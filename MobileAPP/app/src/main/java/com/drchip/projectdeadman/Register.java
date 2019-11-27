@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,7 +41,6 @@ public class Register extends AppCompatActivity {
     private MenuItem DeviceType;
 
     public static final int CONNECTED_SUCCESS = 6;
-    EditText etDate, etMessage, etPlatform;
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
@@ -85,6 +86,7 @@ public class Register extends AppCompatActivity {
         Register.this.finish();
     }
     DatePickerDialog datePickerDialog;
+    EditText etDate, etMessage, etPlatform, etNickName,etPinCode,etEmail,etEmailPassword,etPhoneNumber,etRepeatTime;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -96,7 +98,13 @@ public class Register extends AppCompatActivity {
 
 
 
-        etDate= findViewById(R.id.etDate);
+        etNickName = findViewById(R.id.etNickName);
+        etPinCode = findViewById(R.id.etPinCode);
+        etEmail = findViewById(R.id.etMail);
+        etEmailPassword = findViewById(R.id.etEmailPassword);
+        etPhoneNumber = findViewById(R.id.etPhoneNumber);
+        etRepeatTime = findViewById(R.id.etRepeatTime);
+        etDate= findViewById(R.id.etDateToStart);
         etMessage = findViewById(R.id.etMessage);
         etPlatform = findViewById(R.id.etPlatform);
         btnCreate = findViewById(R.id.btnCreate);
@@ -108,6 +116,67 @@ public class Register extends AppCompatActivity {
 
 
 
+        etPinCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(etPinCode.getText().length() >4 )
+                {
+                    StringBuilder aux = new StringBuilder();
+                    for(int i =0; i<4 ;i++)
+                        aux.append(etPinCode.getText().toString().toCharArray()[i]);
+                    etPinCode.setText(aux);
+                    Toast.makeText(Register.this, "The pin code must have 4 numbers only", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+
+            @Override
+            public void afterTextChanged(Editable s) {
+               // Toast.makeText(Register.this, "Worked", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        etPhoneNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(etPhoneNumber.getText().toString().contains("+")) {
+                    if (etPhoneNumber.getText().length() > 13) {
+                        StringBuilder aux = new StringBuilder();
+                        for (int i = 0; i < 13; i++)
+                            aux.append(etPhoneNumber.getText().toString().toCharArray()[i]);
+                        etPhoneNumber.setText(aux);
+                        Toast.makeText(Register.this, "The phone number is at max lengh", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                        if (etPhoneNumber.getText().length() > 9) {
+                            StringBuilder aux = new StringBuilder();
+                            for (int i = 0; i < 9; i++)
+                                aux.append(etPhoneNumber.getText().toString().toCharArray()[i]);
+                            etPhoneNumber.setText(aux);
+                            Toast.makeText(Register.this, "The phone number is at max lengh", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         etMessage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -255,10 +324,196 @@ public class Register extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(etNickName.getText().toString().isEmpty()) {
 
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose an NICKNAME!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }else
+                if(etPinCode.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose an PINCODE!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+
+                }else
+                if(etEmail.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose an EMAIL that will send the emails!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+
+                }else
+                if(etEmailPassword.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you enter the PASSWORD to the email enter before!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }else
+
+                if(etPhoneNumber.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose a PHONE NUMBER to receive the sms messages!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }else
+                if(etMessage.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose an MESSAGE to release!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }else
+                if(etRepeatTime.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose an REPEAT TIME to do the presence check!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }else
+
+                if(etDate.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose an DATE to start doing the presence check!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }
+                else
+                if(etPlatform.getText().toString().isEmpty())
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure you choose an PLATFORM to do the release!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }
+                  else if(etPinCode.getText().length()<4)
+                {
+                    AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                    message.setTitle("Error!");
+                    message.setMessage("Please make sure your PINCODE have exactly 4 numbers!!!");
+
+                    message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    message.show();
+                }else
+                    if(!etEmail.getText().toString().contains("@"))
+                    {
+                        AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                        message.setTitle("Error!");
+                        message.setMessage("Your email is invalid, please write it correctly!!!!");
+
+                        message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        message.show();
+                    }
+
+                    else if((etPhoneNumber.getText().length()<9 && !etPhoneNumber.getText().toString().contains("+"))|| (etPhoneNumber.getText().length()<13 && etPhoneNumber.getText().toString().contains("+")))
+                    {
+                        AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+
+                        message.setTitle("Error!");
+                        message.setMessage("Please make sure you enter an correct phone number!!!");
+
+                        message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        message.show();
+                    }else
+                        
                 //ApplicationClass.sendMessage("<L>", Register.this);
-                //startActivityForResult(new Intent(Register.this, UserInstructionsRASP.class), 1);
-                startActivityForResult(new Intent(Register.this, UserInstuctionsSTM.class), 1);
+                startActivityForResult(new Intent(Register.this, UserInstructionsRASP.class), 1);
+                //startActivityForResult(new Intent(Register.this, UserInstuctionsSTM.class), 1);
 
 
             }
@@ -301,7 +556,8 @@ public class Register extends AppCompatActivity {
             case R.id.BluetoothState:
                 if(ApplicationClass.deviceConnected)
                 {
-                    Toast.makeText(this, "Device is already connected", Toast.LENGTH_SHORT).show();
+                    ApplicationClass.mBluetoothConnectionService.stop();
+                    Toast.makeText(this, "Closing connection", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

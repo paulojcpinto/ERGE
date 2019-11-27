@@ -233,7 +233,9 @@ public class BluetoothConnectionService {
             BluetoothServerSocket tmp = null;
             // Create a new listening server socket
             try {
-                tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
+                //tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME, MY_UUID);
+                tmp = mAdapter.listenUsingInsecureRfcommWithServiceRecord(NAME,MY_UUID);
+
             } catch (IOException e) {
             }
             mmServerSocket = tmp;
@@ -383,6 +385,8 @@ public class BluetoothConnectionService {
                         mHandler.obtainMessage(Enter.MESSAGE_READ, bytes, -1, buffer)
                                 .sendToTarget();
                     }
+                   // else connectionLost();
+
                     //  }while (buffer[bytesRead]!='>');
                     //bytes = mmInStream.read(buffer);
                     //  mmInStream.reset();

@@ -204,7 +204,8 @@ public class UserInstuctionsSTM extends AppCompatActivity {
 
             case R.id.BluetoothState:
                 if (ApplicationClass.deviceConnected) {
-                    Toast.makeText(this, "Device is already connected", Toast.LENGTH_SHORT).show();
+                    ApplicationClass.mBluetoothConnectionService.stop();
+                    Toast.makeText(this, "Closing connection", Toast.LENGTH_SHORT).show();
                 } else {
                     BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
                     // Attempt to connect to the device
