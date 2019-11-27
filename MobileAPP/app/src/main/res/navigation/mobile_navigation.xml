@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.drchip.projectdeadman.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_user_configs"
+        android:name="com.drchip.projectdeadman.ui.userConfigs.UserConfigsFragment"
+        android:label="User Configurations"
+        tools:layout="@layout/fragment_userconfigs" />
+
+    <fragment
+        android:id="@+id/nav_user_activity"
+        android:name="com.drchip.projectdeadman.ui.userActivity.UserActivityFragment"
+        android:label="User Activity"
+        tools:layout="@layout/fragment_user_activity" />
+
+    <fragment
+        android:id="@+id/nav_terminal"
+        android:name="com.drchip.projectdeadman.ui.terminal.TerminalFragment"
+        android:label="Terminal"
+        tools:layout="@layout/fragment_terminal" />
+
+    <fragment
+        android:id="@+id/nav_btconfigs"
+        android:name="com.drchip.projectdeadman.ui.btConfigs.BtConfigsFragment"
+        android:label="Bluetooth Configurations"
+        tools:layout="@layout/fragment_btconfigs" />
+
+
+</navigation>
