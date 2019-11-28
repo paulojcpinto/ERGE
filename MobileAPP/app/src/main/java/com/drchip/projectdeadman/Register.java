@@ -100,7 +100,7 @@ public class Register extends AppCompatActivity {
 
         etNickName = findViewById(R.id.etNickName);
         etPinCode = findViewById(R.id.etPinCode);
-        etEmail = findViewById(R.id.etMail);
+        etEmail = findViewById(R.id.etEmail);
         etEmailPassword = findViewById(R.id.etEmailPassword);
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
         etRepeatTime = findViewById(R.id.etRepeatTime);
@@ -510,9 +510,9 @@ public class Register extends AppCompatActivity {
                         });
                         message.show();
                     }else
-                        
-                //ApplicationClass.sendMessage("<L>", Register.this);
-                startActivityForResult(new Intent(Register.this, UserInstructionsRASP.class), 1);
+
+                ApplicationClass.sendMessage("<S"+etNickName.getText().toString().trim()+">", Register.this);
+               // startActivityForResult(new Intent(Register.this, UserInstructionsRASP.class), 1);
                 //startActivityForResult(new Intent(Register.this, UserInstuctionsSTM.class), 1);
 
 

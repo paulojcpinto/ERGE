@@ -5,8 +5,8 @@
 #define char_trama_init 							( char )		'<' 
 #define char_trama_end  							( char ) 		'>'	
 	
-#define char_trama_nickName 					( char ) 		'N'
-#define int_nickName									(  int )		 3
+#define char_trama_echo     					( char ) 		'N'
+#define int_echo    									(  int )		 3
 	
 #define char_trama_start 							( char ) 		'L'
 #define int_start											(  int )		 2
@@ -14,14 +14,32 @@
 #define char_trama_error              (char)      'E'
 #define int_error											(  int )		 4
 	
+#define char_trama_nick               (char)     'S'
+#define int_nick                      (int)       5
+	
+	
 
 
 static int out_index = 0;
 int error_number = 0;
 
-void receive_nickName ( user *me, int *c )
+
+void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
-	*c = int_nickName;
+    s += n;
+    //*s = '\0';
+
+    while (n--)
+    {
+        *--s = (bin % 10) + '0';
+        bin /= 10;
+    }
+}
+
+
+void receive_echo ( user *me, int *c )
+{
+	*c = int_echo;
 //	HAL_UART_Transmit_IT(&huart4, "okoko", 5);
 	me->nickName[out_index++] = char_trama_init;
 	me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
@@ -30,20 +48,20 @@ void receive_nickName ( user *me, int *c )
 void receive_start ( user *me, int *c )
 {
 	*c = int_start;
-	me->nickName[out_index++] = char_trama_init;
-	me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+	//me->nickName[out_index++] = char_trama_init;
+	//me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+	UART3Tx_index++;
 }
 
 void prepare_receive_info( user *me, int *c )
 {
 	switch ( UART3Rx_Buffer[UART3Tx_index] )
 	{
-		case char_trama_nickName:
+		case char_trama_echo:
 		{
 			*c= 3;
-			out_index = 0;
 
-			receive_nickName (me, c);
+			receive_echo (me, c);
 		}; break;
 		
 		case char_trama_start:
@@ -51,6 +69,11 @@ void prepare_receive_info( user *me, int *c )
 			*c = 2;
 			receive_start (me, c);
 		}; break;
+		case char_trama_nick:
+			*c= int_nick;
+			UART3Tx_index++;
+
+			break;
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -64,7 +87,7 @@ void end_receiving_trama ( user *me, int *c)
 {
 	switch (*c)
 			{
-				case int_nickName:
+				case int_echo:
 				{
 					HAL_Delay(100);
 					me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
@@ -76,7 +99,7 @@ void end_receiving_trama ( user *me, int *c)
 				{
 					//HAL_Delay(100);
 					me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
-					HAL_UART_Transmit_IT(&huart4, " STM#", sizeof(" STM#")/sizeof(char));
+					HAL_UART_Transmit_IT(&huart4, " STM", sizeof(" STM")/sizeof(char));
 		
 
 
@@ -85,6 +108,42 @@ void end_receiving_trama ( user *me, int *c)
 						//HAL_Delay(5000);
 						HAL_UART_Transmit_IT(&huart4, me->nickName, out_index);
 					break;
+				case int_nick:
+				{
+				 char* s;
+					if(out_index<9)
+					{
+						
+					UlToStr(s,out_index,1);
+						char * aux;
+					aux[0]='<';
+					aux[1]='S';
+					aux[2]=s[0];
+					aux[3]='>';
+					 HAL_UART_Transmit_IT(&huart4, aux ,4 );
+					}
+					
+					else
+					{
+						UlToStr(s,out_index,2);
+						char * aux;
+					aux[0]='<';
+					aux[1]='S';
+					aux[2]=s[0];
+					aux[3]=s[1];
+					aux[4]='>';
+					 HAL_UART_Transmit_IT(&huart4, aux ,5 );
+						
+					}
+					
+	         //HAL_UART_Transmit_IT(&huart4, "Ola", 1);
+				  //HAL_UART_Transmit_IT(&huart4, ">", 1);
+
+					UART3Tx_index++;
+					
+
+				
+				};break;
 			}
 	*c = -1;
 }
@@ -93,7 +152,7 @@ void save_char ( user *me, int *c )
 {
 	switch (*c)
 			{
-				case int_nickName:
+				case int_echo:
 				{
 					me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 				}; break;
@@ -102,6 +161,10 @@ void save_char ( user *me, int *c )
 					char aux = UART3Rx_Buffer[UART3Tx_index++];
 				//	error_number += (aux-48)+10^(UART3Tx_index-3);
 				}break;
+				case int_nick:
+				{
+					me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+				};break;
 			}
 			
 }
@@ -116,6 +179,8 @@ int getNickName (user *me, int *c)
 		{
 			*c = 1;
 			UART3Tx_index ++;
+			out_index = 0;
+
 		}
 		else if (*c == 1)
 		{

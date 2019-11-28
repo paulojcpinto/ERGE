@@ -180,7 +180,7 @@ public class TerminalFragment extends Fragment {
                 ivLoading.startAnimation(rotate);
               //  ApplicationClass.sendMessage("O", getContext());
 
-                ApplicationClass.sendMessage("<N" + etMessage.getText().toString().trim() + ">", getContext());
+                ApplicationClass.sendMessage( etMessage.getText().toString().trim() , getContext());
             }
         });
 

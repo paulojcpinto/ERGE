@@ -8,8 +8,14 @@ typedef struct User user;
 
 struct User
 {
-	char nickName[15];
-	char phoneNumber[9];
+	char nickName[25];
+	char phoneNumber[13];
+	char email[50];
+	char emailPassword[12];
+	char messageToRelease[255];
+	int repeatTime;
+	char dateToStart[10];
+	char platformToRelease[18];
 	int (*getNickName)(user *, int *); 
 };
 
