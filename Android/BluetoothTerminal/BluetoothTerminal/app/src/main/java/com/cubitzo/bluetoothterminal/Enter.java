@@ -504,7 +504,7 @@ public class Enter extends AppCompatActivity {
 
                 message1.setView(dialogView1);
                 message1.setTitle("Bluetooth Devices");
-                message1.setMessage("Select the device that you want to add!!");
+                message1.setMessage("Select the device that you want to select!!");
 
 
 
