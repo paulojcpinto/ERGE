@@ -8,5 +8,11 @@
         android:orderInCategory="102"
         android:title="BluetoothState"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/DeviceTyepe"
+        android:icon="@drawable/not_knowned"
+        android:orderInCategory="101"
+        android:title="Device Type"
+        app:showAsAction="ifRoom" />
 
 </menu>

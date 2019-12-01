@@ -8,11 +8,17 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +28,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -122,6 +129,7 @@ public class Enter extends AppCompatActivity {
         btnTerminal = findViewById(R.id.btnTerminal);
         ivStatus = findViewById(R.id.ivStatus);
         tvType = findViewById(R.id.tvType);
+        btnConnect = findViewById(R.id.btnConnect);
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotate.setStartTime(10);
@@ -141,6 +149,8 @@ public class Enter extends AppCompatActivity {
         if (loadedDevices.size() >= 1) {
             tvDevice.setText(loadedDevices.get(loadedDevices.size() - 1).device.getName());
             tvMacAdress.setText(loadedDevices.get(loadedDevices.size()-1).device.getAddress());
+            tvType.setText(loadedDevices.get(loadedDevices.size()-1).deviceType);
+            ApplicationClass.deviceType = loadedDevices.get(loadedDevices.size()-1).deviceType;
             ApplicationClass.target = loadedDevices.get(loadedDevices.size() - 1).device;
         }
         if (!ApplicationClass.BA.isEnabled()) {
@@ -187,18 +197,23 @@ public class Enter extends AppCompatActivity {
                     // Get the BLuetoothDevice object
                     //String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
                     //
-                    ivStatus.setImageResource(R.drawable.loading2);
-                    ivStatus.clearAnimation();
-                    ivStatus.startAnimation(rotate);
-                    BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
-                    // Attempt to connect to the device
-                    ApplicationClass.mBluetoothConnectionService.connect(device);
+                    if(tvType.getText().toString().contains("Click HERE!!!")){
+
+                        Snackbar.make(findViewById(android.R.id.content), "Please enter an Device type", Snackbar.LENGTH_SHORT).show();
 
 
-                    // for (int i = 0; i < 10000000; i++) for (int j = 0; j < 115; j++) ;
-//                    ApplicationClass.sendMessage("O", Enter.this);
-//
-//                    ApplicationClass.sendMessage("<L>", Enter.this);
+                    }
+                    else {
+                        ivStatus.setImageResource(R.drawable.loading2);
+                        ivStatus.clearAnimation();
+                        ivStatus.startAnimation(rotate);
+                        BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
+                        // Attempt to connect to the device
+                        ApplicationClass.mBluetoothConnectionService.connect(device);
+                    }
+
+
+
 
                 } else {
 
@@ -215,11 +230,169 @@ public class Enter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                AlertDialog.Builder message = new AlertDialog.Builder(Enter.this);
+                LayoutInflater inflater = getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.device_type_dialog, null);
+                final EditText etType = dialogView.findViewById(R.id.etType);
+
+                message.setView(dialogView);
+                message.setTitle("Device type");
+                message.setMessage("Enter the device type for better organization");
+
+                message.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if(etType.getText().toString().isEmpty()) {
+                            Toast.makeText(Enter.this, "Please select a device type", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else {
+
+                            tvType.setText(etType.getText().toString().trim());
+                            ApplicationClass.deviceType = etType.getText().toString().trim();
+                        }
+                    }
+                });
+                message.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                message.show();
+
+
                 //if(connected)
                 //{
                   //  loadedDevices.remove(loadedDevices.size());
                 //  loadedDevices.add(new MybluetoothDevice(ApplicationClass.target,))
                 //}
+            }
+        });
+
+        btnConnect.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!connected) {
+
+
+                    if(tvType.getText().toString().contains("Click HERE!!!")){
+
+                        Snackbar.make(findViewById(android.R.id.content), "Please enter an Device type", Snackbar.LENGTH_SHORT).show();
+
+
+                    }
+                    else {
+                        ivStatus.setImageResource(R.drawable.loading2);
+                        ivStatus.clearAnimation();
+                        ivStatus.startAnimation(rotate);
+                        BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
+                        // Attempt to connect to the device
+                        ApplicationClass.mBluetoothConnectionService.connect(device);
+                    }
+
+
+                    // for (int i = 0; i < 10000000; i++) for (int j = 0; j < 115; j++) ;
+//                    ApplicationClass.sendMessage("O", Enter.this);
+//
+//                    ApplicationClass.sendMessage("<L>", Enter.this);
+
+                } else {
+
+                    ApplicationClass.mBluetoothConnectionService.stop();
+                    connected = false;
+                }
+            }
+        });
+
+        btnMac.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder message = new AlertDialog.Builder(Enter.this);
+                LayoutInflater inflater = getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.bt_mac_adress, null);
+                final EditText etMac = dialogView.findViewById(R.id.etMac);
+
+                message.setView(dialogView);
+                message.setTitle("Device Mac");
+                message.setMessage("Enter the device mac address to connect with him");
+
+                etMac.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        if(count ==1)
+                        if((etMac.getText().toString().length()+1)%3==0)
+                        //if(etMac.getText().toString().length() == 2 ||etMac.getText().toString().length() == 5||etMac.getText().toString().length() ==7 )
+                        {
+                            //SystemClock.sleep(1); //pause and wait for rest of data. Adjust this depending on your sending speed.
+
+                            //etMac.setAllCaps(true);
+                            etMac.append(":");
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+
+
+                    }
+                });
+
+                message.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if(etMac.getText().toString().length() != 17)
+                            Snackbar.make(findViewById(android.R.id.content), "Please enter a valid mac", Snackbar.LENGTH_SHORT).show();
+                        else
+                        {
+                            tvMacAdress.setText(etMac.getText().toString().trim());
+                            ivStatus.setImageResource(R.drawable.loading2);
+                            ivStatus.clearAnimation();
+                            ivStatus.startAnimation(rotate);
+                            BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(tvMacAdress.getText().toString());
+                            // Attempt to connect to the device
+                            ApplicationClass.mBluetoothConnectionService.connect(device);
+                        }
+
+
+
+                    }
+                });
+
+                message.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });                message.show();
+            }
+        });
+
+        tvMacAdress.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboard = (ClipboardManager)v.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("MacAddress", tvMacAdress.getText().toString());
+                clipboard.setPrimaryClip(clip);
+                Snackbar.make(v,"Mac Address copied",Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        btnTerminal.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(connected)
+                startActivity(new Intent(Enter.this,MainActivity.class));
+                else                 Snackbar.make(v,"Please Connect to a device first",Snackbar.LENGTH_SHORT).show();
+
+                //Enter.this.finish();
             }
         });
     }
@@ -286,6 +459,8 @@ public class Enter extends AppCompatActivity {
                         if (choosed) {
                             Toast.makeText(Enter.this, "Selected succesfuly", Toast.LENGTH_SHORT).show();
                             tvDevice.setText(ApplicationClass.target.getName());
+                            tvMacAdress.setText(ApplicationClass.target.getAddress());
+                            Enter.this.tvType.setText("Click HERE!!!");
 
                         } else {
                             Toast.makeText(Enter.this, "Please select one device", Toast.LENGTH_SHORT).show();
@@ -363,6 +538,8 @@ public class Enter extends AppCompatActivity {
                         tvBmac1.setText(listb.get(position).getAddress());
                         tvType.setText(loadedDevices.get(position).deviceType);
 
+                        lv1.setVisibility(View.GONE);
+
                         llSelected1.setVisibility(View.VISIBLE);
                         choosed = true;
 
@@ -377,6 +554,9 @@ public class Enter extends AppCompatActivity {
                         if (choosed) {
                             Toast.makeText(Enter.this, "Selected succesfuly", Toast.LENGTH_SHORT).show();
                             tvDevice.setText(ApplicationClass.target.getName());
+                            tvMacAdress.setText(ApplicationClass.target.getAddress());
+                            Enter.this.tvType.setText("Click HERE!!!");
+
 
                         } else {
                             Toast.makeText(Enter.this, "Please select one device", Toast.LENGTH_SHORT).show();
@@ -420,7 +600,7 @@ public class Enter extends AppCompatActivity {
             }
             outputFile.flush();
             outputFile.close();
-            Toast.makeText(this, "Sucessfully savedes eyeyeyyeyeyeyeyeyeye!", Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, "Sucessfully savedes eyeyeyyeyeyeyeyeyeye!", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
