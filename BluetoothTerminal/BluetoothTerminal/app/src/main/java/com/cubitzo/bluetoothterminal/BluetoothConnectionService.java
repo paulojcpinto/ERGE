@@ -374,10 +374,10 @@ public class BluetoothConnectionService {
                     // Read from the InputStream
                     //   do{
 
-                   // bytes = mmInStream.available();
-                    bytes = mmInStream.read(buffer,0,1);
+                    bytes = mmInStream.available();
+                   // bytes = mmInStream.read(buffer,0,1);
                     if(bytes != 0) {
-                        SystemClock.sleep(100); //pause and wait for rest of data. Adjust this depending on your sending speed.
+                        SystemClock.sleep(50); //pause and wait for rest of data. Adjust this depending on your sending speed.
                         bytes = mmInStream.available(); // how many bytes are ready to be read?
                         bytes = mmInStream.read(buffer, 0, bytes);
 
