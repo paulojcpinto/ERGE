@@ -22,6 +22,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Timer;
 
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     Timer timer;
     Animation fade_in;
     CountDownTimer waitTimer;
+    private AdView mAdView;
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
@@ -110,6 +117,16 @@ public class MainActivity extends AppCompatActivity {
         fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fade_in.setStartOffset(1);
         fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
