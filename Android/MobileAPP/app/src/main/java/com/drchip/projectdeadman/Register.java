@@ -29,6 +29,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class Register extends AppCompatActivity {
 
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -55,8 +57,10 @@ public class Register extends AppCompatActivity {
                         playMenu.setIcon(R.drawable.bluetooth_on);
 
                     }
+                    receive_nick(readMessage);
+                    receive_pincode(readMessage);
 
-                    Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:
@@ -324,7 +328,7 @@ public class Register extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etNickName.getText().toString().isEmpty()) {
+               /* if(etNickName.getText().toString().isEmpty()) {
 
                     AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
 
@@ -509,7 +513,7 @@ public class Register extends AppCompatActivity {
                             }
                         });
                         message.show();
-                    }else
+                    }else*/
 
                 ApplicationClass.sendMessage("<S"+etNickName.getText().toString().trim()+">", Register.this);
                // startActivityForResult(new Intent(Register.this, UserInstructionsRASP.class), 1);
@@ -576,5 +580,94 @@ public class Register extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
 
+    }
+    void receive_nick(String readMessage)
+    {
+        if(readMessage.contains("<S") && readMessage.contains((">")))
+        {
+            StringBuilder aux = new StringBuilder();
+            for (int i =2; i<readMessage.length()-1;i++)
+            {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh=0;
+            try {
+                lengh  = Integer.parseInt(aux.toString());
+            }catch (NumberFormatException nfe)
+            {
+                Toast.makeText(this, "Error Parsing Number", Toast.LENGTH_SHORT).show();
+            }
+            if(lengh != etNickName.getText().length())
+            {
+                Toast.makeText(Register.this, "Error Sending Nickname:"+ lengh + "Suposto:" + etNickName.getText().length() + "With message: "+ readMessage, Toast.LENGTH_SHORT).show();
+                //ApplicationClass.sendMessage("<S"+etNickName.getText().toString().trim()+">", Register.this);
+
+            }else
+            {
+                Toast.makeText(Register.this, "Sended nickname", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<P"+etPinCode.getText().toString().trim()+">", Register.this);
+
+
+            }
+
+        }
+    }
+    void receive_pincode(String readMessage)
+    {
+
+
+        if(readMessage.contains("<P") && readMessage.contains((">"))) {
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length()-1; i++) {
+                aux.append(readMessage.charAt(i));
+            } int lengh=0;
+            try {
+              lengh  = Integer.parseInt(aux.toString());
+            }catch (NumberFormatException nfe)
+            {
+                Toast.makeText(this, "Error Parsing Number", Toast.LENGTH_SHORT).show();
+            }
+
+            if (lengh != etEmail.getText().length() - 1) {
+                Toast.makeText(Register.this, "Error Sending pincode", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<P" + etPinCode.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended pincode", Toast.LENGTH_SHORT).show();
+                 ApplicationClass.sendMessage("<M"+etEmail.getText().toString().trim()+">", Register.this);
+
+
+            }
+
+
+
+
+        }
+    }
+    void receive_email(String readMessage)
+    {
+
+        StringBuilder aux = new StringBuilder();
+        for (int i =2; i<readMessage.length()-1;i++)
+        {
+            aux.append(readMessage.charAt(i));
+        }
+        int lengh=0;
+        try {
+            lengh  = Integer.parseInt(aux.toString());
+        }catch (NumberFormatException nfe)
+        {
+            Toast.makeText(this, "Error Parsing Number", Toast.LENGTH_SHORT).show();
+        }        if(lengh != etNickName.getText().length())
+        {
+            Toast.makeText(Register.this, "Sended pincode", Toast.LENGTH_SHORT).show();
+            ApplicationClass.sendMessage("<M"+etEmail.getText().toString().trim()+">", Register.this);
+
+        }else
+        {
+            Toast.makeText(Register.this, "Error Sending pincode", Toast.LENGTH_SHORT).show();
+            ApplicationClass.sendMessage("<P"+etPinCode.getText().toString().trim()+">", Register.this);
+
+        }
     }
 }

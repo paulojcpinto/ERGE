@@ -9,6 +9,7 @@ typedef struct User user;
 struct User
 {
 	char nickName[25];
+	char pinCode[4];
 	char phoneNumber[13];
 	char email[50];
 	char emailPassword[12];

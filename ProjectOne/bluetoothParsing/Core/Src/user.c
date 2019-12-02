@@ -17,12 +17,16 @@
 #define char_trama_nick               (char)     'S'
 #define int_nick                      (int)       5
 	
+#define char_trama_pincode            (char)    'P'
+#define int_pincode                   (int)     6
+	
+#define char_trama_email               (char)  'M'
+#define int_email                      (int)    7
 	
 
 
 static int out_index = 0;
 int error_number = 0;
-
 
 void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
@@ -35,6 +39,43 @@ void UlToStr(char *s, unsigned int bin, unsigned char n)
         bin /= 10;
     }
 }
+
+void print_response(char c)
+{
+	char* s;
+					if(out_index<=9)
+					{
+						
+				  	UlToStr(s,out_index,1);
+						char * aux;
+					   aux[0]='<';
+					   aux[1]=c;
+					   aux[2]=s[0];
+					   aux[3]='>';
+					   HAL_UART_Transmit_IT(&huart4, aux ,4 );
+					}
+					
+					else
+					{
+						UlToStr(s,out_index,2);
+						char * aux;
+					  aux[0]='<';
+					  aux[1]=c;
+					  aux[2]=s[0];
+					  aux[3]=s[1];
+					  aux[4]='>';
+					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
+						
+					}
+					
+	       
+
+					UART3Tx_index++;
+					
+	
+}
+
+
 
 
 void receive_echo ( user *me, int *c )
@@ -60,7 +101,6 @@ void prepare_receive_info( user *me, int *c )
 		case char_trama_echo:
 		{
 			*c= 3;
-
 			receive_echo (me, c);
 		}; break;
 		
@@ -72,8 +112,20 @@ void prepare_receive_info( user *me, int *c )
 		case char_trama_nick:
 			*c= int_nick;
 			UART3Tx_index++;
-
 			break;
+		
+		case char_trama_pincode:
+			*c= int_pincode;
+			UART3Tx_index++;
+			break;
+		
+		case char_trama_email:
+			*c= int_email;
+			UART3Tx_index++;
+			break;
+	
+		
+		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -108,45 +160,22 @@ void end_receiving_trama ( user *me, int *c)
 						//HAL_Delay(5000);
 						HAL_UART_Transmit_IT(&huart4, me->nickName, out_index);
 					break;
-				case int_nick:
-				{
-				 char* s;
-					if(out_index<9)
-					{
-						
-					UlToStr(s,out_index,1);
-						char * aux;
-					aux[0]='<';
-					aux[1]='S';
-					aux[2]=s[0];
-					aux[3]='>';
-					 HAL_UART_Transmit_IT(&huart4, aux ,4 );
-					}
-					
-					else
-					{
-						UlToStr(s,out_index,2);
-						char * aux;
-					aux[0]='<';
-					aux[1]='S';
-					aux[2]=s[0];
-					aux[3]=s[1];
-					aux[4]='>';
-					 HAL_UART_Transmit_IT(&huart4, aux ,5 );
-						
-					}
-					
-	         //HAL_UART_Transmit_IT(&huart4, "Ola", 1);
-				  //HAL_UART_Transmit_IT(&huart4, ">", 1);
-
-					UART3Tx_index++;
-					
-
 				
-				};break;
-			}
+				case int_nick:
+				 print_response(char_trama_nick);
+				break;
+				
+				case int_pincode:
+				 print_response(char_trama_pincode);
+				break;
+				
+				case int_email:
+					print_response(char_trama_email);
+					break;
+				
 	*c = -1;
-}
+				}
+			}
 
 void save_char ( user *me, int *c )
 {
@@ -165,6 +194,13 @@ void save_char ( user *me, int *c )
 				{
 					me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 				};break;
+				case int_pincode:
+					me->pinCode[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_email:
+					me->email[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				
 			}
 			
 }
