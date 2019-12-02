@@ -155,9 +155,9 @@ public class Enter extends AppCompatActivity {
         }
         if (!ApplicationClass.BA.isEnabled()) {
             Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            Snackbar.make(findViewById(R.id.activity_enter), "Please turn on bluetooth", Snackbar.LENGTH_SHORT).show();
+            //Snackbar.make(findViewById(R.id.activity_enter), "Please turn on bluetooth", Snackbar.LENGTH_SHORT).show();
 
-            Toast.makeText(getApplicationContext(), "Turned on", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Turned on bluetooth", Toast.LENGTH_LONG).show();
             startActivityForResult(turnOn, 0);
         }
 
