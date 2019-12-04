@@ -17,12 +17,18 @@
 #define char_trama_nick               (char)     'S'
 #define int_nick                      (int)       5
 	
-#define char_trama_pincode            (char)    'P'
-#define int_pincode                   (int)     6
+#define char_trama_pincode            (char)     'P'
+#define int_pincode                   (int)       6
 	
-#define char_trama_email               (char)  'M'
-#define int_email                      (int)    7
+#define char_trama_email               (char)    'M'
+#define int_email                      (int)      7
 	
+#define char_trama_email_password       (char)   'X'
+#define int_email_password              (int)      8
+
+#define char_trama_phone_number        (char)    'T'
+#define int_phone_number                (int)     9
+
 
 
 static int out_index = 0;
@@ -86,13 +92,15 @@ void receive_echo ( user *me, int *c )
 	me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 }
 
+
+
 void receive_start ( user *me, int *c )
 {
 	*c = int_start;
-	//me->nickName[out_index++] = char_trama_init;
-	//me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 	UART3Tx_index++;
+	
 }
+
 
 void prepare_receive_info( user *me, int *c )
 {
@@ -121,6 +129,15 @@ void prepare_receive_info( user *me, int *c )
 		
 		case char_trama_email:
 			*c= int_email;
+			UART3Tx_index++;
+			break;
+		
+		case char_trama_email_password:
+			*c= int_email_password;
+			UART3Tx_index++;
+			break;
+		case char_trama_phone_number:
+			*c= int_phone_number;
 			UART3Tx_index++;
 			break;
 	
@@ -173,6 +190,14 @@ void end_receiving_trama ( user *me, int *c)
 					print_response(char_trama_email);
 					break;
 				
+				case int_email_password:
+					print_response(char_trama_email_password);
+					break;
+				
+				case int_phone_number:
+					print_response(char_trama_phone_number);
+					break;
+				
 	*c = -1;
 				}
 			}
@@ -199,6 +224,12 @@ void save_char ( user *me, int *c )
 					break;
 				case int_email:
 					me->email[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_email_password:
+					me->emailPassword[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+				break;
+				case int_phone_number:
+					me->phoneNumber[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				
 			}
