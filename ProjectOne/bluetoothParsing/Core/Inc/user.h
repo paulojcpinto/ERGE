@@ -16,7 +16,7 @@ struct User
 	char messageToRelease[255];
 	int repeatTime;
 	char dateToStart[10];
-	char platformToRelease[18];
+	char platformToRelease[50];
 	int (*getNickName)(user *, int *); 
 };
 

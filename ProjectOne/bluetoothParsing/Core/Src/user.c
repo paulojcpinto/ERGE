@@ -29,6 +29,17 @@
 #define char_trama_phone_number        (char)    'T'
 #define int_phone_number                (int)     9
 
+#define char_trama_message              (char)   'R'
+#define int_message                      (int)   10
+	
+#define char_trama_repeat               (char)   'O'
+#define int_repeat                        (int)  11
+	
+#define char_trama_date                  (char)   'D'
+#define int_date                              (int)   12
+	
+#define char_trama_platform              (char) 'A'
+#define int_platform                      (int) 13
 
 
 static int out_index = 0;
@@ -61,7 +72,7 @@ void print_response(char c)
 					   HAL_UART_Transmit_IT(&huart4, aux ,4 );
 					}
 					
-					else
+					else if(out_index>9 && out_index<100)
 					{
 						UlToStr(s,out_index,2);
 						char * aux;
@@ -72,6 +83,18 @@ void print_response(char c)
 					  aux[4]='>';
 					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
 						
+					}
+					else 
+					{
+						UlToStr(s,out_index,2);
+						char * aux;
+					  aux[0]='<';
+					  aux[1]=c;
+					  aux[2]=s[0];
+					  aux[3]=s[1];
+						aux[4]= s[2];
+					  aux[5]='>';
+					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
 					}
 					
 	       
@@ -141,7 +164,24 @@ void prepare_receive_info( user *me, int *c )
 			UART3Tx_index++;
 			break;
 	
+		case char_trama_message:
+			*c= int_message;
+			UART3Tx_index++;
+			break;
 		
+		case char_trama_repeat:
+			*c= int_repeat;
+			UART3Tx_index++;
+			break;
+		case char_trama_date:
+			*c= int_date;
+			UART3Tx_index++;
+			break;
+		
+		case char_trama_platform:
+			*c= int_platform;
+			UART3Tx_index++;		
+		break;
 		
 		case char_trama_error:
 		{
@@ -198,6 +238,22 @@ void end_receiving_trama ( user *me, int *c)
 					print_response(char_trama_phone_number);
 					break;
 				
+				case int_message:
+					print_response(char_trama_message);
+					break;
+				
+				case int_repeat:
+					print_response(char_trama_repeat);
+					break;
+				
+				case int_date:
+					print_response(char_trama_date);
+					break;
+				
+				case int_platform:
+					print_response(char_trama_platform);
+					break;
+				
 	*c = -1;
 				}
 			}
@@ -230,6 +286,18 @@ void save_char ( user *me, int *c )
 				break;
 				case int_phone_number:
 					me->phoneNumber[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_message:
+					me->messageToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_repeat:
+					me->repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
+					break;
+				case int_date:
+					me->dateToStart[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_platform:
+					me->platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				
 			}
