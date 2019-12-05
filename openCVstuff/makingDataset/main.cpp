@@ -114,7 +114,8 @@ void detectAndDisplay( Mat frame )
     if(faces.size()==1)
     {
         cout<<"Face found";
-        Mat croppedImage = frame_gray(faces[0]);
+        //Mat croppedImage = frame_gray(faces[0]);
+        Mat croppedImage = frame(faces[0]);
         images.push_back(croppedImage);
         //imwrite("/opt/coisalinda.jpeg",frame);
         aux=1;
