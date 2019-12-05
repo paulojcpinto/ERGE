@@ -2,6 +2,7 @@ package com.drchip.projectdeadman;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
@@ -29,6 +30,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class Register extends AppCompatActivity {
 
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -55,8 +58,16 @@ public class Register extends AppCompatActivity {
                         playMenu.setIcon(R.drawable.bluetooth_on);
 
                     }
-
-                    Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
+                    receive_nick(readMessage);
+                    receive_pincode(readMessage);
+                    receive_email(readMessage);
+                    receive_password(readMessage);
+                    receive_phone_number(readMessage);
+                    receive_message(readMessage);
+                    receive_repeatTime(readMessage);
+                    receive_dateStart(readMessage);
+                    receive_platform(readMessage);
+                   // Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:
@@ -577,4 +588,264 @@ public class Register extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+    void receive_nick(String readMessage)
+    {
+        if(readMessage.contains("<S") && readMessage.contains((">")))
+        {
+            StringBuilder aux = new StringBuilder();
+            for (int i =2; i<readMessage.length()-1;i++)
+            {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh=0;
+            try {
+                lengh  = Integer.parseInt(aux.toString());
+            }catch (NumberFormatException nfe)
+            {
+                Toast.makeText(this, "Error Parsing Number: "+nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if(lengh !=etNickName.getText().toString().trim().length())
+            {
+                Toast.makeText(Register.this, "Error Sending Nickname:"+ lengh + "Suposto:" + etNickName.getText().toString().trim().length() + "With message: "+ readMessage, Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<S"+etNickName.getText().toString().trim()+">", Register.this);
+
+            }else
+            {
+                Toast.makeText(Register.this, "Sended nickname", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<P"+etPinCode.getText().toString().trim()+">", Register.this);
+
+
+            }
+
+        }
+    }
+    void receive_pincode(String readMessage)
+    {
+
+
+        if(readMessage.contains("<P") && readMessage.contains((">"))) {
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length()-1; i++) {
+                aux.append(readMessage.charAt(i));
+            } int lengh=0;
+            try {
+              lengh  = Integer.parseInt(aux.toString());
+            }catch (NumberFormatException nfe)
+            {
+                Toast.makeText(this, "Error Parsing Number: "+nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            if (lengh != etPinCode.getText().toString().length()) {
+                Toast.makeText(Register.this, "Error Sending pincode, Receibed: "+lengh+" suposed:"+etPinCode.length(), Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<P" + etPinCode.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended pincode", Toast.LENGTH_SHORT).show();
+                 ApplicationClass.sendMessage("<M"+etEmail.getText().toString().trim()+">", Register.this);
+
+            }
+
+        }
+    }
+
+    void receive_email(String readMessage)
+    {
+        if(readMessage.contains("<M") && readMessage.contains((">"))) {
+
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length() - 1; i++) {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh = 0;
+            try {
+                lengh = Integer.parseInt(aux.toString());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if (lengh != etEmail.getText().toString().trim().length()) {
+                Toast.makeText(Register.this, "<Error sending email, receibed: " + lengh + " instead of:" + etEmail.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<M" + etEmail.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended email", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<X"+etEmailPassword.getText().toString().trim()+">", Register.this);
+
+            }
+        }
+    }
+
+    void receive_password(String readMessage)
+    {
+        if(readMessage.contains("<X") && readMessage.contains((">"))) {
+
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length() - 1; i++) {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh = 0;
+            try {
+                lengh = Integer.parseInt(aux.toString());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if (lengh != etEmailPassword.getText().toString().trim().length()) {
+                Toast.makeText(Register.this, "<Error sending email password, receibed: " + lengh + " instead of:" + etEmailPassword.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<X" + etEmail.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended email email password", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<T"+etPhoneNumber.getText().toString().trim()+">", Register.this);
+
+            }
+        }
+    }
+
+    void receive_phone_number(String readMessage)
+    {
+        if(readMessage.contains("<T") && readMessage.contains((">"))) {
+
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length() - 1; i++) {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh = 0;
+            try {
+                lengh = Integer.parseInt(aux.toString());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if (lengh != etPhoneNumber.getText().toString().trim().length()) {
+                Toast.makeText(Register.this, "<Error sending phone number, receibed: " + lengh + " instead of:" + etPhoneNumber.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
+                 ApplicationClass.sendMessage("<T" + etPhoneNumber.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended phone number", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<R"+etMessage.getText().toString().trim()+">", Register.this);
+
+            }
+        }
+    }
+
+    void receive_message(String readMessage) {
+        if (readMessage.contains("<R") && readMessage.contains((">"))) {
+
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length() - 1; i++) {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh = 0;
+            try {
+                lengh = Integer.parseInt(aux.toString());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if (lengh != etMessage.getText().toString().trim().length()) {
+                Toast.makeText(Register.this, "<Error sending message to release, receibed: " + lengh + " instead of:" + etMessage.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
+                 ApplicationClass.sendMessage("<R" + etMessage.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended message to release", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<O"+etRepeatTime.getText().toString().trim()+">", Register.this);
+
+            }
+        }
+    }
+
+    void receive_repeatTime(String readMessage)
+    {
+        if (readMessage.contains("<O") && readMessage.contains((">"))) {
+
+        StringBuilder aux = new StringBuilder();
+        for (int i = 2; i < readMessage.length() - 1; i++) {
+            aux.append(readMessage.charAt(i));
+        }
+        int lengh = 0;
+        try {
+            lengh = Integer.parseInt(aux.toString());
+        } catch (NumberFormatException nfe) {
+            Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        if (lengh != etRepeatTime.getText().toString().trim().length()) {
+            Toast.makeText(Register.this, "Error sending repeat time, receibed: " + lengh + " instead of:" + etRepeatTime.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
+             ApplicationClass.sendMessage("<O" + etRepeatTime.getText().toString().trim() + ">", Register.this);
+
+        } else {
+            Toast.makeText(Register.this, "Sended repeat time", Toast.LENGTH_SHORT).show();
+            ApplicationClass.sendMessage("<D"+etDate.getText().toString().trim()+">", Register.this);
+
+        }
+    }
+    }
+    void receive_dateStart(String readMessage)
+    {
+        if (readMessage.contains("<D") && readMessage.contains((">"))) {
+
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length() - 1; i++) {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh = 0;
+            try {
+                lengh = Integer.parseInt(aux.toString());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if (lengh != etDate.getText().toString().trim().length()) {
+                Toast.makeText(Register.this, "Error sending Date to start, receibed: " + lengh + " instead of:" + etDate.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
+                 ApplicationClass.sendMessage("<D" + etDate.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended Date to start!", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<A"+etPlatform.getText().toString().trim()+">", Register.this);
+
+            }
+        }
+    }
+    void receive_platform(String readMessage)
+    {
+        if (readMessage.contains("<A") && readMessage.contains((">"))) {
+
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length() - 1; i++) {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh = 0;
+            try {
+                lengh = Integer.parseInt(aux.toString());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if (lengh != etPlatform.getText().toString().trim().length()) {
+                Toast.makeText(Register.this, "<Error sending Date to start, receibed: " + lengh + " instead of:" + etPlatform.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
+                 ApplicationClass.sendMessage("<A" + etPlatform.getText().toString().trim() + ">", Register.this);
+
+            } else {
+                Toast.makeText(Register.this, "Sended Platform to release!", Toast.LENGTH_SHORT).show();
+                final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+                LayoutInflater inflater = getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.success_login_layout, null);
+                //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
+                message.setView(dialogView);
+                message.setTitle("Register Completed");
+                message.setMessage("You successfully register an new user!!");
+                message.setPositiveButton("Nice", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(ApplicationClass.deviceType.contains("STM"))
+                        startActivity(new Intent(Register.this, UserInstuctionsSTM.class));
+                        else if(ApplicationClass.deviceType.contains("RASP"))
+                            startActivity(new Intent(Register.this, UserInstructionsRASP.class));
+                        Register.this.finish();
+                        //startActivityForResult(new Intent(Register.this, UserInstuctionsSTM.class), 1);
+
+                    }
+                });
+                message.show();
+
+            }
+        }
+    }
+
+
+
 }

@@ -21,26 +21,31 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.5.0
 Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
-C:\ESGR\ERGE\ProjectOne\PPPPPPP\MDK-ARM\PPPPPPP.uvprojx
-Project File Date:  11/27/2019
+C:\ESGR\ERGE\ProjectOne\bluetoothParsing\MDK-ARM\PPPPPPP.uvprojx
+Project File Date:  12/02/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'PPPPPPP'
+compiling main.c...
 compiling user.c...
-..\Core\Src\user.c(94): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+..\Core\Src\user.c(72): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  					   HAL_UART_Transmit_IT(&huart4, aux ,4 );
+..\Core\Src\user.c(84): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
+..\Core\Src\user.c(97): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
+..\Core\Src\user.c(203): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   					HAL_UART_Transmit_IT(&huart4, me->nickName, out_index);
-..\Core\Src\user.c(109): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+..\Core\Src\user.c(218): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   						HAL_UART_Transmit_IT(&huart4, me->nickName, out_index);
-..\Core\Src\user.c(123): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-  					 HAL_UART_Transmit_IT(&huart4, aux ,4 );
-..\Core\Src\user.c(135): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-  					 HAL_UART_Transmit_IT(&huart4, aux ,5 );
-..\Core\Src\user.c: 4 warnings, 0 errors
+..\Core\Src\user.c(257): warning:  #111-D: statement is unreachable
+  	*c = -1;
+..\Core\Src\user.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=8508 RO-data=560 RW-data=36 ZI-data=2436  
+Program Size: Code=8804 RO-data=560 RW-data=36 ZI-data=2436  
 FromELF: creating hex file...
-"PPPPPPP\PPPPPPP.axf" - 0 Error(s), 4 Warning(s).
+"PPPPPPP\PPPPPPP.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -63,7 +68,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.3.0
-Build Time Elapsed:  00:00:08
+Build Time Elapsed:  00:00:17
 </pre>
 </body>
 </html>

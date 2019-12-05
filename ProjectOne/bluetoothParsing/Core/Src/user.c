@@ -17,12 +17,33 @@
 #define char_trama_nick               (char)     'S'
 #define int_nick                      (int)       5
 	
+#define char_trama_pincode            (char)     'P'
+#define int_pincode                   (int)       6
 	
+#define char_trama_email               (char)    'M'
+#define int_email                      (int)      7
+	
+#define char_trama_email_password       (char)   'X'
+#define int_email_password              (int)      8
+
+#define char_trama_phone_number        (char)    'T'
+#define int_phone_number                (int)     9
+
+#define char_trama_message              (char)   'R'
+#define int_message                      (int)   10
+	
+#define char_trama_repeat               (char)   'O'
+#define int_repeat                        (int)  11
+	
+#define char_trama_date                  (char)   'D'
+#define int_date                              (int)   12
+	
+#define char_trama_platform              (char) 'A'
+#define int_platform                      (int) 13
 
 
 static int out_index = 0;
 int error_number = 0;
-
 
 void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
@@ -36,6 +57,55 @@ void UlToStr(char *s, unsigned int bin, unsigned char n)
     }
 }
 
+void print_response(char c)
+{
+	char* s;
+					if(out_index<=9)
+					{
+						
+				  	UlToStr(s,out_index,1);
+						char * aux;
+					   aux[0]='<';
+					   aux[1]=c;
+					   aux[2]=s[0];
+					   aux[3]='>';
+					   HAL_UART_Transmit_IT(&huart4, aux ,4 );
+					}
+					
+					else if(out_index>9 && out_index<100)
+					{
+						UlToStr(s,out_index,2);
+						char * aux;
+					  aux[0]='<';
+					  aux[1]=c;
+					  aux[2]=s[0];
+					  aux[3]=s[1];
+					  aux[4]='>';
+					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
+						
+					}
+					else 
+					{
+						UlToStr(s,out_index,2);
+						char * aux;
+					  aux[0]='<';
+					  aux[1]=c;
+					  aux[2]=s[0];
+					  aux[3]=s[1];
+						aux[4]= s[2];
+					  aux[5]='>';
+					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
+					}
+					
+	       
+
+					UART3Tx_index++;
+					
+	
+}
+
+
+
 
 void receive_echo ( user *me, int *c )
 {
@@ -45,13 +115,15 @@ void receive_echo ( user *me, int *c )
 	me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 }
 
+
+
 void receive_start ( user *me, int *c )
 {
 	*c = int_start;
-	//me->nickName[out_index++] = char_trama_init;
-	//me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 	UART3Tx_index++;
+	
 }
+
 
 void prepare_receive_info( user *me, int *c )
 {
@@ -60,7 +132,6 @@ void prepare_receive_info( user *me, int *c )
 		case char_trama_echo:
 		{
 			*c= 3;
-
 			receive_echo (me, c);
 		}; break;
 		
@@ -72,8 +143,46 @@ void prepare_receive_info( user *me, int *c )
 		case char_trama_nick:
 			*c= int_nick;
 			UART3Tx_index++;
-
 			break;
+		
+		case char_trama_pincode:
+			*c= int_pincode;
+			UART3Tx_index++;
+			break;
+		
+		case char_trama_email:
+			*c= int_email;
+			UART3Tx_index++;
+			break;
+		
+		case char_trama_email_password:
+			*c= int_email_password;
+			UART3Tx_index++;
+			break;
+		case char_trama_phone_number:
+			*c= int_phone_number;
+			UART3Tx_index++;
+			break;
+	
+		case char_trama_message:
+			*c= int_message;
+			UART3Tx_index++;
+			break;
+		
+		case char_trama_repeat:
+			*c= int_repeat;
+			UART3Tx_index++;
+			break;
+		case char_trama_date:
+			*c= int_date;
+			UART3Tx_index++;
+			break;
+		
+		case char_trama_platform:
+			*c= int_platform;
+			UART3Tx_index++;		
+		break;
+		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -108,45 +217,46 @@ void end_receiving_trama ( user *me, int *c)
 						//HAL_Delay(5000);
 						HAL_UART_Transmit_IT(&huart4, me->nickName, out_index);
 					break;
-				case int_nick:
-				{
-				 char* s;
-					if(out_index<9)
-					{
-						
-					UlToStr(s,out_index,1);
-						char * aux;
-					aux[0]='<';
-					aux[1]='S';
-					aux[2]=s[0];
-					aux[3]='>';
-					 HAL_UART_Transmit_IT(&huart4, aux ,4 );
-					}
-					
-					else
-					{
-						UlToStr(s,out_index,2);
-						char * aux;
-					aux[0]='<';
-					aux[1]='S';
-					aux[2]=s[0];
-					aux[3]=s[1];
-					aux[4]='>';
-					 HAL_UART_Transmit_IT(&huart4, aux ,5 );
-						
-					}
-					
-	         //HAL_UART_Transmit_IT(&huart4, "Ola", 1);
-				  //HAL_UART_Transmit_IT(&huart4, ">", 1);
-
-					UART3Tx_index++;
-					
-
 				
-				};break;
-			}
+				case int_nick:
+				 print_response(char_trama_nick);
+				break;
+				
+				case int_pincode:
+				 print_response(char_trama_pincode);
+				break;
+				
+				case int_email:
+					print_response(char_trama_email);
+					break;
+				
+				case int_email_password:
+					print_response(char_trama_email_password);
+					break;
+				
+				case int_phone_number:
+					print_response(char_trama_phone_number);
+					break;
+				
+				case int_message:
+					print_response(char_trama_message);
+					break;
+				
+				case int_repeat:
+					print_response(char_trama_repeat);
+					break;
+				
+				case int_date:
+					print_response(char_trama_date);
+					break;
+				
+				case int_platform:
+					print_response(char_trama_platform);
+					break;
+				
 	*c = -1;
-}
+				}
+			}
 
 void save_char ( user *me, int *c )
 {
@@ -165,6 +275,31 @@ void save_char ( user *me, int *c )
 				{
 					me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 				};break;
+				case int_pincode:
+					me->pinCode[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_email:
+					me->email[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_email_password:
+					me->emailPassword[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+				break;
+				case int_phone_number:
+					me->phoneNumber[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_message:
+					me->messageToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_repeat:
+					me->repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
+					break;
+				case int_date:
+					me->dateToStart[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				case int_platform:
+					me->platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				
 			}
 			
 }
