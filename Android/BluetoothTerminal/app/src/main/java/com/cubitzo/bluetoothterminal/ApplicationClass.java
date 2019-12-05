@@ -45,9 +45,7 @@ public class ApplicationClass extends Application {
         deviceConnected = false;
         BA = BluetoothAdapter.getDefaultAdapter();
 
-        ApplicationClass.mBluetoothConnectionService = new BluetoothConnectionService(this, mHandler);
 
-        ApplicationClass.mBluetoothConnectionService.start();
 
 
     }

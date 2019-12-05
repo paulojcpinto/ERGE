@@ -148,7 +148,8 @@
             android:clickable="true"
             android:text="Click HERE!!!"
             android:textColor="@color/coloYellow"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

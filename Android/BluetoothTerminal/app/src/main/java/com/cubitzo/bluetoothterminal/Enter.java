@@ -141,7 +141,6 @@ public class Enter extends AppCompatActivity {
         connected = false;
         listb = new ArrayList<BluetoothDevice>();
         loadedDevices = new ArrayList<>();
-        ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
         loadData();
 
         btnTerminal.setVisibility(View.GONE);
@@ -159,6 +158,14 @@ public class Enter extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Turned on bluetooth", Toast.LENGTH_LONG).show();
             startActivityForResult(turnOn, 0);
+        }
+        else
+        {
+            ApplicationClass.mBluetoothConnectionService = new BluetoothConnectionService(this, mHandler);
+
+            ApplicationClass.mBluetoothConnectionService.start();
+            ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
+
         }
 
         if (ApplicationClass.deviceConnected) {
@@ -199,9 +206,15 @@ public class Enter extends AppCompatActivity {
                     //
                     if(tvType.getText().toString().contains("Click HERE!!!")){
 
-                        Snackbar.make(findViewById(android.R.id.content), "Please enter an Device type", Snackbar.LENGTH_SHORT).show();
+                       // Snackbar.make(findViewById(android.R.id.content), "Please enter an Device type", Snackbar.LENGTH_SHORT).show();
 
-
+                        ivStatus.setImageResource(R.drawable.loading2);
+                        ivStatus.clearAnimation();
+                        ivStatus.startAnimation(rotate);
+                        BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
+                        // Attempt to connect to the device
+                        ApplicationClass.mBluetoothConnectionService.connect(device);
+                        ApplicationClass.deviceType="none";
                     }
                     else {
                         ivStatus.setImageResource(R.drawable.loading2);
@@ -279,8 +292,14 @@ public class Enter extends AppCompatActivity {
 
                     if(tvType.getText().toString().contains("Click HERE!!!")){
 
-                        Snackbar.make(findViewById(android.R.id.content), "Please enter an Device type", Snackbar.LENGTH_SHORT).show();
-
+                        //Snackbar.make(findViewById(android.R.id.content), "Please enter an Device type", Snackbar.LENGTH_SHORT).show();
+                        ivStatus.setImageResource(R.drawable.loading2);
+                        ivStatus.clearAnimation();
+                        ivStatus.startAnimation(rotate);
+                        BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
+                        // Attempt to connect to the device
+                        ApplicationClass.mBluetoothConnectionService.connect(device);
+                        ApplicationClass.deviceType="none";
 
                     }
                     else {
@@ -397,6 +416,17 @@ public class Enter extends AppCompatActivity {
         });
     }
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if (requestCode == 0) {
+            ApplicationClass.mBluetoothConnectionService = new BluetoothConnectionService(this, mHandler);
+
+            ApplicationClass.mBluetoothConnectionService.start();
+            ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
+        }
+    }
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.enter_menu, menu);
