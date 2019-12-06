@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/BluetoothState"
+        android:icon="@drawable/bluetooth_off"
+        android:orderInCategory="103"
+        android:title="BluetoothState"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/DeviceTyepe"
+        android:icon="@drawable/not_knowned"
+        android:orderInCategory="102"
+        android:title="Device Type"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/Clear"
+        android:icon="@drawable/clear"
+        android:orderInCategory="101"
+        android:title="Clear terminal"
+        app:showAsAction="ifRoom" />
+
+</menu>
