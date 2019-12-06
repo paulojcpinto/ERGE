@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "639175246980",
+    "firebase_url": "https://adrevenue-45076.firebaseio.com",
+    "project_id": "adrevenue-45076",
+    "storage_bucket": "adrevenue-45076.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639175246980:android:723ebe6deb36c2cb3caed1",
+        "android_client_info": {
+          "package_name": "com.cubitzo.adrevenue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639175246980-50sqtks2cdoo3jqprstuhshl8kl79q1a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cubitzo.adrevenue",
+            "certificate_hash": "72b721a69ab7ad2d7d482b1ddec5d018c964df9d"
+          }
+        },
+        {
+          "client_id": "639175246980-d3sdt7btirdnp571des17gghpi25ad5f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cubitzo.adrevenue",
+            "certificate_hash": "e462277443011e36ffac9bc59d56ef56b9074284"
+          }
+        },
+        {
+          "client_id": "639175246980-av6vfqkv8emnr55v0le3l1pihop82kmg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cubitzo.adrevenue",
+            "certificate_hash": "e5b5329fa01cd7e4e8eff9ade23c8c9b6bd17027"
+          }
+        },
+        {
+          "client_id": "639175246980-279rjhrkkj5qn9pvit0gqn7lf3tbi5e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdzsh05B1toPYsQUTwFSdKZAV_fg_EZqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639175246980-279rjhrkkj5qn9pvit0gqn7lf3tbi5e9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639175246980:android:b6df6030885cdcd23caed1",
+        "android_client_info": {
+          "package_name": "com.cubitzo.bluetoothterminal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639175246980-f08lqsvtq5epj9g9gkal69n7c2oed97f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cubitzo.bluetoothterminal",
+            "certificate_hash": "e462277443011e36ffac9bc59d56ef56b9074284"
+          }
+        },
+        {
+          "client_id": "639175246980-279rjhrkkj5qn9pvit0gqn7lf3tbi5e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdzsh05B1toPYsQUTwFSdKZAV_fg_EZqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639175246980-279rjhrkkj5qn9pvit0gqn7lf3tbi5e9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

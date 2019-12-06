@@ -61,11 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     String readMessage = new String(readBuf, StandardCharsets.UTF_8);
 
                         //tvDisplay.append(readMessage);
-
-
                             tvDisplay.append(readMessage);
-                            tvDisplay.append("\n");
-
+                            //tvDisplay.append("\n");
 
                     Toast.makeText(MainActivity.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
@@ -204,6 +201,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "You are connected to an " + ApplicationClass.deviceType + " by the name " + ApplicationClass.target.getName(), Toast.LENGTH_SHORT).show();
 
+                break;
+            case R.id.Clear:
+                tvDisplay.setText("");
                 break;
 
         }
