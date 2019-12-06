@@ -4,8 +4,8 @@
 #include <sys/types.h> 
 #include <signal.h>
 
-#define MSGOBJ_NAME "/database_query"
-#define MSGOBJ_NAME_CALLBACK "/database_callback"
+#define MSGOBJ_NAME "/opt/database_query"
+#define MSGOBJ_NAME_CALLBACK "/opt/database_callback"
 #define MAX_MSG_LEN 10000
 
 mqd_t msgq_id;

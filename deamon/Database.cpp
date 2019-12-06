@@ -5,7 +5,7 @@ using namespace std;
 
 CDatabase::CDatabase()
 {
-	databaseName = "ilock.db";
+	databaseName = "deadman.db";
 	openDB();
 }
 
@@ -16,7 +16,7 @@ CDatabase::~CDatabase()
 
 bool CDatabase::openDB()
 {
-	// sqlite3_open(database name, database object)
+	
 	sqlite3_open(databaseName, &database);
 }
 

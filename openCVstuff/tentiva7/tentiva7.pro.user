@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.10.1, 2019-11-30T13:36:22. -->
+<!-- Written by QtCreator 4.10.1, 2019-12-03T21:04:37. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -344,8 +344,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">1</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">tentiva7 (on rpi)</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/andre/tentiva7/tentiva7.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">tentiva7 (on rpi)2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">RemoteLinuxRunConfiguration:/home/andre/git/ERGE/openCVstuff/tentiva7/tentiva7.pro</value>
     <value type="int" key="RemoteLinux.EnvironmentAspect.Version">1</value>
     <value type="QString" key="RemoteLinux.RunConfig.AlternateRemoteExecutable"></value>
     <value type="bool" key="RemoteLinux.RunConfig.UseAlternateRemoteExecutable">false</value>

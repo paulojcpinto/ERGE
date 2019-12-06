@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
       images.pop_back();
       i.pop_back();
 
-    // model->train(images,i);
+     model->train(images,i);
     // Mat testSample = images[images.size() - 1];
      cout<<"treino feito";
      CCamera cam; Mat frame;
