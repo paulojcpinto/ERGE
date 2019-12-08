@@ -94,10 +94,12 @@ public class Enter extends AppCompatActivity {
                             saveDevice();
                         }
 
-                    } else if (readMessage.equals("rasp")) {
+                    } else if (readMessage.equals("RASP")) {
                         ApplicationClass.deviceType = "RASP";
                         connected = true;
+                        ivStatus.clearAnimation();
                         ivStatus.setImageResource(R.drawable.done);
+                        ivStatus.startAnimation(fade_in);
                         Toast.makeText(Enter.this, "Connected with sucess", Toast.LENGTH_SHORT).show();
                         boolean canSave = true;
 
