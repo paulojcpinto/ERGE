@@ -22,6 +22,7 @@
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
+#include "bluetooth_module.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -101,11 +102,8 @@ int main(void)
 	init_UARTs();
 	//HAL_UART_Transmit_IT(&huart3, (uint8_t *)sizeof(char), 1);
 
-	user pp;
-	pp.getNickName = getNickName;
+	//user pp;
 	int c = 0;
-	uint8_t *ppp= "paulo jorge";
-	HAL_UART_Transmit_IT(&huart3, ppp, 5);
 	HAL_Delay(50);
 
   /* USER CODE END 2 */
@@ -114,7 +112,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		if(!pp.getNickName(&pp, &c))
+		//if(!pp.parsingBT(&pp, &c))
+		if(parsingBT(&c))
 		{
 			
 			line_output 	|=   NumPad_1Lin_Pin;
@@ -134,7 +133,7 @@ int main(void)
 			line_output 	&=  ~NumPad_4Lin_Pin;
 			
 		}
-		HAL_Delay(50);
+		HAL_Delay(1);
 		
     /* USER CODE END WHILE */
 

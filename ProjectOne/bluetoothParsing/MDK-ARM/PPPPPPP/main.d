@@ -33,4 +33,5 @@ ppppppp\main.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h
 ppppppp\main.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
 ppppppp\main.o: ../Core/Inc/usart.h
 ppppppp\main.o: ../Core/Inc/gpio.h
+ppppppp\main.o: ../Core/Inc/bluetooth_module.h
 ppppppp\main.o: ../Core/Inc/user.h

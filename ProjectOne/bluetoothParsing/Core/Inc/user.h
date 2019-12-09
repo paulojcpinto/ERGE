@@ -2,7 +2,8 @@
 #define __user_H
 
 #include "usart.h"
-	
+#include "bluetooth_module.h"
+
 typedef struct User user;
 
 
@@ -17,11 +18,21 @@ struct User
 	int repeatTime;
 	char dateToStart[10];
 	char platformToRelease[50];
-	int (*getNickName)(user *, int *); 
+	char unlocked;
+	char prenseceCheck;
+	
+	
 };
 
+extern user getUser(char* nickName, int lengh);
 
-extern int getNickName (user *me, int *c);
+extern int createUser(user_parsing newUser);
+
+
+
+
+
+//extern int parsingBT (user *me, int *c);
 
 
 #endif /*__ user_H */

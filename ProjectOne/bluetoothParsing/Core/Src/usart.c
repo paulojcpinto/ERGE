@@ -19,7 +19,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
-
 /* USER CODE BEGIN 0 */
 uint8_t UART3Rx_Buffer[128];
 uint8_t Rx_Buffer[128];
