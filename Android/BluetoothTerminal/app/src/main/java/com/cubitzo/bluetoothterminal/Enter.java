@@ -91,6 +91,12 @@ public class Enter extends AppCompatActivity {
                         ivStatus.startAnimation(fade_out);
                         btnTerminal.setVisibility(View.GONE);
                     }
+                    if(msg.getData().getString(TOAST).contains("Unable"))
+                    {
+                        ivStatus.clearAnimation();
+                        ivStatus.startAnimation(fade_out);
+                        btnTerminal.setVisibility(View.GONE);
+                    }
                     Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST),
                             Toast.LENGTH_SHORT).show();
                     break;
@@ -290,7 +296,7 @@ public class Enter extends AppCompatActivity {
                 if (!connected) {
 
 
-                    if(tvType.getText().toString().contains("Click HERE!!!")){
+                    if(tvType.getText().toString().contains("Click HERE!!!") && !tvMacAdress.getText().toString().contains("null")){
 
                         //Snackbar.make(findViewById(android.R.id.content), "Please enter an Device type", Snackbar.LENGTH_SHORT).show();
                         ivStatus.setImageResource(R.drawable.loading2);
@@ -303,12 +309,14 @@ public class Enter extends AppCompatActivity {
 
                     }
                     else {
-                        ivStatus.setImageResource(R.drawable.loading2);
-                        ivStatus.clearAnimation();
-                        ivStatus.startAnimation(rotate);
-                        BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
-                        // Attempt to connect to the device
-                        ApplicationClass.mBluetoothConnectionService.connect(device);
+                        if(!tvMacAdress.getText().toString().contains("null")) {
+                            ivStatus.setImageResource(R.drawable.loading2);
+                            ivStatus.clearAnimation();
+                            ivStatus.startAnimation(rotate);
+                            BluetoothDevice device = ApplicationClass.BA.getRemoteDevice(ApplicationClass.target.getAddress());
+                            // Attempt to connect to the device
+                            ApplicationClass.mBluetoothConnectionService.connect(device);
+                        }
                     }
 
 
@@ -447,7 +455,6 @@ public class Enter extends AppCompatActivity {
 
                 final TextView tvBname = dialogView.findViewById(R.id.tvBName);
                 final TextView tvBmac = dialogView.findViewById(R.id.tvBmac);
-                final ImageView ivType = dialogView.findViewById(R.id.ivType);
                 final LinearLayout llSelected = dialogView.findViewById(R.id.llSelected);
                 choosed = false;
                 llSelected.setVisibility(View.GONE);
@@ -520,7 +527,6 @@ public class Enter extends AppCompatActivity {
 
                 final TextView tvBname1 = dialogView1.findViewById(R.id.tvBName);
                 final TextView tvBmac1 = dialogView1.findViewById(R.id.tvBmac);
-                final ImageView ivType1 = dialogView1.findViewById(R.id.ivType);
                 final TextView tvType = dialogView1.findViewById(R.id.tvType);
                 final LinearLayout llSelected1 = dialogView1.findViewById(R.id.llSelected);
                 choosed = false;
@@ -539,16 +545,14 @@ public class Enter extends AppCompatActivity {
 
 
 
-                        auxBluetooth.clear();
+                       // auxBluetooth.clear();
 
                         for (int i = 0; i < loadedDevices.size(); i++) {
-                            if (loadedDevices.get(i).deviceType.contains("STM"))
                                 auxBluetooth.add(loadedDevices.get(i).device);
                         }
 
                         MyBluetoothAdapterType adapter1 = new MyBluetoothAdapterType(getApplicationContext(), loadedDevices);
 
-                        choosed = false;
                         lv1.setAdapter(adapter1);
 
                         llSelected1.setVisibility(View.GONE);
