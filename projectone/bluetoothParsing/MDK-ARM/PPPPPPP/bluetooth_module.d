@@ -1,5 +1,5 @@
-ppppppp\bluetooth_module.o: bluetooth_module.c
-ppppppp\bluetooth_module.o: bluetooth_module.h
+ppppppp\bluetooth_module.o: ..\Core\Src\bluetooth_module.c
+ppppppp\bluetooth_module.o: ../Core/Inc/bluetooth_module.h
 ppppppp\bluetooth_module.o: ../Core/Inc/usart.h
 ppppppp\bluetooth_module.o: ../Core/Inc/main.h
 ppppppp\bluetooth_module.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h
