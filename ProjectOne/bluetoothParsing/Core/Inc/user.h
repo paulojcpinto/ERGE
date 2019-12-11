@@ -23,7 +23,7 @@ struct UserFuncitons
 
 struct User
 {
-	userfuncs what;
+	userfuncs funcs;
 	char nickName[25];
 	char pinCode[4];
 	char phoneNumber[13];
