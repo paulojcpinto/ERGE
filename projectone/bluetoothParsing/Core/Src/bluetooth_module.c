@@ -1,6 +1,6 @@
 #include "bluetooth_module.h"
 #include "usart.h"
-
+#include "user.h"
 
 
 #define discard_char					UART3Tx_index++
@@ -48,7 +48,7 @@
 static int out_index = 0;
 int error_number = 0;
 char echo[255];
-user_parsing user;
+user_parsing user_pars;
 
 void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
@@ -221,7 +221,7 @@ void end_receiving_trama (int *c)
 
 				}; break;
 				case int_error:
-						HAL_UART_Transmit_IT(&huart4, user.nickName, out_index);
+						HAL_UART_Transmit_IT(&huart4, user_pars.nickName, out_index);
 					break;
 				
 				case int_nick:
@@ -278,31 +278,31 @@ void save_char (int *c )
 				}break;
 				case int_nick:
 				{
-					user.nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 				};break;
 				case int_pincode:
-					user.pinCode[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.pinCode[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_email:
-					user.email[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.email[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_email_password:
-					user.emailPassword[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.emailPassword[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
 				break;
 				case int_phone_number:
-					user.phoneNumber[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.phoneNumber[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_message:
-					user.messageToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.messageToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_repeat:
-					user.repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
+					user_pars.repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
 					break;
 				case int_date:
-					user.dateToStart[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.dateToStart[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_platform:
-					user.platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				
 			}

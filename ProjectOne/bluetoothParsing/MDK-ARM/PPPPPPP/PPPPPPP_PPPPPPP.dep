@@ -1,9 +1,9 @@
 Dependencies for Project 'PPPPPPP', Target 'PPPPPPP': (DO NOT MODIFY !)
 F (startup_stm32f767xx.s)(0x5DEA98D4)(--cpu Cortex-M7.fp.dp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include--pd "__UVISION_VERSION SETA 526" --pd "_RTE_ SETA 1" --pd "STM32F767xx SETA 1"--list startup_stm32f767xx.lst --xref -o ppppppp\startup_stm32f767xx.o --depend ppppppp\startup_stm32f767xx.d)
 F (..\Core\Inc\gpio.h)(0x5DEA98D8)()
-F (..\Core\Inc\user.h)(0x5DEEE6CB)()
-F (..\Core\Src\user.c)(0x5DEEE64D)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\user.o --omf_browse ppppppp\user.crf --depend ppppppp\user.d)
-I (../Core/Inc/user.h)(0x5DEEE6CB)
+F (..\Core\Inc\user.h)(0x5DF0D595)()
+F (..\Core\Src\user.c)(0x5DF0D594)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\user.o --omf_browse ppppppp\user.crf --depend ppppppp\user.d)
+I (../Core/Inc/user.h)(0x5DF0D595)
 I (../Core/Inc/usart.h)(0x5DEA98D8)
 I (../Core/Inc/main.h)(0x5DEA98D8)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x5DEA98D7)
@@ -36,7 +36,9 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5DEA98D7)
-I (../Core/Inc/bluetooth_module.h)(0x5DEE5F61)
+I (../Core/Inc/bluetooth_module.h)(0x5DF0D595)
+I (../Core/Inc/message.h)(0x5DF0C68D)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F4BBC)
 F (../Core/Src/main.c)(0x5DEE5F7E)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\main.o --omf_browse ppppppp\main.crf --depend ppppppp\main.d)
 I (../Core/Inc/main.h)(0x5DEA98D8)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x5DEA98D7)
@@ -71,8 +73,9 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5DEA98D7)
 I (../Core/Inc/usart.h)(0x5DEA98D8)
 I (../Core/Inc/gpio.h)(0x5DEA98D8)
-I (../Core/Inc/bluetooth_module.h)(0x5DEE5F61)
-I (../Core/Inc/user.h)(0x5DEEE6CB)
+I (../Core/Inc/bluetooth_module.h)(0x5DF0D595)
+I (../Core/Inc/user.h)(0x5DF0D595)
+I (../Core/Inc/message.h)(0x5DF0C68D)
 F (../Core/Src/gpio.c)(0x5DEA98D8)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\gpio.o --omf_browse ppppppp\gpio.crf --depend ppppppp\gpio.d)
 I (../Core/Inc/gpio.h)(0x5DEA98D8)
 I (../Core/Inc/main.h)(0x5DEA98D8)
@@ -204,8 +207,8 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5DEA98D7)
-F (..\Core\Src\bluetooth_module.c)(0x5DEE5CE4)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\bluetooth_module.o --omf_browse ppppppp\bluetooth_module.crf --depend ppppppp\bluetooth_module.d)
-I (../Core/Inc/bluetooth_module.h)(0x5DEE5F61)
+F (..\Core\Src\bluetooth_module.c)(0x5DF0D595)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\bluetooth_module.o --omf_browse ppppppp\bluetooth_module.crf --depend ppppppp\bluetooth_module.d)
+I (../Core/Inc/bluetooth_module.h)(0x5DF0D595)
 I (../Core/Inc/usart.h)(0x5DEA98D8)
 I (../Core/Inc/main.h)(0x5DEA98D8)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x5DEA98D7)
@@ -238,7 +241,12 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5DEA98D7)
-F (..\Core\Inc\bluetooth_module.h)(0x5DEE5F61)()
+I (../Core/Inc/user.h)(0x5DF0D595)
+I (../Core/Inc/message.h)(0x5DF0C68D)
+F (..\Core\Inc\bluetooth_module.h)(0x5DF0D595)()
+F (..\Core\Inc\message.h)(0x5DF0C68D)()
+F (..\Core\Src\message.c)(0x5DF0C5F7)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\message.o --omf_browse ppppppp\message.crf --depend ppppppp\message.d)
+I (../Core/Inc/message.h)(0x5DF0C68D)
 F (../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c)(0x5DEA98D7)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\stm32f7xx_hal_cortex.o --omf_browse ppppppp\stm32f7xx_hal_cortex.crf --depend ppppppp\stm32f7xx_hal_cortex.d)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x5DEA98D7)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x5DEA98D8)

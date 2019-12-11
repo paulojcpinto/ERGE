@@ -35,3 +35,4 @@ ppppppp\main.o: ../Core/Inc/usart.h
 ppppppp\main.o: ../Core/Inc/gpio.h
 ppppppp\main.o: ../Core/Inc/bluetooth_module.h
 ppppppp\main.o: ../Core/Inc/user.h
+ppppppp\main.o: ../Core/Inc/message.h

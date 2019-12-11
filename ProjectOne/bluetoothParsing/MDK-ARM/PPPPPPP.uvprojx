@@ -442,6 +442,16 @@
               <FileType>5</FileType>
               <FilePath>..\Core\Inc\bluetooth_module.h</FilePath>
             </File>
+            <File>
+              <FileName>message.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\message.h</FilePath>
+            </File>
+            <File>
+              <FileName>message.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\message.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

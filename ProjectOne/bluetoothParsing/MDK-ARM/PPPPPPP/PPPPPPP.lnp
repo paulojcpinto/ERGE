@@ -7,6 +7,7 @@
 "ppppppp\stm32f7xx_it.o"
 "ppppppp\stm32f7xx_hal_msp.o"
 "ppppppp\bluetooth_module.o"
+"ppppppp\message.o"
 "ppppppp\stm32f7xx_hal_cortex.o"
 "ppppppp\stm32f7xx_hal_tim.o"
 "ppppppp\stm32f7xx_hal_tim_ex.o"

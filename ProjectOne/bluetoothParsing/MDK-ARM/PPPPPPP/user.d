@@ -34,3 +34,5 @@ ppppppp\user.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h
 ppppppp\user.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h
 ppppppp\user.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
 ppppppp\user.o: ../Core/Inc/bluetooth_module.h
+ppppppp\user.o: ../Core/Inc/message.h
+ppppppp\user.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
