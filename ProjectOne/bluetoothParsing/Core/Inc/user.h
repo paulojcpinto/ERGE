@@ -5,6 +5,13 @@
 #include "bluetooth_module.h"
 #include  "message.h"
 
+
+#define LOGIN_SUCCESS 1
+#define USER_NOT_FOUND -1
+#define USER_BLOCKED  -2
+#define BAD_CREDENTIALS  -3
+
+
 typedef struct UserFuncitons userfuncs;
 typedef struct User user;
 
@@ -47,6 +54,8 @@ extern int updatePinCode(char *mpinCode, user * mUser);
 extern int updatePhoneNumber(char * mphoneNumber, user *mUser);
 
 extern int updateEmail(char* mEmail,user* mUser);
+
+extern int login(char* nickName, char* pinCode);
 
 extern int updateEmailPassword(char* mEmailPassword, user* mUser);
 

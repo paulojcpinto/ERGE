@@ -27,6 +27,8 @@ void initUser(void)
 		users[i].mmessage.updatePlatformToRelease= updatePlatformToRelease;
 		users[i].mmessage.updateRepeatTime= updateRepeatTime;
 		users[i].position=i;
+	  users[i].unlocked=0;
+
 	}
 	
 	
@@ -45,6 +47,8 @@ void initUser(void)
 	 }
 	 return 0;
  }
+ 
+ 
 
  int createUser(user_parsing newUser)
  {
@@ -60,12 +64,32 @@ void initUser(void)
 	 strcpy(users[nextUser].mmessage.messageToRelease,newUser.messageToRelease);
 	 strcpy(users[nextUser].mmessage.platformToRelease,newUser.platformToRelease);
 	 users[nextUser].mmessage.repeatTime= newUser.repeatTime;
+	 users[nextUser].unlocked=0;
 	 nextUser++;
 	 return 1;	 
 	 }
 	 else return 0;
 	 
  }
+ 
+ int login(char* nickName, char* pinCode)
+ {
+	 user* userAux;
+	 if((userAux=getUser(nickName))!=0)
+	 {
+		 if(strcmp(userAux->pinCode,pinCode))
+		 {
+			 if(userAux->unlocked)
+			 {
+				 return LOGIN_SUCCESS;    //login success
+			 }
+			 else return USER_BLOCKED;   //user blocked
+		 }
+		 else return BAD_CREDENTIALS;   //wrong pincode
+	 }
+	 else return USER_NOT_FOUND;  //return user not found
+ }
+ 
 
  int updatePinCode(char *mpinCode, user * mUser)
  {
