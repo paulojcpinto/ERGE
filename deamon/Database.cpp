@@ -31,7 +31,7 @@ bool CDatabase::executeQuery(char* query)
 	int rc = sqlite3_exec(database, query, callback, (void*)this, &errormsg);
 	if( rc != SQLITE_OK){
 		return FALSE;
-	}
+	}else return TRUE;
 }
 
 int CDatabase::callback(void* result_ptr, int argc, char** argv, char** azColName)

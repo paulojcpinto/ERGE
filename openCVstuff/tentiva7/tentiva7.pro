@@ -28,7 +28,7 @@ INSTALLS += target
 HEADERS += \
     ccamera.h
 QMAKE_CXXFLAGS += -std=c++0x -pthread
-LIBS += -pthread -lrt -lpthread -lbcm2835
+LIBS += -pthread -lrt -lpthread #-lbcm2835
 
 CONFIG += link_pkgconfig
 PKGCONFIG += opencv

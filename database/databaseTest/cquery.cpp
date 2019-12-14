@@ -11,8 +11,9 @@ using namespace std;
 
 CQuery::CQuery()
 {
-	msgq_query = "/database_query";
-	msgq_callback = "/database_callback";
+    msgq_query = "/database_query";
+    msgq_callback = "/daetabase_callback";
+
 }
 
 CQuery::~CQuery()
