@@ -38,6 +38,7 @@ struct messageInfoQuery
 struct faceQuery
 {
     string PathDataset;
+    int NumberOfImages;
 };
 
 struct fingerPrintQuery
@@ -65,7 +66,12 @@ public:
     bool insertUser(const userQuery user);
     bool insertFace(const string Nickname,const faceQuery faceInfo);
     bool insertFingerPrint(const string Nickname,const fingerPrintQuery fingerInfo);
-    bool insertMessageInfo(const messageInfoQuery messageInfo);
+    bool insertMessageInfo(const string Nickname,const messageInfoQuery messageInfo);
+    bool getUser(string Nickname,fullUser *output);
+    bool getUser(string Nickname,userQuery * user);
+    bool getFace( string Nickname,faceQuery *faceInfo);
+    bool getFingerprint( string Nickname, fingerPrintQuery *fingerInfo);
+    bool getMessage( string Nickname, messageInfoQuery * messageInfo);
 
 
 
@@ -87,6 +93,7 @@ private:
     string selectQueryGetResponse(const char*, const char*, const char*, const char*);
     string selectQueryGetResponse(const char*, const char*, const char*, int);
     string selectQueryGetResponse(const char*, const char*);
+     string messageLog;
 
     char query[MAX_MSG_LEN];
     char result[MAX_MSG_LEN];
@@ -95,7 +102,7 @@ private:
     mqd_t msgq_id_query;
     mqd_t msgq_id_callback;
 
-    string messageLog;
+
     int fd;
 };
 

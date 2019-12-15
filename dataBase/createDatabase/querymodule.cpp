@@ -17,6 +17,7 @@ QueryModule::QueryModule()
                 exit(EXIT_FAILURE);
             }
 
+
 }
 
 QueryModule::~QueryModule()
@@ -24,6 +25,8 @@ QueryModule::~QueryModule()
     closeQueryQueue();
     closeCallbackQueue();
 }
+
+
 
 bool QueryModule::openQueryQueue()
 {

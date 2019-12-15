@@ -74,23 +74,23 @@ int main(int argc, char *argv[])
 	msgq_id = mq_open(MSGOBJ_NAME, O_RDWR | O_CREAT);
 	if(msgq_id == (mqd_t) - 1)
 	{
-		write(fd,"Daemon: Error openeing queue!\n",31);
+		write(fd,"Daemon: Error openeing queue!\n\n",32);
 		//syslog(LOG_DAEMON|LOG_ERR, "%s\n", "error opening query queue");
 		exit(1);
 	}	
-	write(fd,"Daemon: Created queue succesfully!\n",36);
+	write(fd,"Daemon: Created queue succesfully!\n\n",37);
 	//syslog(LOG_DAEMON|LOG_INFO, "%s\n", "queue query created/opened");
 	sleep(1);
 	// Open callback queue
 	msgq_id_callback = mq_open(MSGOBJ_NAME_CALLBACK, O_RDWR | O_CREAT);
 	if(msgq_id_callback  == (mqd_t) - 1)
 	{
-		write(fd,"Daemon: Error creating the callback!",37);
+		write(fd,"Daemon: Error creating the callback!\n\n",38);
 		//syslog(LOG_DAEMON|LOG_ERR, "%s\n", "error opening callback queue");
 		exit(1);
 	}
 	//syslog(LOG_DAEMON|LOG_INFO, "%s\n", "queue callback created/opened");
-	write(fd,"Daemon: queue callback created/opened",38);
+	write(fd,"Daemon: queue callback created/opened\n\n",40);
 
 	//Database object
 	CDatabase database;
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
 		syslog(LOG_DAEMON|LOG_INFO, "Query: %s\n", msgcontent);
 		string message("Daemon: Query: ");
 		message.append(msgcontent);
-		message.append("\n");
+		message.append("\n\n");
 		
 		write(fd,message.c_str(),message.size());
 		// Execute database query
@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 		//syslog(LOG_DAEMON|LOG_INFO, "Query result: %s\n", msgcontent_callback);
 		message = "Daemon: Query result = ";
 		message.append(msgcontent_callback);
-		message.append("\n");
+		message.append("\n\n");
         write(fd,message.c_str(),message.size());
 		// Send message
 		mq_send(msgq_id_callback, msgcontent_callback, strlen(msgcontent_callback)+1, 1);

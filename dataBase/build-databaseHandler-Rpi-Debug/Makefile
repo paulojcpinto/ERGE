@@ -169,6 +169,7 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
+		../databaseHandler/.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -312,6 +313,7 @@ Makefile: ../databaseHandler/databaseHandler.pro ../../../../buildroot-2019.08/o
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -444,6 +446,7 @@ Makefile: ../databaseHandler/databaseHandler.pro ../../../../buildroot-2019.08/o
 ../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf:
@@ -577,7 +580,8 @@ main.o: ../databaseHandler/main.cpp ../../../../buildroot-2019.08/output/host/ar
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qeventloop.h
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qeventloop.h \
+		../databaseHandler/sqlquery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../databaseHandler/main.cpp
 
 sqlquery.o: ../databaseHandler/sqlquery.cpp ../databaseHandler/sqlquery.h
