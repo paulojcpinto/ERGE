@@ -152,103 +152,87 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>254</LineNumber>
+          <LineNumber>315</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134225972</Address>
+          <Address>134227502</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Core\Src\user.c</Filename>
+          <Filename>..\Core\Src\bluetooth_module.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/user.c\254</Expression>
+          <Expression>\\PPPPPPP\../Core/Src/bluetooth_module.c\315</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>116</LineNumber>
+          <LineNumber>369</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218632</Address>
+          <Address>134226946</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/gpio.c</Filename>
+          <Filename>..\Core\Src\bluetooth_module.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/gpio.c\116</Expression>
+          <Expression>\\PPPPPPP\../Core/Src/bluetooth_module.c\369</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>122</LineNumber>
+          <LineNumber>314</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218630</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/gpio.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Core\Src\bluetooth_module.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/gpio.c\122</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>150</LineNumber>
+          <LineNumber>366</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218696</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/gpio.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Core\Src\bluetooth_module.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/gpio.c\150</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>4</Number>
           <Type>0</Type>
-          <LineNumber>126</LineNumber>
+          <LineNumber>368</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218636</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/gpio.c</Filename>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Core\Src\bluetooth_module.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/gpio.c\126</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>5</Number>
           <Type>0</Type>
-          <LineNumber>63</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134226636</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Core\Src\user.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/user.c\63</Expression>
-        </Bp>
-        <Bp>
-          <Number>6</Number>
-          <Type>0</Type>
-          <LineNumber>257</LineNumber>
+          <LineNumber>371</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -257,15 +241,15 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\Core\Src\user.c</Filename>
+          <Filename>..\Core\Src\bluetooth_module.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
         <Bp>
-          <Number>7</Number>
+          <Number>6</Number>
           <Type>0</Type>
-          <LineNumber>65</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
+          <LineNumber>393</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
@@ -273,11 +257,48 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\Core\Src\user.c</Filename>
+          <Filename>..\Core\Src\bluetooth_module.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
       </Breakpoint>
+      <WatchWindow1>
+        <Ww>
+          <count>0</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>user_pars</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>users[i]</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>i</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>UART3Rx_index</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>UART3Rx_Buffer</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>*c</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>UART3Tx_index</ItemText>
+        </Ww>
+      </WatchWindow1>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>

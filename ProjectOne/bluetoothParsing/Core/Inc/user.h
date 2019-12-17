@@ -7,9 +7,9 @@
 
 
 #define LOGIN_SUCCESS 1
-#define USER_NOT_FOUND -1
-#define USER_BLOCKED  -2
-#define BAD_CREDENTIALS  -3
+#define USER_NOT_FOUND 2
+#define USER_BLOCKED  3
+#define BAD_CREDENTIALS  4
 
 
 typedef struct UserFuncitons userfuncs;

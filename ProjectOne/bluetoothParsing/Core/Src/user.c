@@ -39,7 +39,7 @@ void initUser(void)
 	 int i=0;
 	 for(i=0;i<MAX_USERS;i++)
 	 {
-		 if(strcmp(users[i].nickName,nickName))
+		 if(!strcmp(users[i].nickName,nickName))
 		 {
 			 return &users[i];
 		 }
@@ -64,7 +64,7 @@ void initUser(void)
 	 strcpy(users[nextUser].mmessage.messageToRelease,newUser.messageToRelease);
 	 strcpy(users[nextUser].mmessage.platformToRelease,newUser.platformToRelease);
 	 users[nextUser].mmessage.repeatTime= newUser.repeatTime;
-	 users[nextUser].unlocked=0;
+	 users[nextUser].unlocked=1;
 	 nextUser++;
 	 return 1;	 
 	 }
@@ -75,9 +75,10 @@ void initUser(void)
  int login(char* nickName, char* pinCode)
  {
 	 user* userAux;
-	 if((userAux=getUser(nickName))!=0)
+	 userAux=getUser(nickName);
+	 if(!strcmp(userAux->nickName,nickName))
 	 {
-		 if(strcmp(userAux->pinCode,pinCode))
+		 if(!strcmp(userAux->pinCode,pinCode))
 		 {
 			 if(userAux->unlocked)
 			 {

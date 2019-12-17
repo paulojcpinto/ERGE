@@ -28,30 +28,21 @@ Project File Date:  12/11/2019
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'PPPPPPP'
 compiling bluetooth_module.c...
-..\Core\Src\bluetooth_module.c(78): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+..\Core\Src\bluetooth_module.c(86): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   					   HAL_UART_Transmit_IT(&huart4, aux ,4 );
-..\Core\Src\bluetooth_module.c(90): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+..\Core\Src\bluetooth_module.c(98): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
-..\Core\Src\bluetooth_module.c(103): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+..\Core\Src\bluetooth_module.c(111): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
-..\Core\Src\bluetooth_module.c(210): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+..\Core\Src\bluetooth_module.c(248): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   					HAL_UART_Transmit_IT(&huart4, echo, out_index);
-..\Core\Src\bluetooth_module.c(224): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+..\Core\Src\bluetooth_module.c(262): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   						HAL_UART_Transmit_IT(&huart4, user_pars.nickName, out_index);
-..\Core\Src\bluetooth_module.c(263): warning:  #111-D: statement is unreachable
-  	*c = -1;
-..\Core\Src\bluetooth_module.c: 6 warnings, 0 errors
-compiling user.c...
-..\Core\Src\user.c(51): warning:  #177-D: variable "i"  was declared but never referenced
-  	 int i=0;
-..\Core\Src\user.c(91): warning:  #1-D: last line of file ends without a newline
-   
-..\Core\Src\user.c: 2 warnings, 0 errors
-compiling main.c...
+..\Core\Src\bluetooth_module.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=8788 RO-data=560 RW-data=36 ZI-data=3116  
+Program Size: Code=9520 RO-data=560 RW-data=40 ZI-data=7752  
 FromELF: creating hex file...
-"PPPPPPP\PPPPPPP.axf" - 0 Error(s), 8 Warning(s).
+"PPPPPPP\PPPPPPP.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -74,7 +65,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.3.0
-Build Time Elapsed:  00:00:16
+Build Time Elapsed:  00:00:19
 </pre>
 </body>
 </html>

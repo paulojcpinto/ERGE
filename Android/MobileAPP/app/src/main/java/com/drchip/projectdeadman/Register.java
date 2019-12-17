@@ -821,6 +821,7 @@ public class Register extends AppCompatActivity {
 
             } else {
                 Toast.makeText(Register.this, "Sended Platform to release!", Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<C>",Register.this);
                 final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.success_login_layout, null);

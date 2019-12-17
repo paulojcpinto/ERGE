@@ -44,6 +44,14 @@
 #define char_trama_platform              (char)  'A'
 #define int_platform                      (int)  13
 
+#define char_create_user                 (char)  'C'
+#define int_create_user                  (int)   14
+	
+#define  char_app_login                  (char)  'Q'
+#define  int_app_login                   (int)   15
+	
+
+
 
 static int out_index = 0;
 int error_number = 0;
@@ -107,6 +115,27 @@ void print_response(char c)
 
 					UART3Tx_index++;
 					
+	
+}
+
+void print_responseLogin(int log)
+{
+	char* s;
+	
+	if(log<=9)
+					{
+						
+				  	UlToStr(s,log,1);
+						uint8_t  pp[4];
+					   pp[0]='<';
+					   pp[1]=char_app_login;
+					   pp[2]=s[0];
+					   pp[3]='>';
+					   HAL_UART_Transmit_IT(&huart4,  pp,4 );
+					}
+						
+					      
+					UART3Tx_index++;
 	
 }
 
@@ -189,6 +218,15 @@ void prepare_receive_info(int *c )
 			UART3Tx_index++;		
 		break;
 		
+		case char_create_user:
+			*c=int_create_user;
+		  UART3Tx_index++;	
+			break;
+		case char_app_login:
+			*c=int_app_login;
+			 UART3Tx_index++;	
+			break;
+		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -201,11 +239,11 @@ void prepare_receive_info(int *c )
 
 void end_receiving_trama (int *c)
 {
+	int loginAnswer;
 	switch (*c)
 			{
 				case int_echo:
 				{
-					HAL_Delay(100);
 					echo[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 					HAL_UART_Transmit_IT(&huart4, echo, out_index);
 
@@ -257,11 +295,20 @@ void end_receiving_trama (int *c)
 					break;
 				
 				case int_platform:
-					print_response(char_trama_platform);
+					print_response(char_trama_platform);				
+					break;
+				case int_create_user:
+					UART3Tx_index++;
+					createUser(user_pars);
+					break;
+				case int_app_login:
+				  loginAnswer=login(user_pars.nickName,user_pars.pinCode);
+				  print_responseLogin(loginAnswer);
 					break;
 				
-	*c = -1;
+
 				}
+				*c = -1;
 			}
 void save_char (int *c )
 {
@@ -303,7 +350,10 @@ void save_char (int *c )
 					break;
 				case int_platform:
 					user_pars.platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+				  
 					break;
+				
+				default : *c = -1;
 				
 			}
 			
@@ -318,6 +368,7 @@ int parsingBT (int *c)
 	{
 		if(UART3Rx_Buffer[UART3Tx_index] == char_trama_init)
 		{
+			
 			*c = 1;
 			UART3Tx_index ++;
 			out_index = 0;
