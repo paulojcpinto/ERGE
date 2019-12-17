@@ -372,6 +372,8 @@ bool SqlQuery::getMessage(string Nickname, messageInfoQuery *messageInfo)
     return true;
 }
 
+
+
 bool SqlQuery::getUser(string Nickname,fullUser *output)
 {
 
@@ -400,6 +402,226 @@ bool SqlQuery::getUser(string Nickname,fullUser *output)
     write(fd,messageLog.c_str(),messageLog.length());
     return false;
 }
+
+void SqlQuery::writeToLog(string Message)
+{
+    string MessageToLog;
+    MessageToLog= PROGRAM_NAME;
+    MessageToLog.append(Message);
+    MessageToLog.append("\n\n");
+    write(fd,MessageToLog.c_str(),MessageToLog.length());
+
+}
+
+vector<fullUser> SqlQuery::getAllUsers()
+{
+    vector<fullUser> users;
+  string str = selectQueryGetResponse("Nickname","MYUSER");
+  string toErase("Nickname = ");
+  size_t pos = string::npos;
+  while((pos = str.find(toErase)) != string::npos)
+  {
+      str.erase(pos, toErase.length());
+  }
+  vector<string> nicks;
+  string parser;
+  stringstream ss(str);
+  while(getline(ss, parser, '\n'))
+  {
+      nicks.push_back(parser);
+  }
+  for(unsigned int i=0; i<nicks.size();i++)
+  {
+      fullUser aux;
+      if(getUser(nicks.at(i),&aux))
+      {
+        users.push_back(aux);
+      }
+      else
+      {
+          messageLog = PROGRAM_NAME;
+          messageLog.append("ERROR getting user:");
+          messageLog.append(nicks.at(i));
+          messageLog.append("\n\n");
+          write(fd,messageLog.c_str(),messageLog.length());
+          vector<fullUser> empty;
+          return empty;
+      }
+
+  }
+
+  return users;
+}
+
+bool SqlQuery::deleteQuery(string table, string column, string condiction)
+{
+    stringstream ss;
+    ss<<"DELETE FROM "<<table<<" WHERE "<<column<<"='"<<condiction<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+
+}
+bool SqlQuery::deleteFace(const string Nickname)
+{
+    if(deleteQuery("FACE","Nickname",Nickname))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool SqlQuery::deleteMessage(const string Nickname)
+{
+    if(deleteQuery("MESSAGEINFO","Nickname",Nickname))
+    {
+        return true;
+    }
+    return false;
+}
+bool SqlQuery::deleteFingerprint(const string Nickname)
+{
+    if(deleteQuery("FINGERPRINT","Nickname",Nickname))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool SqlQuery::deleteUser(const string Nickname)
+{
+    if(deleteQuery("MYUSER","Nickname",Nickname))
+    {
+        return true;
+    }
+    return false;
+}
+
+
+bool SqlQuery::deleteFullUser(const string Nickname)
+{
+    if(deleteUser(Nickname))
+    {
+        if(deleteFace(Nickname))
+        {
+            if(deleteFingerprint(Nickname))
+            {
+                if(deleteMessage(Nickname))
+                {
+                    return true;
+                }
+                writeToLog("Error deleting user message!!");
+                return false;
+            }
+            writeToLog("Error deleting Fingerprint!!!");
+            return false;
+        }
+
+        writeToLog("Error deleting Face!!");
+        return false;
+
+    }
+    writeToLog("Error deleting User");
+    return false;
+
+}
+
+bool SqlQuery::updateNumberOfImage(const string Nickname, const int newNumber)
+{
+    stringstream ss;
+    ss<<"UPDATE FACE SET NumberOfImages = "<<newNumber<<" WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+}
+
+bool SqlQuery::updateUserMessage(const string Nickname, const string newMessage)
+{
+    stringstream ss;
+    ss<<"UPDATE MESSAGEINFO SET userMessage = '"<<newMessage<<"' WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+
+}
+
+bool SqlQuery::updateJumpTime(const string Nickname, const int newJumpTime)
+{
+    stringstream ss;
+    ss<<"UPDATE MESSAGEINFO SET jumpTime = "<<newJumpTime<<" WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+}
+
+bool SqlQuery::updatePlatformToRelease(const string Nickname, const string newPlatform)
+{
+
+    stringstream ss;
+    ss<<"UPDATE MESSAGEINFO SET targetPlatform = '"<<newPlatform<<"' WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+}
+
+bool SqlQuery::updateDateToStart(const string Nickname, const string newDate)
+{
+    stringstream ss;
+    ss<<"UPDATE MESSAGEINFO SET dateToStart = '"<<newDate<<"' WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+}
+bool SqlQuery::updateEmail(const string Nickname, const string newEmail)
+{
+    stringstream ss;
+    ss<<"UPDATE MYUSER SET email = '"<<newEmail<<"' WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+}
+
+bool SqlQuery::updateEmailPassword(const string Nickname, const string newPassword)
+{
+    stringstream ss;
+    ss<<"UPDATE MYUSER SET pass = '"<<newPassword<<"' WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+}
+
+bool SqlQuery::updatePhoneNumber(const string Nickname, const string newPhoneNumber)
+{
+    stringstream ss;
+    ss<<"UPDATE MYUSER SET phone = '"<<newPhoneNumber<<"' WHERE Nickname = '"<<Nickname<<"';";
+    if(sendQuery(ss.str()))
+    {
+        return receiveQuery();
+    }
+    return false;
+}
+
+
+
+
+
+
 
 
 

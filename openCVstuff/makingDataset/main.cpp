@@ -113,7 +113,7 @@ void detectAndDisplay( Mat frame )
     //-- Show what you got
     if(faces.size()==1)
     {
-        cout<<"Face found";
+        cout<<"Face found n: "<<images.size()<<endl;
         Mat croppedImage = frame_gray(faces[0]);
         //Mat croppedImage = frame(faces[0]);
         images.push_back(croppedImage);
@@ -122,7 +122,7 @@ void detectAndDisplay( Mat frame )
         i=11;
 
 }
-    else if(faces.size()>1) cout<<"found "<< faces.size() <<"SO error";
+    else if(faces.size()>1) cout<<"found "<< faces.size() <<" SO error\n";
     else
     {cout << "face not found";
         //imwrite("/opt/coisalinda.jpeg",frame);
