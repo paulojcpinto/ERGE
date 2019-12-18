@@ -15,6 +15,7 @@ public class ApplicationClass extends Application {
     public static BluetoothDevice target;
     public static BluetoothConnectionService mBluetoothConnectionService;
     public static String deviceType;
+    public static  String userNickname;
     public static boolean deviceConnected;
     public static MenuItem DeviceType;
     public static MenuItem playMenu;

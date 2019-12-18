@@ -335,6 +335,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
+                            ApplicationClass.userNickname = etNick.getText().toString().trim();
                             startActivity(new Intent(Login.this, MainActivity.class));
                             Login.this.finish();
 

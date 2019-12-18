@@ -33,5 +33,6 @@ ppppppp\bluetooth_module.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pw
 ppppppp\bluetooth_module.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h
 ppppppp\bluetooth_module.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h
 ppppppp\bluetooth_module.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
+ppppppp\bluetooth_module.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 ppppppp\bluetooth_module.o: ../Core/Inc/user.h
 ppppppp\bluetooth_module.o: ../Core/Inc/message.h

@@ -1,6 +1,7 @@
 package com.drchip.projectdeadman.ui.userConfigs;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -45,6 +46,7 @@ public class UserConfigsFragment extends Fragment {
 
                     }
 
+
                     Toast.makeText(getContext(), "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
@@ -76,13 +78,16 @@ public class UserConfigsFragment extends Fragment {
         galleryViewModel =
                 ViewModelProviders.of(this).get(UserConfigsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_userconfigs, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Communicating");
+        progressDialog.setMessage("Loading user data!...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMax(6);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+
+
         return root;
     }
 }

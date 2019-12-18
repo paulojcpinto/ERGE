@@ -207,7 +207,7 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5DEA98D7)
-F (..\Core\Src\bluetooth_module.c)(0x5DF7C5D9)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\bluetooth_module.o --omf_browse ppppppp\bluetooth_module.crf --depend ppppppp\bluetooth_module.d)
+F (..\Core\Src\bluetooth_module.c)(0x5DFA2719)(--c99 -c --cpu Cortex-M7.fp.dp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_PPPPPPP-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F7xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="526" -D_RTE_ -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx -DUSE_HAL_DRIVER -DSTM32F767xx-o ppppppp\bluetooth_module.o --omf_browse ppppppp\bluetooth_module.crf --depend ppppppp\bluetooth_module.d)
 I (../Core/Inc/bluetooth_module.h)(0x5DF0D595)
 I (../Core/Inc/usart.h)(0x5DEA98D8)
 I (../Core/Inc/main.h)(0x5DEA98D8)
@@ -241,6 +241,7 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x5DEA98D7)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x5DEA98D7)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F4BBC)
 I (../Core/Inc/user.h)(0x5DF79D5F)
 I (../Core/Inc/message.h)(0x5DF0C68D)
 F (..\Core\Inc\bluetooth_module.h)(0x5DF0D595)()

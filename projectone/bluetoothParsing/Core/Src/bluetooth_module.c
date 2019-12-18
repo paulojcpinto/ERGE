@@ -1,5 +1,6 @@
 #include "bluetooth_module.h"
 #include "usart.h"
+#include "string.h"
 #include "user.h"
 
 
@@ -49,6 +50,12 @@
 	
 #define  char_app_login                  (char)  'Q'
 #define  int_app_login                   (int)   15
+
+#define char_get_user                     (char)  'G'
+#define int_get_user                       (int)   16
+
+#define char_get_phone                    (char) 't'
+#define int_get_phone                     (char)  17
 	
 
 
@@ -57,6 +64,9 @@ static int out_index = 0;
 int error_number = 0;
 char echo[255];
 user_parsing user_pars;
+user* userBluetooh;
+char userInfo[50];
+int counterUserInfo;
 
 void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
@@ -138,7 +148,23 @@ void print_responseLogin(int log)
 					UART3Tx_index++;
 	
 }
+void printParameter(char* parameter, char category,int lengh)
+{
+	int i;
+	char message[255];
+	message[0]='<';
+	message[1]=category;
+	for(i=2; i<lengh;i++)
+	{
+		message[i] = parameter[i-2];
+	}
+	int aux;
+	aux=strlen(message);
+	message[aux+1]= '>';
+  HAL_UART_Transmit_IT(&huart4,  message,aux+1 );
 
+	
+}
 
 
 void receive_start (int *c )
@@ -227,6 +253,16 @@ void prepare_receive_info(int *c )
 			 UART3Tx_index++;	
 			break;
 		
+		case char_get_phone:
+			*c=int_get_phone;
+			UART3Tx_index++;	
+			break;
+		case char_get_user:
+			*c=int_get_user;
+		  counterUserInfo=0;
+			UART3Tx_index++;	
+			break;
+		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -305,6 +341,13 @@ void end_receiving_trama (int *c)
 				  loginAnswer=login(user_pars.nickName,user_pars.pinCode);
 				  print_responseLogin(loginAnswer);
 					break;
+				case int_get_phone:
+					//printParameter(
+					break;
+				case int_get_user:
+					print_response(char_get_user);
+				  userBluetooh = getUser(userInfo);
+					break;
 				
 
 				}
@@ -352,6 +395,10 @@ void save_char (int *c )
 					user_pars.platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 				  
 					break;
+				case int_get_user:
+					userInfo[counterUserInfo++]=UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				
 				
 				default : *c = -1;
 				
