@@ -71,11 +71,17 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/qconfig.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri \
@@ -86,14 +92,27 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri \
@@ -102,14 +121,25 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scxml.pri \
-		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scxml_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri \
@@ -122,6 +152,10 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri \
@@ -181,11 +215,17 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/qconfig.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri \
@@ -196,14 +236,27 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri \
@@ -212,14 +265,25 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scxml.pri \
-		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scxml_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri \
@@ -232,6 +296,10 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri \
 		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri \
@@ -280,11 +348,17 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 ../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf:
 ../../../../buildroot-2019.08/output/host/mkspecs/qconfig.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri:
@@ -295,14 +369,27 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri:
@@ -311,14 +398,25 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri:
-../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scxml.pri:
-../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scxml_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri:
@@ -331,6 +429,10 @@ Makefile: ../databaseTest/databaseTest.pro ../../../../buildroot-2019.08/output/
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri:
 ../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri:

@@ -9,7 +9,11 @@
 #include <sstream>
 #include <cstdlib>
 #include <cstdio>
-
+#include <mqueue.h>
+#include <sys/syslog.h>
+#include <sys/types.h> 
+#include <signal.h>
+#include <iostream>
 
 #define TRUE 1
 #define FALSE 0
@@ -17,6 +21,7 @@
 using namespace std;
 
 class CDatabase{
+
 public:
 	CDatabase();
 	~CDatabase();
@@ -31,6 +36,8 @@ private:
 	sqlite3* database;
 	string result;
 	const char * databaseName;
+	int fd;
+	
 };
 
 #endif

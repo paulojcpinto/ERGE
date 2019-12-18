@@ -102,6 +102,7 @@ public class Enter extends AppCompatActivity {
                         ivStatus.startAnimation(fade_in);
 
                         Toast.makeText(Enter.this, "Connected with success", Toast.LENGTH_SHORT).show();
+
                         boolean canSave = true;
 
                         for (int i = 0; i < loadedDevices.size(); i++) {

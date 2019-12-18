@@ -11,6 +11,7 @@ CCamera::CCamera():m_device(0)
     m_cap.set(CV_CAP_PROP_EXPOSURE, 20);
     m_cap.set(CV_CAP_PROP_CONTRAST, 0);
     m_cap.set(CV_CAP_PROP_SATURATION, 0);
+    m_cap.open(m_device);
 }
 CCamera::CCamera(int device): m_device(device)
 {
@@ -44,12 +45,12 @@ void CCamera::shutdown()
 bool CCamera::captureFrame(cv::Mat& image)
 {
     Mat frame;
-    m_cap.open(m_device);
+
     if( m_cap.isOpened())
     {
         m_cap.read(frame);
         image = frame.clone();
-        m_cap.release();
+
         return true;
     }
     return false;

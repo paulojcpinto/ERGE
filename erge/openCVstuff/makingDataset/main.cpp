@@ -82,7 +82,7 @@ void detectAndDisplay( Mat frame )
 {
     Mat frame_gray;
     cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
-    equalizeHist( frame_gray, frame_gray );
+    //equalizeHist( frame_gray, frame_gray );
 
     //-- Detect faces
     std::vector<Rect> faces;
@@ -90,11 +90,11 @@ void detectAndDisplay( Mat frame )
 
     face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50));
 
-   for ( size_t i = 0; i < faces.size(); i++ )
+   /*for ( size_t i = 0; i < faces.size(); i++ )
     {
         Point center( faces[i].x + faces[i].width/2, faces[i].y + faces[i].height/2 );
         ellipse( frame, center, Size( faces[i].width/2, faces[i].height/2 ), 0, 0, 360, Scalar( 255, 0, 255 ), 4 );
-    }
+    }*/
 
 //        Mat faceROI = frame_gray( faces[i] );
 
@@ -113,16 +113,16 @@ void detectAndDisplay( Mat frame )
     //-- Show what you got
     if(faces.size()==1)
     {
-        cout<<"Face found";
-        //Mat croppedImage = frame_gray(faces[0]);
-        Mat croppedImage = frame(faces[0]);
+        cout<<"Face found n: "<<images.size()<<endl;
+        Mat croppedImage = frame_gray(faces[0]);
+        //Mat croppedImage = frame(faces[0]);
         images.push_back(croppedImage);
         //imwrite("/opt/coisalinda.jpeg",frame);
         aux=1;
         i=11;
 
 }
-    else if(faces.size()>1) cout<<"found "<< faces.size() <<"SO error";
+    else if(faces.size()>1) cout<<"found "<< faces.size() <<" SO error\n";
     else
     {cout << "face not found";
         //imwrite("/opt/coisalinda.jpeg",frame);

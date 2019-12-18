@@ -335,7 +335,7 @@ public class Register extends AppCompatActivity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etNickName.getText().toString().isEmpty()) {
+                /*if(etNickName.getText().toString().isEmpty()) {
 
                     AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
 
@@ -515,12 +515,12 @@ public class Register extends AppCompatActivity {
 
                         message.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(DialogInterface dialog, int whicaccch) {
 
                             }
                         });
                         message.show();
-                    }else
+                    }else*/
 
                 ApplicationClass.sendMessage("<S"+etNickName.getText().toString().trim()+">", Register.this);
                // startActivityForResult(new Intent(Register.this, UserInstructionsRASP.class), 1);

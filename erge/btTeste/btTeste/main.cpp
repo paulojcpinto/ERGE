@@ -1,8 +1,17 @@
 #include <QCoreApplication>
+#include "bluetooth_module.h"
+#include <QtWidgets/qapplication.h>
+#include <iostream>
+using namespace std;
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QApplication a(argc, argv);
+    cout<<"Hello";
+    bluetooth_module b;
+    //cout<<"Hello";
 
-    return a.exec();
+    a.exec();
+
+    return 0;
 }
