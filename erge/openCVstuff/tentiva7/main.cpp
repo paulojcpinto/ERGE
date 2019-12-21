@@ -73,9 +73,9 @@ int main( int argc, const char** argv )
 
     cout<< "OLA\r\n";
   //String face_cascade_name = "/opt/haarcascade_frontalface_default.xml";
-   // String face_cascade_name = "/opt/haarcascade_frontalface_alt.xml";
+    String face_cascade_name = "/opt/haarcascade_frontalface_alt.xml";
 
-   String face_cascade_name = "/home/andre/haarcascade_frontalface_alt.xml";
+   //String face_cascade_name = "/home/andre/haarcascade_frontalface_alt.xml";
 
 //    //-- 1. Load the cascades
     if( !face_cascade.load( face_cascade_name ) )
@@ -93,7 +93,7 @@ int main( int argc, const char** argv )
    CCamera cam; Mat frame;
 
     //while (aux==0) {
-   for(i; i<10; i++)
+   for(i; i<1000; i++)
 
    {
        if(cam.captureFrame(frame) == false)
@@ -133,15 +133,13 @@ void detectAndDisplay( Mat frame )
     cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
    // equalizeHist( frame_gray, frame_gray );
            // cv :: resize(frame, frame_resized , Size(200,200), 1.0, 1.0, INTER_CUBIC);
-            cv :: resize(frame_gray, frame_gray_resized, Size(200,200), 1.0, 1.0, INTER_CUBIC);
-            cv :: resize(frame, fame_resized, Size(200,200), 1.0, 1.0, INTER_LINEAR);
 
 
 
     //-- Detect faces
     std::vector<Rect> faces;
-    //face_cascade.detectMultiScale(frame_gray_resized,faces);
-    face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50));
+    face_cascade.detectMultiScale(frame_gray_resized,faces);
+    //face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50));
 
     for ( size_t i = 0; i < faces.size(); i++ )
     {
@@ -184,11 +182,9 @@ void detectAndDisplay( Mat frame )
               }
           }
         imwrite("/opt/photos/coisalinda.jpeg",new_image);
-        imwrite("/home/andre/coisalinda.jpeg",new_image);
 
         //cvtColor(frame,frame,cv::COLOR_BGR2RGB);
         imwrite("/opt/photos/coisalinda1.jpeg",frame_gray);
-        imwrite("/home/andre/coisalinda1.jpeg",frame_gray);
 
         imwrite("/opt/photos/coisalinda4.jpeg",frame);
 
@@ -200,7 +196,7 @@ void detectAndDisplay( Mat frame )
 
 
         aux=1;
-        i=11;
+        i=11000;
 
 }
     else
