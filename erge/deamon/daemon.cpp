@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 	int msgsz;
 	int len, fd;
 	unsigned int sender;
-    if ((fd = open("/var/log/database.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
+    if ((fd = open("/var/log/deadman.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
 			perror("open");
 			exit(EXIT_FAILURE);
 		}

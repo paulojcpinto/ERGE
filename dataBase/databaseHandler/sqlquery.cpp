@@ -11,7 +11,7 @@ SqlQuery::SqlQuery()
 {
     msgq_query = "/database_query";
     msgq_callback = "/daetabase_callback";
-    if ((fd = open("/var/log/database.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
+    if ((fd = open("/var/log/deadman.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
                 perror("open");
                 exit(EXIT_FAILURE);
             }

@@ -15,6 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        dataset.cpp \
+        facerecognizer.cpp \
         main.cpp \
         mcamera.cpp
 
@@ -27,4 +29,6 @@ PKGCONFIG += opencv
 LIBS += -pthread -lrt -lpthread -lbcm2835
 
 HEADERS += \
+    dataset.h \
+    facerecognizer.h \
     mcamera.h
