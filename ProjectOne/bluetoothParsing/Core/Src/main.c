@@ -22,11 +22,12 @@
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
-#include "bluetooth_module.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "bluetooth_module.h"
 #include "user.h"
 
 /* USER CODE END Includes */
