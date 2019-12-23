@@ -105,6 +105,7 @@ void initUser(void)
  }
  
 
+ 
  int updateEmail(char* mEmail,user* mUser)
  {
 	 return 0;
