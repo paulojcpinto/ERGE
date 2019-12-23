@@ -57,6 +57,23 @@
 #define char_get_phone                    (char) 't'
 #define int_get_phone                     (char)  17
 	
+#define char_get_repeat                   (char)  'o'
+#define int_get_repeat                    (int)   18
+	
+#define char_get_email                     (char)  'm'
+#define int_get_email												(int)   19
+	
+#define char_get_emailpassword             (char) 'x'
+#define int_get_emailpassword              (int)  20
+
+#define char_get_message                    (char)  'r'
+#define int_get_message                     (int)  21
+	
+#define char_get_platform                    (char)  'a'
+#define int_get_platform                     (int)  22
+ 	
+
+	
 
 
 
@@ -148,23 +165,30 @@ void print_responseLogin(int log)
 					UART3Tx_index++;
 	
 }
+
+
+
 void printParameter(char* parameter, char category,int lengh)
 {
 	int i;
 	char message[255];
 	message[0]='<';
 	message[1]=category;
-	for(i=2; i<lengh;i++)
+	for(i=2; i<strlen(parameter)+2;i++)
 	{
 		message[i] = parameter[i-2];
 	}
 	int aux;
 	aux=strlen(message);
-	message[aux+1]= '>';
+	message[aux]= '>';
   HAL_UART_Transmit_IT(&huart4,  message,aux+1 );
+	UART3Tx_index++;
 
 	
 }
+
+
+
 
 
 void receive_start (int *c )
@@ -263,6 +287,11 @@ void prepare_receive_info(int *c )
 			UART3Tx_index++;	
 			break;
 		
+		case char_get_repeat:
+			*c=int_get_repeat;
+			 UART3Tx_index++;	
+			break;
+		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -344,8 +373,13 @@ void end_receiving_trama (int *c)
 					//printParameter(
 					break;
 				case int_get_user:
-					print_response(char_get_user);
 				  userBluetooh = getUser(userInfo);
+			  	printParameter(userBluetooh->phoneNumber,char_get_phone,strlen(userBluetooh->phoneNumber));
+					break;
+				case int_get_repeat:
+					
+					printParameter(
+				
 					break;
 				
 

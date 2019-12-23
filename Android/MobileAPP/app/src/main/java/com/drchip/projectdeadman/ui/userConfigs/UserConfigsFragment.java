@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.drchip.projectdeadman.ApplicationClass;
-import com.drchip.projectdeadman.R;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.drchip.projectdeadman.ApplicationClass;
+import com.drchip.projectdeadman.R;
 
 public class UserConfigsFragment extends Fragment {
 
@@ -45,6 +45,7 @@ public class UserConfigsFragment extends Fragment {
                         ApplicationClass.playMenu.setIcon(R.drawable.bluetooth_on);
 
                     }
+                    bt_parsing(readMessage);
 
 
                     Toast.makeText(getContext(), "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
@@ -93,12 +94,60 @@ public class UserConfigsFragment extends Fragment {
         progressDialog.setMessage("Loading user data!...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMax(6);
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
         progressDialog.show();
 
+        ApplicationClass.sendMessage("<G" + ApplicationClass.userNickname + ">", getContext());
 
 
 
         return root;
+    }
+
+
+    private void bt_parsing(String message) {
+        if (message.contains("<") && message.contains(">")) {
+            char c;
+            c = message.charAt(1);
+            switch (c) {
+                case 't':
+                    etPhoneNumber.setText(parsing(message));
+
+                    progressDialog.incrementProgressBy(1);
+                    break;
+                case 'o':
+                    etRepeatTime.setText(parsing(message));
+                    progressDialog.incrementProgressBy(1);
+                    break;
+
+                case 'm':
+                    etMail.setText(parsing(message));
+                    progressDialog.incrementProgressBy(1);
+                    break;
+
+                case 'x':
+                    etMailPassword.setText(parsing(message));
+                    progressDialog.incrementProgressBy(1);
+                    break;
+                case 'r':
+                    etMessage.setText(parsing(message));
+                    progressDialog.incrementProgressBy(1);
+                    break;
+                case 'a':
+                    etPlatform.setText(parsing(message));
+                    progressDialog.dismiss();
+                    break;
+
+            }
+        }
+    }
+
+    private String parsing(String message) {
+        StringBuilder result = new StringBuilder();
+        for (int i = message.indexOf('<') + 2; i < message.indexOf('>') - 1; i++) {
+            result.append(message.charAt(i));
+
+        }
+        return message;
     }
 }

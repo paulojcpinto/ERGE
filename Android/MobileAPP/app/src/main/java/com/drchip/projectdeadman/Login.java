@@ -30,7 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
 
@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
     public static final int CONNECTED_SUCCESS = 6;
     private MenuItem playMenu;
     private MenuItem DeviceType;
-    private List<String> users;
+    private ArrayList<String> users;
 
 
     @SuppressLint("HandlerLeak")
@@ -112,6 +112,7 @@ public class Login extends AppCompatActivity {
             ivType.setImageResource(R.drawable.rasp);
         else ivType.setImageResource(R.drawable.not_knowned);
 
+        users = new ArrayList<>();
         loadData();
 
         ArrayAdapter<String> adapter
@@ -129,7 +130,7 @@ public class Login extends AppCompatActivity {
                 {
                     Toast.makeText(Login.this, "Please make sure you enter all fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    saveUser(etNick.getText().toString());
+
                     ApplicationClass.sendMessage("<S" + etNick.getText().toString().trim() + ">", Login.this);
                 }
 
@@ -341,6 +342,9 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
+                            if (!users.contains(etNick.getText().toString()))
+                                saveUser(etNick.getText().toString());
+
                             ApplicationClass.userNickname = etNick.getText().toString().trim();
                             startActivity(new Intent(Login.this, MainActivity.class));
                             Login.this.finish();
@@ -362,7 +366,7 @@ public class Login extends AppCompatActivity {
             OutputStreamWriter outputFile = new OutputStreamWriter(file);  //cria a connecao com o ficheiro que vamos escrever
             outputFile.append(nickname);
             outputFile.close();
-            Toast.makeText(this, "Sucessfully savedes eyeyeyyeyeyeyeyeyeye!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sucessfully saveded!", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
