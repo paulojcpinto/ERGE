@@ -83,6 +83,11 @@ void Error_Handler(void);
 #define NumPad_4Col_Pin GPIO_PIN_3
 #define NumPad_4Col_GPIO_Port GPIOG
 #define NumPad_4Col_EXTI_IRQn EXTI3_IRQn
+#define fingerPrint_EXTI_Pin GPIO_PIN_8
+#define fingerPrint_EXTI_GPIO_Port GPIOC
+#define fingerPrint_EXTI_EXTI_IRQn EXTI9_5_IRQn
+#define fingerPrint_output_Pin GPIO_PIN_9
+#define fingerPrint_output_GPIO_Port GPIOC
 #define Bluetooth_Uart_Tx_Pin GPIO_PIN_10
 #define Bluetooth_Uart_Tx_GPIO_Port GPIOC
 #define Bluetooth_Uart_Rx_Pin GPIO_PIN_11
