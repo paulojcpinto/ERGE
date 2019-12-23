@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
                 std::vector<Rect> faces;
 
              face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50));
-             if(faces.size()>=1)
+             if(faces.size()==1)
              {
 
                  face_resized = frame_gray(faces[0]);

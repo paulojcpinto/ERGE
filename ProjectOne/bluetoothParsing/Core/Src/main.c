@@ -106,6 +106,7 @@ int main(void)
 	//user pp;
 	int c = 0;
 	HAL_Delay(50);
+	initUser();
 
   /* USER CODE END 2 */
 

@@ -1,6 +1,7 @@
 #include "bluetooth_module.h"
 #include "usart.h"
-
+#include "string.h"
+#include "user.h"
 
 
 #define discard_char					UART3Tx_index++
@@ -44,11 +45,28 @@
 #define char_trama_platform              (char)  'A'
 #define int_platform                      (int)  13
 
+#define char_create_user                 (char)  'C'
+#define int_create_user                  (int)   14
+	
+#define  char_app_login                  (char)  'Q'
+#define  int_app_login                   (int)   15
+
+#define char_get_user                     (char)  'G'
+#define int_get_user                       (int)   16
+
+#define char_get_phone                    (char) 't'
+#define int_get_phone                     (char)  17
+	
+
+
 
 static int out_index = 0;
 int error_number = 0;
 char echo[255];
-user_parsing user;
+user_parsing user_pars;
+user* userBluetooh;
+char userInfo[50];
+int counterUserInfo;
 
 void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
@@ -110,6 +128,43 @@ void print_response(char c)
 	
 }
 
+void print_responseLogin(int log)
+{
+	char* s;
+	
+	if(log<=9)
+					{
+						
+				  	UlToStr(s,log,1);
+						uint8_t  pp[4];
+					   pp[0]='<';
+					   pp[1]=char_app_login;
+					   pp[2]=s[0];
+					   pp[3]='>';
+					   HAL_UART_Transmit_IT(&huart4,  pp,4 );
+					}
+						
+					      
+					UART3Tx_index++;
+	
+}
+void printParameter(char* parameter, char category,int lengh)
+{
+	int i;
+	char message[255];
+	message[0]='<';
+	message[1]=category;
+	for(i=2; i<lengh;i++)
+	{
+		message[i] = parameter[i-2];
+	}
+	int aux;
+	aux=strlen(message);
+	message[aux+1]= '>';
+  HAL_UART_Transmit_IT(&huart4,  message,aux+1 );
+
+	
+}
 
 
 void receive_start (int *c )
@@ -189,6 +244,25 @@ void prepare_receive_info(int *c )
 			UART3Tx_index++;		
 		break;
 		
+		case char_create_user:
+			*c=int_create_user;
+		  UART3Tx_index++;	
+			break;
+		case char_app_login:
+			*c=int_app_login;
+			 UART3Tx_index++;	
+			break;
+		
+		case char_get_phone:
+			*c=int_get_phone;
+			UART3Tx_index++;	
+			break;
+		case char_get_user:
+			*c=int_get_user;
+		  counterUserInfo=0;
+			UART3Tx_index++;	
+			break;
+		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -201,11 +275,11 @@ void prepare_receive_info(int *c )
 
 void end_receiving_trama (int *c)
 {
+	int loginAnswer;
 	switch (*c)
 			{
 				case int_echo:
 				{
-					HAL_Delay(100);
 					echo[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 					HAL_UART_Transmit_IT(&huart4, echo, out_index);
 
@@ -213,7 +287,6 @@ void end_receiving_trama (int *c)
 				
 				case int_start:
 				{
-					//me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 					UART3Tx_index++;
 					HAL_UART_Transmit_IT(&huart4, " STM", sizeof(" STM")/sizeof(char));
 		
@@ -221,7 +294,7 @@ void end_receiving_trama (int *c)
 
 				}; break;
 				case int_error:
-						HAL_UART_Transmit_IT(&huart4, user.nickName, out_index);
+						HAL_UART_Transmit_IT(&huart4, user_pars.nickName, out_index);
 					break;
 				
 				case int_nick:
@@ -257,11 +330,27 @@ void end_receiving_trama (int *c)
 					break;
 				
 				case int_platform:
-					print_response(char_trama_platform);
+					print_response(char_trama_platform);				
+					break;
+				case int_create_user:
+					UART3Tx_index++;
+					createUser(user_pars);
+					break;
+				case int_app_login:
+				  loginAnswer=login(user_pars.nickName,user_pars.pinCode);
+				  print_responseLogin(loginAnswer);
+					break;
+				case int_get_phone:
+					//printParameter(
+					break;
+				case int_get_user:
+					print_response(char_get_user);
+				  userBluetooh = getUser(userInfo);
 					break;
 				
-	*c = -1;
+
 				}
+				*c = -1;
 			}
 void save_char (int *c )
 {
@@ -278,32 +367,39 @@ void save_char (int *c )
 				}break;
 				case int_nick:
 				{
-					user.nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 				};break;
 				case int_pincode:
-					user.pinCode[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.pinCode[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_email:
-					user.email[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.email[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_email_password:
-					user.emailPassword[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.emailPassword[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
 				break;
 				case int_phone_number:
-					user.phoneNumber[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.phoneNumber[out_index++]= UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_message:
-					user.messageToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.messageToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_repeat:
-					user.repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
+					user_pars.repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
 					break;
 				case int_date:
-					user.dateToStart[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.dateToStart[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_platform:
-					user.platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+					user_pars.platformToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
+				  
 					break;
+				case int_get_user:
+					userInfo[counterUserInfo++]=UART3Rx_Buffer[UART3Tx_index++];
+					break;
+				
+				
+				default : *c = -1;
 				
 			}
 			
@@ -318,6 +414,7 @@ int parsingBT (int *c)
 	{
 		if(UART3Rx_Buffer[UART3Tx_index] == char_trama_init)
 		{
+			
 			*c = 1;
 			UART3Tx_index ++;
 			out_index = 0;

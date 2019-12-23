@@ -15,9 +15,17 @@ public class ApplicationClass extends Application {
     public static BluetoothDevice target;
     public static BluetoothConnectionService mBluetoothConnectionService;
     public static String deviceType;
+    public static  String userNickname;
     public static boolean deviceConnected;
     public static MenuItem DeviceType;
     public static MenuItem playMenu;
+    public static final int LOGIN_SUCCESS =1;
+    public static final int USER_NOT_FOUND =2;
+    public static final int USER_BLOCKED =3;
+    public static final int BAD_CREDENTIALS =4;
+
+
+
 
     private final Handler mHandler = new Handler();
 

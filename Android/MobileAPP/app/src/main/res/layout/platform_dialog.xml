@@ -24,6 +24,14 @@
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
             android:text="SMS" />
+
+        <RadioButton
+            android:id="@+id/rbTwitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Twitter" />
+
     </RadioGroup>
 
     <EditText
@@ -48,4 +56,35 @@
         android:hint="Enter destination Phone number"
         android:inputType="phone"
         android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/llTwitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/etkey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="API key"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/tvKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Click here to obtain your API key!"
+            android:textAllCaps="true"
+            android:textColor="#03A9F4"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 </LinearLayout>

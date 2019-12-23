@@ -82,7 +82,7 @@ public class Enter extends AppCompatActivity {
                         ivStatus.setImageResource(R.drawable.done);
                         ivStatus.startAnimation(fade_in);
 
-                        Toast.makeText(Enter.this, "Connected with sucess", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Enter.this, "Connected with success", Toast.LENGTH_SHORT).show();
                         boolean canSave = true;
                         for (int i = 0; i < loadedDevices.size(); i++) {
                             if (loadedDevices.get(i).device.getAddress().equals(ApplicationClass.target.getAddress())) {
@@ -94,11 +94,15 @@ public class Enter extends AppCompatActivity {
                             saveDevice();
                         }
 
-                    } else if (readMessage.equals("rasp")) {
+                    } else if (readMessage.equals("RASP")) {
                         ApplicationClass.deviceType = "RASP";
                         connected = true;
+                        ivStatus.clearAnimation();
                         ivStatus.setImageResource(R.drawable.done);
-                        Toast.makeText(Enter.this, "Connected with sucess", Toast.LENGTH_SHORT).show();
+                        ivStatus.startAnimation(fade_in);
+
+                        Toast.makeText(Enter.this, "Connected with success", Toast.LENGTH_SHORT).show();
+
                         boolean canSave = true;
 
                         for (int i = 0; i < loadedDevices.size(); i++) {
@@ -152,7 +156,7 @@ public class Enter extends AppCompatActivity {
         fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
         connected = false;
-        listb = new ArrayList<BluetoothDevice>();
+        listb = new ArrayList<>();
         loadedDevices = new ArrayList<>();
         ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
 
@@ -290,7 +294,7 @@ public class Enter extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.addDevice:
-
+            {
                 final AlertDialog.Builder message = new AlertDialog.Builder(Enter.this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.paired_devices, null);
@@ -302,7 +306,6 @@ public class Enter extends AppCompatActivity {
                 final LinearLayout llSelected = dialogView.findViewById(R.id.llSelected);
                 choosed = false;
                 llSelected.setVisibility(View.GONE);
-
 
 
                 message.setView(dialogView);
@@ -321,11 +324,8 @@ public class Enter extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ApplicationClass.target = listb.get(position);
-
-                        //  Toast.makeText(Enter.this, "Device added succesfully " + listb.get(position).getName(), Toast.LENGTH_SHORT).show();
                         tvBname.setText(listb.get(position).getName());
                         tvBmac.setText(listb.get(position).getAddress());
-
 
                         ivType.setImageResource(R.drawable.not_knowned);
                         lv.setVisibility(View.GONE);
@@ -359,6 +359,7 @@ public class Enter extends AppCompatActivity {
                 message.show();
 
 
+        }
                 break;
 
             case R.id.SelectDevice:
@@ -399,7 +400,6 @@ public class Enter extends AppCompatActivity {
                             if (loadedDevices.get(i).deviceType.contains("STM"))
                                 auxBluetooth.add(loadedDevices.get(i).device);
                         }
-
                         MyBluetoothAdapter adapter = new MyBluetoothAdapter(getApplicationContext(), auxBluetooth, 1);
 
                         choosed = false;
@@ -440,8 +440,10 @@ public class Enter extends AppCompatActivity {
                         tvBname1.setText(listb.get(position).getName());
                         tvBmac1.setText(listb.get(position).getAddress());
                         if (rbSTM.isChecked()) {
+                            ApplicationClass.deviceType= "STM";
                             ivType1.setImageResource(R.drawable.stm);
                         } else if (rbRasp.isChecked()) {
+                            ApplicationClass.deviceType= "RASP";
                             ivType1.setImageResource(R.drawable.rasp);
                         }
                         lv1.setVisibility(View.GONE);
