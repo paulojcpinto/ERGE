@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.drchip.projectdeadman.ApplicationClass;
@@ -26,6 +27,8 @@ public class UserConfigsFragment extends Fragment {
     public static final int MESSAGE_TOAST = 5;
     public static final int CONNECTED_SUCCESS = 6;
     public static final String TOAST = "toast";
+
+
 
 
     @SuppressLint("HandlerLeak")
@@ -67,7 +70,9 @@ public class UserConfigsFragment extends Fragment {
     };
 
     private UserConfigsViewModel galleryViewModel;
+    EditText etPlatform,etPhoneNumber,etRepeatTime,etMail,etMailPassword,etMessage;
 
+    ProgressDialog progressDialog;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
@@ -75,13 +80,22 @@ public class UserConfigsFragment extends Fragment {
         galleryViewModel =
                 ViewModelProviders.of(this).get(UserConfigsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_userconfigs, container, false);
-        ProgressDialog progressDialog = new ProgressDialog(getContext());
+
+        etPlatform= root.findViewById(R.id.etPlatform);
+        etPhoneNumber= root.findViewById(R.id.etPhoneNumber);
+        etRepeatTime= root.findViewById(R.id.etRepeatTime);
+        etMail = root.findViewById(R.id.etEmail);
+        etMailPassword= root.findViewById(R.id.etEmailPassword);
+        etMessage = root.findViewById(R.id.etMessage);
+
+        progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Communicating");
         progressDialog.setMessage("Loading user data!...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.setMax(6);
         progressDialog.setCancelable(false);
         progressDialog.show();
+
 
 
 

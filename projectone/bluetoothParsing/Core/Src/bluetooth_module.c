@@ -287,7 +287,6 @@ void end_receiving_trama (int *c)
 				
 				case int_start:
 				{
-					//me->nickName[out_index++] = UART3Rx_Buffer[UART3Tx_index++];
 					UART3Tx_index++;
 					HAL_UART_Transmit_IT(&huart4, " STM", sizeof(" STM")/sizeof(char));
 		
