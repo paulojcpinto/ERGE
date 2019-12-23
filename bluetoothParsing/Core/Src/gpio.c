@@ -95,11 +95,17 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(MotionSensor_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PBPin PBPin PBPin PBPin */
-  GPIO_InitStruct.Pin = NumPad_3Col_Pin|NumPad_4Col_Pin|NumPad_1Col_Pin|NumPad_2Col_Pin;
+  /*Configure GPIO pins : PBPin PBPin PBPin */
+  GPIO_InitStruct.Pin = NumPad_3Col_Pin|NumPad_4Col_Pin|NumPad_2Col_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PC8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PC9 */
   GPIO_InitStruct.Pin = GPIO_PIN_9;
@@ -119,7 +125,7 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 {
 	switch ( GPIO_PIN )
 	{
-		case NumPad_1Col_Pin:
+		case NumPad_1Lin_Pin:
 		{			
 			//HAL_GPIO_TogglePin(GPIOB, EmbLED_Red_Pin);
 			

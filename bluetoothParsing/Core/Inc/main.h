@@ -98,9 +98,6 @@ void Error_Handler(void);
 #define GSM_Usart_Tx_GPIO_Port GPIOG
 #define EmbLED_Blue_Pin GPIO_PIN_7
 #define EmbLED_Blue_GPIO_Port GPIOB
-#define NumPad_1Col_Pin GPIO_PIN_8
-#define NumPad_1Col_GPIO_Port GPIOB
-#define NumPad_1Col_EXTI_IRQn EXTI9_5_IRQn
 #define NumPad_2Col_Pin GPIO_PIN_9
 #define NumPad_2Col_GPIO_Port GPIOB
 #define NumPad_2Col_EXTI_IRQn EXTI9_5_IRQn

@@ -21,6 +21,8 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+#include "FingerPrint.h"
+#include "FingerPrintConfig.h"
 uint8_t UART3Rx_Buffer[128];
 uint8_t Rx_Buffer[128];
 volatile uint8_t UART3Tx_index;
@@ -240,6 +242,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+    /* USART2 interrupt Init */
+    HAL_NVIC_SetPriority(USART2_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE BEGIN USART2_MspInit 1 */
 
   /* USER CODE END USART2_MspInit 1 */
@@ -359,6 +364,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
     */
     HAL_GPIO_DeInit(GPIOD, FingerPrint_Uart_Tx_Pin|FingerPrint_Uart_Rx_Pin);
 
+    /* USART2 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(USART2_IRQn);
   /* USER CODE BEGIN USART2_MspDeInit 1 */
 
   /* USER CODE END USART2_MspDeInit 1 */
@@ -411,6 +418,11 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 //implemantation of UART ISR
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
+		if(huart->Instance == USART2)
+	{
+		FingerPrint_RxCallback();
+		//HAL_UART_Transmit_IT(&huart3, &UART3Rx_index, 1);
+}
 	if (huart->Instance == UART4){ //current UART?
 		UART3Rx_index++;
 		UART3Rx_index &= ~(1<<7); //keep index inside the limits
@@ -430,6 +442,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
 		HAL_UART_Receive_IT(&huart3, &UART6Rx_Buffer[UART6Rx_index], 1);
 		HAL_UART_Transmit_IT(&huart4, &UART6Rx_Buffer[UART6Rx_index]-1, 1);
 	}
+
 }
 
 int messageReceived(int *c){
@@ -479,7 +492,8 @@ void init_UARTs(){
 	HAL_UART_Receive_IT(&huart4, &UART4Rx_Buffer[UART4Rx_index], 1);
 	HAL_UART_Receive_IT(&huart5, &UART5Rx_Buffer[UART5Rx_index], 1);
 	HAL_UART_Receive_IT(&huart6, &UART6Rx_Buffer[UART6Rx_index], 1);
-	HAL_UART_Receive_IT(&huart2, &UART7Rx_Buffer[UART7Rx_index], 1);
+	FingerPrint_RxCallback();
+	//HAL_UART_Receive_IT(&huart2, &UART7Rx_Buffer[UART7Rx_index], 1);
 }
 
 /* USER CODE END 1 */

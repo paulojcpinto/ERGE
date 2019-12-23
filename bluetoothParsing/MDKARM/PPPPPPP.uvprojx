@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F767xx,USE_HAL_DRIVER,STM32F767xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Core/Inc;  ../Drivers/STM32F7xx_HAL_Driver/Inc;  ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;  ../Middlewares/Third_Party/FreeRTOS/Source/include;  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;  ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;  ../Drivers/CMSIS/Device/ST/STM32F7xx/Include;  ../Drivers/CMSIS/Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -393,36 +393,6 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/main.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>freertos.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/freertos.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f7xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f7xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f7xx_hal_msp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Core/Src/stm32f7xx_hal_msp.c</FilePath>
-            </File>
-            <File>
               <FileName>bluetooth_module.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Core\Inc\bluetooth_module.h</FilePath>
@@ -438,14 +408,14 @@
               <FilePath>..\Core\Inc\FingerPrintConfig.h</FilePath>
             </File>
             <File>
-              <FileName>FreeRTOSConfig.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Core\Inc\FreeRTOSConfig.h</FilePath>
-            </File>
-            <File>
               <FileName>message.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Core\Inc\message.h</FilePath>
+            </File>
+            <File>
+              <FileName>usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\usart.h</FilePath>
             </File>
             <File>
               <FileName>user.h</FileName>
@@ -476,6 +446,36 @@
               <FileName>user.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\user.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/main.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>freertos.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/freertos.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/stm32f7xx_it.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f7xx_hal_msp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\stm32f7xx_hal_msp.c</FilePath>
             </File>
           </Files>
         </Group>
