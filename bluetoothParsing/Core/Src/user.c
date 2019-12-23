@@ -92,10 +92,12 @@ void initUser(void)
 	 else return USER_NOT_FOUND;  //return user not found
  }
  
+ 
+ 
 
  int updatePinCode(char *mpinCode, user * mUser)
  {
-	 return 0;
+	 return 1;
  }
  
 
