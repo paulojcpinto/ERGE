@@ -2,16 +2,22 @@ package com.drchip.projectdeadman.ui.userConfigs;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -72,8 +78,14 @@ public class UserConfigsFragment extends Fragment {
 
     private UserConfigsViewModel galleryViewModel;
     EditText etPlatform,etPhoneNumber,etRepeatTime,etMail,etMailPassword,etMessage;
+    ImageView ivTop, ivBot;
+    Animation animTop, animBot;
+    int itBot;
+
 
     ProgressDialog progressDialog;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
@@ -88,7 +100,8 @@ public class UserConfigsFragment extends Fragment {
         etMail = root.findViewById(R.id.etEmail);
         etMailPassword= root.findViewById(R.id.etEmailPassword);
         etMessage = root.findViewById(R.id.etMessage);
-
+        ivTop = root.findViewById(R.id.ivTop);
+        ivBot = root.findViewById(R.id.ivBot);
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Communicating");
         progressDialog.setMessage("Loading user data!...");
@@ -96,9 +109,19 @@ public class UserConfigsFragment extends Fragment {
         progressDialog.setMax(6);
         progressDialog.setCancelable(true);
         progressDialog.show();
-
+        animTop = AnimationUtils.loadAnimation(getContext(), R.anim.update_anim);
+        animBot = AnimationUtils.loadAnimation(getContext(), R.anim.update_anim);
+        animBot.setStartOffset(1000);
+        ivTop.setAnimation(animTop);
+        ivBot.setAnimation(animBot);
         ApplicationClass.sendMessage("<G" + ApplicationClass.userNickname + ">", getContext());
-
+        etMessage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getButtonState() == MotionEvent.ACTION_POINTER_DOWN)
+                    return false;
+            }
+        });
 
 
         return root;
@@ -111,30 +134,34 @@ public class UserConfigsFragment extends Fragment {
             c = message.charAt(1);
             switch (c) {
                 case 't':
-                    etPhoneNumber.setText(parsing(message));
-
+                    etPhoneNumber.setText(parsing(message).substring(message.indexOf("<t") + 2, message.lastIndexOf(">")));
+                    ApplicationClass.sendMessage("<o>", getContext());
                     progressDialog.incrementProgressBy(1);
                     break;
                 case 'o':
-                    etRepeatTime.setText(parsing(message));
+                    etRepeatTime.setText(parsing(message).substring(message.indexOf("<o") + 2, message.lastIndexOf(">")));
+                    ApplicationClass.sendMessage("<m>", getContext());
                     progressDialog.incrementProgressBy(1);
                     break;
 
                 case 'm':
-                    etMail.setText(parsing(message));
+                    etMail.setText(parsing(message).substring(message.indexOf("<m") + 2, message.lastIndexOf(">")));
+                    ApplicationClass.sendMessage("<x>", getContext());
                     progressDialog.incrementProgressBy(1);
                     break;
 
                 case 'x':
-                    etMailPassword.setText(parsing(message));
+                    etMailPassword.setText(parsing(message).substring(message.indexOf("<x") + 2, message.lastIndexOf(">")));
+                    ApplicationClass.sendMessage("<r>", getContext());
                     progressDialog.incrementProgressBy(1);
                     break;
                 case 'r':
-                    etMessage.setText(parsing(message));
+                    etMessage.setText(parsing(message).substring(message.indexOf("<r") + 2, message.lastIndexOf(">")));
+                    ApplicationClass.sendMessage("<a>", getContext());
                     progressDialog.incrementProgressBy(1);
                     break;
                 case 'a':
-                    etPlatform.setText(parsing(message));
+                    etPlatform.setText(parsing(message).substring(message.indexOf("<a") + 2, message.lastIndexOf(">")));
                     progressDialog.dismiss();
                     break;
 

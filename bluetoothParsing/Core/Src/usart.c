@@ -20,17 +20,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
 /* USER CODE BEGIN 0 */
-uint8_t UART3Rx_Buffer[128];
-uint8_t Rx_Buffer[128];
+uint8_t UART3Rx_Buffer[255];
+uint8_t Rx_Buffer[255];
 volatile uint8_t UART3Tx_index;
 volatile uint8_t UART3Rx_index;
 
-uint8_t UART4Rx_Buffer[128];
-uint8_t Rx4_Buffer[128];
+uint8_t UART4Rx_Buffer[255];
+uint8_t Rx4_Buffer[255];
 volatile uint8_t UART4Rx_index;
 
-uint8_t UART5Rx_Buffer[128];
-uint8_t Rx5_Buffer[128];
+uint8_t UART5Rx_Buffer[255];
+uint8_t Rx5_Buffer[255];
 volatile uint8_t UART5Rx_index;
 
 

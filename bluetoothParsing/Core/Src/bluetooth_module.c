@@ -87,6 +87,7 @@ user_parsing user_pars;
 user* userBluetooh;
 char userInfo[50];
 int counterUserInfo;
+char repeatTime[20];
 
 void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
@@ -108,7 +109,8 @@ void print_response(char c)
 					{
 						
 				  	UlToStr(s,out_index,1);
-						char * aux;
+						char aux[4];
+						 memset(aux,0,4);
 					   aux[0]='<';
 					   aux[1]=c;
 					   aux[2]=s[0];
@@ -119,7 +121,8 @@ void print_response(char c)
 					else if(out_index>9 && out_index<100)
 					{
 						UlToStr(s,out_index,2);
-						char * aux;
+						char aux[5];
+   				 memset(aux,0,5);
 					  aux[0]='<';
 					  aux[1]=c;
 					  aux[2]=s[0];
@@ -131,7 +134,8 @@ void print_response(char c)
 					else 
 					{
 						UlToStr(s,out_index,2);
-						char * aux;
+						char aux[6];
+					  memset(aux,0,6);
 					  aux[0]='<';
 					  aux[1]=c;
 					  aux[2]=s[0];
@@ -157,18 +161,16 @@ void print_responseLogin(int log)
 	char* s;
 	
 	if(log<=9)
-					{
-						
+					{						
 				  	UlToStr(s,log,1);
 						uint8_t  pp[4];
+						memset(pp,0,4);
 					   pp[0]='<';
 					   pp[1]=char_app_login;
 					   pp[2]=s[0];
 					   pp[3]='>';
 					   HAL_UART_Transmit_IT(&huart4,  pp,4 );
-					}
-						
-					      
+					}				      
 					UART3Tx_index++;
 	
 }
@@ -178,7 +180,8 @@ void print_responseLogin(int log)
 void printParameter(char* parameter, char category)
 {
 	int i;
-	char message[255];
+	char message[300];
+	memset(message,0,300);
 	message[0]='<';
 	message[1]=category;
 	for(i=2; i<strlen(parameter)+2;i++)
@@ -197,10 +200,12 @@ void printParameter(char* parameter, char category)
 void printNumber(int number,char c)
 {
 	char* s;
-	char numberChar[20];
-	sprintf(numberChar,"%d",number);
-	printParameter(numberChar,c);
-		
+	char numberChar[30];
+	memset(numberChar,0,30);
+	sprintf(numberChar,"<%c%d>",c,number);
+  HAL_UART_Transmit_IT(&huart4,  numberChar,strlen(numberChar) );
+	UART3Tx_index++;
+	
 }
 
 
@@ -270,6 +275,7 @@ void prepare_receive_info(int *c )
 		case char_trama_repeat:
 			*c= int_repeat;
 			UART3Tx_index++;
+	  	memset(repeatTime,0,20);
 			break;
 		
 		case char_trama_date:
@@ -304,6 +310,22 @@ void prepare_receive_info(int *c )
 		case char_get_repeat:
 			*c=int_get_repeat;
 			 UART3Tx_index++;	
+			break;
+		case char_get_email:
+			*c=int_get_email;
+		  UART3Tx_index++;	
+			break;
+		case char_get_emailpassword:
+			*c= int_get_emailpassword;
+			UART3Tx_index++;	
+			break;
+		case char_get_message:
+			*c=int_get_message;
+  		UART3Tx_index++;	
+			break;
+		case char_get_platform:
+			*c=int_get_platform;
+		  UART3Tx_index++;	
 			break;
 		
 		case char_trama_error:
@@ -365,6 +387,7 @@ void end_receiving_trama (int *c)
 					break;
 				
 				case int_repeat:
+					user_pars.repeatTime= atoi(repeatTime);
 					print_response(char_trama_repeat);
 					break;
 				
@@ -383,18 +406,27 @@ void end_receiving_trama (int *c)
 				  loginAnswer=login(user_pars.nickName,user_pars.pinCode);
 				  print_responseLogin(loginAnswer);
 					break;
-				case int_get_phone:
-					//printParameter(
-					break;
 				case int_get_user:
 				  userBluetooh = getUser(userInfo);
 			  	printParameter(userBluetooh->phoneNumber,char_get_phone);
 					break;
 				case int_get_repeat:
-					
-					
-
-				
+					printNumber(userBluetooh->mmessage.repeatTime,char_get_repeat);					
+					break;
+				case int_get_email:
+					printParameter(userBluetooh->email,char_get_email);
+					break;
+				case int_get_emailpassword:
+					printParameter(userBluetooh->emailPassword,char_get_emailpassword);
+					break;
+				case int_get_message:
+					printParameter(userBluetooh->mmessage.messageToRelease,char_get_message);
+				break;
+				case int_get_platform:
+					printParameter(userBluetooh->mmessage.platformToRelease,char_get_platform);
+					break;
+				case int_get_phone:
+					printParameter(userBluetooh->phoneNumber,char_get_phone);
 					break;
 				
 
@@ -434,7 +466,8 @@ void save_char (int *c )
 					user_pars.messageToRelease[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_repeat:
-					user_pars.repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
+				//	user_pars.repeatTime += (UART3Rx_Buffer[UART3Tx_index++]-'0')*(10 ^(out_index++-2));
+				  repeatTime[out_index++]=UART3Rx_Buffer[UART3Tx_index++];
 					break;
 				case int_date:
 					user_pars.dateToStart[out_index++]=UART3Rx_Buffer[UART3Tx_index++];

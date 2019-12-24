@@ -99,7 +99,8 @@ public class Login extends AppCompatActivity {
         actionBar.setTitle("Login");
 
         ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
-
+        users = new ArrayList<>();
+        loadData();
         etNick =  findViewById(R.id.etNick);
         etPinCode= findViewById(R.id.etPinCode);
         btnCancel = findViewById(R.id.btnCancel);
@@ -112,11 +113,10 @@ public class Login extends AppCompatActivity {
             ivType.setImageResource(R.drawable.rasp);
         else ivType.setImageResource(R.drawable.not_knowned);
 
-        users = new ArrayList<>();
-        loadData();
+
 
         ArrayAdapter<String> adapter
-                = new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, users);
+                = new ArrayAdapter<>(this, R.layout.custom_design_autocomlete, users);
 
         etNick.setThreshold(1);  //Numero de caraters que o utilizador percisa de por para começar a aparecer a funcao de autocomplete
         etNick.setAdapter(adapter);
@@ -380,10 +380,9 @@ public class Login extends AppCompatActivity {
         if (file.exists()) {
             try {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("bluetooth.txt")));  //abre p ficheiro Data.txt para leitura!
+                BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("users.txt")));  //abre p ficheiro Data.txt para leitura!
                 while ((linefromFile = reader.readLine()) != null) {
                     users.add(linefromFile);
-
                 }
 
             } catch (IOException e) {
