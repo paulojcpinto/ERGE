@@ -1,6 +1,9 @@
 #include "bluetooth_module.h"
 #include "usart.h"
 #include "string.h"
+#include "stdio.h"
+
+#include "stdlib.h"
 #include "user.h"
 
 
@@ -145,6 +148,10 @@ void print_response(char c)
 	
 }
 
+
+
+
+
 void print_responseLogin(int log)
 {
 	char* s;
@@ -168,7 +175,7 @@ void print_responseLogin(int log)
 
 
 
-void printParameter(char* parameter, char category,int lengh)
+void printParameter(char* parameter, char category)
 {
 	int i;
 	char message[255];
@@ -187,7 +194,14 @@ void printParameter(char* parameter, char category,int lengh)
 	
 }
 
-
+void printNumber(int number,char c)
+{
+	char* s;
+	char numberChar[20];
+	sprintf(numberChar,"%d",number);
+	printParameter(numberChar,c);
+		
+}
 
 
 
@@ -374,11 +388,12 @@ void end_receiving_trama (int *c)
 					break;
 				case int_get_user:
 				  userBluetooh = getUser(userInfo);
-			  	printParameter(userBluetooh->phoneNumber,char_get_phone,strlen(userBluetooh->phoneNumber));
+			  	printParameter(userBluetooh->phoneNumber,char_get_phone);
 					break;
 				case int_get_repeat:
 					
-					printParameter(
+					
+
 				
 					break;
 				
