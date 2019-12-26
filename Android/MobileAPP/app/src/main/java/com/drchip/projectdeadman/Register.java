@@ -196,6 +196,9 @@ public class Register extends AppCompatActivity {
 
             }
         });
+
+
+
         etMessage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -665,7 +668,6 @@ public class Register extends AppCompatActivity {
 
             }else
             {
-                Toast.makeText(Register.this, "Sended nickname", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<P"+etPinCode.getText().toString().trim()+">", Register.this);
 
@@ -695,7 +697,6 @@ public class Register extends AppCompatActivity {
                 ApplicationClass.sendMessage("<P" + etPinCode.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended pincode", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<M"+etEmail.getText().toString().trim()+">", Register.this);
 
@@ -719,11 +720,9 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
             }
             if (lengh != etEmail.getText().toString().trim().length()) {
-                Toast.makeText(Register.this, "<Error sending email, receibed: " + lengh + " instead of:" + etEmail.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
                 ApplicationClass.sendMessage("<M" + etEmail.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended email", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<X"+etEmailPassword.getText().toString().trim()+">", Register.this);
 
@@ -750,7 +749,6 @@ public class Register extends AppCompatActivity {
                 ApplicationClass.sendMessage("<X" + etEmail.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended email email password", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<T"+etPhoneNumber.getText().toString().trim()+">", Register.this);
 
@@ -803,7 +801,6 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<R" + etMessage.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended message to release", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<O"+etRepeatTime.getText().toString().trim()+">", Register.this);
 
@@ -830,7 +827,6 @@ public class Register extends AppCompatActivity {
              ApplicationClass.sendMessage("<O" + etRepeatTime.getText().toString().trim() + ">", Register.this);
 
         } else {
-            Toast.makeText(Register.this, "Sended repeat time", Toast.LENGTH_SHORT).show();
             progressDialog.incrementProgressBy(1);
             ApplicationClass.sendMessage("<D"+etDate.getText().toString().trim()+">", Register.this);
 
@@ -856,7 +852,6 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<D" + etDate.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended Date to start!", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<A"+etPlatform.getText().toString().trim()+">", Register.this);
 
@@ -882,7 +877,6 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<A" + etPlatform.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended Platform to release!", Toast.LENGTH_SHORT).show();
                 ApplicationClass.sendMessage("<C>",Register.this);
                 final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
                 LayoutInflater inflater = getLayoutInflater();
