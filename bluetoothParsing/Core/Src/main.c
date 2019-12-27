@@ -27,9 +27,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "FingerPrint.h"
 #include "FingerPrintConfig.h"
 #include "user.h"
+#include "init.h"
 
 /* USER CODE END Includes */
 
@@ -108,10 +112,14 @@ int main(void)
 	int c = 0;
 	HAL_Delay(50);
 	initUser();
-
+	vSemaphoreCreateBinary(finger_signal);
+	char test[8];
+	int testi = 10;
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
+	sprintf(test,"%d",testi);
+	HAL_UART_Transmit(&huart3, test, sizeof(test), 1000);
   MX_FREERTOS_Init(); 
 	FingerPrint_Init(osPriorityLow);
 
