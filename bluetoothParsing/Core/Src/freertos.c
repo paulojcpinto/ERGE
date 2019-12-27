@@ -54,14 +54,17 @@
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 osThreadId myTaskHandle;
+osThreadId simTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-   void StartmyTask(void const * argument);
+void StartmyTask(void const * argument);
+void StartsimTask(void const * argument);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
 void StartmyTask(void const * argument);
+void StartsimTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -98,6 +101,9 @@ void MX_FREERTOS_Init(void) {
 	
 	osThreadDef(myTask, StartmyTask, osPriorityNormal, 0, 1024);
   myTaskHandle = osThreadCreate(osThread(myTask),  (void*)pp);
+	
+	osThreadDef(simTask, StartsimTask, osPriorityNormal, 0, 1024);
+  simTaskHandle = osThreadCreate(osThread(simTask),  (void*)pp);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -145,6 +151,23 @@ void StartmyTask(void const * argument)
 	if(xSemaphoreTake(finger_signal, 99999))
 	{
 		send_SMS ("+351933288042", "amo", 3);
+	}
+		vTaskDelay(100);
+}
+}
+
+void StartsimTask(void const * argument)
+{
+	if(xSemaphoreTake(sim1, 99999))
+	{
+		;
+	}
+	while(1){
+	if(xSemaphoreTake(sim1, 99999))
+	{
+		update_local_time();
+		HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
+		HAL_UART_Transmit(&huart3, "\r\nyap\r\n", 7,1000);
 	}
 		vTaskDelay(100);
 }
