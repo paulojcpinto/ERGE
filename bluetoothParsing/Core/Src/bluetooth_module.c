@@ -247,31 +247,36 @@ void prepare_receive_info(int *c )
 		case char_trama_nick:
 			*c= int_nick;
 			UART3Tx_index++;
-		  memset(&user_pars,0,sizeof(user_parsing));
+		  memset(&user_pars.nickName,'\0',strlen(user_pars.nickName));
 			break;
 		
 		case char_trama_pincode:
 			*c= int_pincode;
 			UART3Tx_index++;
+			memset(&user_pars.pinCode,'\0',strlen(user_pars.pinCode));
 			break;
 		
 		case char_trama_email:
 			*c= int_email;
 			UART3Tx_index++;
+			memset(&user_pars.email,'\0',strlen(user_pars.email));
 			break;
 		
 		case char_trama_email_password:
 			*c= int_email_password;
 			UART3Tx_index++;
+			memset(&user_pars.emailPassword,'\0',strlen(user_pars.emailPassword));
 			break;
 		case char_trama_phone_number:
 			*c= int_phone_number;
 			UART3Tx_index++;
+		  memset(&user_pars.phoneNumber,'\0',strlen(user_pars.phoneNumber));
 			break;
 	
 		case char_trama_message:
 			*c= int_message;
 			UART3Tx_index++;
+		  memset(&user_pars.messageToRelease,'\0',strlen(user_pars.messageToRelease));
 			break;
 		
 		case char_trama_repeat:
@@ -283,11 +288,13 @@ void prepare_receive_info(int *c )
 		case char_trama_date:
 			*c= int_date;
 			UART3Tx_index++;
+		  memset(&user_pars.dateToStart,'\0',strlen(user_pars.dateToStart));
 			break;
 		
 		case char_trama_platform:
 			*c= int_platform;
 			UART3Tx_index++;		
+		  memset(&user_pars.platformToRelease,'\0',strlen(user_pars.platformToRelease));
 		break;
 		
 		case char_create_user:

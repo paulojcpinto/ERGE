@@ -79,7 +79,15 @@ void initUser(void)
 	 userAux=getUser(nickName);
 	 if(!strcmp(userAux->nickName,nickName))
 	 {
-		 if(!strcmp(userAux->pinCode,pinCode))
+		 int i,result=0;
+		 for(i=0;i<4;i++)
+		 {
+			 if(userAux->pinCode[i] != pinCode[i])
+				 
+			 result=1;
+		 }
+		 
+		 if(!result)
 		 {
 			 if(userAux->unlocked)
 			 {

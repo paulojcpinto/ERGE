@@ -152,23 +152,23 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>314</LineNumber>
+          <LineNumber>80</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134227748</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>startup_stm32f767xx.s</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Core\Src\user.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\PPPPPPP\../Core/Src/user.c\80</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>357</LineNumber>
+          <LineNumber>314</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -184,7 +184,7 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>358</LineNumber>
+          <LineNumber>357</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -200,7 +200,7 @@
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>366</LineNumber>
+          <LineNumber>358</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -216,7 +216,7 @@
         <Bp>
           <Number>4</Number>
           <Type>0</Type>
-          <LineNumber>368</LineNumber>
+          <LineNumber>366</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -232,7 +232,7 @@
         <Bp>
           <Number>5</Number>
           <Type>0</Type>
-          <LineNumber>371</LineNumber>
+          <LineNumber>368</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -248,7 +248,7 @@
         <Bp>
           <Number>6</Number>
           <Type>0</Type>
-          <LineNumber>392</LineNumber>
+          <LineNumber>371</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -264,7 +264,7 @@
         <Bp>
           <Number>7</Number>
           <Type>0</Type>
-          <LineNumber>412</LineNumber>
+          <LineNumber>392</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -280,7 +280,7 @@
         <Bp>
           <Number>8</Number>
           <Type>0</Type>
-          <LineNumber>413</LineNumber>
+          <LineNumber>412</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -296,7 +296,7 @@
         <Bp>
           <Number>9</Number>
           <Type>0</Type>
-          <LineNumber>414</LineNumber>
+          <LineNumber>413</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -312,7 +312,7 @@
         <Bp>
           <Number>10</Number>
           <Type>0</Type>
-          <LineNumber>415</LineNumber>
+          <LineNumber>414</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -328,7 +328,7 @@
         <Bp>
           <Number>11</Number>
           <Type>0</Type>
-          <LineNumber>416</LineNumber>
+          <LineNumber>415</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -344,7 +344,7 @@
         <Bp>
           <Number>12</Number>
           <Type>0</Type>
-          <LineNumber>417</LineNumber>
+          <LineNumber>416</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -360,7 +360,7 @@
         <Bp>
           <Number>13</Number>
           <Type>0</Type>
-          <LineNumber>418</LineNumber>
+          <LineNumber>417</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -376,7 +376,7 @@
         <Bp>
           <Number>14</Number>
           <Type>0</Type>
-          <LineNumber>439</LineNumber>
+          <LineNumber>418</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -391,6 +391,22 @@
         </Bp>
         <Bp>
           <Number>15</Number>
+          <Type>0</Type>
+          <LineNumber>439</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>startup_stm32f767xx.s</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>16</Number>
           <Type>0</Type>
           <LineNumber>440</LineNumber>
           <EnabledFlag>1</EnabledFlag>
@@ -441,6 +457,11 @@
           <count>6</count>
           <WinNumber>1</WinNumber>
           <ItemText>UART3Tx_index</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>users[0]</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
