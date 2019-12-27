@@ -783,7 +783,7 @@ public class UserConfigsFragment extends Fragment {
                 ApplicationClass.sendMessage("<A" + etPlatform.getText().toString().trim() + ">", getContext());
 
             } else {
-                ApplicationClass.sendMessage("<C>",getContext());
+                ApplicationClass.sendMessage("<U>",getContext());
                 toUpdate.add(ivPlatform);
                 ivPlatform.startAnimation(fade_out2);
 

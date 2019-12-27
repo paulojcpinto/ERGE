@@ -94,6 +94,23 @@ void initUser(void)
  
  
  
+ int updateUser(user_parsing updateInfo)
+ {
+	  user * toUpdate = getUser(updateInfo.nickName);
+		if(!strcmp(toUpdate->nickName,updateInfo.nickName))
+		{
+			int error=1;
+			error=toUpdate->funcs.updateEmail(updateInfo.email,toUpdate);
+			error=toUpdate->funcs.updateEmailPassowrd(updateInfo.emailPassword,toUpdate);
+			error=toUpdate->funcs.updatePhoneNumber(updateInfo.phoneNumber,toUpdate);
+			error=toUpdate->mmessage.updateMessageToRelease(updateInfo.messageToRelease,&toUpdate->mmessage);
+			error=toUpdate->mmessage.updatePlatformToRelease(updateInfo.platformToRelease,&toUpdate->mmessage);
+			error=toUpdate->mmessage.updateRepeatTime(updateInfo.repeatTime,&toUpdate->mmessage);
+			return error;
+			
+			
+		}else return USER_NOT_FOUND;
+ }
 
  int updatePinCode(char *mpinCode, user * mUser)
  {

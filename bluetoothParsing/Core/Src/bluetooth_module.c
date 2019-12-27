@@ -75,7 +75,8 @@
 #define char_get_platform                    (char)  'a'
 #define int_get_platform                     (int)  22
  	
-
+#define char_update                           (char)  'U'
+#define int_update                             (int) 23
 	
 
 
@@ -328,7 +329,10 @@ void prepare_receive_info(int *c )
 			*c=int_get_platform;
 		  UART3Tx_index++;	
 			break;
-		
+		case char_update:
+			*c=int_update;
+			UART3Tx_index++;
+		break;
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -338,6 +342,14 @@ void prepare_receive_info(int *c )
 	}
 }
 
+
+void printUpdate(int error)
+{
+	char message[5];
+	sprintf(message,"<%c%d>",char_update,error);
+	HAL_UART_Transmit_IT(&huart4,  message,strlen(message) );
+	UART3Tx_index++;
+}
 
 void end_receiving_trama (int *c)
 {
@@ -409,6 +421,8 @@ void end_receiving_trama (int *c)
 					break;
 				case int_get_user:
 				  userBluetooh = getUser(userInfo);
+				  memset(&user_pars,0,sizeof(user_parsing));
+					strcpy(user_pars.nickName,userInfo);
 			  	printParameter(userBluetooh->phoneNumber,char_get_phone);
 					break;
 				case int_get_repeat:
@@ -428,6 +442,9 @@ void end_receiving_trama (int *c)
 					break;
 				case int_get_phone:
 					printParameter(userBluetooh->phoneNumber,char_get_phone);
+					break;
+				case int_update:
+					printUpdate(updateUser(user_pars));
 					break;
 				
 

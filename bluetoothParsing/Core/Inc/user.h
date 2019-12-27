@@ -59,7 +59,7 @@ extern int login(char* nickName, char* pinCode);
 
 extern int updateEmailPassword(char* mEmailPassword, user* mUser);
 
-
+extern int updateUser(user_parsing updateInfo);
 
 
 
