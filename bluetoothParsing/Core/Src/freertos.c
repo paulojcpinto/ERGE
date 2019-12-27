@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */     
 
 #include "usart.h"
+#include "init.h"
 
 /* USER CODE END Includes */
 
@@ -90,7 +91,7 @@ void MX_FREERTOS_Init(void) {
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+  defaultTaskHandle = osThreadCreate(osThread(defaultTask),  (void*)pp);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -112,15 +113,15 @@ void StartDefaultTask(void const * argument)
 
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
+	uint8_t*  okp = (uint8_t* ) argument;
   for(;;)
   {
-		if(1)
+		if(xSemaphoreTake(finger_signal, 99999))
 		{
-
-			osDelay(100);
+			if (*okp == 5)
+				HAL_UART_Transmit(&huart3, "5",1 ,10000);
+				HAL_UART_Transmit(&huart3, "\r\nokok\r\n",8 ,10000);		
 		}
-		else
-			HAL_UART_Transmit(&huart3, "couldn't take1\r\n",16, 1000); 
   }
   /* USER CODE END StartDefaultTask */
 }
