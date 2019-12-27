@@ -21,6 +21,7 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+#include <stdio.h>
 #include "FingerPrint.h"
 #include "FingerPrintConfig.h"
 uint8_t UART3Rx_Buffer[128];
@@ -57,7 +58,7 @@ void MX_UART4_Init(void)
 {
 
   huart4.Instance = UART4;
-  huart4.Init.BaudRate = 9600;
+  huart4.Init.BaudRate = 115200;
   huart4.Init.WordLength = UART_WORDLENGTH_8B;
   huart4.Init.StopBits = UART_STOPBITS_1;
   huart4.Init.Parity = UART_PARITY_NONE;
@@ -119,7 +120,7 @@ void MX_USART3_UART_Init(void)
 {
 
   huart3.Instance = USART3;
-  huart3.Init.BaudRate = 115200;
+  huart3.Init.BaudRate = 256000;
   huart3.Init.WordLength = UART_WORDLENGTH_8B;
   huart3.Init.StopBits = UART_STOPBITS_1;
   huart3.Init.Parity = UART_PARITY_NONE;
@@ -423,7 +424,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
 		FingerPrint_RxCallback();
 		//HAL_UART_Transmit_IT(&huart3, &UART3Rx_index, 1);
 }
-	if (huart->Instance == UART4){ //current UART?
+if (huart->Instance == UART4){ //current UART?
 		UART3Rx_index++;
 		UART3Rx_index &= ~(1<<7); //keep index inside the limits
 		
@@ -495,7 +496,10 @@ void init_UARTs(){
 	FingerPrint_RxCallback();
 	//HAL_UART_Receive_IT(&huart2, &UART7Rx_Buffer[UART7Rx_index], 1);
 }
-
+int fputc(int ch, FILE *f){
+	HAL_UART_Transmit(&huart4, (uint8_t*)&ch, 1, 100);
+	return ch;
+}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

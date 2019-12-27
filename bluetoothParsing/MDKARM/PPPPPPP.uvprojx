@@ -312,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -486,6 +486,26 @@
               <FileName>init.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\init.c</FilePath>
+            </File>
+            <File>
+              <FileName>gsm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\gsm.c</FilePath>
+            </File>
+            <File>
+              <FileName>gsm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\gsm.h</FilePath>
+            </File>
+            <File>
+              <FileName>localtime.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\localtime.c</FilePath>
+            </File>
+            <File>
+              <FileName>localtime.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Core\Inc\localtime.h</FilePath>
             </File>
           </Files>
         </Group>

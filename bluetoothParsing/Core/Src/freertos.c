@@ -29,6 +29,7 @@
 
 #include "usart.h"
 #include "init.h"
+#include "gsm.h"
 
 /* USER CODE END Includes */
 
@@ -52,6 +53,7 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
+osThreadId myTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -59,6 +61,7 @@ osThreadId defaultTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
+void StartmyTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -90,8 +93,11 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 1024);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask),  (void*)pp);
+	
+	osThreadDef(myTask, StartmyTask, osPriorityNormal, 0, 1024);
+  myTaskHandle = osThreadCreate(osThread(myTask),  (void*)pp);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -116,14 +122,32 @@ void StartDefaultTask(void const * argument)
 	uint8_t*  okp = (uint8_t* ) argument;
   for(;;)
   {
-		if(xSemaphoreTake(finger_signal, 99999))
-		{
-			if (*okp == 5)
-				HAL_UART_Transmit(&huart3, "5",1 ,10000);
-				HAL_UART_Transmit(&huart3, "\r\nokok\r\n",8 ,10000);		
+		parsing_gsm();
+		vTaskDelay(100);
+//		if(xSemaphoreTake(finger_signal, 99999))
+//		{
+//			if (*okp == 5)
+//				HAL_UART_Transmit(&huart3, "5",1 ,10000);
+//				HAL_UART_Transmit(&huart3, "\r\nokok\r\n",8 ,10000);		
 		}
-  }
   /* USER CODE END StartDefaultTask */
+}
+
+
+void StartmyTask(void const * argument)
+{
+	if(xSemaphoreTake(finger_signal, 99999))
+	{
+		
+		printf("ATE0\r\n");
+	}
+	while(1){
+	if(xSemaphoreTake(finger_signal, 99999))
+	{
+		send_SMS ("+351933288042", "amo", 3);
+	}
+		vTaskDelay(100);
+}
 }
 
 /* Private application code --------------------------------------------------*/
