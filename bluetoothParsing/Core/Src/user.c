@@ -97,23 +97,31 @@ void initUser(void)
 
  int updatePinCode(char *mpinCode, user * mUser)
  {
+	 memset(mUser->pinCode,0,strlen(mUser->pinCode));
+	 strcpy(mUser->pinCode,mpinCode);
 	 return 1;
  }
  
 
  int updatePhoneNumber(char * mphoneNumber, user *mUser)
  {
-	 return 0;
+	 memset(mUser->phoneNumber,0,strlen(mUser->phoneNumber));
+	 strcpy(mUser->phoneNumber,mphoneNumber);
+	 return 1;
  }
  
 
  int updateEmail(char* mEmail,user* mUser)
  {
-	 return 0;
+	 memset(mUser->email,0,strlen(mUser->email));
+	 strcpy(mUser->email,mEmail);
+	 return 1;
  }
 
  int updateEmailPassword(char* mEmailPassword, user* mUser)
  {
-	 return 0;
+	 memset(mUser->emailPassword,0,strlen(mUser->emailPassword));
+	 strcpy(mUser->emailPassword,mEmailPassword);
+	 return 1;
  }
  

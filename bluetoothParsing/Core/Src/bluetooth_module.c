@@ -246,6 +246,7 @@ void prepare_receive_info(int *c )
 		case char_trama_nick:
 			*c= int_nick;
 			UART3Tx_index++;
+		  memset(&user_pars,0,sizeof(user_parsing));
 			break;
 		
 		case char_trama_pincode:
