@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -104,7 +105,9 @@ int main(void)
   MX_UART5_Init();
   MX_USART6_UART_Init();
   MX_USART2_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+	HAL_TIM_Base_Start_IT(&htim2);
 	init_UARTs();
 	//HAL_UART_Transmit_IT(&huart3, (uint8_t *)sizeof(char), 1);
 
@@ -113,6 +116,7 @@ int main(void)
 	HAL_Delay(50);
 	initUser();
 	vSemaphoreCreateBinary(finger_signal);
+	vSemaphoreCreateBinary(sim1);
 	char test[8];
 	int testi = 10;
   /* USER CODE END 2 */
