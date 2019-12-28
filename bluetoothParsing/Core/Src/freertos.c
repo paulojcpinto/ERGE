@@ -55,16 +55,21 @@
 osThreadId defaultTaskHandle;
 osThreadId myTaskHandle;
 osThreadId simTaskHandle;
+osThreadId releaseTaskHandle;
+osThreadId parsingTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 void StartmyTask(void const * argument);
 void StartsimTask(void const * argument);
+void StartreleaseTask(void const * argument);
+void StartparsingTask(void const * argument);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
 void StartmyTask(void const * argument);
 void StartsimTask(void const * argument);
+void StartreleaseTask(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -104,6 +109,12 @@ void MX_FREERTOS_Init(void) {
 	
 	osThreadDef(simTask, StartsimTask, osPriorityNormal, 0, 1024);
   simTaskHandle = osThreadCreate(osThread(simTask),  (void*)pp);
+	
+	osThreadDef(releaseTask, StartreleaseTask, osPriorityNormal, 0, 1024);
+  releaseTaskHandle = osThreadCreate(osThread(releaseTask),  (void*)pp);
+	
+	osThreadDef(parsingTask, StartparsingTask, osPriorityNormal, 0, 1024);
+  parsingTaskHandle = osThreadCreate(osThread(parsingTask),  (void*)pp);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -150,7 +161,7 @@ void StartmyTask(void const * argument)
 	while(1){
 	if(xSemaphoreTake(finger_signal, 99999))
 	{
-		send_SMS ("+351933288042", "amo", 3);
+		send_SMS ("+351916201643", "amo", 3);
 	}
 		vTaskDelay(100);
 }
@@ -167,11 +178,35 @@ void StartsimTask(void const * argument)
 	{
 		update_local_time();
 		HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
+		
+		//send_SMS ("+351916201643", "amo", 3);
 		HAL_UART_Transmit(&huart3, "\r\nyap\r\n", 7,1000);
 	}
 		vTaskDelay(100);
 }
 }
+
+void StartreleaseTask(void const * argument)
+{
+	if(xSemaphoreTake(release_signal, 99999))
+	{
+	;
+	}
+	while(1){
+	if(xSemaphoreTake(release_signal, 99999))
+	{
+			send_SMS ("+351916201643", "amo", 3);
+	}
+		vTaskDelay(100);
+}
+}
+
+void StartparsingTask(void const * argument)
+{
+	parsing_gsm();
+		vTaskDelay(100);
+}
+
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */

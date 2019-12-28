@@ -1,12 +1,14 @@
 #ifndef __message_H
 #define __message_H
 
+#include <time.h>
 
 typedef struct Message message;
 
 
 struct Message
 {
+	struct tm time_release;
 	char messageToRelease[255];
 	int repeatTime;
 	char dateToStart[10];

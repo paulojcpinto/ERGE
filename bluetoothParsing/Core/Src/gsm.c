@@ -18,6 +18,7 @@
 char my_numeber[] = "+351934145654";
 char message[256] ;
 
+int its_updating = 0;
 uint8_t size_SMS;
 static uint8_t local = 0;
 static uint8_t local_position = 0;
@@ -43,7 +44,7 @@ void send_SMS ( uint8_t number[13], uint8_t *messag, uint8_t size_message )
 {
 	while ( busy );
 	local = send_SMS_t;
-	busy = 1;
+	busy = 2;
 	size_SMS = size_message;
 	for ( uint8_t pos=0; pos <size_message; pos ++)
 	{
@@ -99,12 +100,18 @@ void send_sms_me (  )
 
 void update_local_time ( void )
 {
-	while(busy);
-	local = update_tim;
-	local_position = 0;
-	sim = response_ok;
-	isim = sizeof( response_ok ) / sizeof( char ) -1;
-	printf("AT+CMGDA=\"DEL ALL\"\r\n");
+	if (!its_updating)
+	{
+		its_updating = 1;
+		while(busy == 2);
+		busy = 1;
+		local = update_tim;
+		local_position = 0;
+		sim = response_ok;
+		isim = sizeof( response_ok ) / sizeof( char ) -1;
+		HAL_UART_Transmit(&huart3,"Paulo",5,1000);
+		printf("AT+CMGDA=\"DEL ALL\"\r\n");
+	}
 }
 
 void read_message (  )
@@ -116,9 +123,9 @@ void read_message (  )
 
 void parsing_gsm1 ( void )
 {
-					HAL_UART_Transmit(&huart4, "AT+CMGS=\"+351933288042\"\r\n", sizeof("AT+CMGS=\"+351913753546\"\r\n")/sizeof(char)-1, 1000);
-					HAL_Delay(500);
-					HAL_UART_Transmit(&huart4, "Andre gay", sizeof("Andre gay")/sizeof(char)-1,1000);
+			//		HAL_UART_Transmit(&huart4, "AT+CMGS=\"+351933288042\"\r\n", sizeof("AT+CMGS=\"+351913753546\"\r\n")/sizeof(char)-1, 1000);
+			//		HAL_Delay(500);
+				//	HAL_UART_Transmit(&huart4, "Andre gay", sizeof("Andre gay")/sizeof(char)-1,1000);
 }
 
 int vHardware_verify ( void  )
@@ -186,9 +193,14 @@ void vWait_message ( void )
 			local_position = 0;
 			isim = sizeof( PIN_correct ) / sizeof( char ) -1;
 			//printf("AT+CPIN=0522\r\n");
-			HAL_UART_Transmit(&huart3, "\r\n\r\n\r\nokokk\r\n\r\n\r\n", 16, 10000);
-			
-			local ++;
+			stmtime.localtim->tm_year =	0;	
+			stmtime.localtim->tm_mon 	= 0;
+			stmtime.localtim->tm_mday = 0;
+			stmtime.localtim->tm_hour =	0;	
+			stmtime.localtim->tm_min 	= 0;	
+			stmtime.localtim->tm_sec 	= 0;	
+			HAL_UART_Transmit(&huart3, "\r\n\r\n\r\nokokk\r\n\r\n\r\n", 16, 10000);			
+			local = update_localtime;
 		}
 	}
 	else if ( UART3Rx_Buffer[UART3Tx_index] == response_ok[local_position] )
@@ -197,7 +209,7 @@ void vWait_message ( void )
 		{
 			local_position = 0;
 			printf("AT+CMGR=1\r\n");
-			HAL_Delay(1000);
+			HAL_Delay(100);
 		}
 	}
 	else
@@ -245,15 +257,22 @@ void update_localtimeStm ( void )
 			}break;
 			case seconds_position + 1:
 			{
-				local = discard_char ;
+its_updating=0;
+				if (stmtime.localtim->tm_year >= 19)
+				{
+					HAL_UART_Transmit(&huart3, "\r\nIT'S OK\r\n",11, 1000);
+					local = discard_char ;
 				busy = 0;
 				stmtime.updated=1;
 				stmtime.need_update=0;
-				xSemaphoreGive(finger_signal);
-				if (stmtime.localtim->tm_year == 19)
-					HAL_UART_Transmit(&huart3, "\r\nIT'S OK\r\n",11, 1000);
+				}
 				else
+				{
 					HAL_UART_Transmit(&huart3, "\r\nnotS OK\r\n",11, 1000);
+					busy = 0;
+					update_local_time();
+						
+				}
 			}
 		}
 	}
@@ -332,13 +351,7 @@ void parsing_gsm ( void )
 			}break;
 			case tread_message:
 			{
-				vWait_message();	
-				stmtime.localtim->tm_year =	0;	
-				stmtime.localtim->tm_mon 	= 0;
-				stmtime.localtim->tm_mday = 0;
-				stmtime.localtim->tm_hour =	0;	
-				stmtime.localtim->tm_min 	= 0;	
-				stmtime.localtim->tm_sec 	= 0;				
+				vWait_message();				
 			}break;
 			case update_localtime:
 			{
@@ -367,9 +380,8 @@ void parsing_gsm ( void )
 					local = discard_char;
 					busy = 0;
 					SMS_to_update = 0;
-					//update_local_time();
 				}
-			}
+			}break;
 			case discard_char:
 			{
 				

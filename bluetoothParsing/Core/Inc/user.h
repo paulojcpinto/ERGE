@@ -3,7 +3,7 @@
 
 #include "usart.h"
 #include "bluetooth_module.h"
-#include  "message.h"
+#include "message.h"
 
 
 #define LOGIN_SUCCESS 1
@@ -62,7 +62,7 @@ extern int updateEmailPassword(char* mEmailPassword, user* mUser);
 
 
 
-
+extern void verify_release_time ( void );
 
 
 

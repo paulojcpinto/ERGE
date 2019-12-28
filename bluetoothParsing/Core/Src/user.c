@@ -1,9 +1,11 @@
 #include "user.h"
 #include <string.h>
+#include <localtime.h>
+#include "init.h"
 
 #define MAX_USERS 10
 
-int  nextUser;
+int  nextUser = 0;
 user users[MAX_USERS];
 
 
@@ -117,3 +119,12 @@ void initUser(void)
 	 return 0;
  }
  
+ 
+ void verify_release_time ( void )
+ {
+	 for ( int count = 0; count < nextUser; count ++)
+	 {
+		 if( users[count].mmessage.time_release.tm_min >= stmtime.localtim->tm_min)
+				xSemaphoreGive(finger_signal);
+	 }
+ }

@@ -3,6 +3,8 @@
 
 xSemaphoreHandle finger_signal;
 xSemaphoreHandle sim1;
+xSemaphoreHandle release_signal;
+
 volatile uint8_t ok;
 uint8_t *pp = &ok;
 
