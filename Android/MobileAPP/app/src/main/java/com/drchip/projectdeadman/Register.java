@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,10 +20,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -96,6 +102,8 @@ public class Register extends AppCompatActivity {
         startActivity(new Intent(Register.this, Enter.class));
         Register.this.finish();
     }
+
+    ProgressDialog progressDialog;
     DatePickerDialog datePickerDialog;
     EditText etDate, etMessage, etPlatform, etNickName,etPinCode,etEmail,etEmailPassword,etPhoneNumber,etRepeatTime;
 
@@ -188,6 +196,9 @@ public class Register extends AppCompatActivity {
 
             }
         });
+
+
+
         etMessage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -265,14 +276,30 @@ public class Register extends AppCompatActivity {
                     //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
                     final RadioButton rbSMS = dialogView.findViewById(R.id.rbSMS);
                     final RadioButton rbEmail = dialogView.findViewById(R.id.rbEmail);
+                    final RadioButton rbTwitter = dialogView.findViewById(R.id.rbTwitter);
                     final EditText etEmail = dialogView.findViewById(R.id.etMail);
                     final EditText etPhone = dialogView.findViewById(R.id.etPhone);
+                    final EditText etKey = dialogView.findViewById(R.id.etkey);
+                    final TextView tvKey= dialogView.findViewById(R.id.tvKey);
+                    final LinearLayout llTwiter= dialogView.findViewById(R.id.llTwitter);
 
 
                     message.setView(dialogView);
                     message.setTitle("Platform to Release");
                     message.setMessage("Enter the platform that you want to release here!!");
 
+                    if(ApplicationClass.deviceType.contains("STM"))
+                        rbTwitter.setVisibility(View.VISIBLE);
+                    else rbTwitter.setVisibility(View.GONE);
+
+                    rbTwitter.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            etPhone.setVisibility(View.GONE);
+                            etEmail.setVisibility(View.GONE);
+                            llTwiter.setVisibility(View.VISIBLE);
+                        }
+                    });
 
                     rbSMS.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -282,6 +309,7 @@ public class Register extends AppCompatActivity {
                         }
                     });
 
+
                     rbEmail.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -289,6 +317,13 @@ public class Register extends AppCompatActivity {
                             etPhone.setVisibility(View.GONE);
 
                         }
+                    });
+                    tvKey.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Uri uriUrl = Uri.parse("https://thingspeak.com/apps/thingtweets");
+                            Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                            startActivity(launchBrowser);                        }
                     });
 
                     message.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -310,7 +345,18 @@ public class Register extends AppCompatActivity {
                                 } else {
                                     etPlatform.setText("SMS " + etPhone.getText().toString().trim());
                                 }
-                            } else {
+                            }
+                            else if(rbTwitter.isChecked())
+                            {
+                             if(etKey.getText().toString().isEmpty())
+                             {
+                                 Toast.makeText(Register.this, "Please put an twitter KEY number!", Toast.LENGTH_SHORT).show();
+                                 dialog.cancel();
+                             }
+                             else etPlatform.setText("TWITTER "+etKey.getText().toString().trim());
+
+                            }
+                            else {
                                 Toast.makeText(Register.this, "Please select an option!!", Toast.LENGTH_SHORT).show();
                                 dialog.cancel();
                             }
@@ -522,7 +568,18 @@ public class Register extends AppCompatActivity {
                         message.show();
                     }else
 
-                ApplicationClass.sendMessage("<S"+etNickName.getText().toString().trim()+">", Register.this);
+                    {
+
+                        progressDialog = new ProgressDialog(Register.this);
+                        progressDialog.setTitle("Communicating");
+                        progressDialog.setMessage("Loading user data!...");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressDialog.setMax(6);
+                        progressDialog.setCancelable(true);
+                        progressDialog.show();
+                        ApplicationClass.sendMessage("<S"+etNickName.getText().toString().trim()+">", Register.this);
+                    }
+
                // startActivityForResult(new Intent(Register.this, UserInstructionsRASP.class), 1);
                 //startActivityForResult(new Intent(Register.this, UserInstuctionsSTM.class), 1);
 
@@ -611,7 +668,7 @@ public class Register extends AppCompatActivity {
 
             }else
             {
-                Toast.makeText(Register.this, "Sended nickname", Toast.LENGTH_SHORT).show();
+                progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<P"+etPinCode.getText().toString().trim()+">", Register.this);
 
 
@@ -640,8 +697,8 @@ public class Register extends AppCompatActivity {
                 ApplicationClass.sendMessage("<P" + etPinCode.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended pincode", Toast.LENGTH_SHORT).show();
-                 ApplicationClass.sendMessage("<M"+etEmail.getText().toString().trim()+">", Register.this);
+                progressDialog.incrementProgressBy(1);
+                ApplicationClass.sendMessage("<M"+etEmail.getText().toString().trim()+">", Register.this);
 
             }
 
@@ -663,11 +720,10 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
             }
             if (lengh != etEmail.getText().toString().trim().length()) {
-                Toast.makeText(Register.this, "<Error sending email, receibed: " + lengh + " instead of:" + etEmail.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
                 ApplicationClass.sendMessage("<M" + etEmail.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended email", Toast.LENGTH_SHORT).show();
+                progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<X"+etEmailPassword.getText().toString().trim()+">", Register.this);
 
             }
@@ -693,7 +749,7 @@ public class Register extends AppCompatActivity {
                 ApplicationClass.sendMessage("<X" + etEmail.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended email email password", Toast.LENGTH_SHORT).show();
+                progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<T"+etPhoneNumber.getText().toString().trim()+">", Register.this);
 
             }
@@ -720,6 +776,7 @@ public class Register extends AppCompatActivity {
 
             } else {
                 Toast.makeText(Register.this, "Sended phone number", Toast.LENGTH_SHORT).show();
+                progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<R"+etMessage.getText().toString().trim()+">", Register.this);
 
             }
@@ -744,7 +801,7 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<R" + etMessage.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended message to release", Toast.LENGTH_SHORT).show();
+                progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<O"+etRepeatTime.getText().toString().trim()+">", Register.this);
 
             }
@@ -770,7 +827,7 @@ public class Register extends AppCompatActivity {
              ApplicationClass.sendMessage("<O" + etRepeatTime.getText().toString().trim() + ">", Register.this);
 
         } else {
-            Toast.makeText(Register.this, "Sended repeat time", Toast.LENGTH_SHORT).show();
+            progressDialog.incrementProgressBy(1);
             ApplicationClass.sendMessage("<D"+etDate.getText().toString().trim()+">", Register.this);
 
         }
@@ -795,7 +852,7 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<D" + etDate.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended Date to start!", Toast.LENGTH_SHORT).show();
+                progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<A"+etPlatform.getText().toString().trim()+">", Register.this);
 
             }
@@ -820,12 +877,13 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<A" + etPlatform.getText().toString().trim() + ">", Register.this);
 
             } else {
-                Toast.makeText(Register.this, "Sended Platform to release!", Toast.LENGTH_SHORT).show();
                 ApplicationClass.sendMessage("<C>",Register.this);
                 final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.success_login_layout, null);
                 //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
+                progressDialog.dismiss();
+
                 message.setView(dialogView);
                 message.setTitle("Register Completed");
                 message.setMessage("You successfully register an new user!!");

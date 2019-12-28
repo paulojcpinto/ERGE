@@ -14,6 +14,7 @@ void initUser(void)
 
 	int i;
 	nextUser =0;
+	
 	for(i=0;i<MAX_USERS;i++)
 	{
 		

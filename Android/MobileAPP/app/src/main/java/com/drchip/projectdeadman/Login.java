@@ -24,6 +24,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+
 public class Login extends AppCompatActivity {
 
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -37,6 +45,7 @@ public class Login extends AppCompatActivity {
     public static final int CONNECTED_SUCCESS = 6;
     private MenuItem playMenu;
     private MenuItem DeviceType;
+    private ArrayList<String> users;
 
 
     @SuppressLint("HandlerLeak")
@@ -90,7 +99,8 @@ public class Login extends AppCompatActivity {
         actionBar.setTitle("Login");
 
         ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
-
+        users = new ArrayList<>();
+        loadData();
         etNick =  findViewById(R.id.etNick);
         etPinCode= findViewById(R.id.etPinCode);
         btnCancel = findViewById(R.id.btnCancel);
@@ -103,10 +113,10 @@ public class Login extends AppCompatActivity {
             ivType.setImageResource(R.drawable.rasp);
         else ivType.setImageResource(R.drawable.not_knowned);
 
-        String [] names = {"James","John", "Jenny","Pila","Jenine","Jack","PauloGay"};  // lista de nomes para aparecer na ajuda
+
 
         ArrayAdapter<String> adapter
-                = new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete,names);
+                = new ArrayAdapter<>(this, R.layout.custom_design_autocomlete, users);
 
         etNick.setThreshold(1);  //Numero de caraters que o utilizador percisa de por para começar a aparecer a funcao de autocomplete
         etNick.setAdapter(adapter);
@@ -119,8 +129,10 @@ public class Login extends AppCompatActivity {
                 if(etNick.getText().toString().isEmpty() || etNick.getText().toString().isEmpty())
                 {
                     Toast.makeText(Login.this, "Please make sure you enter all fields", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    ApplicationClass.sendMessage("<S" + etNick.getText().toString().trim() + ">", Login.this);
                 }
-                else  ApplicationClass.sendMessage("<S"+etNick.getText().toString().trim()+">", Login.this);
 
             }
         });
@@ -252,8 +264,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    void receive_login(String readMessage)
-    {
+    void receive_login(String readMessage) {
 
 
         if(readMessage.contains("<Q") && readMessage.contains((">"))) {
@@ -263,13 +274,11 @@ public class Login extends AppCompatActivity {
             } int lengh=0;
             try {
                 lengh  = Integer.parseInt(aux.toString());
-            }catch (NumberFormatException nfe)
-            {
+            }catch (NumberFormatException nfe) {
                 Toast.makeText(this, "Error Parsing Number: "+nfe.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-            switch (lengh)
-            {
+            switch (lengh) {
                 case ApplicationClass.BAD_CREDENTIALS:
 
                     final AlertDialog.Builder message = new AlertDialog.Builder(Login.this);
@@ -286,45 +295,43 @@ public class Login extends AppCompatActivity {
                     });
                     message.show();
                     break;
-                    case ApplicationClass.USER_NOT_FOUND: {
-                        final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
-                        LayoutInflater inflaterUserNotFound = getLayoutInflater();
-                        final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_not_knowed, null);
-                        //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
-                        messageUserNotFound.setView(dialogViewUserNotFound);
-                        messageUserNotFound.setTitle("Error!!");
-                        messageUserNotFound.setMessage("The user that you entered does not exists, please try again!!!");
-                        messageUserNotFound.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                case ApplicationClass.USER_NOT_FOUND: {
+                    final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
+                    LayoutInflater inflaterUserNotFound = getLayoutInflater();
+                    final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_not_knowed, null);
+                    //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
+                    messageUserNotFound.setView(dialogViewUserNotFound);
+                    messageUserNotFound.setTitle("Error!!");
+                    messageUserNotFound.setMessage("The user that you entered does not exists, please try again!!!");
+                    messageUserNotFound.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
 
-                            }
-                        });
-                        messageUserNotFound.show();
-                    }
-                        break;
-                        case ApplicationClass.USER_BLOCKED:
-                        {
-                            final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
-                            LayoutInflater inflaterUserNotFound = getLayoutInflater();
-                            final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_blocked, null);
-                            messageUserNotFound.setView(dialogViewUserNotFound);
-                            messageUserNotFound.setTitle("Error!!");
-                            messageUserNotFound.setMessage("You need to unlock the application!!!");
-                            messageUserNotFound.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-
-                                }
-                            });
-                            messageUserNotFound.show();
                         }
+                    });
+                    messageUserNotFound.show();
+                }
+                break;
+                case ApplicationClass.USER_BLOCKED: {
+                    final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
+                    LayoutInflater inflaterUserNotFound = getLayoutInflater();
+                    final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_blocked, null);
+                    messageUserNotFound.setView(dialogViewUserNotFound);
+                    messageUserNotFound.setTitle("Error!!");
+                    messageUserNotFound.setMessage("You need to unlock the application!!!");
+                    messageUserNotFound.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                            break;
-                case ApplicationClass.LOGIN_SUCCESS:
-                {
+
+                        }
+                    });
+                    messageUserNotFound.show();
+                }
+
+                break;
+                case ApplicationClass.LOGIN_SUCCESS: {
                     final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
                     LayoutInflater inflaterUserNotFound = getLayoutInflater();
                     final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.success_login_layout, null);
@@ -334,6 +341,9 @@ public class Login extends AppCompatActivity {
                     messageUserNotFound.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+
+                            if (!users.contains(etNick.getText().toString()))
+                                saveUser(etNick.getText().toString());
 
                             ApplicationClass.userNickname = etNick.getText().toString().trim();
                             startActivity(new Intent(Login.this, MainActivity.class));
@@ -349,4 +359,39 @@ public class Login extends AppCompatActivity {
 
         }
     }
+
+    public void saveUser(String nickname) {
+        try {
+            FileOutputStream file = openFileOutput("users.txt", MODE_PRIVATE);  //cria o ficheiro caso nao exitsa, e define a permisao do ficheiro para so o nossa aplicaçao
+            OutputStreamWriter outputFile = new OutputStreamWriter(file);  //cria a connecao com o ficheiro que vamos escrever
+            outputFile.append(nickname);
+            outputFile.close();
+            Toast.makeText(this, "Sucessfully saveded!", Toast.LENGTH_LONG).show();
+
+        } catch (IOException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void loadData() {
+        File file = getApplicationContext().getFileStreamPath("users.txt");
+        String linefromFile;
+        if (file.exists()) {
+            try {
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("users.txt")));  //abre p ficheiro Data.txt para leitura!
+                while ((linefromFile = reader.readLine()) != null) {
+                    users.add(linefromFile);
+                }
+
+            } catch (IOException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        } else
+
+            Toast.makeText(this, "No users saved", Toast.LENGTH_SHORT).show();
+
+    }
+
 }
