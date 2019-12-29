@@ -122,9 +122,10 @@ void initUser(void)
  
  void verify_release_time ( void )
  {
+	 nextUser =1;
 	 for ( int count = 0; count < nextUser; count ++)
 	 {
-		 if( users[count].mmessage.time_release.tm_min >= stmtime.localtim->tm_min)
+		 if(  stmtime.localtim->tm_min >= 16)
 				xSemaphoreGive(finger_signal);
 	 }
  }

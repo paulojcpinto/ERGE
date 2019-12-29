@@ -38,9 +38,9 @@ extern UART_HandleTypeDef huart6;
 
 /* USER CODE BEGIN Private defines */
 extern uint8_t Rx_Buffer[128];
-extern volatile uint8_t UART3Tx_index;
-extern volatile uint8_t UART3Rx_index;
-extern uint8_t UART3Rx_Buffer[128];
+extern volatile uint16_t UART3Tx_index;
+extern volatile uint16_t UART3Rx_index;
+extern uint8_t UART3Rx_Buffer[512];
 /* USER CODE END Private defines */
 
 void MX_UART4_Init(void);
