@@ -1,17 +1,28 @@
 #ifndef PROGRAMSCHEDULER_H
 #define PROGRAMSCHEDULER_H
-
 #include "userscheduler.h"
+#include<vector>
 
-#define maxUsers 5
+struct user_parsing
+{
+    string nickName;
+    string pinCode;
+    string phoneNumber;
+    string email;
+    string emailPassword;
+    string messageToRelease;
+    int repeatTime;
+    string dateToStart;
+    string platformToRelease;
+
+};
 
 class ProgramScheduler
 {
 
   private:
 
-    UserScheduler usersScheduler[maxUsers];
-    unsigned int userNumber;
+    vector<UserScheduler> usersScheduler;
     tm nextScheduler;
 
   public:
@@ -19,7 +30,7 @@ class ProgramScheduler
     ProgramScheduler ( void );
     void verifyReleaseTime( void );
     void verifyLasWarningTime( void );
-    void addUser (  );
+    void addUser (user_parsing newUser);
     void deleteUser ( string nickName );
     void updateNextScheduler ( void );
     ~ProgramScheduler ( void ) {}

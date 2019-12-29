@@ -17,39 +17,11 @@ return 0;
 }
 */
 
-/*
-#include <fcntl.h>
-#include <stdio.h>
 
-#define BUTTONS "/dev/buttons"
-
-int main (void){
-
-    char buffer[1]={0};
-    FILE* fd ;
-
-
-    //read (fd,buffer,3,NULL);
-    while(1){
-        fd = fopen (BUTTONS, "r" );
-        if(fd == NULL){
-            printf ("Device doesn't exist\n");
-            return -1;
-        }
-    fread(buffer,sizeof(int),1,fd);
-
-    printf ("Values on buffer: %s\n", buffer);
-    //printf ("Read it");
-    fclose (fd);}
-    return 0;
-}
-*/
-
+#include <QtWidgets/qapplication.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/socket.h>
-//#include <bluetooth/bluetooth.h>
-//#include <bluetooth/rfcomm.h>
 #include <errno.h>
 #include <ctype.h>
 #include <stdarg.h>
@@ -57,40 +29,13 @@ int main (void){
 #include <string.h>
 #include <time.h>
 #include "programscheduler.h"
-#include "../HeaderFiles/FingerprintReader.h"
+//#include "FingerprintReader.h"
 #include<iostream>
 #include <QThread>
+#include "bluetooth_module.h"
 
 using namespace std;
-
-
-/*int main(int argc, char **argv)
-{
-    struct sockaddr_rc addr = { 0 };
-    int s, status;
-    char dest[18] = "70:BB:E9:EF:EC:AE";
-
-    // allocate a socket
-    s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
-
-    // set the connection parameters (who to connect to)
-    addr.rc_family = AF_BLUETOOTH;
-    addr.rc_channel = (uint8_t) 1;
-    str2ba( dest, &addr.rc_bdaddr );
-
-    // connect to server
-    status = connect(s, (struct sockaddr *)&addr, sizeof(addr));
-
-    // send a message
-    if( status == 0 ) {
-        status = write(s, "hello!", 6);
-    }
-
-    if( status < 0 ) perror("uh oh");
-
-    close(s);
-    return 0;
-}*/
+/*
 void *theadtry (void *arg)
 {
   Fingerprint f;
@@ -127,12 +72,14 @@ void *theadtry (void *arg)
  // printf("\n\n\paulo\nfingerprint ID = %d", fingerID);
 
 }
-
+*/
 int main(int argc, char **argv)
 {
+    QApplication a(argc, argv);
 
+    //bluetooth_module b;
 
-
+/*
 
   time_t raw_time;
   struct tm *ptr_ts;
@@ -154,67 +101,8 @@ pthread_join(pps, NULL);
   printf ("Time Amsterdam: %2d:%02d\n",
        ptr_ts->tm_year+1900, ptr_ts->tm_mday);
   return 0;
+  */
+    return  a.exec();
 
-/*
-    struct sockaddr_rc loc_addr = { 0 }, rem_addr = { 0 };
-    char buf[1024] = { 0 };
-    int s, client, bytes_read;
-    socklen_t opt = sizeof(rem_addr);
-system("hciconfig hci0 piscan");
-    // allocate socket
-    s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
-
-    // bind socket to port 1 of the first available
-    // local bluetooth adapter
-    loc_addr.rc_family = AF_BLUETOOTH;
-    loc_addr.rc_bdaddr = {{0, 0, 0, 0, 0, 0}};
-    loc_addr.rc_channel = (uint8_t) 1;
-    bind(s, (struct sockaddr *)&loc_addr, sizeof(loc_addr));
-
-    // put socket into listening mode
-    listen(s, 1);
-
-    // accept one connection
-    client = accept(s, (struct sockaddr *)&rem_addr, &opt);
-
-  //  ba2str( &rem_addr.rc_bdaddr, buf );
- //   fprintf(stderr, "accepted connection from %s\n", buf);
-    memset(buf, 0, sizeof(buf));
-
-    // read data from the client
-    bytes_read = read(client, buf, sizeof(buf));
-    if( bytes_read > 0 ) {
-        printf("received [%s]\n", buf);
-    }
-
-    // close connection
-    close(client);
-    close(s);
-    return 0;*/
 }
 
-/*
- *
-#include <stdio.h>
-#include <time.h>
-
-#define PST (-8)
-#define CET (1)
-
-int main ()
-{
-        time_t raw_time;
-        struct tm *ptr_ts;
-
-        time ( &raw_time );
-        ptr_ts = gmtime ( &raw_time );
-
-        printf ("Time Los Angeles: %2d:%02d\n",
-             ptr_ts->tm_hour, ptr_ts->tm_min);
-        printf ("Time Amsterdam: %2d:%02d\n",
-             ptr_ts->tm_year+1900, ptr_ts->tm_mday);
-        return 0;
- }
-
-
- * */

@@ -10,7 +10,7 @@ UserScheduler::UserScheduler()
 }
 
 
-UserScheduler::UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease ) : user ( nickName, phoneNumber, email, password, IDFinger, message, platform, deleteAfterRelease )
+UserScheduler::UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease ) : user ( nickName,pinCode, phoneNumber, email, password, IDFinger, message, platform, deleteAfterRelease )
 {
     this->jumpScheduler = jumpScheduler;
     this->nextScheduler = nextScheduler;

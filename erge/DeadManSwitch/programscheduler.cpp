@@ -2,7 +2,7 @@
 
 ProgramScheduler::ProgramScheduler()
 {
-  userNumber = 0;
+  usersScheduler.clear();
   nextScheduler.tm_year = 0;
 }
 
@@ -15,8 +15,8 @@ void ProgramScheduler::verifyReleaseTime( void )
   ptr_ts = gmtime ( &raw_time );
   bool aux = false;
 while(!aux)
-  for ( uint8_t cont = 0; cont < userNumber; cont ++)
-    if(usersScheduler[cont].compareTimeRelease (*ptr_ts))
+  for ( uint8_t cont = 0; cont < usersScheduler.size(); cont ++)
+    if(usersScheduler.at(cont).compareTimeRelease (*ptr_ts))
       { /*send signal */
         printf("okooko");
         aux = true;
@@ -28,26 +28,27 @@ while(!aux)
     }
 }
 
-void ProgramScheduler::addUser( void )
+void ProgramScheduler::addUser(user_parsing newUser)
 {
   time_t raw_time;
   struct tm *ptr_ts;
-  userNumber ++ ;
+  tm nextScheduler;
   time ( &raw_time );
   ptr_ts = gmtime ( &raw_time );
   ptr_ts->tm_min++;
-  UserScheduler ok(*ptr_ts);
-  usersScheduler[0] = ok;
+  int idfinger=0;
+
+  usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
 }
 
 void ProgramScheduler::deleteUser( string nickName )
 {
-  for ( uint8_t count = 0; count < userNumber; count++ )
+  for ( uint8_t count = 0; count < usersScheduler.size(); count++ )
     {
       if ( usersScheduler[count].compareUserNickName ( nickName ))
         {
-          usersScheduler[count] = usersScheduler[userNumber - 1];
-          userNumber --;
+
+          usersScheduler.erase(usersScheduler.begin()+count);
           return;
         }
     }
@@ -59,7 +60,7 @@ void ProgramScheduler::updateNextScheduler ( void )
     struct tm timeAux;
     unsigned long int aux;
     unsigned long int aux2;
-    if ( userNumber )
+    if ( usersScheduler.size() )
     {
 
         nextScheduler = usersScheduler[0].getNextScheduler ();
@@ -68,7 +69,7 @@ void ProgramScheduler::updateNextScheduler ( void )
         aux += nextScheduler.tm_yday * 61 * 25 ;
         aux += nextScheduler.tm_year * 61 * 25 * 367 ;
 
-        for ( unsigned int count = 1; count < userNumber; count ++ )
+        for ( unsigned int count = 1; count < usersScheduler.size(); count ++ )
         {
             timeAux = usersScheduler[count].getNextScheduler ();
             aux2 = timeAux.tm_min;

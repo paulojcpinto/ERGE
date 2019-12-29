@@ -6,31 +6,21 @@
 #include <QtWidgets/qdialog.h>
 #include "bluetooth_server.h"
 #include <string>
+#include "programscheduler.h"
 
 QT_USE_NAMESPACE
 
 
-using namespace std;
-struct user_parsing
-{
-    string nickName;
-    string pinCode;
-    string phoneNumber;
-    string email;
-    string emailPassword;
-    string messageToRelease;
-    int repeatTime;
-    string dateToStart;
-    string platformToRelease;
 
-};
+using namespace std;
+
 
 class bluetooth_module : public QDialog
 {
     Q_OBJECT
 
 public:
-    bluetooth_module(QWidget *parent = nullptr);
+    bluetooth_module(ProgramScheduler* scheduler, QWidget *parent = nullptr);
 
 signals:
     void sendMessage(const QString &message);
@@ -53,10 +43,15 @@ private:
     user_parsing user;
     int adapterFromUserSelection() const;
     int currentAdapterIndex = 0;
+    int fd;
     bluetooth_server *server;
     QList<QBluetoothHostInfo> localAdapters;
     QString localName;
     void parsing(QString input,string &output,char answer);
+    void writeToLog(string Message);
+    ProgramScheduler *data;
+
+
 
 
 };
