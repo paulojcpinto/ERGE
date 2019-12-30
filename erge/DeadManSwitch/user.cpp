@@ -22,12 +22,13 @@ User::User():finger(200)
  *
  * *************************************************************************/
 
-User::User( string nickName, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease): finger (IDFinger), dataInfo (message, platform, deleteAfterRelease)
+User::User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease): finger (IDFinger), dataInfo (message, platform, deleteAfterRelease)
 {
     this->nickName = nickName;
     this->phoneNumber = phoneNumber;
     this->email = email;
     this->password = password;
+    this->pinCode=pinCode;
 }
 
 

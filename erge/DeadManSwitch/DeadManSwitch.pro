@@ -1,4 +1,5 @@
 QT -= gui
+QT += core bluetooth widgets
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -15,8 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        Adafruit_Fingerprint.cpp \
-        FingerprintReader.cpp \
         bluetooth_module.cpp \
         bluetooth_server.cpp \
         datainfo.cpp \
@@ -25,7 +24,6 @@ SOURCES += \
         finger.cpp \
         main.cpp \
         programscheduler.cpp \
-        uart.cpp \
         user.cpp \
         userscheduler.cpp
 

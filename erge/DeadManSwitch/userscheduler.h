@@ -19,7 +19,7 @@ private:
 
 public:
   UserScheduler();
-  UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease );
+  UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease );
   UserScheduler(tm nextScheduler);
   struct tm getNextScheduler ( void );
   bool compareTimeRelease( tm timeNow );

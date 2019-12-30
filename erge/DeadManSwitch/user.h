@@ -25,7 +25,7 @@ class User
     public:
 
         User();
-        User( string nickName, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease = true  );
+        User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease = true  );
         void updatePhoneNumeber ( string phoneNumber );
         void updateEMail ( string email );
         void updatePassword ( string password );
