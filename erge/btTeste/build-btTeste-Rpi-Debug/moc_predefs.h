@@ -101,6 +101,7 @@
 #define __USER_LABEL_PREFIX__ 
 #define __STDC_HOSTED__ 1
 #define __LDBL_HAS_INFINITY__ 1
+#define __INT_FAST16_TYPE__ int
 #define __LFRACT_MIN__ (-0.5LR-0.5LR)
 #define __HA_IBIT__ 8
 #define __FLT32_DIG__ 6
@@ -162,7 +163,6 @@
 #define __INTPTR_WIDTH__ 32
 #define __LACCUM_MAX__ 0X7FFFFFFFFFFFFFFFP-31LK
 #define __FLT32X_HAS_DENORM__ 1
-#define __INT_FAST16_TYPE__ int
 #define __LDBL_HAS_DENORM__ 1
 #define __ARM_FEATURE_LDREX 15
 #define __cplusplus 201103L
