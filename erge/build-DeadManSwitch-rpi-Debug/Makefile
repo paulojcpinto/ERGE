@@ -196,7 +196,6 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		../DeadManSwitch/.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -368,7 +367,6 @@ Makefile: ../DeadManSwitch/DeadManSwitch.pro ../../../../buildroot-2019.08/outpu
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -504,7 +502,6 @@ Makefile: ../DeadManSwitch/DeadManSwitch.pro ../../../../buildroot-2019.08/outpu
 ../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf:

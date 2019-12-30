@@ -24,7 +24,7 @@ SqlQuery::~SqlQuery()
     closeCallbackQueue();
 }
 
-int parsingNumber(string aux)
+int SqlQuery::parsingNumber(string aux)
 {
   int auxInt;
   stringstream strToInt(aux);

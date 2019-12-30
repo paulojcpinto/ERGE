@@ -104,6 +104,8 @@ private:
     bool sendQuery(string);
     bool receiveQuery();
 
+    int  parsingNumber(string aux);
+
     void writeToLog(string Message);
 
     string getLastQueryResult();

@@ -22,7 +22,7 @@ FRecognizer::FRecognizer(DataSet* dataset)
 
 }
 
-void DataSet::writeToLog(string Message)
+void FRecognizer::writeToLog(string Message)
 {
     string MessageToLog;
     MessageToLog= PROGRAM_NAME;
