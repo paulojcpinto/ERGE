@@ -118,9 +118,7 @@ int main(void)
 	vSemaphoreCreateBinary(finger_signal);
 	vSemaphoreCreateBinary(sim1);
 	vSemaphoreCreateBinary(release_signal);
-	
-	char test[8];
-	int testi = 10;
+
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

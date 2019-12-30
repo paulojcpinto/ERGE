@@ -1,8 +1,9 @@
 #include "esp8266.h"
+#include <stdio.h>
 
 int oo=0;
 static uint8_t local1 = 0;
-static uint8_t local_position1 = 0;
+static int local_position1 = 0;
 static volatile uint8_t busy = 0;
 
 #define discard   			( int )  50
@@ -23,6 +24,13 @@ int isim2 = sizeof( response_ok1 ) / sizeof( char ) -1;
 void publish_twitter ( int i )
 {
 oo = i;
+	if (busy)
+	{
+		HAL_UART_Transmit(&huart3, "s", 1, 100);
+
+	}
+		
+	busy = 1;
 	printf("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80\r\n");
 	sim2 = response_ok1;
 	isim2 = sizeof( response_ok1 ) / sizeof( char ) -1;
@@ -141,7 +149,11 @@ void update_date1 ()
 
 void  wait1 ()
 { 
-	
+	if (busy)
+
+		HAL_UART_Transmit(&huart3, "w", 1, 100);
+
+	busy = 1;
 	printf("AT+CIPSTART=\"TCP\",\"%s\",80\r\n","facebook.com");
 	sim2 = response_ok1;
 	isim2 = sizeof( response_ok1 ) / sizeof( char ) -1;
@@ -180,6 +192,9 @@ void parsing_gsm11 ( void )
 				if ( vHardware_verify1 ( ) > 0 )
 				{
 					printf("AT+CIPSEND=19\r\n");
+
+		HAL_UART_Transmit(&huart3, "w1", 2, 100);
+
 					sim2 = ready_message1;
 					isim2 = sizeof( ready_message1 ) / sizeof( char ) -1;
 					local1 = 21;
@@ -190,6 +205,7 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0 )
 				{
+							HAL_UART_Transmit(&huart3, "w2", 2, 100);
 					printf("HEAD / HTTP/1.1\r\n\r\n");
 					sim2 = date_pars1;
 					isim2 = sizeof( date_pars1 ) / sizeof( char ) -1;
@@ -202,18 +218,21 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0 )
 				{
+							HAL_UART_Transmit(&huart3, "w3", 2, 100);
 					local1 = 23;
 					local_position1 = 0;
 				}
 			}break;
 			case 23:
 			{
+						HAL_UART_Transmit(&huart3, "w4", 2, 100);
 				update_date1 ();
 			}break;
 			case 24:
 			{
 				if ( vHardware_verify1 ( ) > 0 )
 				{
+							HAL_UART_Transmit(&huart3, "w5", 2, 100);
 				printf("AT+CIPCLOSE\r\n");
 					stmtime.updated = 0;
 				local1 =25;}
@@ -221,6 +240,8 @@ void parsing_gsm11 ( void )
 			
 			case 25:
 			{
+						HAL_UART_Transmit(&huart3, "w6", 2, 100);
+				busy = 0;
 				wait_close();
 			}break;
 			case 26:
@@ -238,7 +259,8 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0 )
 				{
-					printf("GET /apps/thingtweet/1/statuses/update?api_key=GWA7NVWHFSUK8YW3&status=My first tweet from ESP8260%d\r\n", oo);
+					HAL_UART_Transmit(&huart3, "\r\nsim\r\n",7, 1000);
+					printf("GET /apps/thingtweet/1/statuses/update?api_key=GWA7NVWHFSUK8YW3&status=My first tweet from ESP8711%d\r\n", oo);
 					sim2 = rec;
 					isim2 = sizeof( rec ) / sizeof( char ) -1;
 					local1 = 28;

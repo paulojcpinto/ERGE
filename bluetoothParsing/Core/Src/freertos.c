@@ -30,6 +30,7 @@
 #include "usart.h"
 #include "init.h"
 #include "user.h"
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -101,7 +102,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityHigh, 0, 1024);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 1024);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask),  (void*)pp);
 	
 	osThreadDef(myTask, StartmyTask, osPriorityNormal, 0, 1024);
@@ -134,7 +135,6 @@ void StartDefaultTask(void const * argument)
 
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
-	uint8_t*  okp = (uint8_t* ) argument;
   for(;;)
   {
 parsing_gsm11();
@@ -172,7 +172,7 @@ void StartmyTask(void const * argument)
 
 void StartsimTask(void const * argument)
 {
-	int i =2;
+
 	if(xSemaphoreTake(sim1, 99999))
 	{
 		;
@@ -183,6 +183,8 @@ void StartsimTask(void const * argument)
 		stmtime.updated = 1;
 		//printf("AT+CIPCLOSE\r\n");
 		//publish_twitter(i++);
+		printf("AT+CIPCLOSE\r\n");
+		vTaskDelay(100);
 		wait1();
 		HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
 		//xSemaphoreGive(finger_signal);

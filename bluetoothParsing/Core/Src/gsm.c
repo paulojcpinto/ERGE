@@ -1,5 +1,6 @@
 #include "gsm.h"
 #include <gpio.h>
+#include <stdio.h>
 
 #define hardware_verify    									(  int )		 0
 #define set_PIN    													(  int )		 1
@@ -16,7 +17,7 @@
 #define discard_char												(	 int )		 12
 	
 char my_numeber[] = "+351934145654";
-char message[256] ;
+uint8_t message[256] ;
 
 int its_updating = 0;
 uint8_t size_SMS;
@@ -65,7 +66,6 @@ void send_SMS ( uint8_t number[13], uint8_t *messag, uint8_t size_message )
 
 void prepare_send_message (  ) 
 {
-	uint8_t * number = my_numeber;
 	busy = 1;
 	HAL_UART_Transmit(&huart4, "AT+CMGS=\"", sizeof("AT+CMGS=\"")/sizeof(char)-1, 1000);
 	HAL_UART_Transmit(&huart4, "+351934145654", sizeof(my_numeber)/sizeof(char)-1, 1000);
@@ -264,7 +264,7 @@ its_updating=0;
 					local = discard_char ;
 				busy = 0;
 				stmtime.updated=1;
-				stmtime.need_update=0;
+				//stmtime.need_update=0;
 				}
 				else
 				{

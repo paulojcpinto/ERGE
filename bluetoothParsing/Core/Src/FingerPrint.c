@@ -4,6 +4,7 @@
 #include "usart.h"
 #include "task.h"
 #include <string.h>
+#include "localtime.h"
 
 
 
@@ -467,8 +468,11 @@ int16_t	FingerPrint_Scan(void)
 			
 								ok = FingerPrint.AnswerBuffer[4];
 				
+
 				if (FingerPrint.AnswerBuffer[4] > 0)
-					xSemaphoreGive(finger_signal);
+				{
+					//xSemaphoreGive(finger_signal);
+				stmtime.need_update = 0;}
 
 				if (FingerPrint.AnswerBuffer[4] == 7)
 				HAL_UART_Transmit_IT(&huart3,"7",1);
