@@ -17,6 +17,12 @@ UserScheduler::UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName
     this->preseceCheck = false;
 }
 
+UserScheduler::UserScheduler(tm jumpScheduler,tm nextScheduler,fullUser userData)
+{
+    this->jumpScheduler = jumpScheduler;
+    this->nextScheduler = nextScheduler;
+    this->preseceCheck = false;
+}
 
 UserScheduler::UserScheduler(tm nextScheduler)
 {
@@ -29,6 +35,10 @@ struct tm UserScheduler::getNextScheduler( void )
   return nextScheduler;
 }
 
+bool UserScheduler::login(string pincode)
+{
+    return  user.login(pincode);
+}
 /******************************************************************************************************
  *
  *
@@ -106,12 +116,4 @@ bool UserScheduler::compareUserNickName ( string nickName )
   return user.compareNickName (nickName);
 }
 
-
-void UserScheduler::operator=(UserScheduler userSchedule)
-{
-  this->jumpScheduler = userSchedule.jumpScheduler;
-  this->nextScheduler = userSchedule.nextScheduler;
-  this->preseceCheck = userSchedule.preseceCheck;
-  this->user = userSchedule.user;
-}
 

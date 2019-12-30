@@ -32,8 +32,7 @@ return 0;
 //#include "FingerprintReader.h"
 #include<iostream>
 #include <QThread>
-#include "bluetooth_module.h"
-
+#include "BluetoothModule/bluetooth_module.h"
 using namespace std;
 /*
 void *theadtry (void *arg)

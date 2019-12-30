@@ -15,13 +15,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+
 SOURCES += \
-        bluetooth_module.cpp \
-        bluetooth_server.cpp \
+        BluetoothModule/bluetooth_module.cpp \
+        BluetoothModule/bluetooth_server.cpp \
+        FaceModule/dataset.cpp \
+        FaceModule/facerecognizer.cpp \
+        FaceModule/mcamera.cpp \
+        SqlModule/sqlquery.cpp \
         datainfo.cpp \
-        example.cpp \
         face.cpp \
         finger.cpp \
+        loghandler.cpp \
         main.cpp \
         programscheduler.cpp \
         user.cpp \
@@ -32,17 +37,21 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+CONFIG += link_pkgconfig
+PKGCONFIG += opencv
+LIBS += -pthread -lrt -lpthread -lbcm2835
+
 HEADERS += \
-    ../HeaderFiles/Adafruit_Fingerprint.h \
-    ../HeaderFiles/FingerprintReader.h \
-    ../HeaderFiles/MFRC522.h \
-    ../HeaderFiles/dDrivers.h \
-    ../HeaderFiles/uart.h \
-    bluetooth_module.h \
-    bluetooth_server.h \
+    BluetoothModule/bluetooth_module.h \
+    BluetoothModule/bluetooth_server.h \
+    FaceModule/dataset.h \
+    FaceModule/facerecognizer.h \
+    FaceModule/mcamera.h \
+    SqlModule/sqlquery.h \
     datainfo.h \
     face.h \
     finger.h \
+    loghandler.h \
     programscheduler.h \
     timef.h \
     user.h \

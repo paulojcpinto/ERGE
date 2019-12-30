@@ -1,6 +1,8 @@
 #ifndef PROGRAMSCHEDULER_H
 #define PROGRAMSCHEDULER_H
 #include "userscheduler.h"
+#include "loghandler.h"
+#include "SqlModule/sqlquery.h"
 #include<vector>
 
 struct user_parsing
@@ -22,7 +24,11 @@ class ProgramScheduler
 
   private:
 
+    LogHandler log;
     vector<UserScheduler> usersScheduler;
+    UserScheduler* finduser(string Nickname);
+    SqlQuery mQuery;
+    void loadData(vector<fullUser> &users);
     tm nextScheduler;
 
   public:
@@ -33,6 +39,11 @@ class ProgramScheduler
     void addUser (user_parsing newUser);
     void deleteUser ( string nickName );
     void updateNextScheduler ( void );
+    int login(string nickname,string pincode);
+    bool updateFullUser(user_parsing updDateinfo, string Nickname);
+    static bool userParsingToFulluser(user_parsing input,fullUser *output);
+    static bool userParsingToFulluser(fullUser input,user_parsing *output);
+
     ~ProgramScheduler ( void ) {}
 
 };

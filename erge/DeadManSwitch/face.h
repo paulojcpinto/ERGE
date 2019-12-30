@@ -1,16 +1,21 @@
 #ifndef FACE_H
 #define FACE_H
-
+#include "FaceModule/facerecognizer.h"
 
 class Face
 {
   private:
 
+    DataSet UserDataset;
+    FRecognizer userRecognizer;
 
 
-  public:
+  public:    
+    Face(string nickname);
+    DataSet* getDataset();
+    FRecognizer* getRecognizer();
 
-    Face();
+
 };
 
 #endif // FACE_H
