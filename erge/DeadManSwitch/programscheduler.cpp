@@ -1,9 +1,45 @@
 ﻿#include "programscheduler.h"
+#include <sstream>
 
-ProgramScheduler::ProgramScheduler()
+#define LOGIN_SUCCESS 1
+#define USER_NOT_FOUND 2
+#define USER_BLOCKED  3
+#define BAD_CREDENTIALS  4
+using namespace  std;
+ProgramScheduler::ProgramScheduler():log("ProgramScheduler: ")
 {
   usersScheduler.clear();
   nextScheduler.tm_year = 0;
+}
+
+void ProgramScheduler::loadData(vector<fullUser> &users)
+{
+    for(fullUser nUser: users)
+    {
+        time_t raw_time;
+        struct tm *ptr_ts;
+        tm nextScheduler;
+        time ( &raw_time );
+        ptr_ts = gmtime ( &raw_time );
+        ptr_ts->tm_min++;
+        //usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
+
+
+
+    }
+}
+bool ProgramScheduler::userParsingToFulluser(fullUser input, user_parsing *output)
+{
+    output->email=input.user.Email;
+    output->pinCode=input.user.PinCode;
+    output->nickName=input.user.NickName;
+    output->repeatTime=input.messageInfo.JumpTime;
+    output->dateToStart=input.messageInfo.dateToStart;
+    output->phoneNumber=input.user.PhoneNumber;
+    output->emailPassword=input.user.EmailPassword;
+    output->messageToRelease=input.messageInfo.UserMessage;
+    output->platformToRelease=input.messageInfo.TargetPlatform;
+    return true;
 }
 
 void ProgramScheduler::verifyReleaseTime( void )
@@ -38,6 +74,7 @@ void ProgramScheduler::addUser(user_parsing newUser)
   ptr_ts->tm_min++;
   int idfinger=0;
 
+  // TODO mudar para full user
   usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
 }
 
@@ -49,11 +86,39 @@ void ProgramScheduler::deleteUser( string nickName )
         {
 
           usersScheduler.erase(usersScheduler.begin()+count);
+          stringstream message;
+          message<<"Deleted User: "<<nickName;
+          log.writeToLog(message.str());
           return;
         }
     }
 }
 
+
+UserScheduler* ProgramScheduler::finduser(string Nickname)
+{
+    for(int i=0; i<usersScheduler.size();i++)
+    {
+        if(usersScheduler[i].compareUserNickName(Nickname))
+        {
+            return &usersScheduler[i];
+        }
+    }
+
+    return  nullptr;
+}
+
+int ProgramScheduler::login(string nickname, string pincode)
+{
+    UserScheduler* userLog = finduser(nickname);
+    if(userLog != nullptr)
+    {
+        if(userLog->login(pincode))
+            return LOGIN_SUCCESS;
+        return BAD_CREDENTIALS;
+
+    }return USER_NOT_FOUND;
+}
 
 void ProgramScheduler::updateNextScheduler ( void )
 {
