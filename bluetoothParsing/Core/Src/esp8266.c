@@ -24,12 +24,12 @@ int isim2 = sizeof( response_ok1 ) / sizeof( char ) -1;
 void publish_twitter ( int i )
 {
 oo = i;
-	if (busy)
-	{
-		HAL_UART_Transmit(&huart3, "s", 1, 100);
+//	while (busy)
+//	{
+//		HAL_UART_Transmit(&huart3, "s", 1, 100);
 
-	}
-		
+//	}
+//		
 	busy = 1;
 	printf("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80\r\n");
 	sim2 = response_ok1;
@@ -149,10 +149,12 @@ void update_date1 ()
 
 void  wait1 ()
 { 
-	if (busy)
-
-		HAL_UART_Transmit(&huart3, "w", 1, 100);
-
+//	while (busy)
+//	{
+//		vTaskDelay(10);
+//		HAL_UART_Transmit(&huart3, "w", 1, 100);
+//		
+//	}
 	busy = 1;
 	printf("AT+CIPSTART=\"TCP\",\"%s\",80\r\n","facebook.com");
 	sim2 = response_ok1;
@@ -246,7 +248,7 @@ void parsing_gsm11 ( void )
 			}break;
 			case 26:
 			{
-				if ( vHardware_verify1 ( ) > 0 )
+				if ( vHardware_verify1 ( ) > 0 || UART3Tx_index == UART3Rx_index)
 				{
 					printf("AT+CIPSEND=%d\r\n", sizeof("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=My first tweet from ESP8266\r\n"));
 					sim2 = ready_message1;
@@ -259,8 +261,9 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0 )
 				{
-					HAL_UART_Transmit(&huart3, "\r\nsim\r\n",7, 1000);
-					printf("GET /apps/thingtweet/1/statuses/update?api_key=GWA7NVWHFSUK8YW3&status=My first tweet from ESP8711%d\r\n", oo);
+					HAL_Delay(10);
+					//HAL_UART_Transmit(&huart3, "\r\nsim\r\n",7, 1000);
+					printf("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=My fipst t%dweet from ESP8266\r\n", oo);
 					sim2 = rec;
 					isim2 = sizeof( rec ) / sizeof( char ) -1;
 					local1 = 28;

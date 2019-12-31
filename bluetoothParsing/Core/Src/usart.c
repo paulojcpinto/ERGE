@@ -432,7 +432,7 @@ if (huart->Instance == UART4){ //current UART?
 		HAL_UART_Receive_IT(&huart4, &UART3Rx_Buffer[UART3Rx_index], 1);
 		
 //		if (UART3Rx_Buffer[UART3Rx_index-1] == '>')
-			HAL_UART_Transmit_IT(&huart3, &UART3Rx_Buffer[UART3Rx_index]-1, 1);
+			//HAL_UART_Transmit_IT(&huart3, &UART3Rx_Buffer[UART3Rx_index]-1, 1);
 			
 	}
 	if (huart->Instance == USART3){ //current UART?

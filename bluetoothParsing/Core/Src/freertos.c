@@ -155,7 +155,7 @@ void StartmyTask(void const * argument)
 	if(xSemaphoreTake(finger_signal, 99999))
 	{
 		printf("AT+CIPCLOSE\r\n");
-			vTaskDelay(1000);
+			vTaskDelay(100);
 		wait1();
 	}
 	while(1){
@@ -183,8 +183,7 @@ void StartsimTask(void const * argument)
 		stmtime.updated = 1;
 		//printf("AT+CIPCLOSE\r\n");
 		//publish_twitter(i++);
-		printf("AT+CIPCLOSE\r\n");
-		vTaskDelay(100);
+
 		wait1();
 		HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
 		//xSemaphoreGive(finger_signal);
