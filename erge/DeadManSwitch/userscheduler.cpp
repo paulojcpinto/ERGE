@@ -122,6 +122,6 @@ void UserScheduler::operator=(UserScheduler userSchedule)
   this->jumpScheduler = userSchedule.jumpScheduler;
   this->nextScheduler = userSchedule.nextScheduler;
   this->preseceCheck = userSchedule.preseceCheck;
-  //his->user = userSchedule.user;
+  this->user = userSchedule.user;
 }
 

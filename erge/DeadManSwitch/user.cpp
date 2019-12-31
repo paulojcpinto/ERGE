@@ -32,6 +32,15 @@ User::User( string nickName,string pinCode, string phoneNumber, string email, st
     this->pinCode=pinCode;
 }
 
+User::User(fullUser Data):finger(Data.fingerInfo),face(Data.faceInfo),dataInfo(Data.messageInfo)
+{
+    nickName= Data.user.NickName;
+    phoneNumber=Data.user.PhoneNumber;
+    pinCode=Data.user.PinCode;
+    email=Data.user.Email;
+    password=Data.user.EmailPassword;
+}
+
 bool User::login(string pincode)
 {
     return pinCode == pincode;

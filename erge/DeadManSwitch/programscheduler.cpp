@@ -22,6 +22,7 @@ void ProgramScheduler::loadData(vector<fullUser> &users)
         time ( &raw_time );
         ptr_ts = gmtime ( &raw_time );
         ptr_ts->tm_min++;
+        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,nUser));
         //usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
 
 
@@ -39,6 +40,20 @@ bool ProgramScheduler::userParsingToFulluser(fullUser input, user_parsing *outpu
     output->emailPassword=input.user.EmailPassword;
     output->messageToRelease=input.messageInfo.UserMessage;
     output->platformToRelease=input.messageInfo.TargetPlatform;
+    return true;
+}
+
+bool ProgramScheduler::userParsingToFulluser(user_parsing input, fullUser *output)
+{
+    output->user.NickName=input.nickName;
+    output->user.PinCode=input.pinCode;
+    output->user.Email=input.email;
+    output->user.EmailPassword=input.emailPassword;
+    output->user.PhoneNumber=input.phoneNumber;
+    output->messageInfo.JumpTime=input.repeatTime;
+    output->messageInfo.UserMessage=input.messageToRelease;
+    output->messageInfo.dateToStart=input.dateToStart;
+    output->messageInfo.TargetPlatform=input.dateToStart;
     return true;
 }
 
