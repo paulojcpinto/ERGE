@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include "FingerPrint.h"
 #include "FingerPrintConfig.h"
-uint8_t UART3Rx_Buffer[512];
+uint8_t UART3Rx_Buffer[1024];
 uint8_t Rx_Buffer[128];
 volatile uint16_t UART3Tx_index;
 volatile uint16_t UART3Rx_index;
@@ -426,13 +426,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
 }
 if (huart->Instance == UART4){ //current UART?
 		UART3Rx_index++;
-		UART3Rx_index &= ~(1<<9); //keep index inside the limits
-		
+		UART3Rx_index &= ~(1<<10); //keep index inside the limits
+		if (UART3Rx_index == UART3Tx_index)
+			UART3Rx_index++;
 		// set the interrupt for UART3 Rx again
 		HAL_UART_Receive_IT(&huart4, &UART3Rx_Buffer[UART3Rx_index], 1);
 		
 //		if (UART3Rx_Buffer[UART3Rx_index-1] == '>')
-			//HAL_UART_Transmit_IT(&huart3, &UART3Rx_Buffer[UART3Rx_index]-1, 1);
+	//		HAL_UART_Transmit_IT(&huart3, &UART3Rx_Buffer[UART3Rx_index]-1, 1);
 			
 	}
 	if (huart->Instance == USART3){ //current UART?

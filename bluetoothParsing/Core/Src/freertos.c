@@ -161,7 +161,11 @@ void StartmyTask(void const * argument)
 	while(1){
 	if(xSemaphoreTake(finger_signal, 99999))
 	{
-
+while(stmtime.need_update)
+{	HAL_UART_Transmit(&huart3, "s", 1, 100);
+	vTaskDelay(100);
+}
+	
 		publish_twitter(i++);
 		
 		//send_SMS ("+351916201643", "amo", 3);
@@ -183,7 +187,11 @@ void StartsimTask(void const * argument)
 		stmtime.updated = 1;
 		//printf("AT+CIPCLOSE\r\n");
 		//publish_twitter(i++);
-
+while(stmtime.need_update)
+{
+	HAL_UART_Transmit(&huart3, "w", 1, 100);
+	vTaskDelay(10);
+}
 		wait1();
 		HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
 		//xSemaphoreGive(finger_signal);
@@ -191,6 +199,7 @@ void StartsimTask(void const * argument)
 		while( stmtime.updated )
 			vTaskDelay(100);
 		verify_release_time ();
+		stmtime.need_update=0;
 			
 		HAL_UART_Transmit(&huart3, "\r\nyap\r\n", 7,1000);
 	}

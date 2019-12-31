@@ -23,6 +23,7 @@ int isim2 = sizeof( response_ok1 ) / sizeof( char ) -1;
 
 void publish_twitter ( int i )
 {
+	stmtime.need_update=2;
 oo = i;
 //	while (busy)
 //	{
@@ -44,6 +45,7 @@ void wait_close ( void )
 	{
 		if ( ++local_position1 == ( sizeof( response_ok1 ) / sizeof( char ) - 1) )
 		{
+			stmtime.updated = 0;
 			busy = 0;
 			local1 = discard;
 		}
@@ -52,6 +54,7 @@ void wait_close ( void )
 	{
 		if ( ++local_position1 == ( sizeof( error ) / sizeof( char ) - 1))
 		{
+			stmtime.updated = 0;
 			busy = 0;
 			local1 = discard;
 		}
@@ -155,6 +158,7 @@ void  wait1 ()
 //		HAL_UART_Transmit(&huart3, "w", 1, 100);
 //		
 //	}
+	stmtime.need_update = 1;
 	busy = 1;
 	printf("AT+CIPSTART=\"TCP\",\"%s\",80\r\n","facebook.com");
 	sim2 = response_ok1;
@@ -236,21 +240,22 @@ void parsing_gsm11 ( void )
 				{
 							HAL_UART_Transmit(&huart3, "w5", 2, 100);
 				printf("AT+CIPCLOSE\r\n");
-					stmtime.updated = 0;
+					
 				local1 =25;}
 			}break;
 			
 			case 25:
 			{
 						HAL_UART_Transmit(&huart3, "w6", 2, 100);
+				stmtime.need_update = 0;
 				busy = 0;
 				wait_close();
 			}break;
 			case 26:
 			{
-				if ( vHardware_verify1 ( ) > 0 || UART3Tx_index == UART3Rx_index)
+				if ( vHardware_verify1 ( ) > 0)
 				{
-					printf("AT+CIPSEND=%d\r\n", sizeof("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=My first tweet from ESP8266\r\n"));
+					printf("AT+CIPSEND=%d\r\n", sizeof("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=0\r\n"));
 					sim2 = ready_message1;
 					isim2 = sizeof( ready_message1 ) / sizeof( char ) -1;
 					local1 = 27;
@@ -261,9 +266,8 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0 )
 				{
-					HAL_Delay(10);
 					//HAL_UART_Transmit(&huart3, "\r\nsim\r\n",7, 1000);
-					printf("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=My fipst t%dweet from ESP8266\r\n", oo);
+					printf("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=4%d\r\n", oo);
 					sim2 = rec;
 					isim2 = sizeof( rec ) / sizeof( char ) -1;
 					local1 = 28;
@@ -275,17 +279,23 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0 )
 				{
+					//printf("AT+CIPCLOSE\r\n");
+					stmtime.need_update = 0;
 					busy = 0;
 					local1 = discard;
 				}
 			}break;
 			case discard :
 			{
+				uint8_t *p=&busy;
+				*p = 0;
+				busy =0;
+				stmtime.need_update = 0;
 			}break;
 				
 				
 		}	
 		UART3Tx_index++;
-		UART3Tx_index &= ~(1<<9);		
+		UART3Tx_index &= ~(1<<10);		
 	}
 }

@@ -125,7 +125,7 @@ void initUser(void)
 	 nextUser =1;
 	 for ( int count = 0; count < nextUser; count ++)
 	 {
-		 if(  (stmtime.localtim->tm_min <= 60) && (stmtime.need_update==1))
+		 if(  (stmtime.localtim->tm_min <= 60) )
 		 {
 			 HAL_UART_Transmit(&huart3, "\r\ndedo\r\n", 8, 1000);
 				xSemaphoreGive(finger_signal);
