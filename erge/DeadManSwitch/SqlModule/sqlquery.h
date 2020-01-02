@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <vector>
-
 #define MAX_MSG_LEN 10000
 using namespace std;
 
@@ -57,6 +56,7 @@ struct fullUser
     fingerPrintQuery fingerInfo;
 
 };
+
 
 class SqlQuery
 {
@@ -103,6 +103,8 @@ private:
     bool closeCallbackQueue();
     bool sendQuery(string);
     bool receiveQuery();
+
+    int  parsingNumber(string aux);
 
     void writeToLog(string Message);
 

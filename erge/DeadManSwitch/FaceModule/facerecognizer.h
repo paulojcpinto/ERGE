@@ -23,7 +23,7 @@ public:
     int recognizeFace(Mat frame);
     int loadRecognizer(int numberOfImages=15);
 
-    const string face_cascade_name = "/opt/haarcascade_frontalface_alt.xml";
+     string face_cascade_name = "/opt/haarcascade_frontalface_alt.xml";
 
 private:
     void loadLog();
@@ -32,7 +32,6 @@ private:
     DataSet *dataset;
     CascadeClassifier face_cascade;
     Ptr<FaceRecognizer> model;
-
     int fd;
 
 };

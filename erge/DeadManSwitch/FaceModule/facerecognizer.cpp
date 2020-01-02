@@ -7,7 +7,7 @@
 
 #define PROGRAM_NAME "FACERECOGNIZER: "
 
-FRecognizer::FRecognizer()
+FRecognizer::FRecognizer():face_cascade_name("/opt/haarcascade_frontalface_alt.xml")
 {
  dataset = new DataSet();
  loadLog();
@@ -22,7 +22,7 @@ FRecognizer::FRecognizer(DataSet* dataset)
 
 }
 
-void DataSet::writeToLog(string Message)
+void FRecognizer::writeToLog(string Message)
 {
     string MessageToLog;
     MessageToLog= PROGRAM_NAME;

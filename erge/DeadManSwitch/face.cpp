@@ -6,6 +6,10 @@ Face::Face(string nickname):UserDataset(nickname),userRecognizer(&UserDataset)
 
 
 }
+Face::Face(faceQuery faceInfo):UserDataset(faceInfo.PathDataset),userRecognizer(&UserDataset)
+{
+    numberOfImages=faceInfo.NumberOfImages;
+}
 
 DataSet* Face::getDataset()
 {
@@ -14,4 +18,9 @@ DataSet* Face::getDataset()
 FRecognizer* Face::getRecognizer()
 {
     return &userRecognizer;
+}
+void Face::operator=(Face face)
+{
+  this->UserDataset= face.UserDataset;
+  this->userRecognizer=face.userRecognizer;
 }

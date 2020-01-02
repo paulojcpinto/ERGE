@@ -107,7 +107,7 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
     if(message.contains("<L>"))
     {
         sendMessage("RASP");
-    }
+    }else
     if(message.contains("<")&& message.contains(">"))
     {
         char c;

@@ -41,6 +41,10 @@ DataSet::DataSet(string Nickname)
 }
 
 
+DataSet::~DataSet()
+{
+
+}
 
 bool DataSet::createDataset()
 {
