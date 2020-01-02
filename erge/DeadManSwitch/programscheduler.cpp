@@ -10,9 +10,10 @@ ProgramScheduler::ProgramScheduler():log("ProgramScheduler: ")
 {
   usersScheduler.clear();
   nextScheduler.tm_year = 0;
+  loadData(mQuery.getAllUsers());
 }
 
-void ProgramScheduler::loadData(vector<fullUser> &users)
+void ProgramScheduler::loadData(vector<fullUser> users)
 {
     for(fullUser nUser: users)
     {
@@ -89,8 +90,20 @@ void ProgramScheduler::addUser(user_parsing newUser)
   ptr_ts->tm_min++;
   int idfinger=0;
 
+  fullUser NewUser;
+  userParsingToFulluser(newUser,&NewUser);
+
+  NewUser.fingerInfo.FingerprintID=1;     //TODO getFingerprint here
+  NewUser.fingerInfo.FingerprintName="FingerOne";
+  //TODO getfaces here!!
+  NewUser.faceInfo.PathDataset=newUser.nickName;
+  NewUser.faceInfo.NumberOfImages=15;
+
+
+
   // TODO mudar para full user
   usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
+  mQuery.insertUser(NewUser);
 }
 
 void ProgramScheduler::deleteUser( string nickName )
@@ -114,9 +127,14 @@ UserScheduler* ProgramScheduler::finduser(string Nickname)
 {
     for(int i=0; i<usersScheduler.size();i++)
     {
+        stringstream ss;
+        ss<<"log size: "<<usersScheduler.size();
+        log.writeToLog(ss.str());
         if(usersScheduler[i].compareUserNickName(Nickname))
         {
+            log.writeToLog("User fouded!");
             return &usersScheduler[i];
+
         }
     }
 

@@ -75,8 +75,8 @@ void *theadtry (void *arg)
 int main(int argc, char **argv)
 {
     QApplication a(argc, argv);
-
-    //bluetooth_module b;
+    ProgramScheduler p;
+    bluetooth_module b(&p);
 
 /*
 

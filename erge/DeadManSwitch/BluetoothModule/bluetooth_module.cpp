@@ -97,6 +97,7 @@ int parsingNumber(string aux)
 
 }
 
+
 void bluetooth_module::receibedMessage(const QString &sender, const QString &message)
 {
     stringstream ss;
@@ -153,7 +154,12 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
             ss<<"User Platform to Release: "<<user.platformToRelease<<"\n\n";
             break;
          case 'C':
-
+            data->addUser(user);
+            ss<<"added User?";
+            break;
+         case 'Q':
+           sendLoginResult(data->login(user.nickName,user.pinCode));
+           ss<<"Login from user: "<<user.nickName<<" with pincode: "<<user.pinCode;
             break;
         default:
             ss<<"1 character:"<<c<<"\n";
@@ -165,8 +171,20 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
 
 
 }
+void bluetooth_module::sendLoginResult(int result)
+{
+     QString answer = "<";
+     answer.append('Q');
+     answer.append(QString::number(result));
+     answer.append('>');
+     stringstream ss;
+     ss<<"Message sended: "<<answer.toStdString() ;
+     writeToLog(ss.str());
+     sendMessage(answer);
+}
 void bluetooth_module::parsing(QString input, string &output, char answer)
 {
+    output="";
     for(int i = 2; i<input.length()-1;i++)
        output += input.at(i).toLatin1();
     QString answer_back = "<";

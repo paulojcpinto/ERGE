@@ -50,6 +50,7 @@ private:
     void parsing(QString input,string &output,char answer);
     void writeToLog(string Message);
     ProgramScheduler *data;
+    void sendLoginResult(int result);
 
 
 

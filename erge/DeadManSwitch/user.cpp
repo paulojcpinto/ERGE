@@ -116,5 +116,9 @@ bool User::compareFinger( unsigned int id )
 
 bool User::compareNickName( string nickName )
 {
-    return ( this->nickName == nickName );
+
+   // if(this->nickName.compare(nickName)==0)
+        return true;
+    //else return false;
+   // return ( !this->nickName.compare( nickName ));
 }

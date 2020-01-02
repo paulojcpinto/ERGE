@@ -28,7 +28,7 @@ class ProgramScheduler
     vector<UserScheduler> usersScheduler;
     UserScheduler* finduser(string Nickname);
     SqlQuery mQuery;
-    void loadData(vector<fullUser> &users);
+    void loadData(vector<fullUser> users);
     tm nextScheduler;
 
   public:
