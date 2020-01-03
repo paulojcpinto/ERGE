@@ -421,7 +421,7 @@ void end_receiving_trama (int *c)
 					break;
 				case int_create_user:
 					UART3Tx_index++;
-					createUser(user_pars);
+					printNumber(createUser(user_pars),char_create_user);
 					break;
 				case int_app_login:
 				  loginAnswer=login(user_pars.nickName,user_pars.pinCode);
