@@ -385,7 +385,7 @@ public class BluetoothConnectionService {
                     {
                         throw new IOException();
                     }
-                        SystemClock.sleep(80); //pause and wait for rest of data. Adjust this depending on your sending speed.
+                        SystemClock.sleep(200); //pause and wait for rest of data. Adjust this depending on your sending speed.
                         bytes = mmInStream.available(); // how many bytes are ready to be read?
                         bytes = mmInStream.read(buffer, 0, bytes);
 

@@ -113,13 +113,15 @@ public class Login extends AppCompatActivity {
             ivType.setImageResource(R.drawable.rasp);
         else ivType.setImageResource(R.drawable.not_knowned);
 
-
-
+       // String[] stringArray = users.toArray().copyOf(objectArray, objectArray.length, String[].class);
+        String[] strArr = asStrings(users.toArray());
+       // String[] strArr = {"Pau","Paulo","Andre","coisa"};
         ArrayAdapter<String> adapter
-                = new ArrayAdapter<>(this, R.layout.custom_design_autocomlete, users);
+                = new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, strArr);
 
-        etNick.setThreshold(1);  //Numero de caraters que o utilizador percisa de por para começar a aparecer a funcao de autocomplete
-        etNick.setAdapter(adapter);
+        etNick.setThreshold(1);
+        etNick.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, strArr));
+        etNick.setDropDownAnchor(R.id.ivType);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +155,12 @@ public class Login extends AppCompatActivity {
 
         startActivity(new Intent(Login.this, Enter.class));
         Login.this.finish();
+    }
+    public static String[] asStrings(Object... objArray) {
+        String[] strArray = new String[objArray.length];
+        for (int i = 0; i < objArray.length; i++)
+            strArray[i] = String.valueOf(objArray[i]);
+        return strArray;
     }
 @Override
     public boolean onCreateOptionsMenu( Menu menu ) {

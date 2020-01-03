@@ -73,7 +73,8 @@ public class Register extends AppCompatActivity {
                     receive_repeatTime(readMessage);
                     receive_dateStart(readMessage);
                     receive_platform(readMessage);
-                   // Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
+                    recieve_create(readMessage);
+                    Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:
@@ -877,6 +878,7 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<A" + etPlatform.getText().toString().trim() + ">", Register.this);
 
             } else {
+                progressDialog.dismiss();
                 ApplicationClass.sendMessage("<C>",Register.this);
 
 
@@ -904,7 +906,7 @@ public class Register extends AppCompatActivity {
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.success_login_layout, null);
                 //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
-                progressDialog.dismiss();
+               // progressDialog.dismiss();
 
                 message.setView(dialogView);
                 message.setTitle("Register Completed");
@@ -929,7 +931,7 @@ public class Register extends AppCompatActivity {
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.error_login_layout, null);
                 //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
-                progressDialog.dismiss();
+                //progressDialog.dismiss();
 
                 message.setView(dialogView);
                 message.setTitle("Register Failed");
@@ -937,6 +939,8 @@ public class Register extends AppCompatActivity {
                 message.setMessage("A user with that name already exists!!");
                 else if(result==3)
                     message.setMessage("maximum user limit has already been reached!!");
+                else message.setMessage("Error unkowned!!");
+
                 message.setPositiveButton("Ok :(", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
