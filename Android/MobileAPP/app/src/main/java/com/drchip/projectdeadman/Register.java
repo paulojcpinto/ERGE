@@ -73,7 +73,8 @@ public class Register extends AppCompatActivity {
                     receive_repeatTime(readMessage);
                     receive_dateStart(readMessage);
                     receive_platform(readMessage);
-                   // Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
+                    recieve_create(readMessage);
+                    Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:
@@ -572,7 +573,7 @@ public class Register extends AppCompatActivity {
 
                         progressDialog = new ProgressDialog(Register.this);
                         progressDialog.setTitle("Communicating");
-                        progressDialog.setMessage("Loading user data!...");
+                        progressDialog.setMessage("Sending user data!...");
                         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                         progressDialog.setMax(6);
                         progressDialog.setCancelable(true);
@@ -877,12 +878,35 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<A" + etPlatform.getText().toString().trim() + ">", Register.this);
 
             } else {
+                progressDialog.dismiss();
                 ApplicationClass.sendMessage("<C>",Register.this);
+
+
+            }
+        }
+    }
+
+    void recieve_create(String readMessage)
+    {
+        if (readMessage.contains("<C") && readMessage.contains((">")))
+        {
+            StringBuilder aux = new StringBuilder();
+            for (int i = 2; i < readMessage.length() - 1; i++) {
+                aux.append(readMessage.charAt(i));
+            }
+            int result=0;
+            try {
+                result = Integer.parseInt(aux.toString());
+            } catch (NumberFormatException nfe) {
+                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if(result==1)
+            {
                 final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.success_login_layout, null);
                 //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
-                progressDialog.dismiss();
+               // progressDialog.dismiss();
 
                 message.setView(dialogView);
                 message.setTitle("Register Completed");
@@ -891,7 +915,7 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(ApplicationClass.deviceType.contains("STM"))
-                        startActivity(new Intent(Register.this, UserInstuctionsSTM.class));
+                            startActivity(new Intent(Register.this, UserInstuctionsSTM.class));
                         else if(ApplicationClass.deviceType.contains("RASP"))
                             startActivity(new Intent(Register.this, UserInstructionsRASP.class));
                         Register.this.finish();
@@ -900,9 +924,37 @@ public class Register extends AppCompatActivity {
                     }
                 });
                 message.show();
-
             }
+            else
+            {
+                final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
+                LayoutInflater inflater = getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.error_login_layout, null);
+                //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
+                //progressDialog.dismiss();
+
+                message.setView(dialogView);
+                message.setTitle("Register Failed");
+                if(result==2)
+                message.setMessage("A user with that name already exists!!");
+                else if(result==3)
+                    message.setMessage("maximum user limit has already been reached!!");
+                else message.setMessage("Error unkowned!!");
+
+                message.setPositiveButton("Ok :(", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+                message.show();
+            }
+
+
+
         }
+
     }
 
 

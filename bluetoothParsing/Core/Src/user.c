@@ -56,20 +56,25 @@ void initUser(void)
 	 int i=0;
 	 if(nextUser <= MAX_USERS)
 	 {
-   strcpy(users[nextUser].nickName,newUser.nickName);
-	 strcpy(users[nextUser].pinCode,newUser.pinCode);
-	 strcpy(users[nextUser].email,newUser.email);
-	 strcpy(users[nextUser].emailPassword,newUser.emailPassword);
-	 strcpy(users[nextUser].phoneNumber,newUser.phoneNumber);
-	 strcpy(users[nextUser].mmessage.dateToStart,newUser.dateToStart);
-	 strcpy(users[nextUser].mmessage.messageToRelease,newUser.messageToRelease);
-	 strcpy(users[nextUser].mmessage.platformToRelease,newUser.platformToRelease);
-	 users[nextUser].mmessage.repeatTime= newUser.repeatTime;
-	 users[nextUser].unlocked=1;
-	 nextUser++;
-	 return 1;	 
+		 if(!strcmp(getUser(newUser.nickName)->nickName,newUser.nickName))
+		 {
+			 strcpy(users[nextUser].nickName,newUser.nickName);
+			 strcpy(users[nextUser].pinCode,newUser.pinCode);
+			 strcpy(users[nextUser].email,newUser.email);
+			 strcpy(users[nextUser].emailPassword,newUser.emailPassword);
+			 strcpy(users[nextUser].phoneNumber,newUser.phoneNumber);
+			 strcpy(users[nextUser].mmessage.dateToStart,newUser.dateToStart);
+			 strcpy(users[nextUser].mmessage.messageToRelease,newUser.messageToRelease);
+			 strcpy(users[nextUser].mmessage.platformToRelease,newUser.platformToRelease);
+			 users[nextUser].mmessage.repeatTime= newUser.repeatTime;
+			 users[nextUser].unlocked=1;
+			 nextUser++;
+		 
+			 return 1;	 
+		 }
+		 return 2;	 
 	 }
-	 else return 0;
+	  return 3;
 	 
  }
  
