@@ -85,12 +85,13 @@ int ProgramScheduler::addUser(user_parsing newUser)
     if(finduser(newUser.nickName)!=nullptr)
     {
 
-  return 1;
+        newUserInfo=newUser;
+        return 1;
     }
     return 2;
 }
 
-void ProgramScheduler::createUser()
+void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *endedFingerPrint)
 {
     time_t raw_time;
     struct tm *ptr_ts;
@@ -103,7 +104,10 @@ void ProgramScheduler::createUser()
 
     NewUser.fingerInfo.FingerprintID=1;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
+    *endedFingerPrint=true;
     //TODO getfaces here!!
+    finduser(NewUser.user.NickName)->createDataset(imagesTaked,endedDataSet);
+    
     NewUser.faceInfo.PathDataset=newUserInfo.nickName;
     NewUser.faceInfo.NumberOfImages=15;
    usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,NewUser));
@@ -112,6 +116,8 @@ void ProgramScheduler::createUser()
     // TODO mudar para full user
     mQuery.insertUser(NewUser);
 }
+
+
 
 void ProgramScheduler::deleteUser( string nickName )
 {

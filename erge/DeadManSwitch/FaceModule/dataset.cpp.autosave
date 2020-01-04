@@ -4,7 +4,6 @@
 #include <mqueue.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "BluetoothModule/bluetooth_module.h"
 #define PROGRAM_NAME "DATASET_MODULE: "
 #define DEFAULT_PATH "/datasets/teste1/"
 
@@ -40,7 +39,7 @@ DataSet::~DataSet()
 
 }
 
-bool DataSet::createDataset()
+bool DataSet::createDataset(int *imagesTaked, bool *ended)
 {
     CascadeClassifier face_cascade;
      vector<Mat> images;
@@ -69,6 +68,7 @@ bool DataSet::createDataset()
              writeToLog("Face was found");
              Mat croppedImage = frame(faces[0]);
              images.push_back(croppedImage);
+             *imagesTaked=*imagesTaked+1;
              //TODO: send to bluetooth the signal that a face was found!
 
          }
@@ -76,6 +76,7 @@ bool DataSet::createDataset()
          else writeToLog("Face was not found!");
      }
      }
+     *ended=true;
      writeToLog("Created dataset successfuly");
     return true;
 }

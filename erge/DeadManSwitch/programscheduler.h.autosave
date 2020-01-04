@@ -38,7 +38,7 @@ class ProgramScheduler
     void verifyReleaseTime( void );
     void verifyLasWarningTime( void );
     int addUser (user_parsing newUser);
-    void createUser();
+    void createUser(int *imagesTaked,bool *endedDataSet, bool *endedFingerPrint);
     void deleteUser ( string nickName );
     void updateNextScheduler ( void );
     int login(string nickname,string pincode);

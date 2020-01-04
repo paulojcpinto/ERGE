@@ -162,6 +162,8 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
            sendResult(data->login(user.nickName,user.pinCode),'Q');
            ss<<"Login from user: "<<user.nickName<<" with pincode: "<<user.pinCode;
             break;
+         case '':
+            break;
         default:
             ss<<"1 character:"<<c<<"\n";
 
@@ -171,6 +173,19 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
     }
 
 
+}
+void* bluetooth_module::createDatasetFunc(void *threadid)
+{
+    data->createUser(&imagesTaked,&endedFace,&endedFInger);
+}
+
+void* bluetooth_module::createDataset(void *threadid)
+{
+    imagesTaked=0;
+    endedFace=false;
+    endedFInger=false;
+    pthread_t doDataSet;
+    int rTask= pthread_create(&doDataSet,NULL,createDatasetFunc,NULL);
 }
 void bluetooth_module::sendResult(int result,char c)
 {
