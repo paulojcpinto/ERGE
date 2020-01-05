@@ -4,7 +4,8 @@
 #include "usart.h"
 #include "bluetooth_module.h"
 #include "message.h"
-
+#include "init.h"
+#include "localtime.h"
 
 #define LOGIN_SUCCESS 1
 #define USER_NOT_FOUND 2
@@ -59,10 +60,10 @@ extern int login(char* nickName, char* pinCode);
 
 extern int updateEmailPassword(char* mEmailPassword, user* mUser);
 
+extern int updateUser(user_parsing updateInfo);
 
 
 
-extern void verify_release_time ( void );
 
 
 

@@ -472,7 +472,7 @@ int16_t	FingerPrint_Scan(void)
 				if (FingerPrint.AnswerBuffer[4] > 0)
 				{
 					//xSemaphoreGive(finger_signal);
-				stmtime.need_update = 0;}
+				stmtime.fingerp =1; }
 
 				if (FingerPrint.AnswerBuffer[4] == 7)
 				HAL_UART_Transmit_IT(&huart3,"7",1);

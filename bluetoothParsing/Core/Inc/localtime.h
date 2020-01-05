@@ -17,7 +17,7 @@ typedef struct localtime
 	struct tm* localtim;
 	unsigned int updated;
 	unsigned int need_update;
-
+	unsigned int fingerp;
 } localtime1;
 
 extern localtime1 stmtime;

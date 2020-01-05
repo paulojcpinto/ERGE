@@ -5,10 +5,11 @@
 #include "usart.h"
 #include "localtime.h"
 #include <gpio.h>
+#include "bluetooth_module.h"
 
 extern volatile uint8_t busy;
 extern void parsing_gsm11( void );
 extern void  wait1 ( void );
-extern void publish_twitter ( int i );
+extern void publish_twitter ( uint8_t message_release[] );
 
 #endif

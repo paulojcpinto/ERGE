@@ -8,14 +8,14 @@ typedef struct Message message;
 
 struct Message
 {
-	struct tm time_release;
 	char messageToRelease[255];
 	int repeatTime;
 	char dateToStart[10];
 	char platformToRelease[50];
+	struct tm dateToRelease1;
 	
-  int  (*updateMessageToRelease)(char*,message*);
-	int   (*updateRepeatTime)  (int ,message*);
+  int   (*updateMessageToRelease)(char*,message*);
+	int   (*updateRepeatTime)	(int ,message*);
 	int   (*updateDateToRelease) (char*,message*);
 	int   (*updatePlatformToRelease) (char*, message*);
 	

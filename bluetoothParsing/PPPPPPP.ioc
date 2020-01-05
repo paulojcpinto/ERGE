@@ -1,6 +1,7 @@
 #MicroXplorer Configuration settings - do not modify
-FREERTOS.IPParameters=Tasks01
-FREERTOS.Tasks01=defaultTask,0,128,StartDefaultTask,Default,NULL
+FREERTOS.FootprintOK=true
+FREERTOS.IPParameters=Tasks01,FootprintOK
+FREERTOS.Tasks01=defaultTask,0,1024,StartDefaultTask,Default,NULL,Dynamic,NULL,NULL;updateTimeTask,-3,1024,StartTaskUpdateTime,Default,NULL,Dynamic,NULL,NULL;publishTask,-3,1024,StartTaskpublish,Default,NULL,Dynamic,NULL,NULL;parsingBTTask,-3,128,StarPparsingBT,Default,NULL,Dynamic,NULL,NULL
 File.Version=6
 KeepUserPlacement=true
 Mcu.Family=STM32F7
@@ -326,12 +327,13 @@ TIM2.Period=64799
 TIM2.Prescaler=49999
 UART4.BaudRate=9600
 UART4.IPParameters=BaudRate
-UART5.BaudRate=9600
+UART5.BaudRate=115200
 UART5.IPParameters=BaudRate
 USART2.BaudRate=57600
 USART2.IPParameters=VirtualMode-Asynchronous,BaudRate
 USART2.VirtualMode-Asynchronous=VM_ASYNC
-USART3.IPParameters=VirtualMode-Asynchronous
+USART3.BaudRate=256000
+USART3.IPParameters=VirtualMode-Asynchronous,BaudRate
 USART3.VirtualMode-Asynchronous=VM_ASYNC
 USART6.BaudRate=9600
 USART6.IPParameters=VirtualMode-Asynchronous,BaudRate

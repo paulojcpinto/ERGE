@@ -123,8 +123,7 @@ int main(void)
 
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init(); 
-	FingerPrint_Init(osPriorityLow);
-
+FingerPrint_Init(osPriorityLow);
   /* Start scheduler */
   osKernelStart();
   

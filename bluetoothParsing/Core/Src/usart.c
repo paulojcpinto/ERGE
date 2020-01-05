@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -24,18 +24,20 @@
 #include <stdio.h>
 #include "FingerPrint.h"
 #include "FingerPrintConfig.h"
-uint8_t UART3Rx_Buffer[1024];
+uint8_t UART3Rx_Buffer[128];
 uint8_t Rx_Buffer[128];
 volatile uint16_t UART3Tx_index;
 volatile uint16_t UART3Rx_index;
 
-uint8_t UART4Rx_Buffer[128];
-uint8_t Rx4_Buffer[128];
-volatile uint8_t UART4Rx_index;
+uint8_t UART4Rx_Buffer[1024];
+uint8_t Rx4_Buffer[256];
+volatile uint16_t UART4Tx_index;
+volatile uint16_t UART4Rx_index;
 
-uint8_t UART5Rx_Buffer[128];
+uint8_t UART5Rx_Buffer[1024];
 uint8_t Rx5_Buffer[128];
-volatile uint8_t UART5Rx_index;
+volatile uint16_t UART5Tx_index;
+volatile uint16_t UART5Rx_index;
 
 
 uint8_t UART6Rx_Buffer[128];
@@ -58,7 +60,7 @@ void MX_UART4_Init(void)
 {
 
   huart4.Instance = UART4;
-  huart4.Init.BaudRate = 115200;
+  huart4.Init.BaudRate = 9600;
   huart4.Init.WordLength = UART_WORDLENGTH_8B;
   huart4.Init.StopBits = UART_STOPBITS_1;
   huart4.Init.Parity = UART_PARITY_NONE;
@@ -78,7 +80,7 @@ void MX_UART5_Init(void)
 {
 
   huart5.Instance = UART5;
-  huart5.Init.BaudRate = 9600;
+  huart5.Init.BaudRate = 115200;
   huart5.Init.WordLength = UART_WORDLENGTH_8B;
   huart5.Init.StopBits = UART_STOPBITS_1;
   huart5.Init.Parity = UART_PARITY_NONE;
@@ -419,23 +421,39 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 //implemantation of UART ISR
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
-		if(huart->Instance == USART2)
+	if(huart->Instance == USART2)
 	{
 		FingerPrint_RxCallback();
 		//HAL_UART_Transmit_IT(&huart3, &UART3Rx_index, 1);
-}
-if (huart->Instance == UART4){ //current UART?
-		UART3Rx_index++;
-		UART3Rx_index &= ~(1<<10); //keep index inside the limits
-		if (UART3Rx_index == UART3Tx_index)
-			UART3Rx_index++;
-		// set the interrupt for UART3 Rx again
-		HAL_UART_Receive_IT(&huart4, &UART3Rx_Buffer[UART3Rx_index], 1);
+	}
+	
+	if (huart->Instance == UART4)
+		{ //current UART?
+			UART4Rx_index++;
+			UART4Rx_index &= ~(1<<10); //keep index inside the limits
+
+			// set the interrupt for UART3 Rx again
+			HAL_UART_Receive_IT(&huart4, &UART4Rx_Buffer[UART4Rx_index], 1);
 		
 //		if (UART3Rx_Buffer[UART3Rx_index-1] == '>')
 	//		HAL_UART_Transmit_IT(&huart3, &UART3Rx_Buffer[UART3Rx_index]-1, 1);
-			
-	}
+		}
+		
+		if (huart->Instance == UART5)
+		{ //current UART?
+			UART5Rx_index++;
+			UART5Rx_index &= ~(1<<10); //keep index inside the limits
+			if (UART5Rx_index == UART5Tx_index)
+			{
+				UART5Tx_index++;
+			UART5Tx_index &= ~(1<<10);
+			}
+			// set the interrupt for UART3 Rx again
+			HAL_UART_Receive_IT(&huart5, &UART5Rx_Buffer[UART5Rx_index], 1);
+		
+//		if (UART3Rx_Buffer[UART3Rx_index-1] == '>')
+			//HAL_UART_Transmit_IT(&huart3, &UART5Rx_Buffer[UART3Rx_index]-1, 1);
+		}
 	if (huart->Instance == USART3){ //current UART?
 		UART6Rx_index++;
 		UART6Rx_index &= ~(1<<7); //keep index inside the limits
@@ -498,7 +516,7 @@ void init_UARTs(){
 	//HAL_UART_Receive_IT(&huart2, &UART7Rx_Buffer[UART7Rx_index], 1);
 }
 int fputc(int ch, FILE *f){
-	HAL_UART_Transmit(&huart4, (uint8_t*)&ch, 1, 100);
+	HAL_UART_Transmit(&huart5, (uint8_t*)&ch, 1, 100);
 	return ch;
 }
 /* USER CODE END 1 */

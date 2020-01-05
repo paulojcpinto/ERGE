@@ -54,10 +54,9 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
-osThreadId myTaskHandle;
-osThreadId simTaskHandle;
-osThreadId releaseTaskHandle;
-
+osThreadId updateTimeTaskHandle;
+osThreadId publishTaskHandle;
+osThreadId parsingBTTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -68,9 +67,9 @@ void StartsimTask(void const * argument);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
-void StartmyTask(void const * argument);
-void StartsimTask(void const * argument);
-//void StartreleaseTask(void const * argument);
+void StartTaskUpdateTime(void const * argument);
+void StartTaskpublish(void const * argument);
+void StarPparsingBT(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -102,18 +101,20 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 1024);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask),  (void*)pp);
-	
-	osThreadDef(myTask, StartmyTask, osPriorityNormal, 0, 1024);
-  myTaskHandle = osThreadCreate(osThread(myTask),  (void*)pp);
-	
-	osThreadDef(simTask, StartsimTask, osPriorityNormal, 0, 1024);
-  simTaskHandle = osThreadCreate(osThread(simTask),  (void*)pp);
-	
-//	osThreadDef(releaseTask, StartreleaseTask, osPriorityNormal, 0, 1024);
-//  releaseTaskHandle = osThreadCreate(osThread(releaseTask),  (void*)pp);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 256);
+  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
+  /* definition and creation of updateTimeTask */
+  osThreadDef(updateTimeTask, StartTaskUpdateTime, osPriorityNormal, 0, 128);
+  updateTimeTaskHandle = osThreadCreate(osThread(updateTimeTask), NULL);
+
+  /* definition and creation of publishTask */
+  osThreadDef(publishTask, StartTaskpublish, osPriorityNormal, 0, 128);
+  publishTaskHandle = osThreadCreate(osThread(publishTask), NULL);
+
+  /* definition and creation of parsingBTTask */
+  osThreadDef(parsingBTTask, StarPparsingBT, osPriorityNormal, 0, 1024);
+  parsingBTTaskHandle = osThreadCreate(osThread(parsingBTTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -132,12 +133,15 @@ void StartDefaultTask(void const * argument)
 {
     
     
+    
+    
+    
 
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)
   {
-parsing_gsm11();
+    parsing_gsm11();
 		vTaskDelay(100);
 //		if(xSemaphoreTake(finger_signal, 99999))
 //		{
@@ -148,81 +152,106 @@ parsing_gsm11();
   /* USER CODE END StartDefaultTask */
 }
 
-
-void StartmyTask(void const * argument)
+/* USER CODE BEGIN Header_StartTaskUpdateTime */
+/**
+* @brief Function implementing the updateTimeTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskUpdateTime */
+void StartTaskUpdateTime(void const * argument)
 {
-	int i =0;
+  /* USER CODE BEGIN StartTaskUpdateTime */
+	if(xSemaphoreTake(sim1, 99999))
+	{
+		;
+	}
+  /* Infinite loop */
+  for(;;)
+  {
+		if(xSemaphoreTake(sim1, 99999))
+		{
+			stmtime.updated = 1;
+			//printf("AT+CIPCLOSE\r\n");
+			//publish_twitter(i++);
+			while(stmtime.need_update)
+			{
+				HAL_UART_Transmit(&huart3, "w", 1, 100);
+				vTaskDelay(10);
+			}
+			wait1();
+			HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
+			//xSemaphoreGive(finger_signal);
+			//send_SMS ("+351916201643", "amo", 3);
+			while( stmtime.updated )
+				vTaskDelay(100);
+			verify_release_time ();
+			stmtime.need_update=0;
+				
+			HAL_UART_Transmit(&huart3, "\r\nyap\r\n", 7,1000);
+		}
+			vTaskDelay(1000);
+	}
+ 
+
+  /* USER CODE END StartTaskUpdateTime */
+}
+
+/* USER CODE BEGIN Header_StartTaskpublish */
+/**
+* @brief Function implementing the publishTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskpublish */
+void StartTaskpublish(void const * argument)
+{
+  /* USER CODE BEGIN StartTaskpublish */
+	uint8_t i = 0;
 	if(xSemaphoreTake(finger_signal, 99999))
 	{
 		printf("AT+CIPCLOSE\r\n");
 			vTaskDelay(100);
 		wait1();
 	}
-	while(1){
-	if(xSemaphoreTake(finger_signal, 99999))
+  /* Infinite loop */
+  for(;;)
+  {
+    if(xSemaphoreTake(finger_signal, 99999))
 	{
-while(stmtime.need_update)
-{	HAL_UART_Transmit(&huart3, "s", 1, 100);
-	vTaskDelay(100);
-}
-	
-		publish_twitter(i++);
+		while(stmtime.need_update)
+		{	HAL_UART_Transmit(&huart3, "s", 1, 100);
+			vTaskDelay(100);
+		}
+			
+		publish_twitter(&i);
 		
 		//send_SMS ("+351916201643", "amo", 3);
 	}
-}	
-
+	vTaskDelay(1000);
+  }
+  /* USER CODE END StartTaskpublish */
 }
 
-void StartsimTask(void const * argument)
+/* USER CODE BEGIN Header_StarPparsingBT */
+/**
+* @brief Function implementing the parsingBTTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StarPparsingBT */
+void StarPparsingBT(void const * argument)
 {
-
-	if(xSemaphoreTake(sim1, 99999))
-	{
-		;
-	}
-	while(1){
-	if(xSemaphoreTake(sim1, 99999))
-	{
-		stmtime.updated = 1;
-		//printf("AT+CIPCLOSE\r\n");
-		//publish_twitter(i++);
-while(stmtime.need_update)
-{
-	HAL_UART_Transmit(&huart3, "w", 1, 100);
-	vTaskDelay(10);
-}
-		wait1();
-		HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
-		//xSemaphoreGive(finger_signal);
-		//send_SMS ("+351916201643", "amo", 3);
-		while( stmtime.updated )
+  /* USER CODE BEGIN StarPparsingBT */
+	initUser();
+  /* Infinite loop */
+  for(;;)
+  {
+		parsingBT(&cp);
 			vTaskDelay(100);
-		verify_release_time ();
-		stmtime.need_update=0;
-			
-		HAL_UART_Transmit(&huart3, "\r\nyap\r\n", 7,1000);
-	}
-		vTaskDelay(100);
+  }
+  /* USER CODE END StarPparsingBT */
 }
-}
-
-//void StartreleaseTask(void const * argument)
-//{
-//	if(xSemaphoreTake(release_signal, 99999))
-//	{
-//	;
-//	}
-////	while(1){
-//	//if(xSemaphoreTake(release_signal, 99999))
-//	{
-//			//send_SMS ("+351916201643", "amo", 3);
-//	}
-//		vTaskDelay(10000);
-//}
-
-
-
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
