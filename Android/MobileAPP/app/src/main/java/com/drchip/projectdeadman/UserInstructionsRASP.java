@@ -76,6 +76,56 @@ public class UserInstructionsRASP extends AppCompatActivity {
                         playMenu.setIcon(R.drawable.bluetooth_on);
 
                     }
+                    if(readMessage.contains("<F>"))
+                    {
+                        ivFingerRasp.setImageResource(R.drawable.correct);
+                        ivFingerRasp.clearAnimation();
+                        ivFaceStart.startAnimation(rotate);
+                        linFaceDescription.setVisibility(View.VISIBLE);
+
+                        aux=0;
+                    }
+                    if(readMessage.contains("<I>"))
+                    {
+
+
+
+                        if(aux==0)
+                        {
+                            ivFaceStart.setImageResource(R.drawable.correct);
+                            ivFaceStart.clearAnimation();
+                            linImageCount.setVisibility(View.VISIBLE);
+                            Animation animation2 = AnimationUtils.loadAnimation(UserInstructionsRASP.this, R.anim.rotate);
+                            animation2.setStartTime(10);
+                            ivImageCount.startAnimation(animation2);
+                        }
+                        aux++;
+                        if ( aux < 15) {
+                            ivImageCount.clearAnimation();
+                            ivImageCount.startAnimation(fade_in);
+                            tvImageNumber.setText(aux  + "");
+                            pbImageCount.setProgress(aux );
+                            starttime = System.currentTimeMillis();
+                            ivImageCount.setImageResource(R.drawable.correct);
+
+                            // ivImageCount.setVisibility(View.INVISIBLE);
+
+
+                            //ivImageCount.startAnimation(fade_in);
+                            //  timer = new Timer();
+                            //timer.schedule(new firstTask(), 1000,9000);
+
+
+                        } else  {
+                            Animation fade_in1 = AnimationUtils.loadAnimation(UserInstructionsRASP.this, R.anim.fade_in);
+                            tvImageNumber.setText(aux  + "");
+                            pbImageCount.setProgress(aux );
+                            ivImageCount.setImageResource(R.drawable.correct);
+                            btnConfirm.startAnimation(fade_in1);
+                            btnConfirm.setVisibility(View.VISIBLE);
+                        }
+
+                    }
 
                     Toast.makeText(UserInstructionsRASP.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
@@ -138,6 +188,7 @@ public class UserInstructionsRASP extends AppCompatActivity {
         to_start = AnimationUtils.loadAnimation(this, R.anim.rotate_to_start);
         fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
+        ApplicationClass.sendMessage("<Y>",this);
 
         ivFingerRasp.startAnimation(rotate);
 
@@ -159,6 +210,8 @@ public class UserInstructionsRASP extends AppCompatActivity {
                 else tvFaceRecoDescription.setVisibility(View.GONE);
             }
         });
+
+
 
         btnTeste.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -321,6 +374,8 @@ public class UserInstructionsRASP extends AppCompatActivity {
             h.sendEmptyMessage(0);
         }
     }
+
+
 
 }
 
