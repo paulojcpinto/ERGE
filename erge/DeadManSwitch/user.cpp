@@ -8,12 +8,6 @@
  *
  *
  * *************************************************************************/
-User::User():finger(200),face("default")
-{
-
-}
-
-
 
 /****************************************************************************
  *
@@ -23,7 +17,7 @@ User::User():finger(200),face("default")
  *
  * *************************************************************************/
 
-User::User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease): finger (IDFinger), dataInfo (message, platform, deleteAfterRelease),face(nickName)
+User::User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease): finger (IDFinger),face(nickName,nullptr), dataInfo (message, platform, deleteAfterRelease),log("UserClass:")
 {
     this->nickName = nickName;
     this->phoneNumber = phoneNumber;
@@ -32,7 +26,7 @@ User::User( string nickName,string pinCode, string phoneNumber, string email, st
     this->pinCode=pinCode;
 }
 
-User::User(fullUser Data):finger(Data.fingerInfo),face(Data.faceInfo),dataInfo(Data.messageInfo)
+User::User(MCamera* cameraPointer,fullUser Data):finger(Data.fingerInfo),face(cameraPointer,Data.faceInfo),dataInfo(Data.messageInfo),log("UserClass: ")
 {
     nickName= Data.user.NickName;
     phoneNumber=Data.user.PhoneNumber;
@@ -43,6 +37,9 @@ User::User(fullUser Data):finger(Data.fingerInfo),face(Data.faceInfo),dataInfo(D
 
 bool User::login(string pincode)
 {
+    stringstream ss;
+    ss<<"Login Attempt On user: "<<nickName<<", Gived Pincode: "<<pincode<<" and user Pincode: "<<pinCode;
+    log.writeToLog(ss.str());
     return pinCode == pincode;
 }
 
@@ -100,6 +97,7 @@ void User::updatePhoneNumeber( string phoneNumber )
 
 bool User::compareFinger( unsigned int id )
 {
+
     return ( this->finger.CompareFinger( id ) );
 }
 
@@ -114,11 +112,17 @@ bool User::compareFinger( unsigned int id )
  *
  * *************************************************************************/
 
+
 bool User::compareNickName( string nickName )
 {
 
    // if(this->nickName.compare(nickName)==0)
-        return true;
+        //return true;
     //else return false;
-   // return ( !this->nickName.compare( nickName ));
+    return (this->nickName  == nickName );
+}
+
+bool User::createDataset(int *imagesTaked, bool *ended)
+{
+    return face.createDataset(imagesTaked,ended);
 }

@@ -4,10 +4,6 @@
 #define numberHourDay       24
 #define numberMinutesHour   60
 
-UserScheduler::UserScheduler()
-{
-
-}
 
 
 UserScheduler::UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease ) : user ( nickName,pinCode, phoneNumber, email, password, IDFinger, message, platform, deleteAfterRelease )
@@ -17,17 +13,13 @@ UserScheduler::UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName
     this->preseceCheck = false;
 }
 
-UserScheduler::UserScheduler(tm jumpScheduler,tm nextScheduler,fullUser userData)
+UserScheduler::UserScheduler(tm jumpScheduler,tm nextScheduler,MCamera* cameraPointer,fullUser userData):user(cameraPointer,userData)
 {
     this->jumpScheduler = jumpScheduler;
     this->nextScheduler = nextScheduler;
     this->preseceCheck = false;
 }
 
-UserScheduler::UserScheduler(tm nextScheduler)
-{
-  this->nextScheduler = nextScheduler;
-}
 
 
 struct tm UserScheduler::getNextScheduler( void )
@@ -116,6 +108,10 @@ bool UserScheduler::compareUserNickName ( string nickName )
   return user.compareNickName (nickName);
 }
 
+bool UserScheduler::createDataset(int *imagesTaked, bool *ended)
+{
+    return user.createDataset(imagesTaked,ended);
+}
 
 void UserScheduler::operator=(UserScheduler userSchedule)
 {

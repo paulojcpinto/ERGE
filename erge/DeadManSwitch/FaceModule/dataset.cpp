@@ -4,7 +4,6 @@
 #include <mqueue.h>
 #include <unistd.h>
 #include <stdlib.h>
-
 #define PROGRAM_NAME "DATASET_MODULE: "
 #define DEFAULT_PATH "/datasets/teste1/"
 
@@ -21,18 +20,16 @@ DataSet::DataSet()
 }
 
 
-DataSet::DataSet(string Nickname)
+DataSet::DataSet(string Nickname,MCamera* cameraPointer)
 {
+    cam = cameraPointer;
     stringstream ss;
-    ss <<"/datasets/"<<Nickname<<"/";
-    m_dataset_path = ss.str();
-    ss.clear();
-    ss<<"mkdir /datasets";
-    system(ss.str().c_str());
-    ss.clear();
-    ss<<"mkdir "<<m_dataset_path;
-    system(ss.str().c_str());
+    ss <<"mkdir /datasets/"<<Nickname<<"/";
 
+    system(ss.str().c_str());
+    stringstream path;
+    path<<"/datasets/"<<Nickname<<"/";
+    m_dataset_path =path.str();
     if ((fd = open("/var/log/deadman.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
                 perror("open");
                 exit(EXIT_FAILURE);
@@ -46,7 +43,7 @@ DataSet::~DataSet()
 
 }
 
-bool DataSet::createDataset()
+bool DataSet::createDataset(int *imagesTaked, bool *ended)
 {
     CascadeClassifier face_cascade;
      vector<Mat> images;
@@ -57,9 +54,9 @@ bool DataSet::createDataset()
          writeToLog("ERROR opening CascadeClassifier");
          return false;
      }
-     while(!addFace(images,0))
+     while(images.size()<15)
      {
-     if(cam.captureFrame(frame) == false)
+     if(cam->captureFrame(frame) == false)
         {
             writeToLog("Error getting frame!");
         }
@@ -75,13 +72,17 @@ bool DataSet::createDataset()
              writeToLog("Face was found");
              Mat croppedImage = frame(faces[0]);
              images.push_back(croppedImage);
+             *imagesTaked=*imagesTaked+1;
              //TODO: send to bluetooth the signal that a face was found!
 
          }
          else if(faces.size()>1) writeToLog("Founded more than one face!");
-         else writeToLog("Face was not found!");
+
      }
      }
+     addFace(images,15);
+     cam->shutdown();
+     *ended=true;
      writeToLog("Created dataset successfuly");
     return true;
 }

@@ -1,12 +1,12 @@
 #include "face.h"
 
-Face::Face(string nickname):UserDataset(nickname),userRecognizer(&UserDataset)
+Face::Face(string nickname,MCamera* cameraPointer):UserDataset(nickname,cameraPointer),userRecognizer(&UserDataset)
 {
 
 
 
 }
-Face::Face(faceQuery faceInfo):UserDataset(faceInfo.PathDataset),userRecognizer(&UserDataset)
+Face::Face(MCamera* cameraPointer,faceQuery faceInfo):UserDataset(faceInfo.PathDataset,cameraPointer),userRecognizer(&UserDataset)
 {
     numberOfImages=faceInfo.NumberOfImages;
 }
@@ -18,6 +18,10 @@ DataSet* Face::getDataset()
 FRecognizer* Face::getRecognizer()
 {
     return &userRecognizer;
+}
+bool Face::createDataset(int *imagesTaked, bool *ended)
+{
+    return UserDataset.createDataset(imagesTaked,ended);
 }
 void Face::operator=(Face face)
 {

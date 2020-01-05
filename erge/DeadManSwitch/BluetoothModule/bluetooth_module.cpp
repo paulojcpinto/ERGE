@@ -8,10 +8,15 @@
 #include <vector>
 #include <mqueue.h>
 #include <unistd.h>
+#include "loghandler.h"
 
 
 #define  PROGRAM_NAME "BluetoothModule: "
 
+int imagesTaked;
+bool endedFace,endedFInger;
+ProgramScheduler *data2;
+bluetooth_module* test;
 
 static const QLatin1String serviceUuid("e8e10f95-1a70-4b27-9ccf-02010264e9c8");
 using namespace  std;
@@ -20,7 +25,9 @@ bluetooth_module::bluetooth_module(ProgramScheduler* scheduler,QWidget *parent )
 
 
     data=scheduler;
+    data2=data;
     localAdapters = QBluetoothLocalDevice::allDevices();
+    test= this;
     QBluetoothLocalDevice adapter(localAdapters.at(0).address());
     adapter.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
     server = new bluetooth_server(this);
@@ -48,6 +55,7 @@ bluetooth_module::bluetooth_module(ProgramScheduler* scheduler,QWidget *parent )
 
 
 }
+
 
 void bluetooth_module::writeToLog(string Message)
 {
@@ -97,6 +105,55 @@ int parsingNumber(string aux)
 
 }
 
+
+void* createDatasetFunc(void *threadid)
+{
+     LogHandler log("CreateDatasetThread: ");
+     log.writeToLog("thread created");
+     endedFInger=true;
+     data2->createUser(&imagesTaked,&endedFace,&endedFInger);
+     log.writeToLog("Thread ended");
+     pthread_exit(NULL);
+
+}
+
+void* datasetHandler(void *threadid)
+{
+    imagesTaked=0;
+    endedFace=false;
+    endedFInger=false;
+    pthread_t doDataSet;
+    LogHandler log("ThreadDataSetHandel: ");
+    log.writeToLog("Inicialized successfully");
+    int rTask= pthread_create(&doDataSet,NULL,createDatasetFunc,NULL);
+    if(rTask)
+    {
+        stringstream ss;
+        ss<<"ERROR: return code from pthread_create() is: "<<rTask;
+        log.writeToLog(ss.str());
+    }
+   int i ;
+    while(!endedFInger){
+
+        usleep(100);
+
+           };
+    log.writeToLog("Fingerprint created successfuly");
+    test->sendMessage("<F>");
+    int imagesAux=0;
+    while(!endedFace)
+    {
+        while (imagesAux < imagesTaked)
+        {
+           test->sendMessage("<I>");
+           imagesAux++;
+        }
+    }
+    pthread_join(doDataSet,NULL);
+    stringstream ss;
+    ss<<"Created user successfully!!";
+    pthread_exit(NULL);
+}
 
 void bluetooth_module::receibedMessage(const QString &sender, const QString &message)
 {
@@ -154,12 +211,24 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
             ss<<"User Platform to Release: "<<user.platformToRelease<<"\n\n";
             break;
          case 'C':
-            data->addUser(user);
+            sendResult(data->addUser(user),'C');
             ss<<"added User?";
             break;
          case 'Q':
-           sendLoginResult(data->login(user.nickName,user.pinCode));
+           sendResult(data->login(user.nickName,user.pinCode),'Q');
            ss<<"Login from user: "<<user.nickName<<" with pincode: "<<user.pinCode;
+            break;
+         case 'Y':
+            pthread_t create;
+            int rThread;
+            rThread=pthread_create(&create, NULL, datasetHandler, NULL);
+            if(rThread)
+            {
+                stringstream ss;
+                ss<<"ERROR: return code from pthread_create() is: "<<rThread;
+                writeToLog(ss.str());
+            }
+
             break;
         default:
             ss<<"1 character:"<<c<<"\n";
@@ -171,10 +240,15 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
 
 
 }
-void bluetooth_module::sendLoginResult(int result)
+
+
+
+
+
+void bluetooth_module::sendResult(int result,char c)
 {
      QString answer = "<";
-     answer.append('Q');
+     answer.append(c);
      answer.append(QString::number(result));
      answer.append('>');
      stringstream ss;
@@ -182,6 +256,7 @@ void bluetooth_module::sendLoginResult(int result)
      writeToLog(ss.str());
      sendMessage(answer);
 }
+
 void bluetooth_module::parsing(QString input, string &output, char answer)
 {
     output="";

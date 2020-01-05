@@ -23,7 +23,7 @@ void ProgramScheduler::loadData(vector<fullUser> users)
         time ( &raw_time );
         ptr_ts = gmtime ( &raw_time );
         ptr_ts->tm_min++;
-        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,nUser));
+        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,nUser));
         //usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
 
 
@@ -80,31 +80,51 @@ while(!aux)
     }
 }
 
-void ProgramScheduler::addUser(user_parsing newUser)
+int ProgramScheduler::addUser(user_parsing newUser)
 {
-  time_t raw_time;
-  struct tm *ptr_ts;
-  tm nextScheduler;
-  time ( &raw_time );
-  ptr_ts = gmtime ( &raw_time );
-  ptr_ts->tm_min++;
-  int idfinger=0;
+    if(finduser(newUser.nickName)==nullptr)
+    {
 
-  fullUser NewUser;
-  userParsingToFulluser(newUser,&NewUser);
-
-  NewUser.fingerInfo.FingerprintID=1;     //TODO getFingerprint here
-  NewUser.fingerInfo.FingerprintName="FingerOne";
-  //TODO getfaces here!!
-  NewUser.faceInfo.PathDataset=newUser.nickName;
-  NewUser.faceInfo.NumberOfImages=15;
-
-
-
-  // TODO mudar para full user
-  usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
-  mQuery.insertUser(NewUser);
+        newUserInfo=newUser;
+        return 1;
+    }
+    return 2;
 }
+
+void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *endedFingerPrint)
+{
+
+    time_t raw_time;
+    struct tm *ptr_ts;
+    tm nextScheduler;
+    time ( &raw_time );
+    ptr_ts = gmtime ( &raw_time );
+    ptr_ts->tm_min++;
+    fullUser NewUser;
+    userParsingToFulluser(newUserInfo,&NewUser);
+
+    log.writeToLog("Deu ate aqui!");
+    NewUser.fingerInfo.FingerprintID=9;     //TODO getFingerprint here
+    NewUser.fingerInfo.FingerprintName="FingerOne";
+    *endedFingerPrint=true;
+    log.writeToLog("Deu ate aqui!2");
+    //TODO getfaces here!!
+
+    NewUser.faceInfo.PathDataset=newUserInfo.nickName;
+    NewUser.faceInfo.NumberOfImages=15;
+    usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,NewUser));
+
+    finduser(NewUser.user.NickName)->createDataset(imagesTaked,endedDataSet);
+
+
+
+
+
+    // TODO mudar para full user
+    mQuery.insertUser(NewUser);
+}
+
+
 
 void ProgramScheduler::deleteUser( string nickName )
 {
@@ -128,12 +148,14 @@ UserScheduler* ProgramScheduler::finduser(string Nickname)
     for(int i=0; i<usersScheduler.size();i++)
     {
         stringstream ss;
-        ss<<"log size: "<<usersScheduler.size();
+        ss<<"Users number: "<<usersScheduler.size();
         log.writeToLog(ss.str());
         if(usersScheduler[i].compareUserNickName(Nickname))
         {
-            log.writeToLog("User fouded!");
-            return &usersScheduler[i];
+            ss.clear();
+            ss<<"User Founded: "<<Nickname<<" at position: "<<i;
+            log.writeToLog(ss.str());
+            return &usersScheduler.at(i);
 
         }
     }

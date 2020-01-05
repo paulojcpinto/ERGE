@@ -23,7 +23,7 @@ public:
     bluetooth_module(ProgramScheduler* scheduler, QWidget *parent = nullptr);
 
 signals:
-    void sendMessage(const QString &message);
+     void sendMessage(const QString &message);
 
 private slots:
     //void connectClicked();
@@ -39,18 +39,21 @@ private slots:
     void clientConnected(const QString &name);
 
 
+
 private:
     user_parsing user;
     int adapterFromUserSelection() const;
     int currentAdapterIndex = 0;
     int fd;
+
     bluetooth_server *server;
     QList<QBluetoothHostInfo> localAdapters;
     QString localName;
     void parsing(QString input,string &output,char answer);
     void writeToLog(string Message);
     ProgramScheduler *data;
-    void sendLoginResult(int result);
+    void sendResult(int result,char c);
+
 
 
 
