@@ -11,8 +11,8 @@ class Face
     int numberOfImages;
 
   public:    
-    Face(string nickname);
-    Face(faceQuery faceInfo);
+    Face(string nickname,MCamera* cameraPointer);
+    Face(MCamera* cameraPointer,faceQuery faceInfo);
     DataSet* getDataset();
     bool createDataset(int *imagesTaked,bool *ended);
     FRecognizer* getRecognizer();

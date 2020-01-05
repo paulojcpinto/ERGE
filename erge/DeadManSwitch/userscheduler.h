@@ -22,7 +22,7 @@ public:
   UserScheduler();
   UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease );
   UserScheduler(tm nextScheduler);
-  UserScheduler(tm jumpScheduler, tm nextScheduler,fullUser userData);
+  UserScheduler(tm jumpScheduler, tm nextScheduler,MCamera* cameraPointer,fullUser userData);
   struct tm getNextScheduler ( void );
   bool compareTimeRelease( tm timeNow );
   void updateNextSchedulerTime ( void );

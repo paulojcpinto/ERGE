@@ -31,6 +31,7 @@ class ProgramScheduler
     user_parsing newUserInfo;
     void loadData(vector<fullUser> users);
     tm nextScheduler;
+    MCamera mCamera;
 
   public:
 

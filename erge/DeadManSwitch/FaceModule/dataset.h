@@ -16,7 +16,7 @@ class DataSet
 {
 public:
     DataSet();
-    DataSet(string NickName);
+    DataSet(string NickName, MCamera* cameraPointer);
     ~DataSet();
     bool createDataset(int *imagesTaked,bool *ended);
     bool addFace(vector<cv::Mat>images, unsigned int lengh = 15);
@@ -25,7 +25,7 @@ public:
     void removeFace();
     string getDatasetPath();
 private:
-    MCamera cam;
+    MCamera* cam;
     void writeToLog(string message);
     string m_dataset_path;
     int fd;

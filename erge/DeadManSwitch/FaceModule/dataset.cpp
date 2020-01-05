@@ -20,12 +20,16 @@ DataSet::DataSet()
 }
 
 
-DataSet::DataSet(string Nickname)
+DataSet::DataSet(string Nickname,MCamera* cameraPointer)
 {
+    cam = cameraPointer;
     stringstream ss;
     ss <<"mkdir /datasets/"<<Nickname<<"/";
-    system(ss.str().c_str());
 
+    system(ss.str().c_str());
+    stringstream path;
+    path<<"/datasets/"<<Nickname<<"/";
+    m_dataset_path =path.str();
     if ((fd = open("/var/log/deadman.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
                 perror("open");
                 exit(EXIT_FAILURE);
@@ -50,9 +54,9 @@ bool DataSet::createDataset(int *imagesTaked, bool *ended)
          writeToLog("ERROR opening CascadeClassifier");
          return false;
      }
-     while(!addFace(images,0))
+     while(images.size()<15)
      {
-     if(cam.captureFrame(frame) == false)
+     if(cam->captureFrame(frame) == false)
         {
             writeToLog("Error getting frame!");
         }
@@ -73,9 +77,11 @@ bool DataSet::createDataset(int *imagesTaked, bool *ended)
 
          }
          else if(faces.size()>1) writeToLog("Founded more than one face!");
-         else writeToLog("Face was not found!");
+
      }
      }
+     addFace(images,15);
+     cam->shutdown();
      *ended=true;
      writeToLog("Created dataset successfuly");
     return true;

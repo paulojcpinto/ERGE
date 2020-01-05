@@ -29,7 +29,7 @@ class User
 
     public:
         User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease = true  );
-        User(fullUser Data);
+        User(MCamera* cameraPointer,fullUser Data);
         void updatePhoneNumeber ( string phoneNumber );
         void updateEMail ( string email );
         void updatePassword ( string password );

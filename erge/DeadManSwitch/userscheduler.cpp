@@ -13,7 +13,7 @@ UserScheduler::UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName
     this->preseceCheck = false;
 }
 
-UserScheduler::UserScheduler(tm jumpScheduler,tm nextScheduler,fullUser userData):user(userData)
+UserScheduler::UserScheduler(tm jumpScheduler,tm nextScheduler,MCamera* cameraPointer,fullUser userData):user(cameraPointer,userData)
 {
     this->jumpScheduler = jumpScheduler;
     this->nextScheduler = nextScheduler;

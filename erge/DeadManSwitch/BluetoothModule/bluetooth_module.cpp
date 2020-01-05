@@ -8,6 +8,7 @@
 #include <vector>
 #include <mqueue.h>
 #include <unistd.h>
+#include "loghandler.h"
 
 
 #define  PROGRAM_NAME "BluetoothModule: "
@@ -107,7 +108,11 @@ int parsingNumber(string aux)
 
 void* createDatasetFunc(void *threadid)
 {
+     LogHandler log("CreateDatasetThread: ");
+     log.writeToLog("thread created");
+     endedFInger=true;
      data2->createUser(&imagesTaked,&endedFace,&endedFInger);
+     log.writeToLog("Thread ended");
      pthread_exit(NULL);
 
 }
@@ -118,8 +123,22 @@ void* datasetHandler(void *threadid)
     endedFace=false;
     endedFInger=false;
     pthread_t doDataSet;
+    LogHandler log("ThreadDataSetHandel: ");
+    log.writeToLog("Inicialized successfully");
     int rTask= pthread_create(&doDataSet,NULL,createDatasetFunc,NULL);
-    while(!endedFInger){};
+    if(rTask)
+    {
+        stringstream ss;
+        ss<<"ERROR: return code from pthread_create() is: "<<rTask;
+        log.writeToLog(ss.str());
+    }
+   int i ;
+    while(!endedFInger){
+
+        usleep(100);
+
+           };
+    log.writeToLog("Fingerprint created successfuly");
     test->sendMessage("<F>");
     int imagesAux=0;
     while(!endedFace)

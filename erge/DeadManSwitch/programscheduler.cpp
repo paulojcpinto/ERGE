@@ -23,7 +23,7 @@ void ProgramScheduler::loadData(vector<fullUser> users)
         time ( &raw_time );
         ptr_ts = gmtime ( &raw_time );
         ptr_ts->tm_min++;
-        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,nUser));
+        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,nUser));
         //usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
 
 
@@ -93,6 +93,7 @@ int ProgramScheduler::addUser(user_parsing newUser)
 
 void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *endedFingerPrint)
 {
+
     time_t raw_time;
     struct tm *ptr_ts;
     tm nextScheduler;
@@ -102,15 +103,21 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     fullUser NewUser;
     userParsingToFulluser(newUserInfo,&NewUser);
 
-    NewUser.fingerInfo.FingerprintID=1;     //TODO getFingerprint here
+    log.writeToLog("Deu ate aqui!");
+    NewUser.fingerInfo.FingerprintID=9;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
     *endedFingerPrint=true;
+    log.writeToLog("Deu ate aqui!2");
     //TODO getfaces here!!
-    finduser(NewUser.user.NickName)->createDataset(imagesTaked,endedDataSet);
 
     NewUser.faceInfo.PathDataset=newUserInfo.nickName;
     NewUser.faceInfo.NumberOfImages=15;
-   usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,NewUser));
+    usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,NewUser));
+
+    finduser(NewUser.user.NickName)->createDataset(imagesTaked,endedDataSet);
+
+
+
 
 
     // TODO mudar para full user
