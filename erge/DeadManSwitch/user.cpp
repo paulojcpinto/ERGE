@@ -112,6 +112,7 @@ bool User::compareFinger( unsigned int id )
  *
  * *************************************************************************/
 
+
 bool User::compareNickName( string nickName )
 {
 
@@ -119,4 +120,9 @@ bool User::compareNickName( string nickName )
         //return true;
     //else return false;
     return (this->nickName  == nickName );
+}
+
+bool User::createDataset(int *imagesTaked, bool *ended)
+{
+    return face.createDataset(imagesTaked,ended);
 }

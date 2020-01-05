@@ -28,6 +28,7 @@ public:
   void updateNextSchedulerTime ( void );
   bool compareUserFinger ( unsigned int id );
   bool compareUserNickName ( string nickName );
+  bool createDataset(int *imagesTaked,bool *ended);
   bool login(string pincode);
   void operator=(UserScheduler userSchedule);
   ~UserScheduler(){}

@@ -19,6 +19,10 @@ FRecognizer* Face::getRecognizer()
 {
     return &userRecognizer;
 }
+bool Face::createDataset(int *imagesTaked, bool *ended)
+{
+    return UserDataset.createDataset(imagesTaked,ended);
+}
 void Face::operator=(Face face)
 {
   this->UserDataset= face.UserDataset;

@@ -14,6 +14,7 @@ class Face
     Face(string nickname);
     Face(faceQuery faceInfo);
     DataSet* getDataset();
+    bool createDataset(int *imagesTaked,bool *ended);
     FRecognizer* getRecognizer();
     void operator=(Face finger);
 

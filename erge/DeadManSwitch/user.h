@@ -26,6 +26,7 @@ class User
        LogHandler log;
 
 
+
     public:
         User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease = true  );
         User(fullUser Data);
@@ -35,6 +36,7 @@ class User
         bool releaseInformation ( void );
         bool compareNickName ( string nickName );
         bool compareFinger ( unsigned int id );
+        bool createDataset(int *imagesTaked,bool *ended);
         bool login(string pincode);
         ~User(){}
 

@@ -12,6 +12,10 @@
 
 #define  PROGRAM_NAME "BluetoothModule: "
 
+int imagesTaked;
+bool endedFace,endedFInger;
+ProgramScheduler *data2;
+bluetooth_module* test;
 
 static const QLatin1String serviceUuid("e8e10f95-1a70-4b27-9ccf-02010264e9c8");
 using namespace  std;
@@ -20,7 +24,9 @@ bluetooth_module::bluetooth_module(ProgramScheduler* scheduler,QWidget *parent )
 
 
     data=scheduler;
+    data2=data;
     localAdapters = QBluetoothLocalDevice::allDevices();
+    test= this;
     QBluetoothLocalDevice adapter(localAdapters.at(0).address());
     adapter.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
     server = new bluetooth_server(this);
@@ -99,6 +105,37 @@ int parsingNumber(string aux)
 }
 
 
+void* createDatasetFunc(void *threadid)
+{
+     data2->createUser(&imagesTaked,&endedFace,&endedFInger);
+     pthread_exit(NULL);
+
+}
+
+void* datasetHandler(void *threadid)
+{
+    imagesTaked=0;
+    endedFace=false;
+    endedFInger=false;
+    pthread_t doDataSet;
+    int rTask= pthread_create(&doDataSet,NULL,createDatasetFunc,NULL);
+    while(!endedFInger){};
+    test->sendMessage("<F>");
+    int imagesAux=0;
+    while(!endedFace)
+    {
+        while (imagesAux < imagesTaked)
+        {
+           test->sendMessage("<I>");
+           imagesAux++;
+        }
+    }
+    pthread_join(doDataSet,NULL);
+    stringstream ss;
+    ss<<"Created user successfully!!";
+    pthread_exit(NULL);
+}
+
 void bluetooth_module::receibedMessage(const QString &sender, const QString &message)
 {
     stringstream ss;
@@ -162,6 +199,18 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
            sendResult(data->login(user.nickName,user.pinCode),'Q');
            ss<<"Login from user: "<<user.nickName<<" with pincode: "<<user.pinCode;
             break;
+         case 'Y':
+            pthread_t create;
+            int rThread;
+            rThread=pthread_create(&create, NULL, datasetHandler, NULL);
+            if(rThread)
+            {
+                stringstream ss;
+                ss<<"ERROR: return code from pthread_create() is: "<<rThread;
+                writeToLog(ss.str());
+            }
+
+            break;
         default:
             ss<<"1 character:"<<c<<"\n";
 
@@ -172,6 +221,11 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
 
 
 }
+
+
+
+
+
 void bluetooth_module::sendResult(int result,char c)
 {
      QString answer = "<";
@@ -183,6 +237,7 @@ void bluetooth_module::sendResult(int result,char c)
      writeToLog(ss.str());
      sendMessage(answer);
 }
+
 void bluetooth_module::parsing(QString input, string &output, char answer)
 {
     output="";

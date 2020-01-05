@@ -8,7 +8,6 @@
 #include <string.h>
 #include <sstream>
 #include "mcamera.h"
-#include "BluetoothModule/bluetooth_module.h"
 using namespace cv;
 using namespace std;
 
@@ -19,7 +18,7 @@ public:
     DataSet();
     DataSet(string NickName);
     ~DataSet();
-    bool createDataset();
+    bool createDataset(int *imagesTaked,bool *ended);
     bool addFace(vector<cv::Mat>images, unsigned int lengh = 15);
     bool appendFrame(vector<cv::Mat>images);
     vector<cv::Mat> readFace(int lengh=15);

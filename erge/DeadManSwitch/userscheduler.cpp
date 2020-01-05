@@ -108,6 +108,10 @@ bool UserScheduler::compareUserNickName ( string nickName )
   return user.compareNickName (nickName);
 }
 
+bool UserScheduler::createDataset(int *imagesTaked, bool *ended)
+{
+    return user.createDataset(imagesTaked,ended);
+}
 
 void UserScheduler::operator=(UserScheduler userSchedule)
 {

@@ -39,11 +39,13 @@ private slots:
     void clientConnected(const QString &name);
 
 
+
 private:
     user_parsing user;
     int adapterFromUserSelection() const;
     int currentAdapterIndex = 0;
     int fd;
+
     bluetooth_server *server;
     QList<QBluetoothHostInfo> localAdapters;
     QString localName;
@@ -51,6 +53,7 @@ private:
     void writeToLog(string Message);
     ProgramScheduler *data;
     void sendResult(int result,char c);
+
 
 
 
