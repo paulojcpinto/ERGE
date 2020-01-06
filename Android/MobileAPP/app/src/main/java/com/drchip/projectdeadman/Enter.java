@@ -91,7 +91,9 @@ public class Enter extends AppCompatActivity {
                         }
                         if (canSave) {
                             loadedDevices.add(new MybluetoothDevice(ApplicationClass.target, ApplicationClass.deviceType));
-                            saveDevice();
+                           // saveDevice(ApplicationClass.deviceConnected);
+                            saveDevice(ApplicationClass.target.getAddress(),ApplicationClass.deviceType);
+
                         }
 
                     } else if (readMessage.equals("RASP")) {
@@ -112,7 +114,7 @@ public class Enter extends AppCompatActivity {
                         }
                         if (canSave) {
                             loadedDevices.add(new MybluetoothDevice(ApplicationClass.target, ApplicationClass.deviceType));
-                            saveDevice();
+                            saveDevice(ApplicationClass.target.getAddress(),ApplicationClass.deviceType);
                         }
                     }
 
@@ -498,20 +500,21 @@ public class Enter extends AppCompatActivity {
         super.onPostResume();
     }
 
-    public void saveDevice() {
+    public void saveDevice(String mac,String type) {
 
         try {
             FileOutputStream file = openFileOutput("bluetooth.txt", MODE_PRIVATE);  //cria o ficheiro caso nao exitsa, e define a permisao do ficheiro para so o nossa aplicaçao
             OutputStreamWriter outputFile = new OutputStreamWriter(file);  //cria a connecao com o ficheiro que vamos escrever
 
-            for (int i = 0; i < loadedDevices.size(); i++) {
-                outputFile.write(loadedDevices.get(i).device.getName() + "," + loadedDevices.get(i).device.getAddress() + "," + loadedDevices.get(i).deviceType);
-
-
-            }
+//            for (int i = 0; i < loadedDevices.size(); i++) {
+//                outputFile.write(loadedDevices.get(i).device.getName() + "," + loadedDevices.get(i).device.getAddress() + "," + loadedDevices.get(i).deviceType);
+//
+//
+//            }
+            outputFile.write(mac+","+type+"\r\n");
             outputFile.flush();
             outputFile.close();
-            Toast.makeText(this, "Sucessfully savedes eyeyeyyeyeyeyeyeyeye!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sucessfully saveded!", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -529,18 +532,17 @@ public class Enter extends AppCompatActivity {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("bluetooth.txt")));  //abre p ficheiro Data.txt para leitura!
                 while ((linefromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(linefromFile, ",");
-                    String DeviceName = tokens.nextToken();
                     String DeviceMac = tokens.nextToken();
                     String type = tokens.nextToken();
                     Set<BluetoothDevice> auxDevices = ApplicationClass.BA.getBondedDevices();
                     for (BluetoothDevice test : auxDevices) {
-                        if (test.getName().equals(DeviceName)) {
+
                             if (test.getAddress().equals(DeviceMac)) {
                                 loadedDevices.add(new MybluetoothDevice(test, type));
                             }
 
 
-                        }
+
                     }
 
                 }

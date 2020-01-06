@@ -50,6 +50,30 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         playMenu.setIcon(R.drawable.bluetooth_on);
 
                     }
+                    if(readMessage.contains("<F>"))
+                    {
+                        ivFingerSTM.setImageResource(R.drawable.correct);
+                        ivFingerSTM.clearAnimation();
+                        ivPinCode.startAnimation(rotate);
+                        linPincode.setVisibility(View.VISIBLE);
+                    }
+
+                    if(readMessage.contains("<I1>"))
+                    {
+                        ivPinCode.setImageResource(R.drawable.correct);
+                        ivPinCode.clearAnimation();
+                        linSuccess.setVisibility(View.VISIBLE);
+                        ivSuccess.startAnimation(fade_in);
+                        Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
+                        btnConfirm.startAnimation(fade_in1);
+                        btnConfirm.setVisibility(View.VISIBLE);
+
+                    }
+                    if(readMessage.contains("<I2"))
+                    {
+
+                    }
+
 
                     Toast.makeText(UserInstuctionsSTM.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
@@ -60,6 +84,7 @@ public class UserInstuctionsSTM extends AppCompatActivity {
 
                         Toast.makeText(UserInstuctionsSTM.this, "Device was lost", Toast.LENGTH_SHORT).show();
                     }
+
                     Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST),
                             Toast.LENGTH_SHORT).show();
                     break;
@@ -111,6 +136,8 @@ public class UserInstuctionsSTM extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Instructions");
+        ApplicationClass.sendMessage("<Y>",this);
+
 
         tvFingerSTM.setOnClickListener(new View.OnClickListener() {
             @Override

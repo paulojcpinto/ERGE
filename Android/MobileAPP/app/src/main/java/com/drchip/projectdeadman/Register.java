@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -104,6 +106,7 @@ public class Register extends AppCompatActivity {
         Register.this.finish();
     }
 
+    TimePickerDialog picker;
     ProgressDialog progressDialog;
     DatePickerDialog datePickerDialog;
     EditText etDate, etMessage, etPlatform, etNickName,etPinCode,etEmail,etEmailPassword,etPhoneNumber,etRepeatTime;
@@ -249,9 +252,24 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
+
                                     // set day of month , month and year value in the edit text
                                     etDate.setText(dayOfMonth + "/"
                                             + (monthOfYear + 1) + "/" + year);
+                                    final Calendar cldr = Calendar.getInstance();
+                                    int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                                    int minutes = cldr.get(Calendar.MINUTE);
+                                    // time picker dialog
+                                    picker = new TimePickerDialog(Register.this,
+                                            new TimePickerDialog.OnTimeSetListener() {
+                                                @Override
+                                                public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
+                                                    etDate.append("/"+sHour+"/"+sMinute);
+                                                                                                   }
+                                            }, hour, minutes, true);
+                                    picker.show();
+
+
 
                                 }
                             }, mYear, mMonth, mDay);
