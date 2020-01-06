@@ -1,6 +1,8 @@
 #include "init.h"
 
 
+
+
 xSemaphoreHandle finger_signal;
 xSemaphoreHandle sim1;
 xSemaphoreHandle release_signal;

@@ -1,5 +1,6 @@
 #include "esp8266.h"
 #include <stdio.h>
+#include "user.h"
 
 
 #define   wait_connect_face           ( int )   20
@@ -15,7 +16,7 @@
 	
 #define   discard                     ( int )   50
 
-
+int u;
 int oo=0;
 static uint8_t local1 = 0;
 static int local_position1 = 0;
@@ -95,8 +96,8 @@ void update_date1 ()
 		}break ;
 		case 6:
 		{
-			stmtime.localtim->tm_yday += (UART5Rx_Buffer[UART5Tx_index] - '0');
-			if (stmtime.localtim->tm_yday == 29)
+			stmtime.localtim->tm_mday += (UART5Rx_Buffer[UART5Tx_index] - '0');
+			if (stmtime.localtim->tm_mday == 29)
 				HAL_UART_Transmit(&huart3, "\r\n\r\nits\r\n\r\n", 11, 1000);
 		}break;
 		
@@ -151,6 +152,7 @@ void update_date1 ()
 		{
 			stmtime.localtim->tm_sec *= 10;
 			stmtime.localtim->tm_sec += UART5Rx_Buffer[UART5Tx_index] - '0';
+
 		}break;
 		
 		case 25:

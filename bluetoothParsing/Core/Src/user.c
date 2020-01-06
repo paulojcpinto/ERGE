@@ -182,6 +182,38 @@ void initUser(void)
 	 strcpy(mUser->emailPassword,mEmailPassword);
 	 return 1;
  }
+ 
+ 
+ void verify_release_time1 ( void )
+ {
+	 uint64_t user_time;
+	 uint64_t current_time=0;
+	 	 users[ 0 ].mmessage.dateToRelease1.tm_min = 0;
+		users[ 0 ].mmessage.dateToRelease1.tm_hour  = 0;
+	 current_time = stmtime.localtim->tm_min;
+	 current_time += stmtime.localtim->tm_hour * hour;
+	 current_time += stmtime.localtim->tm_mday * day;
+	 current_time += stmtime.localtim->tm_mon * month;
+	 current_time += stmtime.localtim->tm_year * year;
+	 for ( int count = 0; count < nextUser; count ++)
+	 {
+		 user_time  = users[ count ].mmessage.dateToRelease1.tm_min;
+		 user_time += users[ count ].mmessage.dateToRelease1.tm_hour * hour;
+		 user_time += users[ count ].mmessage.dateToRelease1.tm_mday * day;
+		 user_time += users[ count ].mmessage.dateToRelease1.tm_mon * month;
+		 user_time += users[ count ].mmessage.dateToRelease1.tm_year * year;
+		 if ( user_time <= current_time )
+		 {
+			 to_release[ count ].to_publish = 1;
+			 users[ count-- ] = users[ --nextUser ];
+
+		 }
+		 else 
+		 {
+			 to_release[ count ].to_publish = 0;
+		 }
+	 }
+ }
 
  void verify_release_time ( void )
  {

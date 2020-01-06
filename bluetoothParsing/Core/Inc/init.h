@@ -5,12 +5,19 @@
 #include "cmsis_os.h"
 
 
+#define hour         61
+#define day         ( hour   +  24 )
+#define month       ( day    +  31 )
+#define year        ( month  +  12 )
+
+
 typedef struct message_info
 {
 	uint8_t message [256];
 	uint8_t cardentials_twitter[16];
 	uint8_t phone_number[13];
 	uint8_t where;
+	uint8_t to_publish;
 }message_info;
 
 extern xSemaphoreHandle finger_signal;

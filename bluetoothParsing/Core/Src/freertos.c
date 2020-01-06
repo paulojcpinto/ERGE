@@ -185,7 +185,7 @@ void StartTaskUpdateTime(void const * argument)
 			//send_SMS ("+351916201643", "amo", 3);
 			while( stmtime.updated )
 				vTaskDelay(100);
-			verify_release_time ();
+			verify_release_time1 ();
 			stmtime.need_update=0;
 				
 			HAL_UART_Transmit(&huart3, "\r\nyap\r\n", 7,1000);
