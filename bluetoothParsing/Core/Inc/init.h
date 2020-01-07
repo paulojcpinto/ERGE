@@ -6,9 +6,9 @@
 
 
 #define hour         61
-#define day         ( hour   +  24 )
-#define month       ( day    +  31 )
-#define year        ( month  +  12 )
+#define day         ( hour   *  24 )
+#define month       ( day    *  31 )
+#define year        ( month  *  12 )
 
 
 typedef struct message_info

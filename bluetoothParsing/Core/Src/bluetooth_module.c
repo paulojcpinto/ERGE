@@ -78,6 +78,9 @@
 #define char_update                           (char)  'U'
 #define int_update                             (int) 23
 	
+#define char_instructions                     (char)  'Y'
+#define int_instructions                      (int) 24
+	
 
 
 
@@ -203,7 +206,7 @@ void printNumber(int number,char c)
 	char numberChar[30];
 	memset(numberChar,0,30);
 	sprintf(numberChar,"<%c%d>",c,number);
-  HAL_UART_Transmit_IT(&huart4,  numberChar,strlen(numberChar) );
+  HAL_UART_Transmit_IT(&huart4,  numberChar,strlen(numberChar));
 	UART4Tx_index++;
 	
 }
@@ -301,6 +304,10 @@ void prepare_receive_info(int *c )
 			*c=int_create_user;
 		  UART4Tx_index++;	
 			break;
+		case char_instructions:
+			*c=int_instructions;
+			UART4Tx_index++;	
+			break;
 		case char_app_login:
 			*c=int_app_login;
 			 UART4Tx_index++;	
@@ -350,10 +357,10 @@ void prepare_receive_info(int *c )
 }
 
 
-void printUpdate(int error)
+void printUpdate(int error,char c)
 {
 	char message[5];
-	sprintf(message,"<%c%d>",char_update,error);
+	sprintf(message,"<%c%d>",c,error);
 	HAL_UART_Transmit_IT(&huart4,  message,strlen(message) );
 	UART4Tx_index++;
 }
@@ -451,7 +458,14 @@ void end_receiving_trama (int *c)
 					printParameter(userBluetooh->phoneNumber,char_get_phone);
 					break;
 				case int_update:
-					printUpdate(updateUser(user_pars));
+					printUpdate(updateUser(user_pars),char_update);
+					break;
+				case int_instructions:
+					    //TODO
+					HAL_TIM_Base_Stop_IT(&htim2);
+					printUpdate(create_user_finger(),char_instructions);
+					HAL_TIM_Base_Start_IT(&htim2);
+				
 					break;
 				
 

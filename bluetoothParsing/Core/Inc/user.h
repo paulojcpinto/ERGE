@@ -12,6 +12,8 @@
 #define USER_BLOCKED  3
 #define BAD_CREDENTIALS  4
 
+#define MAX_USERS 5
+
 
 typedef struct UserFuncitons userfuncs;
 typedef struct User user;
@@ -33,9 +35,11 @@ struct User
 	message mmessage; 
 	userfuncs funcs;
 	int position;
+	uint8_t fingerID;
 	char nickName[25];
 	char pinCode[4];
 	char phoneNumber[13];
+	char twitterCardentials[16];
 	char email[50];
 	char emailPassword[12];
 	char unlocked;
@@ -62,6 +66,12 @@ extern int updateEmailPassword(char* mEmailPassword, user* mUser);
 
 extern int updateUser(user_parsing updateInfo);
 
+
+extern uint8_t get_fingerID_avaiable ( void );
+
+extern  int create_user_finger ( void );
+
+extern  void update_presenceCheck ( char ID );
 
 
 

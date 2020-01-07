@@ -1,8 +1,6 @@
-  
 #include "user.h"
 #include <string.h>
 
-#define MAX_USERS 10
 
 int  nextUser;
 user users[MAX_USERS];
@@ -39,7 +37,7 @@ void initUser(void)
  user* getUser(char* nickName)
  {
 	 int i=0;
-	 for(i=0;i<MAX_USERS;i++)
+	 for(i=0;i<nextUser;i++)
 	 {
 		 if(!strcmp(users[i].nickName,nickName))
 		 {
@@ -94,9 +92,36 @@ void initUser(void)
 								users[nextUser].mmessage.dateToRelease1.tm_year *= 10;
 								users[nextUser].mmessage.dateToRelease1.tm_year += users[nextUser].mmessage.dateToStart[ position ] - '0';
 							}break;
+							case 3:
+							{
+								users[nextUser].mmessage.dateToRelease1.tm_hour *= 10;
+								users[nextUser].mmessage.dateToRelease1.tm_hour += users[nextUser].mmessage.dateToStart[ position ] - '0';
+							}break;
+							case 4:
+							{
+								users[nextUser].mmessage.dateToRelease1.tm_min *= 10;
+								users[nextUser].mmessage.dateToRelease1.tm_min += users[nextUser].mmessage.dateToStart[ position ] - '0';
+							}break;
 						}
 			 }
-			 nextUser++;
+			 users[nextUser].mmessage.phone_to_release[0] = '+';
+			 users[nextUser].mmessage.phone_to_release[1] = '3';
+			 users[nextUser].mmessage.phone_to_release[2] = '5';
+			 users[nextUser].mmessage.phone_to_release[3] = '1';
+			 if ( users[nextUser].mmessage.platformToRelease[0] == 'S' ) 
+			 {
+				 for ( uint8_t position = 4; position < 13; position++)
+				 {
+					 users[nextUser].mmessage.phone_to_release[position] = users[nextUser].mmessage.platformToRelease[position];
+				 }
+			 }
+			 else 
+			 {
+				 for ( uint8_t position = 8; position < 24; position++)
+				 {
+					 users[nextUser].mmessage.twitter_cardentials[position-8] = users[nextUser].mmessage.platformToRelease[position];
+				 }
+			 }
 		 
 			 return 1;	 
 		 }
@@ -183,13 +208,28 @@ void initUser(void)
 	 return 1;
  }
  
+ void update_time( uint8_t use )
+ {
+	 int aux = users[use].mmessage.dateToRelease1.tm_min + users[use].mmessage.repeatTime;
+	 while(aux > 0)
+	 {
+	 if (aux > 59)
+	 {
+	  users[use].mmessage.dateToRelease1.tm_hour += 1;
+	 
+	 }
+	 else 
+		 users[use].mmessage.dateToRelease1.tm_min  =aux;
+	 	aux -= 60;	
+ }
+	 
+ }
+ 
  
  void verify_release_time1 ( void )
  {
 	 uint64_t user_time;
 	 uint64_t current_time=0;
-	 	 users[ 0 ].mmessage.dateToRelease1.tm_min = 0;
-		users[ 0 ].mmessage.dateToRelease1.tm_hour  = 0;
 	 current_time = stmtime.localtim->tm_min;
 	 current_time += stmtime.localtim->tm_hour * hour;
 	 current_time += stmtime.localtim->tm_mday * day;
@@ -202,11 +242,29 @@ void initUser(void)
 		 user_time += users[ count ].mmessage.dateToRelease1.tm_mday * day;
 		 user_time += users[ count ].mmessage.dateToRelease1.tm_mon * month;
 		 user_time += users[ count ].mmessage.dateToRelease1.tm_year * year;
-		 if ( user_time <= current_time )
+		 if ( user_time <= current_time && !(users[count].presenceCheck) )
 		 {
+			 if ( users[count].mmessage.platformToRelease[0] == 'T' )
+			 {
+				 strcpy(to_release[ count ].cardentials_twitter, users[count].mmessage.twitter_cardentials);
+				 to_release[count].where = 0;
+				 xSemaphoreGive(finger_signal);
+			 }
+			 else 
+			 {
+				 strcpy(to_release[ count ].phone_number, users[count].mmessage.phone_to_release);
+				 to_release[count].where = 1;
+			 }
+			 strcpy(to_release[count].message, users[count].mmessage.messageToRelease);
 			 to_release[ count ].to_publish = 1;
 			 users[ count-- ] = users[ --nextUser ];
 
+		 }
+		 else if ( user_time == current_time && users[count].presenceCheck )
+		 {
+			 update_time(count);
+			 users[count].presenceCheck =0;
+			 to_release[ count ].to_publish = 0;
 		 }
 		 else 
 		 {
@@ -230,4 +288,53 @@ void initUser(void)
 	 }
 	 
 	 stmtime.fingerp = 0;
+ }
+ 
+ uint8_t get_fingerID_avaiable ( void )
+ {
+	 uint8_t fingerID = 1;
+	 for ( uint8_t position = 0; ( position < nextUser ) && ( fingerID <= MAX_USERS ) ; position++ )
+	 {
+		 if ( users[ position ].fingerID == fingerID )
+		 {
+			 position = 0;
+			 fingerID ++;
+		 }
+	 }
+	 if ( fingerID > MAX_USERS )
+		 return 0;
+	 
+	 return fingerID;
+ }
+ 
+ void update_presenceCheck ( char ID )
+ {
+	 uint8_t fingerIDp = ID - '0';
+	 
+	 if ( fingerIDp < MAX_USERS )
+	 {
+		 users[fingerIDp].presenceCheck = 1;
+	 }
+ }
+ 
+
+ int create_user_finger ( void )
+ {
+		uint8_t fingerID = get_fingerID_avaiable ( );
+		if ( fingerID )
+		{
+			if ( Fingerprint_SaveNewFinger(fingerID,40) )
+			{				
+				users[ nextUser++ ].fingerID = fingerID;
+				return 1;
+			}
+			else
+			{
+				return 2;
+			}
+		}
+		else 
+		{
+			return 3;
+		}
  }

@@ -101,15 +101,15 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 256);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 512);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of updateTimeTask */
-  osThreadDef(updateTimeTask, StartTaskUpdateTime, osPriorityNormal, 0, 128);
+  osThreadDef(updateTimeTask, StartTaskUpdateTime, osPriorityNormal, 0, 256);
   updateTimeTaskHandle = osThreadCreate(osThread(updateTimeTask), NULL);
 
   /* definition and creation of publishTask */
-  osThreadDef(publishTask, StartTaskpublish, osPriorityNormal, 0, 128);
+  osThreadDef(publishTask, StartTaskpublish, osPriorityNormal, 0, 256);
   publishTaskHandle = osThreadCreate(osThread(publishTask), NULL);
 
   /* definition and creation of parsingBTTask */
@@ -223,8 +223,14 @@ void StartTaskpublish(void const * argument)
 		{	HAL_UART_Transmit(&huart3, "s", 1, 100);
 			vTaskDelay(100);
 		}
-			
-		publish_twitter(&i);
+		for ( int pos = 0; pos < MAX_USERS;pos ++)
+		{
+			if ( to_release[pos].to_publish && to_release[pos].where == 0 )
+			{
+				publish_twitter(to_release[pos].message, to_release[pos].cardentials_twitter);
+			}
+		}
+		
 		
 		//send_SMS ("+351916201643", "amo", 3);
 	}

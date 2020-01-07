@@ -15,6 +15,8 @@
 #define   wait_publish_twitter        ( int )   28
 	
 #define   discard                     ( int )   50
+	
+enum months { January = 1, February, March, April, May, June, July, August, September, October, November, December };
 
 int u;
 int oo=0;
@@ -37,11 +39,14 @@ char *sim2 = sOK;
 int isim2 = sizeof( sOK ) / sizeof( char ) -1;
 
 uint8_t message_to_release[256];
+uint8_t who_to_publish[16];
 
+void atribute_month ( void );
 
-void publish_twitter ( uint8_t message_release[] )
+void publish_twitter ( uint8_t message_release[], uint8_t who_publish[] )
 {
 	strcpy( message_to_release, message_release );
+	strcpy( who_to_publish, who_publish );
 	stmtime.need_update=2;
 //	while (busy)
 //	{
@@ -92,7 +97,7 @@ void update_date1 ()
 	{
 		case 5:
 		{
-			stmtime.localtim->tm_yday = (UART5Rx_Buffer[UART5Tx_index] - '0')*10;
+			stmtime.localtim->tm_mday = (UART5Rx_Buffer[UART5Tx_index] - '0')*10;
 		}break ;
 		case 6:
 		{
@@ -104,7 +109,9 @@ void update_date1 ()
 		case 8:
 		{		}
 		case 9:
-		{		}
+		{				
+			month1[local_position1 - 8] = UART5Rx_Buffer[UART5Tx_index];
+		}break;
 		case 10:
 		{
 			month1[local_position1 - 8] = UART5Rx_Buffer[UART5Tx_index];
@@ -112,6 +119,7 @@ void update_date1 ()
 		
 		case 12:
 		{
+			atribute_month();
 			stmtime.localtim->tm_year = UART5Rx_Buffer[UART5Tx_index] - '0';
 		}break;
 		case 13:
@@ -206,6 +214,85 @@ int vHardware_verify1 ( void  )
 	}
 }
 
+void atribute_month ( void )
+{
+	switch ( month1[0] )
+	{
+		case 'J':
+		{
+			switch ( month1[1] )
+			{
+				case 'a':
+				{
+					stmtime.localtim->tm_mon = January;
+				}break;
+				case 'u':
+				{
+					switch ( month1[2] )
+					{
+						case 'n':
+						{
+							stmtime.localtim->tm_mon = June;
+						}break;
+						case 'l':
+						{
+							stmtime.localtim->tm_mon = July;
+						}break;
+					}
+				}break;
+			}
+		}break;
+		case 'F':
+		{
+			stmtime.localtim->tm_mon = February;
+		}break;
+		case 'M':
+		{
+			switch ( month1[2] )
+			{
+				case 'r':
+				{
+					stmtime.localtim->tm_mon = March;
+				}break;
+				case 'y':
+				{
+					stmtime.localtim->tm_mon = May;
+				}break;
+			}
+		}break;
+		case 'A':
+		{
+			switch ( month1[1] )
+			{
+				case 'p':
+				{
+					stmtime.localtim->tm_mon = April;
+				}break;
+				case 'u':
+				{
+					stmtime.localtim->tm_mon = August;
+				}break;
+			}
+		}break;
+		case 'S':
+		{
+			stmtime.localtim->tm_mon = September;
+		}break;
+		case 'O':
+		{
+			stmtime.localtim->tm_mon = October;
+		}break;
+		case 'N':
+		{
+			stmtime.localtim->tm_mon = November;
+		}break;
+		case 'D':
+		{
+			stmtime.localtim->tm_mon = December;
+		}break;
+	}
+}
+
 void parsing_gsm11 ( void )
 {
 	while ( UART5Tx_index != UART5Rx_index )
@@ -278,7 +365,7 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0)
 				{
-					printf("AT+CIPSEND=%d\r\n", sizeof("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=00\r\n"));
+					printf("AT+CIPSEND=%d\r\n",  strlen("GET /apps/thingtweet/1/statuses/update?api_key=&status=\r\n") + strlen(message_to_release)+16 );
 					sim2 = sReady_message;
 					isim2 = sizeof( sReady_message ) / sizeof( char ) -1;
 					local1 = 27;
@@ -291,7 +378,12 @@ void parsing_gsm11 ( void )
 				if ( vHardware_verify1 ( ) > 0 )
 				{
 					//HAL_UART_Transmit(&huart3, "\r\nsim\r\n",7, 1000);
-					printf("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=11%d\r\n", oo);
+					//printf("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=11%d\r\n", oo);
+					HAL_UART_Transmit(&huart5,"GET /apps/thingtweet/1/statuses/update?api_key=" ,strlen("GET /apps/thingtweet/1/statuses/update?api_key="), 10000);
+					HAL_UART_Transmit(&huart5, who_to_publish, 16, 10000);
+					HAL_UART_Transmit(&huart5, "&status=", 8, 10000);
+					HAL_UART_Transmit(&huart5, message_to_release, strlen(message_to_release), 10000);
+					HAL_UART_Transmit(&huart5, "\r\n", 2, 10000);
 					sim2 = rec;
 					isim2 = sizeof( rec ) / sizeof( char ) -1;
 					local1 = 28;
