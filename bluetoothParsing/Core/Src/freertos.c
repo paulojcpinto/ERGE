@@ -32,6 +32,7 @@
 #include "user.h"
 #include <stdio.h>
 #include "gsm.h"
+#include <string.h>
 
 /* USER CODE END Includes */
 
@@ -237,7 +238,7 @@ void StartTaskpublish(void const * argument)
 				publish_twitter(to_release[pos].message, to_release[pos].cardentials_twitter);
 			}
 			else if(to_release[pos].to_publish && to_release[pos].where == 1)
-			send_SMS("+351913753546", "oioio\r\n",7); 
+				send_SMS(to_release[pos].phone_number, to_release[pos].message,strlen(to_release[pos].message)); 
 		}
 		publ();
 		
