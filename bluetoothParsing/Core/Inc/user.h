@@ -12,7 +12,7 @@
 #define USER_BLOCKED  3
 #define BAD_CREDENTIALS  4
 
-#define MAX_USERS 5
+#define MAX_USERS 8
 
 
 typedef struct UserFuncitons userfuncs;

@@ -11,5 +11,6 @@ extern volatile uint8_t busy;
 extern void parsing_gsm11( void );
 extern void  wait1 ( void );
 extern void publish_twitter ( uint8_t message_release[], uint8_t who_publish[] );
-
+extern void ini ();
+extern void publ();
 #endif

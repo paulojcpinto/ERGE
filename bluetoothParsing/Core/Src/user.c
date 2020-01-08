@@ -70,6 +70,8 @@ void initUser(void)
 			 users[nextUser].mmessage.dateToRelease1.tm_year = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_mon = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_mday = 0;
+			 users[nextUser].mmessage.dateToRelease1.tm_min = 0;
+			 users[nextUser].mmessage.dateToRelease1.tm_hour = 0;
 			 for(int position = 0; position < strlen(users[nextUser].mmessage.dateToStart); position++)
 			 {
 					if ( users[nextUser].mmessage.dateToStart[ position ] == '/' )
@@ -247,8 +249,8 @@ void initUser(void)
 			 if ( users[count].mmessage.platformToRelease[0] == 'T' )
 			 {
 				 strcpy(to_release[ count ].cardentials_twitter, users[count].mmessage.twitter_cardentials);
+				 to_release[ count ].to_publish = 1;
 				 to_release[count].where = 0;
-				 xSemaphoreGive(finger_signal);
 			 }
 			 else 
 			 {
@@ -271,6 +273,7 @@ void initUser(void)
 			 to_release[ count ].to_publish = 0;
 		 }
 	 }
+	 				 xSemaphoreGive(finger_signal);
  }
 
  void verify_release_time ( void )
@@ -310,11 +313,11 @@ void initUser(void)
  void update_presenceCheck ( char ID )
  {
 	 uint8_t fingerIDp = ID - '0';
-	 
-	 if ( fingerIDp < MAX_USERS )
-	 {
-		 users[fingerIDp].presenceCheck = 1;
-	 }
+	 for (uint8_t pos = 0; pos < MAX_USERS; pos++)
+		if ( users[pos].fingerID == ID )
+		{
+			users[pos].presenceCheck = 1;
+		}
  }
  
 

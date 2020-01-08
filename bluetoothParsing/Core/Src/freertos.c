@@ -31,6 +31,7 @@
 #include "init.h"
 #include "user.h"
 #include <stdio.h>
+#include "gsm.h"
 
 /* USER CODE END Includes */
 
@@ -57,6 +58,7 @@ osThreadId defaultTaskHandle;
 osThreadId updateTimeTaskHandle;
 osThreadId publishTaskHandle;
 osThreadId parsingBTTaskHandle;
+osThreadId parsingGSMTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -70,6 +72,7 @@ void StartDefaultTask(void const * argument);
 void StartTaskUpdateTime(void const * argument);
 void StartTaskpublish(void const * argument);
 void StarPparsingBT(void const * argument);
+void StarPparsingGSM(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -101,7 +104,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 512);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityAboveNormal, 0, 512);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of updateTimeTask */
@@ -117,6 +120,8 @@ void MX_FREERTOS_Init(void) {
   parsingBTTaskHandle = osThreadCreate(osThread(parsingBTTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
+	osThreadDef(parsingGSMTask, StarPparsingGSM, osPriorityNormal, 0, 512);
+  parsingGSMTaskHandle = osThreadCreate(osThread(parsingGSMTask), NULL);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 
@@ -134,13 +139,13 @@ void StartDefaultTask(void const * argument)
     
     
     
-    
-    
+
 
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)
   {
+
     parsing_gsm11();
 		vTaskDelay(100);
 //		if(xSemaphoreTake(finger_signal, 99999))
@@ -210,7 +215,9 @@ void StartTaskpublish(void const * argument)
 	uint8_t i = 0;
 	if(xSemaphoreTake(finger_signal, 99999))
 	{
-		printf("AT+CIPCLOSE\r\n");
+		ini();
+			HAL_UART_Transmit(&huart5, "AT+CIPCLOSE\r\n", 13, 1000);
+		    HAL_UART_Transmit(&huart6, "AT+CMEE=2\r\n", 11, 1000);
 			vTaskDelay(100);
 		wait1();
 	}
@@ -229,8 +236,10 @@ void StartTaskpublish(void const * argument)
 			{
 				publish_twitter(to_release[pos].message, to_release[pos].cardentials_twitter);
 			}
+			else if(to_release[pos].to_publish && to_release[pos].where == 1)
+			send_SMS("+351913753546", "oioio\r\n",7); 
 		}
-		
+		publ();
 		
 		//send_SMS ("+351916201643", "amo", 3);
 	}
@@ -261,7 +270,19 @@ void StarPparsingBT(void const * argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-     
+     void StarPparsingGSM(void const * argument)
+{
+  /* USER CODE BEGIN StarPparsingBT */
+	    
+
+  /* Infinite loop */
+  for(;;)
+  {
+		parsing_gsm();
+			vTaskDelay(100);
+  }
+  /* USER CODE END StarPparsingBT */
+}
 /* USER CODE END Application */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

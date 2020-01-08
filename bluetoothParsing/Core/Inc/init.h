@@ -31,9 +31,9 @@ extern uint8_t interrupt_count;
 extern uint8_t max_interrupt;
 
 
-extern message_info to_release[5];
+extern message_info to_release[8];
 extern uint8_t number_release;
-extern message_info to_warning[5];
+extern message_info to_warning[8];
 extern uint8_t number_warning; 
 
 #endif

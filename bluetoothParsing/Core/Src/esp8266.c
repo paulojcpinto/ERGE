@@ -38,15 +38,46 @@ char month1[3];
 char *sim2 = sOK;
 int isim2 = sizeof( sOK ) / sizeof( char ) -1;
 
-uint8_t message_to_release[256];
-uint8_t who_to_publish[16];
+uint8_t message_to_release[ MAX_USERS ][256];
+uint8_t who_to_publish[MAX_USERS] [16];
+uint8_t Tx_publish = 0;
+uint8_t Rx_publish = 0;
 
 void atribute_month ( void );
+void ini ()
+{
+	local1 = 0x14;
+}
 
 void publish_twitter ( uint8_t message_release[], uint8_t who_publish[] )
 {
-	strcpy( message_to_release, message_release );
-	strcpy( who_to_publish, who_publish );
+	strcpy( message_to_release[Rx_publish], message_release );
+	strcpy( who_to_publish[Rx_publish++], who_publish );
+	Rx_publish &= ~MAX_USERS;
+
+}
+void publ()
+{
+	if (Rx_publish !=Tx_publish)
+	{
+		stmtime.need_update=2;
+//	while (busy)
+//	{
+//		HAL_UART_Transmit(&huart3, "s", 1, 100);
+
+//	}
+//		
+	busy = 1;
+	printf("AT+CIPSTART=\"TCP\",\"api.thingspeak.com\",80\r\n");
+	sim2 = sOK;
+	isim2 = sizeof( sOK ) / sizeof( char ) -1;
+	local1 =26;
+	local_position1 = 0;
+	}
+}
+void publish_twitter1 ( void )
+{
+	
 	stmtime.need_update=2;
 //	while (busy)
 //	{
@@ -365,7 +396,7 @@ void parsing_gsm11 ( void )
 			{
 				if ( vHardware_verify1 ( ) > 0)
 				{
-					printf("AT+CIPSEND=%d\r\n",  strlen("GET /apps/thingtweet/1/statuses/update?api_key=&status=\r\n") + strlen(message_to_release)+16 );
+					printf("AT+CIPSEND=%d\r\n",  strlen("GET /apps/thingtweet/1/statuses/update?api_key=&status=\r\n") + strlen(message_to_release[Tx_publish])+16 );
 					sim2 = sReady_message;
 					isim2 = sizeof( sReady_message ) / sizeof( char ) -1;
 					local1 = 27;
@@ -380,12 +411,15 @@ void parsing_gsm11 ( void )
 					//HAL_UART_Transmit(&huart3, "\r\nsim\r\n",7, 1000);
 					//printf("GET /apps/thingtweet/1/statuses/update?api_key=6TOVXUMDMAKFHWLF&status=11%d\r\n", oo);
 					HAL_UART_Transmit(&huart5,"GET /apps/thingtweet/1/statuses/update?api_key=" ,strlen("GET /apps/thingtweet/1/statuses/update?api_key="), 10000);
-					HAL_UART_Transmit(&huart5, who_to_publish, 16, 10000);
+					HAL_UART_Transmit(&huart5, who_to_publish[Tx_publish], 16, 10000);
 					HAL_UART_Transmit(&huart5, "&status=", 8, 10000);
-					HAL_UART_Transmit(&huart5, message_to_release, strlen(message_to_release), 10000);
+					HAL_UART_Transmit(&huart5, message_to_release[Tx_publish], strlen(message_to_release[Tx_publish]), 10000);
 					HAL_UART_Transmit(&huart5, "\r\n", 2, 10000);
 					sim2 = rec;
 					isim2 = sizeof( rec ) / sizeof( char ) -1;
+					Tx_publish++;
+					Tx_publish &= ~MAX_USERS;
+
 					local1 = 28;
 					local_position1 = 0;
 				}				
@@ -406,6 +440,8 @@ void parsing_gsm11 ( void )
 			
 			case discard :
 			{
+				if ( Tx_publish != Rx_publish )
+					publish_twitter1();
 				stmtime.need_update = 0;
 			}break;
 				

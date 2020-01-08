@@ -40,9 +40,10 @@ volatile uint16_t UART5Tx_index;
 volatile uint16_t UART5Rx_index;
 
 
-uint8_t UART6Rx_Buffer[128];
+uint8_t UART6Rx_Buffer[512];
 uint8_t Rx6_Buffer[128];
-volatile uint8_t UART6Rx_index;
+volatile uint16_t UART6Tx_index;
+volatile uint16_t UART6Rx_index;
 
 uint8_t UART7Rx_Buffer[128];
 uint8_t Rx7_Buffer[128];
@@ -443,13 +444,28 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart){
 		{ //current UART?
 			UART5Rx_index++;
 			UART5Rx_index &= ~(1<<10); //keep index inside the limits
-			if (UART5Rx_index == UART5Tx_index)
-			{
-				UART5Tx_index++;
-			UART5Tx_index &= ~(1<<10);
-			}
+//			if (UART5Rx_index == UART5Tx_index)
+//			{
+//				UART5Tx_index++;
+//			UART5Tx_index &= ~(1<<10);
+//			}
 			// set the interrupt for UART3 Rx again
 			HAL_UART_Receive_IT(&huart5, &UART5Rx_Buffer[UART5Rx_index], 1);
+		
+//		if (UART3Rx_Buffer[UART3Rx_index-1] == '>')
+			//HAL_UART_Transmit_IT(&huart3, &UART5Rx_Buffer[UART3Rx_index]-1, 1);
+		}
+				if (huart->Instance == USART6)
+		{ //current UART?
+			UART6Rx_index++;
+			UART6Rx_index &= ~(1<<9); //keep index inside the limits
+			if (UART6Rx_index == UART6Tx_index)
+			{
+				UART6Tx_index++;
+			UART6Tx_index &= ~(1<<9);
+			}
+			// set the interrupt for UART3 Rx again
+			HAL_UART_Receive_IT(&huart6, &UART6Rx_Buffer[UART6Rx_index], 1);
 		
 //		if (UART3Rx_Buffer[UART3Rx_index-1] == '>')
 			//HAL_UART_Transmit_IT(&huart3, &UART5Rx_Buffer[UART3Rx_index]-1, 1);

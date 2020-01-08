@@ -51,6 +51,11 @@ extern uint8_t UART5Rx_Buffer[1024];
 extern uint8_t Rx5_Buffer[128];
 extern volatile uint16_t UART5Tx_index;
 extern volatile uint16_t UART5Rx_index;
+
+extern uint8_t UART6Rx_Buffer[512];
+extern uint8_t Rx6_Buffer[128];
+extern volatile uint16_t UART6Tx_index;
+extern volatile uint16_t UART6Rx_index;
 /* USER CODE END Private defines */
 
 void MX_UART4_Init(void);
