@@ -65,17 +65,27 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         linPincode.setVisibility(View.VISIBLE);
                     }
 
-                    if(readMessage.contains("<I1>"))
+                    if(readMessage.contains("<Q1>"))
                     {
                         toUpdate.add(ivPinCode);
                         ivPinCode.setAnimation(fade_out2);
+                        linSuccess.setVisibility(View.VISIBLE);
+                        linSuccess.setAnimation(fade_in2);
+                        Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
+                        btnConfirm.setVisibility(View.VISIBLE);
+                        btnConfirm.startAnimation(fade_in1);
 
 
                     }
-                    if(readMessage.contains("<I2"))
+                    if(readMessage.contains("<Q5"))
                     {
                         toUpdate.add(ivPinCode);
                         ivPinCode.setAnimation(fade_out);
+                        ivSuccess.setImageResource(R.drawable.error);
+                        tvSuccess.setText("Error: pincode invalid!!!");
+                        linSuccess.setVisibility(View.VISIBLE);
+                        linSuccess.setAnimation(fade_in2);
+                        ivSuccess.startAnimation(fade_in);
                     }
                     if(readMessage.contains("<Y1>"))
                     {
@@ -84,13 +94,15 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
                         btnConfirm.setVisibility(View.VISIBLE);
                         btnConfirm.startAnimation(fade_in1);
+
+
                     }
                     if(readMessage.contains("<Y2>"))
                     {
                         ivSuccess.setImageResource(R.drawable.error);
                         tvSuccess.setText("Error registering your fingerprint, timeout");
                         linSuccess.setVisibility(View.VISIBLE);
-                        linSuccess.setAnimation(fade_in);
+                        linSuccess.setAnimation(fade_in2);
                         ivSuccess.startAnimation(fade_in);
 
                     }
