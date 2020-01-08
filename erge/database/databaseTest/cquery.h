@@ -50,6 +50,9 @@ private:
 	const char * msgq_callback;
 	mqd_t msgq_id_query;
 	mqd_t msgq_id_callback;
+    int fd;
+    string messageLog;
+
 };
 
 #endif

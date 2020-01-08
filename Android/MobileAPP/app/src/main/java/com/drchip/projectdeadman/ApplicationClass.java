@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Date;
+
 public class ApplicationClass extends Application {
 
     public static int connectedTo;
@@ -15,9 +17,18 @@ public class ApplicationClass extends Application {
     public static BluetoothDevice target;
     public static BluetoothConnectionService mBluetoothConnectionService;
     public static String deviceType;
+    public static  String userNickname;
     public static boolean deviceConnected;
     public static MenuItem DeviceType;
     public static MenuItem playMenu;
+    public static final int LOGIN_SUCCESS =1;
+    public static final int USER_NOT_FOUND =2;
+    public static final int USER_BLOCKED =3;
+    public static final int BAD_CREDENTIALS =4;
+    public static long conectedTime;
+    public static long seccionTime;
+
+
 
     private final Handler mHandler = new Handler();
 
