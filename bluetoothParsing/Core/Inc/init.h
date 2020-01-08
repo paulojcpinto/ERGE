@@ -23,6 +23,7 @@ typedef struct message_info
 extern xSemaphoreHandle finger_signal;
 extern xSemaphoreHandle sim1;
 extern xSemaphoreHandle release_signal;
+extern xSemaphoreHandle numPad;
 
 extern int cp ;
 extern volatile uint8_t ok;
@@ -30,6 +31,7 @@ extern uint8_t *pp;
 extern uint8_t interrupt_count;
 extern uint8_t max_interrupt;
 
+extern uint8_t code_number;
 
 extern message_info to_release[8];
 extern uint8_t number_release;

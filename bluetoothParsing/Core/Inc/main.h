@@ -72,8 +72,10 @@ void Error_Handler(void);
 #define MotionSensor_GPIO_Port GPIOG
 #define NumPad_3Col_Pin GPIO_PIN_10
 #define NumPad_3Col_GPIO_Port GPIOB
+#define NumPad_3Col_EXTI_IRQn EXTI15_10_IRQn
 #define NumPad_4Col_Pin GPIO_PIN_11
 #define NumPad_4Col_GPIO_Port GPIOB
+#define NumPad_4Col_EXTI_IRQn EXTI15_10_IRQn
 #define LedGreen_Pin GPIO_PIN_13
 #define LedGreen_GPIO_Port GPIOB
 #define EmbLED_Red_Pin GPIO_PIN_14

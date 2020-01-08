@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
+#include "init.h"
 /* USER CODE BEGIN 0 */
 
 #define 		line_mask 			GPIOE->ODR & 0x03C
@@ -76,7 +77,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PEPin PEPin PEPin PEPin */
   GPIO_InitStruct.Pin = NumPad_1Lin_Pin|NumPad_2Lin_Pin|NumPad_3Lin_Pin|NumPad_4Lin_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
@@ -98,7 +99,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PBPin PBPin PBPin */
   GPIO_InitStruct.Pin = NumPad_3Col_Pin|NumPad_4Col_Pin|NumPad_2Col_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PC8 */
@@ -118,42 +119,16 @@ void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 2 */
 void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 {
 	switch ( GPIO_PIN )
-	{
-		case NumPad_1Lin_Pin:
-		{			
-			//HAL_GPIO_TogglePin(GPIOB, EmbLED_Red_Pin);
-			
-			switch ( line_mask  )
-			{
-				case NumPad_1Lin_Pin:
-				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Green_Pin);
-				}; break;
-				
-				case NumPad_2Lin_Pin:
-				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Red_Pin);
-				}; break;
-				
-				case NumPad_3Lin_Pin:
-				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
-				}; break;
-				
-				case NumPad_4Lin_Pin:
-				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Red_Pin);
-				}; break;
-			}
-			
-		}; break;
-		
+	{		
 		case NumPad_2Col_Pin:
 		{	
 			
@@ -163,22 +138,23 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//2
+					code_number++;
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//5
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//8
 				}; break;
 				
 				case NumPad_4Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//0
 				}; break;
 			}			
 			
@@ -192,23 +168,19 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//1
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//4
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//7
 				}; break;
-				
-				case NumPad_4Lin_Pin:
-				{
-					
-				}; break;
+
 			}
 		} break;
 		
@@ -220,22 +192,17 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//3
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//6
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					
-				}; break;
-				
-				case NumPad_4Lin_Pin:
-				{
-					
+					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//9
 				}; break;
 			}
 		} break;

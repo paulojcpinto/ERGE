@@ -7,11 +7,13 @@
 xSemaphoreHandle finger_signal;
 xSemaphoreHandle sim1;
 xSemaphoreHandle release_signal;
+xSemaphoreHandle numPad;
 
 volatile uint8_t ok;
 uint8_t *pp = &ok;
 
 int cp = 0;
+uint8_t code_number=0;
 
 uint8_t interrupt_count = 0;
 uint8_t max_interrupt = 2;

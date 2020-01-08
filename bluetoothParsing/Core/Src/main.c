@@ -118,6 +118,7 @@ int main(void)
 	vSemaphoreCreateBinary(finger_signal);
 	vSemaphoreCreateBinary(sim1);
 	vSemaphoreCreateBinary(release_signal);
+	vSemaphoreCreateBinary(numPad);
 
   /* USER CODE END 2 */
 

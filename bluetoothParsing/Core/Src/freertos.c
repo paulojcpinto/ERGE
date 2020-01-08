@@ -60,6 +60,7 @@ osThreadId updateTimeTaskHandle;
 osThreadId publishTaskHandle;
 osThreadId parsingBTTaskHandle;
 osThreadId parsingGSMTaskHandle;
+osThreadId numPadTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -74,6 +75,7 @@ void StartTaskUpdateTime(void const * argument);
 void StartTaskpublish(void const * argument);
 void StarPparsingBT(void const * argument);
 void StarPparsingGSM(void const * argument);
+void StartNumpad(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -123,6 +125,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
 	osThreadDef(parsingGSMTask, StarPparsingGSM, osPriorityNormal, 0, 512);
   parsingGSMTaskHandle = osThreadCreate(osThread(parsingGSMTask), NULL);
+	
+		osThreadDef(numPadTask, StartNumpad, osPriorityNormal, 0, 512);
+  numPadTaskHandle = osThreadCreate(osThread(numPadTask), NULL);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 
@@ -284,6 +289,43 @@ void StarPparsingBT(void const * argument)
 			vTaskDelay(100);
   }
   /* USER CODE END StarPparsingBT */
+}
+
+   void StartNumpad(void const * argument)
+{
+  /* USER CODE BEGIN StarPparsingBT */
+	//    if (xSemaphoreTake(numPad, 99999));
+
+  /* Infinite loop */
+  for(;;)
+  {
+		code_number = 0;
+		if (xSemaphoreTake(numPad, 99999))
+		{
+			while ( code_number < 4 )
+			{
+				line_output 	|=   NumPad_1Lin_Pin;
+				vTaskDelay(10);
+				line_output		&=  ~NumPad_1Lin_Pin;
+				vTaskDelay(10);
+			
+				line_output 	|=   NumPad_2Lin_Pin;
+				vTaskDelay(10);
+				line_output 	&=  ~NumPad_2Lin_Pin;
+				vTaskDelay(10);
+			
+				line_output 	|=   NumPad_3Lin_Pin;
+				vTaskDelay(10);
+				line_output 	&=  ~NumPad_3Lin_Pin;
+				vTaskDelay(10);
+			
+				line_output 	|=   NumPad_4Lin_Pin;
+				vTaskDelay(10);
+				line_output 	&=  ~NumPad_4Lin_Pin;
+				vTaskDelay(10);
+			}
+		}
+  }
 }
 /* USER CODE END Application */
 
