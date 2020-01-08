@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.drchip.projectdeadman.ApplicationClass;
 import com.drchip.projectdeadman.DevicesAdapter;
 import com.drchip.projectdeadman.R;
+import com.drchip.projectdeadman.Register;
 import com.drchip.projectdeadman.UserInstructionsRASP;
 
 import androidx.annotation.NonNull;
@@ -54,20 +55,32 @@ public class HomeFragment extends Fragment {
                         ApplicationClass.conectedTime= SystemClock.elapsedRealtime();
 
                     }
+                    receive_nick(readMessage);
                     if(readMessage.contains("<H1>"))
                     {
                         tvPresenceStatus.setText("Already Done");
                         toUpdateText.add(tvPresenceStatus);
                         toUpdateImage.add(ivPresenseStatus);
+                        ivPresenseStatus.setImageResource(R.drawable.correct);
                         ivPresenseStatus.setAnimation(fade_out2);
                         tvPresenceStatus.setAnimation(fade_out);
 
                     }
                     if(readMessage.contains("<H2>"))
                     {
+                        tvPresenceStatus.setText("User not unknown");
+                        toUpdateText.add(tvPresenceStatus);
+                        toUpdateImage.add(ivPresenseStatus);
+                        ivPresenseStatus.setImageResource(R.drawable.not_knowned);
+                        ivPresenseStatus.setAnimation(fade_out);
+                        tvPresenceStatus.setAnimation(fade_out);
+                    }
+                    if(readMessage.contains("<H0>"))
+                    {
                         tvPresenceStatus.setText("Lacking");
                         toUpdateText.add(tvPresenceStatus);
                         toUpdateImage.add(ivPresenseStatus);
+                        ivPresenseStatus.setImageResource(R.drawable.correct);
                         ivPresenseStatus.setAnimation(fade_out);
                         tvPresenceStatus.setAnimation(fade_out);
                     }
@@ -207,6 +220,7 @@ Animation blink;
         ivClock.setAnimation(blink);
         timerHandler.postDelayed(timerRunnable, 0);
 
+        ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname+">",getContext());
        // ApplicationClass.sendMessage("<H>",getContext());
 
 
@@ -302,6 +316,36 @@ Animation blink;
         @Override
         public void run() {
             h.sendEmptyMessage(0);
+        }
+    }
+
+    void receive_nick(String readMessage)
+    {
+        if(readMessage.contains("<S") && readMessage.contains((">")))
+        {
+            StringBuilder aux = new StringBuilder();
+            for (int i =2; i<readMessage.length()-1;i++)
+            {
+                aux.append(readMessage.charAt(i));
+            }
+            int lengh=0;
+            try {
+                lengh  = Integer.parseInt(aux.toString());
+            }catch (NumberFormatException nfe)
+            {
+                Toast.makeText(getContext(), "Error Parsing Number: "+nfe.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            if(lengh !=ApplicationClass.userNickname.length())
+            {
+                Toast.makeText(getContext(), "Error Sending Nickname:"+ lengh + "Suposto:" + ApplicationClass.userNickname.length() + "With message: "+ readMessage, Toast.LENGTH_SHORT).show();
+                ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname.length()+">", getContext());
+
+            }else
+            {
+                ApplicationClass.sendMessage("<H>",getContext());
+
+            }
+
         }
     }
 

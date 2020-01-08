@@ -358,6 +358,7 @@ void prepare_receive_info(int *c )
 			UART4Tx_index++;		
 			break;
 		
+		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -477,6 +478,10 @@ void end_receiving_trama (int *c)
 					printUpdate(create_user_finger(),char_instructions);
 					HAL_TIM_Base_Start_IT(&htim2);
 				
+					break;
+				
+				case int_presence_check:
+					printUpdate(getPresenceStatus(user_pars.nickName),char_presensce_check);
 					break;
 				
 

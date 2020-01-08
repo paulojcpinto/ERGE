@@ -186,6 +186,7 @@ public class BtConfigsFragment extends Fragment {
 
         return root;
     }
+
     public void loadData() {
         devices.clear();
         File file = Objects.requireNonNull(getContext()).getFileStreamPath("bluetooth.txt");
