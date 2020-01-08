@@ -31,7 +31,3 @@ ProjectOne/bluetoothParsing/MDKARM/PPPPPPP/gpio.o
 *.lst
 *.s
 
-bluetoothParsing/MDK-ARM/PPPPPPP.uvguix.andre
-bluetoothParsing/MDK-ARM/PPPPPPP.uvoptx
-bluetoothParsing/MDK-ARM/PPPPPPP.uvoptx
-erge/btTeste/build-btTeste-Rpi-Debug/moc_bluetooth_module.cpp
