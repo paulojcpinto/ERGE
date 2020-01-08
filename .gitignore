@@ -1,5 +1,9 @@
 
 ProjectOne/PPPPPPP/MDK-ARM/PPPPPPP.uvguix.Andre
+
+*.Paulo
+*.uvprojx
+
 ProjectOne/bluetoothParsing/MDKARM/DebugConfig/PPPPPPP_STM32F767ZITx_2.0.0.dbgconf
 ProjectOne/bluetoothParsing/MDKARM/EventRecorderStub.scvd
 ProjectOne/bluetoothParsing/MDKARM/PPPPPPP.uvguix.Andre
@@ -26,3 +30,4 @@ ProjectOne/bluetoothParsing/MDKARM/PPPPPPP/gpio.o
 *.dep
 *.lst
 *.s
+
