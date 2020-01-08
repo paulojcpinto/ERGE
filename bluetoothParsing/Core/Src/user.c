@@ -65,8 +65,9 @@ void initUser(void)
 			 strcpy(users[nextUser].mmessage.dateToStart,newUser.dateToStart);
 			 strcpy(users[nextUser].mmessage.messageToRelease,newUser.messageToRelease);
 			 strcpy(users[nextUser].mmessage.platformToRelease,newUser.platformToRelease);
+			 strcpy(pin_code, newUser.pinCode);
 			 users[nextUser].mmessage.repeatTime= newUser.repeatTime;
-			 users[nextUser].unlocked=1;
+			 users[nextUser].unlocked=0;
 			 users[nextUser].mmessage.dateToRelease1.tm_year = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_mon = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_mday = 0;
@@ -156,8 +157,10 @@ void initUser(void)
 			 }
 			 else 
 			 {
-				 return USER_BLOCKED;   //user blocked
+  			 strcpy(pin_code, pinCode);
 				 xSemaphoreGive(numPad);
+				 return USER_BLOCKED;   //user blocked
+
 			 }
 		 }
 		 else return BAD_CREDENTIALS;   //wrong pincode
@@ -334,6 +337,7 @@ void initUser(void)
 			if ( Fingerprint_SaveNewFinger(fingerID,40) )
 			{				
 				users[ nextUser++ ].fingerID = fingerID;
+				xSemaphoreGive(numPad);
 				return 1;
 			}
 			else

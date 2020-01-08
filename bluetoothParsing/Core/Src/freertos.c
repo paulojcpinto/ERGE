@@ -299,6 +299,7 @@ void StarPparsingBT(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+	if (xSemaphoreTake(numPad, 99999));
 		code_number = 0;
 		if (xSemaphoreTake(numPad, 99999))
 		{
@@ -307,23 +308,29 @@ void StarPparsingBT(void const * argument)
 				line_output 	|=   NumPad_1Lin_Pin;
 				vTaskDelay(70);
 				line_output		&=  ~NumPad_1Lin_Pin;
-				vTaskDelay(70);
+				vTaskDelay(100);
 			
 				line_output 	|=   NumPad_2Lin_Pin;
 				vTaskDelay(70);
 				line_output 	&=  ~NumPad_2Lin_Pin;
-				vTaskDelay(70);
+				vTaskDelay(100);
 			
 				line_output 	|=   NumPad_3Lin_Pin;
 				vTaskDelay(70);
 				line_output 	&=  ~NumPad_3Lin_Pin;
-				vTaskDelay(70);
+				vTaskDelay(100);
 			
 				line_output 	|=   NumPad_4Lin_Pin;
 				vTaskDelay(70);
 				line_output 	&=  ~NumPad_4Lin_Pin;
-				vTaskDelay(70);
+				vTaskDelay(100);
 			}
+			pin_code[4] = 0;
+		  choose_pin[4] = 0;
+			if (!strcmp(pin_code, choose_pin))
+				HAL_UART_Transmit(&huart4, "<Q1>",4, 1000);
+			else
+				HAL_UART_Transmit(&huart4, "<Q5>",4, 1000);
 		}
   }
 }

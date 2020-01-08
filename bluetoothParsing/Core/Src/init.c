@@ -14,6 +14,8 @@ uint8_t *pp = &ok;
 
 int cp = 0;
 uint8_t code_number=0;
+char pin_code[5];
+char choose_pin[5];
 
 uint8_t interrupt_count = 0;
 uint8_t max_interrupt = 2;

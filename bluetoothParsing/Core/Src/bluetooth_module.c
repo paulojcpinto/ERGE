@@ -463,8 +463,16 @@ void end_receiving_trama (int *c)
 				case int_instructions:
 					    //TODO
 					HAL_TIM_Base_Stop_IT(&htim2);
-					printUpdate(create_user_finger(),char_instructions);
+				
+				if (	create_user_finger()==2)
+				{
+					printUpdate(2,char_instructions);
 					HAL_TIM_Base_Start_IT(&htim2);
+					break;
+				}
+				UART4Tx_index++;
+				
+				HAL_TIM_Base_Start_IT(&htim2);
 				
 					break;
 				
