@@ -244,7 +244,6 @@ void StartTaskpublish(void const * argument)
 			}
 			else if(to_release[pos].to_publish && to_release[pos].where == 1)
 				send_SMS(to_release[pos].phone_number, to_release[pos].message,strlen(to_release[pos].message)); 
-			to_release[pos].to_publish = 0;
 		}
 		publ();
 		
