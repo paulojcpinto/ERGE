@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorPrimaryLight"
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/btnUpdate"
+        android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -35,16 +34,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout11"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/ivBot"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivTop">
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -65,7 +61,6 @@
                 android:hint="Enter Phone Number:"
                 android:inputType="phone"
                 android:textColor="@color/colorText" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -145,7 +140,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/colorAccent"
-                android:clickable="true"
                 android:contextClickable="true"
                 android:cursorVisible="true"
                 android:ems="10"
@@ -182,87 +176,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/ivBot"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/rasp" />
-
-    <ImageView
-        android:id="@+id/ivTop"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:srcCompat="@drawable/stm" />
-
-    <ImageView
-        android:id="@+id/ivPhone1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout11"
-        app:layout_constraintVertical_bias="0.01999998"
-        app:srcCompat="@drawable/correct" />
-
-    <ImageView
-        android:id="@+id/ivRepeat"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivPhone1"
-        app:srcCompat="@drawable/correct" />
-
-    <ImageView
-        android:id="@+id/ivEmail"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRepeat"
-        app:srcCompat="@drawable/correct" />
-
-    <ImageView
-        android:id="@+id/ivEmailPassword"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivEmail"
-        app:srcCompat="@drawable/correct" />
-
-    <ImageView
-        android:id="@+id/ivMessage"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivEmailPassword"
-        app:srcCompat="@drawable/correct" />
-
-    <ImageView
-        android:id="@+id/ivPlatform"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivMessage"
-        app:srcCompat="@drawable/correct" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

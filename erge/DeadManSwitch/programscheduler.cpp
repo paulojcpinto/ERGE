@@ -1,61 +1,9 @@
 ﻿#include "programscheduler.h"
-#include <sstream>
 
-#define LOGIN_SUCCESS 1
-#define USER_NOT_FOUND 2
-#define USER_BLOCKED  3
-#define BAD_CREDENTIALS  4
-using namespace  std;
-ProgramScheduler::ProgramScheduler():log("ProgramScheduler: ")
+ProgramScheduler::ProgramScheduler()
 {
-  usersScheduler.clear();
+  userNumber = 0;
   nextScheduler.tm_year = 0;
-  loadData(mQuery.getAllUsers());
-}
-
-void ProgramScheduler::loadData(vector<fullUser> users)
-{
-    for(fullUser nUser: users)
-    {
-        time_t raw_time;
-        struct tm *ptr_ts;
-        tm nextScheduler;
-        time ( &raw_time );
-        ptr_ts = gmtime ( &raw_time );
-        ptr_ts->tm_min++;
-        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,nUser));
-        //usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
-
-
-
-    }
-}
-bool ProgramScheduler::userParsingToFulluser(fullUser input, user_parsing *output)
-{
-    output->email=input.user.Email;
-    output->pinCode=input.user.PinCode;
-    output->nickName=input.user.NickName;
-    output->repeatTime=input.messageInfo.JumpTime;
-    output->dateToStart=input.messageInfo.dateToStart;
-    output->phoneNumber=input.user.PhoneNumber;
-    output->emailPassword=input.user.EmailPassword;
-    output->messageToRelease=input.messageInfo.UserMessage;
-    output->platformToRelease=input.messageInfo.TargetPlatform;
-    return true;
-}
-
-bool ProgramScheduler::userParsingToFulluser(user_parsing input, fullUser *output)
-{
-    output->user.NickName=input.nickName;
-    output->user.PinCode=input.pinCode;
-    output->user.Email=input.email;
-    output->user.EmailPassword=input.emailPassword;
-    output->user.PhoneNumber=input.phoneNumber;
-    output->messageInfo.JumpTime=input.repeatTime;
-    output->messageInfo.UserMessage=input.messageToRelease;
-    output->messageInfo.dateToStart=input.dateToStart;
-    output->messageInfo.TargetPlatform=input.dateToStart;
-    return true;
 }
 
 void ProgramScheduler::verifyReleaseTime( void )
@@ -67,8 +15,8 @@ void ProgramScheduler::verifyReleaseTime( void )
   ptr_ts = gmtime ( &raw_time );
   bool aux = false;
 while(!aux)
-  for ( uint8_t cont = 0; cont < usersScheduler.size(); cont ++)
-    if(usersScheduler.at(cont).compareTimeRelease (*ptr_ts))
+  for ( uint8_t cont = 0; cont < userNumber; cont ++)
+    if(usersScheduler[cont].compareTimeRelease (*ptr_ts))
       { /*send signal */
         printf("okooko");
         aux = true;
@@ -80,107 +28,38 @@ while(!aux)
     }
 }
 
-int ProgramScheduler::addUser(user_parsing newUser)
+void ProgramScheduler::addUser( void )
 {
-    if(finduser(newUser.nickName)==nullptr)
-    {
-
-        newUserInfo=newUser;
-        return 1;
-    }
-    return 2;
+  time_t raw_time;
+  struct tm *ptr_ts;
+  userNumber ++ ;
+  time ( &raw_time );
+  ptr_ts = gmtime ( &raw_time );
+  ptr_ts->tm_min++;
+  UserScheduler ok(*ptr_ts);
+  usersScheduler[0] = ok;
 }
-
-void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *endedFingerPrint)
-{
-
-    time_t raw_time;
-    struct tm *ptr_ts;
-    tm nextScheduler;
-    time ( &raw_time );
-    ptr_ts = gmtime ( &raw_time );
-    ptr_ts->tm_min++;
-    fullUser NewUser;
-    userParsingToFulluser(newUserInfo,&NewUser);
-
-    log.writeToLog("Deu ate aqui!");
-    NewUser.fingerInfo.FingerprintID=9;     //TODO getFingerprint here
-    NewUser.fingerInfo.FingerprintName="FingerOne";
-    *endedFingerPrint=true;
-    log.writeToLog("Deu ate aqui!2");
-    //TODO getfaces here!!
-
-    NewUser.faceInfo.PathDataset=newUserInfo.nickName;
-    NewUser.faceInfo.NumberOfImages=15;
-    usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,NewUser));
-
-    finduser(NewUser.user.NickName)->createDataset(imagesTaked,endedDataSet);
-
-
-
-
-
-    // TODO mudar para full user
-    mQuery.insertUser(NewUser);
-}
-
-
 
 void ProgramScheduler::deleteUser( string nickName )
 {
-  for ( uint8_t count = 0; count < usersScheduler.size(); count++ )
+  for ( uint8_t count = 0; count < userNumber; count++ )
     {
       if ( usersScheduler[count].compareUserNickName ( nickName ))
         {
-
-          usersScheduler.erase(usersScheduler.begin()+count);
-          stringstream message;
-          message<<"Deleted User: "<<nickName;
-          log.writeToLog(message.str());
+          usersScheduler[count] = usersScheduler[userNumber - 1];
+          userNumber --;
           return;
         }
     }
 }
 
 
-UserScheduler* ProgramScheduler::finduser(string Nickname)
-{
-    for(int i=0; i<usersScheduler.size();i++)
-    {
-        stringstream ss;
-        ss<<"Users number: "<<usersScheduler.size();
-        log.writeToLog(ss.str());
-        if(usersScheduler[i].compareUserNickName(Nickname))
-        {
-            ss.clear();
-            ss<<"User Founded: "<<Nickname<<" at position: "<<i;
-            log.writeToLog(ss.str());
-            return &usersScheduler.at(i);
-
-        }
-    }
-
-    return  nullptr;
-}
-
-int ProgramScheduler::login(string nickname, string pincode)
-{
-    UserScheduler* userLog = finduser(nickname);
-    if(userLog != nullptr)
-    {
-        if(userLog->login(pincode))
-            return LOGIN_SUCCESS;
-        return BAD_CREDENTIALS;
-
-    }return USER_NOT_FOUND;
-}
-
 void ProgramScheduler::updateNextScheduler ( void )
 {
     struct tm timeAux;
     unsigned long int aux;
     unsigned long int aux2;
-    if ( usersScheduler.size() )
+    if ( userNumber )
     {
 
         nextScheduler = usersScheduler[0].getNextScheduler ();
@@ -189,7 +68,7 @@ void ProgramScheduler::updateNextScheduler ( void )
         aux += nextScheduler.tm_yday * 61 * 25 ;
         aux += nextScheduler.tm_year * 61 * 25 * 367 ;
 
-        for ( unsigned int count = 1; count < usersScheduler.size(); count ++ )
+        for ( unsigned int count = 1; count < userNumber; count ++ )
         {
             timeAux = usersScheduler[count].getNextScheduler ();
             aux2 = timeAux.tm_min;

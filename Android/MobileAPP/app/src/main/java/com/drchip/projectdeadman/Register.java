@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,7 +28,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -75,8 +73,7 @@ public class Register extends AppCompatActivity {
                     receive_repeatTime(readMessage);
                     receive_dateStart(readMessage);
                     receive_platform(readMessage);
-                    recieve_create(readMessage);
-                    Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:
@@ -106,7 +103,6 @@ public class Register extends AppCompatActivity {
         Register.this.finish();
     }
 
-    TimePickerDialog picker;
     ProgressDialog progressDialog;
     DatePickerDialog datePickerDialog;
     EditText etDate, etMessage, etPlatform, etNickName,etPinCode,etEmail,etEmailPassword,etPhoneNumber,etRepeatTime;
@@ -200,9 +196,6 @@ public class Register extends AppCompatActivity {
 
             }
         });
-
-
-
         etMessage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -252,24 +245,9 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
-
                                     // set day of month , month and year value in the edit text
                                     etDate.setText(dayOfMonth + "/"
                                             + (monthOfYear + 1) + "/" + year);
-                                    final Calendar cldr = Calendar.getInstance();
-                                    int hour = cldr.get(Calendar.HOUR_OF_DAY);
-                                    int minutes = cldr.get(Calendar.MINUTE);
-                                    // time picker dialog
-                                    picker = new TimePickerDialog(Register.this,
-                                            new TimePickerDialog.OnTimeSetListener() {
-                                                @Override
-                                                public void onTimeSet(TimePicker tp, int sHour, int sMinute) {
-                                                    etDate.append("/"+sHour+"/"+sMinute);
-                                                                                                   }
-                                            }, hour, minutes, true);
-                                    picker.show();
-
-
 
                                 }
                             }, mYear, mMonth, mDay);
@@ -308,11 +286,7 @@ public class Register extends AppCompatActivity {
                     message.setMessage("Enter the platform that you want to release here!!");
 
                     if(ApplicationClass.deviceType.contains("STM"))
-                    {
                         rbTwitter.setVisibility(View.VISIBLE);
-                        rbEmail.setVisibility(View.GONE);
-                    }
-
                     else rbTwitter.setVisibility(View.GONE);
 
                     rbTwitter.setOnClickListener(new OnClickListener() {
@@ -376,10 +350,7 @@ public class Register extends AppCompatActivity {
                                  Toast.makeText(Register.this, "Please put an twitter KEY number!", Toast.LENGTH_SHORT).show();
                                  dialog.cancel();
                              }
-                             else if(etKey.getText().toString().length() == 16)
-                             {
-                                 etPlatform.setText("TWITTER "+etKey.getText().toString().trim());
-                             }else Toast.makeText(Register.this, "Please make sure you put the 16 characters", Toast.LENGTH_SHORT).show();
+                             else etPlatform.setText("TWITTER "+etKey.getText().toString().trim());
 
                             }
                             else {
@@ -598,7 +569,7 @@ public class Register extends AppCompatActivity {
 
                         progressDialog = new ProgressDialog(Register.this);
                         progressDialog.setTitle("Communicating");
-                        progressDialog.setMessage("Sending user data!...");
+                        progressDialog.setMessage("Loading user data!...");
                         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                         progressDialog.setMax(6);
                         progressDialog.setCancelable(true);
@@ -694,6 +665,7 @@ public class Register extends AppCompatActivity {
 
             }else
             {
+                Toast.makeText(Register.this, "Sended nickname", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<P"+etPinCode.getText().toString().trim()+">", Register.this);
 
@@ -723,6 +695,7 @@ public class Register extends AppCompatActivity {
                 ApplicationClass.sendMessage("<P" + etPinCode.getText().toString().trim() + ">", Register.this);
 
             } else {
+                Toast.makeText(Register.this, "Sended pincode", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<M"+etEmail.getText().toString().trim()+">", Register.this);
 
@@ -746,9 +719,11 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
             }
             if (lengh != etEmail.getText().toString().trim().length()) {
+                Toast.makeText(Register.this, "<Error sending email, receibed: " + lengh + " instead of:" + etEmail.getText().toString().trim().length(), Toast.LENGTH_SHORT).show();
                 ApplicationClass.sendMessage("<M" + etEmail.getText().toString().trim() + ">", Register.this);
 
             } else {
+                Toast.makeText(Register.this, "Sended email", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<X"+etEmailPassword.getText().toString().trim()+">", Register.this);
 
@@ -775,6 +750,7 @@ public class Register extends AppCompatActivity {
                 ApplicationClass.sendMessage("<X" + etEmail.getText().toString().trim() + ">", Register.this);
 
             } else {
+                Toast.makeText(Register.this, "Sended email email password", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<T"+etPhoneNumber.getText().toString().trim()+">", Register.this);
 
@@ -827,6 +803,7 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<R" + etMessage.getText().toString().trim() + ">", Register.this);
 
             } else {
+                Toast.makeText(Register.this, "Sended message to release", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<O"+etRepeatTime.getText().toString().trim()+">", Register.this);
 
@@ -853,6 +830,7 @@ public class Register extends AppCompatActivity {
              ApplicationClass.sendMessage("<O" + etRepeatTime.getText().toString().trim() + ">", Register.this);
 
         } else {
+            Toast.makeText(Register.this, "Sended repeat time", Toast.LENGTH_SHORT).show();
             progressDialog.incrementProgressBy(1);
             ApplicationClass.sendMessage("<D"+etDate.getText().toString().trim()+">", Register.this);
 
@@ -878,6 +856,7 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<D" + etDate.getText().toString().trim() + ">", Register.this);
 
             } else {
+                Toast.makeText(Register.this, "Sended Date to start!", Toast.LENGTH_SHORT).show();
                 progressDialog.incrementProgressBy(1);
                 ApplicationClass.sendMessage("<A"+etPlatform.getText().toString().trim()+">", Register.this);
 
@@ -903,37 +882,14 @@ public class Register extends AppCompatActivity {
                  ApplicationClass.sendMessage("<A" + etPlatform.getText().toString().trim() + ">", Register.this);
 
             } else {
-                progressDialog.dismiss();
+                Toast.makeText(Register.this, "Sended Platform to release!", Toast.LENGTH_SHORT).show();
                 ApplicationClass.sendMessage("<C>",Register.this);
-
-
-            }
-        }
-    }
-
-    void recieve_create(String readMessage)
-    {
-        if (readMessage.contains("<C") && readMessage.contains((">")))
-        {
-            StringBuilder aux = new StringBuilder();
-            for (int i = 2; i < readMessage.length() - 1; i++) {
-                aux.append(readMessage.charAt(i));
-            }
-            int result=0;
-            try {
-                result = Integer.parseInt(aux.toString());
-            } catch (NumberFormatException nfe) {
-                Toast.makeText(this, "Error Parsing Number: " + nfe.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-            if(result==1)
-            {
                 final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.success_login_layout, null);
                 //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
-               // progressDialog.dismiss();
+                progressDialog.dismiss();
 
-                ApplicationClass.userNickname= etNickName.getText().toString();
                 message.setView(dialogView);
                 message.setTitle("Register Completed");
                 message.setMessage("You successfully register an new user!!");
@@ -941,7 +897,7 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(ApplicationClass.deviceType.contains("STM"))
-                            startActivity(new Intent(Register.this, UserInstuctionsSTM.class));
+                        startActivity(new Intent(Register.this, UserInstuctionsSTM.class));
                         else if(ApplicationClass.deviceType.contains("RASP"))
                             startActivity(new Intent(Register.this, UserInstructionsRASP.class));
                         Register.this.finish();
@@ -950,37 +906,9 @@ public class Register extends AppCompatActivity {
                     }
                 });
                 message.show();
+
             }
-            else
-            {
-                final AlertDialog.Builder message = new AlertDialog.Builder(Register.this);
-                LayoutInflater inflater = getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.error_login_layout, null);
-                //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
-                //progressDialog.dismiss();
-
-                message.setView(dialogView);
-                message.setTitle("Register Failed");
-                if(result==2)
-                message.setMessage("A user with that name already exists!!");
-                else if(result==3)
-                    message.setMessage("maximum user limit has already been reached!!");
-                else message.setMessage("Error unkowned!!");
-
-                message.setPositiveButton("Ok :(", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                    }
-                });
-                message.show();
-            }
-
-
-
         }
-
     }
 
 

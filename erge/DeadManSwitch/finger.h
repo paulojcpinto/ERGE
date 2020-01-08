@@ -2,7 +2,7 @@
 #define FINGER_H
 
 #include <string>
-#include "SqlModule/sqlquery.h"
+
 using namespace std;
 
 class Finger
@@ -17,7 +17,7 @@ class Finger
 
         Finger ( void ) {}
         Finger ( unsigned int ID );
-        Finger(fingerPrintQuery fingerInfo );
+        void operator=(Finger finger);
         bool CompareFinger ( unsigned int ID );
         ~Finger ( void ) {}
 

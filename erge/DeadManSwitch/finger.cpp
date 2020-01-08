@@ -13,11 +13,7 @@ Finger::Finger( unsigned int ID )
 {
     this->fingerID = ID;
 }
-Finger::Finger(fingerPrintQuery fingerInfo)
-{
-    this->fingerID=fingerInfo.FingerprintID;
-    this->fingerName=fingerInfo.FingerprintName;
-}
+
 
 /****************************************************************************
  *
@@ -34,3 +30,8 @@ bool Finger::CompareFinger( unsigned int ID )
     return ( this->fingerID == ID );
 }
 
+
+void Finger::operator=(Finger finger)
+{
+  this->fingerID = finger.fingerID;
+}

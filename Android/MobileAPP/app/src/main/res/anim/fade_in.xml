@@ -8,7 +8,7 @@
         android:pivotY="70%"
         android:toDegrees="0" />
     <alpha
-        android:duration="900"
+        android:duration="500"
         android:fromAlpha="0.0"
         android:fromDegrees="0"
         android:interpolator="@android:anim/accelerate_interpolator"

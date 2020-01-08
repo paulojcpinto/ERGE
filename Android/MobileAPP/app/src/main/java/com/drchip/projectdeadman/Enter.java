@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +34,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -83,7 +81,6 @@ public class Enter extends AppCompatActivity {
                         ivStatus.clearAnimation();
                         ivStatus.setImageResource(R.drawable.done);
                         ivStatus.startAnimation(fade_in);
-                        ApplicationClass.conectedTime = SystemClock.elapsedRealtime();
 
                         Toast.makeText(Enter.this, "Connected with success", Toast.LENGTH_SHORT).show();
                         boolean canSave = true;
@@ -94,9 +91,7 @@ public class Enter extends AppCompatActivity {
                         }
                         if (canSave) {
                             loadedDevices.add(new MybluetoothDevice(ApplicationClass.target, ApplicationClass.deviceType));
-                           // saveDevice(ApplicationClass.deviceConnected);
-                            saveDevice(ApplicationClass.target.getAddress(),ApplicationClass.deviceType);
-
+                            saveDevice();
                         }
 
                     } else if (readMessage.equals("RASP")) {
@@ -108,8 +103,6 @@ public class Enter extends AppCompatActivity {
 
                         Toast.makeText(Enter.this, "Connected with success", Toast.LENGTH_SHORT).show();
 
-                        ApplicationClass.conectedTime = SystemClock.elapsedRealtime();
-
                         boolean canSave = true;
 
                         for (int i = 0; i < loadedDevices.size(); i++) {
@@ -119,7 +112,7 @@ public class Enter extends AppCompatActivity {
                         }
                         if (canSave) {
                             loadedDevices.add(new MybluetoothDevice(ApplicationClass.target, ApplicationClass.deviceType));
-                            saveDevice(ApplicationClass.target.getAddress(),ApplicationClass.deviceType);
+                            saveDevice();
                         }
                     }
 
@@ -505,21 +498,20 @@ public class Enter extends AppCompatActivity {
         super.onPostResume();
     }
 
-    public void saveDevice(String mac,String type) {
+    public void saveDevice() {
 
         try {
             FileOutputStream file = openFileOutput("bluetooth.txt", MODE_PRIVATE);  //cria o ficheiro caso nao exitsa, e define a permisao do ficheiro para so o nossa aplicaçao
             OutputStreamWriter outputFile = new OutputStreamWriter(file);  //cria a connecao com o ficheiro que vamos escrever
 
-//            for (int i = 0; i < loadedDevices.size(); i++) {
-//                outputFile.write(loadedDevices.get(i).device.getName() + "," + loadedDevices.get(i).device.getAddress() + "," + loadedDevices.get(i).deviceType);
-//
-//
-//            }
-            outputFile.append(mac+","+type+"\r\n");
-           // outputFile.flush();
+            for (int i = 0; i < loadedDevices.size(); i++) {
+                outputFile.write(loadedDevices.get(i).device.getName() + "," + loadedDevices.get(i).device.getAddress() + "," + loadedDevices.get(i).deviceType);
+
+
+            }
+            outputFile.flush();
             outputFile.close();
-            Toast.makeText(this, "Sucessfully saveded!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sucessfully savedes eyeyeyyeyeyeyeyeyeye!", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -537,17 +529,18 @@ public class Enter extends AppCompatActivity {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("bluetooth.txt")));  //abre p ficheiro Data.txt para leitura!
                 while ((linefromFile = reader.readLine()) != null) {
                     StringTokenizer tokens = new StringTokenizer(linefromFile, ",");
+                    String DeviceName = tokens.nextToken();
                     String DeviceMac = tokens.nextToken();
                     String type = tokens.nextToken();
                     Set<BluetoothDevice> auxDevices = ApplicationClass.BA.getBondedDevices();
                     for (BluetoothDevice test : auxDevices) {
-
+                        if (test.getName().equals(DeviceName)) {
                             if (test.getAddress().equals(DeviceMac)) {
                                 loadedDevices.add(new MybluetoothDevice(test, type));
                             }
 
 
-
+                        }
                     }
 
                 }

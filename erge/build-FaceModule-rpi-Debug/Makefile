@@ -52,13 +52,9 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../FaceModule/dataset.cpp \
-		../FaceModule/facerecognizer.cpp \
-		../FaceModule/main.cpp \
+SOURCES       = ../FaceModule/main.cpp \
 		../FaceModule/mcamera.cpp 
-OBJECTS       = dataset.o \
-		facerecognizer.o \
-		main.o \
+OBJECTS       = main.o \
 		mcamera.o
 DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_pre.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/common/unix.conf \
@@ -173,7 +169,6 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		../FaceModule/.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -192,11 +187,7 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exceptions.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/yacc.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/lex.prf \
-		../FaceModule/FaceModule.pro ../FaceModule/dataset.h \
-		../FaceModule/facerecognizer.h \
-		../FaceModule/mcamera.h ../FaceModule/dataset.cpp \
-		../FaceModule/facerecognizer.cpp \
-		../FaceModule/main.cpp \
+		../FaceModule/FaceModule.pro ../FaceModule/mcamera.h ../FaceModule/main.cpp \
 		../FaceModule/mcamera.cpp
 QMAKE_TARGET  = FaceModule
 DESTDIR       = 
@@ -322,7 +313,6 @@ Makefile: ../FaceModule/FaceModule.pro ../../../../buildroot-2019.08/output/host
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -456,7 +446,6 @@ Makefile: ../FaceModule/FaceModule.pro ../../../../buildroot-2019.08/output/host
 ../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf:
@@ -491,8 +480,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../FaceModule/dataset.h ../FaceModule/facerecognizer.h ../FaceModule/mcamera.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../FaceModule/dataset.cpp ../FaceModule/facerecognizer.cpp ../FaceModule/main.cpp ../FaceModule/mcamera.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../FaceModule/mcamera.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../FaceModule/main.cpp ../FaceModule/mcamera.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -539,201 +528,6 @@ compiler_lex_clean:
 compiler_clean: compiler_moc_predefs_clean 
 
 ####### Compile
-
-dataset.o: ../FaceModule/dataset.cpp ../FaceModule/dataset.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/string.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/features.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_config.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/cdefs.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv_modules.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/types_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/assert.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdlib.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/waitflags.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/waitstatus.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/endian.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/endian.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/byteswap.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-common.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/types.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/wordsize.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/typesizes.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-16.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/types.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/time.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/time.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_clk_tck.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/select.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/select.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigset.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/sysmacros.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/pthreadtypes.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/alloca.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdint.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/wchar.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/math.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_val.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_valf.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_vall.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/inf.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/nan.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathdef.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathcalls.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathinline.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/version.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/limits.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix1_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/local_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/linux/limits.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_local_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix2_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/xopen_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/stdio_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/operations.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/mat.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/miniflann.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/defines.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/config.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/types_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/video.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/tracking.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/background_segm.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/features2d/features2d.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/objdetect/objdetect.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/calib3d/calib3d.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/affine.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/ml/ml.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/contrib.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/retina.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/openfabmap.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdio.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_stdio.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wchar.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wctype.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/getopt.h \
-		../FaceModule/mcamera.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/mqueue.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/fcntl.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/fcntl.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uio.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/stat.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/stat.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/siginfo.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mqueue.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/unistd.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix_opt.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_posix_opt.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/environments.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dataset.o ../FaceModule/dataset.cpp
-
-facerecognizer.o: ../FaceModule/facerecognizer.cpp ../FaceModule/facerecognizer.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/string.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/features.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_config.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/cdefs.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv_modules.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/types_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/assert.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdlib.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/waitflags.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/waitstatus.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/endian.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/endian.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/byteswap.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-common.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/types.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/wordsize.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/typesizes.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-16.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/types.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/time.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/time.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_clk_tck.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/select.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/select.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigset.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/sysmacros.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/pthreadtypes.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/alloca.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdint.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/wchar.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/math.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_val.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_valf.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_vall.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/inf.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/nan.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathdef.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathcalls.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathinline.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/version.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/limits.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix1_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/local_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/linux/limits.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_local_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix2_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/xopen_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/stdio_lim.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/operations.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/mat.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/miniflann.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/defines.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/config.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/types_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/video.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/tracking.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/background_segm.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/features2d/features2d.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/objdetect/objdetect.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/calib3d/calib3d.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/affine.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/ml/ml.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui_c.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/contrib.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/retina.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/openfabmap.hpp \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdio.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_stdio.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wchar.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wctype.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/getopt.h \
-		../FaceModule/dataset.h \
-		../FaceModule/mcamera.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/mqueue.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/fcntl.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/fcntl.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uio.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/stat.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/stat.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/siginfo.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mqueue.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/unistd.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix_opt.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_posix_opt.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/environments.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o facerecognizer.o ../FaceModule/facerecognizer.cpp
 
 main.o: ../FaceModule/main.cpp ../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QCoreApplication \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreapplication.h \

@@ -12,11 +12,7 @@ DataInfo::DataInfo( string message, string platform, bool deleteAfterRelease )
     this->dataInfo.platform = platform;
     this->dataInfo.deleteAfterRelease = deleteAfterRelease;
 }
-DataInfo::DataInfo(messageInfoQuery messageInfo)
-{
-    this->dataInfo.message=messageInfo.UserMessage;
-    this->dataInfo.platform=messageInfo.TargetPlatform;
-}
+
 
 /****************************************************************************************
  *

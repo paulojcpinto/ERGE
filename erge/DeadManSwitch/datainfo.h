@@ -2,7 +2,6 @@
 #define DATAINFO_H
 
 #include <string>
-#include "SqlModule/sqlquery.h"
 
 using namespace std;
 
@@ -28,7 +27,6 @@ class DataInfo
 
         DataInfo();
         DataInfo( string message, string platform, bool deleteAfterRelease = true );
-        DataInfo(messageInfoQuery messageInfo);
         void updateMessage ( string message );
         void updateplatform ( string platform );
         void updateAfterRelease( bool deleteAfterRelease );

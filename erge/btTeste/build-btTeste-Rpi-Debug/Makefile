@@ -17,7 +17,7 @@ CXX           = /home/andre/buildroot-2019.08/output/host/bin/arm-buildroot-linu
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_BLUETOOTH_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os --sysroot=/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os --sysroot=/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../btTeste -I. -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore -I. -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/interface/vmcs_host/linux -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/interface/vcos/pthreads -I/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++
+INCPATH       = -I../btTeste -I. -I../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5 -I../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth -I../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets -I../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui -I../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore -I. -I../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/interface/vmcs_host/linux -I../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/interface/vcos/pthreads -I../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++
 QMAKE         = /home/andre/buildroot-2019.08/output/host/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = btTeste1.0.0
-DISTDIR = /home/andre/git/ERGE/erge/btTeste/build-btTeste-rpi-Debug/.tmp/btTeste1.0.0
+DISTDIR = /home/andre/git/ERGE/btTeste/build-btTeste-Rpi-Debug/.tmp/btTeste1.0.0
 LINK          = /home/andre/buildroot-2019.08/output/host/bin/arm-buildroot-linux-uclibcgnueabihf-g++
 LFLAGS        = --sysroot=/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot -Wl,-rpath-link,/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib
 LIBS          = $(SUBLIBS) -latomic /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libQt5Bluetooth.so /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libQt5Widgets.so /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libQt5Gui.so /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libQt5Core.so /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libGLESv2.so /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libbcm_host.so /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libvcos.so /home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib/libvchiq_arm.so -lpthread  -lrt -lpthread -ldl 
@@ -61,138 +61,139 @@ OBJECTS       = bluetooth_module.o \
 		main.o \
 		moc_bluetooth_module.o \
 		moc_bluetooth_server.o
-DIST          = /home/andre/buildroot-2019.08/output/host/mkspecs/features/spec_pre.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/unix.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/linux.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/sanitize.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/gcc-base.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/gcc-base-unix.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/g++-base.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/g++-unix.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/qdevice.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/device_config.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_pre.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/arch.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/qconfig.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fb_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldebug_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_theme_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_zlib_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt_functions.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/resolve_config.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/default_post.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qml_debug.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/warn_on.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/resources.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/moc.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/unix/opengl.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/uic.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/unix/thread.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qmake_use.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/file_copies.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/testcase_targets.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/exceptions.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/yacc.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/lex.prf \
+DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_pre.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/unix.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/linux.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/sanitize.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/gcc-base.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/gcc-base-unix.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/g++-base.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/g++-unix.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/qdevice.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/device_config.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_pre.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/arch.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/qconfig.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fb_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_theme_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_zlib_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_functions.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
+		../btTeste/.qmake.stash \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/resolve_config.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/default_post.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qml_debug.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/warn_on.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qt.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/resources.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/moc.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/unix/opengl.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/uic.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/unix/thread.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qmake_use.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/file_copies.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/testcase_targets.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/exceptions.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/yacc.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/lex.prf \
 		../btTeste/btTeste.pro ../btTeste/bluetooth_module.h \
 		../btTeste/bluetooth_server.h ../btTeste/bluetooth_module.cpp \
 		../btTeste/bluetooth_server.cpp \
@@ -208,272 +209,274 @@ first: all
 btTeste:  $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
-Makefile: ../btTeste/btTeste.pro /home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf /home/andre/buildroot-2019.08/output/host/mkspecs/features/spec_pre.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/unix.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/linux.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/sanitize.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/gcc-base.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/gcc-base-unix.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/g++-base.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/common/g++-unix.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/qdevice.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/device_config.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_pre.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/arch.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/qconfig.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fb_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldebug_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_theme_support_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_zlib_private.pri \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt_functions.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/resolve_config.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/default_post.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qml_debug.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/warn_on.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/resources.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/moc.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/unix/opengl.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/uic.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/unix/thread.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/qmake_use.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/file_copies.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/testcase_targets.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/exceptions.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/yacc.prf \
-		/home/andre/buildroot-2019.08/output/host/mkspecs/features/lex.prf \
+Makefile: ../btTeste/btTeste.pro ../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_pre.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/unix.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/linux.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/sanitize.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/gcc-base.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/gcc-base-unix.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/g++-base.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/common/g++-unix.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/qdevice.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/device_config.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_pre.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/arch.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/qconfig.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fb_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_theme_support_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_zlib_private.pri \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_functions.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
+		.qmake.stash \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/resolve_config.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/default_post.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qml_debug.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/warn_on.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qt.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/resources.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/moc.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/unix/opengl.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/uic.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/unix/thread.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/qmake_use.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/file_copies.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/testcase_targets.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/exceptions.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/yacc.prf \
+		../../../../buildroot-2019.08/output/host/mkspecs/features/lex.prf \
 		../btTeste/btTeste.pro
 	$(QMAKE) -o Makefile ../btTeste/btTeste.pro -spec devices/linux-buildroot-g++ CONFIG+=debug CONFIG+=qml_debug
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/spec_pre.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/common/unix.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/common/linux.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/common/sanitize.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/common/gcc-base.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/common/gcc-base-unix.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/common/g++-base.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/common/g++-unix.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/qdevice.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/device_config.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_pre.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/arch.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/qconfig.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fb_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fontdatabase_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldebug_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_theme_support_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/modules/qt_lib_zlib_private.pri:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt_functions.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt_config.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/spec_post.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/toolchain.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/default_pre.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/resolve_config.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/default_post.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/qml_debug.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/warn_on.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/qt.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/resources.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/moc.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/unix/opengl.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/uic.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/unix/thread.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/qmake_use.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/file_copies.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/testcase_targets.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/exceptions.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/yacc.prf:
-/home/andre/buildroot-2019.08/output/host/mkspecs/features/lex.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/spec_pre.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/common/unix.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/common/linux.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/common/sanitize.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/common/gcc-base.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/common/gcc-base-unix.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/common/g++-base.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/common/g++-unix.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/qdevice.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/features/device_config.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_pre.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/arch.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/devices/common/linux_device_post.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/qconfig.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_accessibility_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bluetooth_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_bootstrap_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_charts_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_concurrent_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_core_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_dbus_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_devicediscovery_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_edid_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_egl_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fb_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_fontdatabase_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_gui_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_input_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_location_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimedia_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediagsttools_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_multimediawidgets_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_network_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_nfc_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_opengl_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_openglextensions_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_packetprotocol_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_platformcompositor_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioning_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_positioningquick_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_printsupport_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qml_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldebug_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmldevtools_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qmltest_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quick_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickparticles_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickshapes_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_quickwidgets_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_script_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_scripttools_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialbus_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_serialport_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_service_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_sql_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_svg_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_testlib_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_theme_support_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandclient_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_waylandcompositor_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkit_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_webkitwidgets_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_websockets_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_widgets_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xml_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_xmlpatterns_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/modules/qt_lib_zlib_private.pri:
+../../../../buildroot-2019.08/output/host/mkspecs/features/qt_functions.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf:
+.qmake.stash:
+../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/resolve_config.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/default_post.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/qml_debug.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/warn_on.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/qt.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/resources.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/moc.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/unix/opengl.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/uic.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/unix/thread.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/qmake_use.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/file_copies.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/testcase_targets.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/exceptions.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/yacc.prf:
+../../../../buildroot-2019.08/output/host/mkspecs/features/lex.prf:
 ../btTeste/btTeste.pro:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../btTeste/btTeste.pro -spec devices/linux-buildroot-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -489,7 +492,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents /home/andre/buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../../../buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../btTeste/bluetooth_module.h ../btTeste/bluetooth_server.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../btTeste/bluetooth_module.cpp ../btTeste/bluetooth_server.cpp ../btTeste/main.cpp $(DISTDIR)/
 
@@ -520,22 +523,223 @@ compiler_rcc_clean:
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
-moc_predefs.h: /home/andre/buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp
-	/home/andre/buildroot-2019.08/output/host/bin/arm-buildroot-linux-uclibcgnueabihf-g++ -pipe -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os --sysroot=/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /home/andre/buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp
+moc_predefs.h: ../../../../buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp
+	/home/andre/buildroot-2019.08/output/host/bin/arm-buildroot-linux-uclibcgnueabihf-g++ -pipe -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -Os --sysroot=/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../../buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: moc_bluetooth_module.cpp moc_bluetooth_server.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_bluetooth_module.cpp moc_bluetooth_server.cpp
 moc_bluetooth_module.cpp: ../btTeste/bluetooth_module.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothhostinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetoothglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig-bootstrapped.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtcore-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsystemdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qprocessordetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcompilerdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtypeinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsysinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlogging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbasicatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qgenericatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_msvc.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobalstatic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmutex.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnumeric.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qversiontagging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetooth-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothAddress \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothaddress.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrefcount.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnamespace.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qarraydata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QString \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstring.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringliteral.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringview.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringbuilder.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QMetaType \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgetsglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtguiglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtgui-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgets-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qwidget.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiterator.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhashfunctions.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpair.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearraylist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qregexp.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringmatcher.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qscopedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmargins.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpaintdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrect.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsize.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpalette.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcolor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgb.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgba64.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qbrush.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qmatrix.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpolygon.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qregion.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdatastream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtransform.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpainterpath.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qimage.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixelformat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfont.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontmetrics.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcursor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qkeysequence.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfile.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfiledevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qvector2d.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtouchdevice.h \
 		../btTeste/bluetooth_server.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothserviceinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothuuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QtGlobal \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/quuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QDebug \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QList \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QSharedPointer \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QVariant \
 		moc_predefs.h \
-		/home/andre/buildroot-2019.08/output/host/bin/moc
-	/home/andre/buildroot-2019.08/output/host/bin/moc $(DEFINES) --include /home/andre/git/ERGE/erge/btTeste/build-btTeste-rpi-Debug/moc_predefs.h -I/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++ -I/home/andre/git/ERGE/erge/btTeste/btTeste -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore -I. -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/arm-buildroot-linux-uclibcgnueabihf -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/backward -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include-fixed -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include ../btTeste/bluetooth_module.h -o moc_bluetooth_module.cpp
+		../../../../buildroot-2019.08/output/host/bin/moc
+	/home/andre/buildroot-2019.08/output/host/bin/moc $(DEFINES) --include /home/andre/git/ERGE/btTeste/build-btTeste-Rpi-Debug/moc_predefs.h -I/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++ -I/home/andre/git/ERGE/btTeste/btTeste -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore -I. -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/arm-buildroot-linux-uclibcgnueabihf -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/backward -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include-fixed -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include ../btTeste/bluetooth_module.h -o moc_bluetooth_module.cpp
 
 moc_bluetooth_server.cpp: ../btTeste/bluetooth_server.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnamespace.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig-bootstrapped.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtcore-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsystemdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qprocessordetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcompilerdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtypeinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsysinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlogging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbasicatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qgenericatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_msvc.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobalstatic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmutex.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnumeric.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qversiontagging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstring.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrefcount.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qarraydata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringliteral.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringview.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringbuilder.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiterator.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhashfunctions.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpair.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearraylist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qregexp.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringmatcher.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qscopedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothaddress.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetoothglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetooth-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QString \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QMetaType \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothserviceinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothuuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QtGlobal \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/quuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QDebug \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothAddress \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QList \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QSharedPointer \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QVariant \
 		moc_predefs.h \
-		/home/andre/buildroot-2019.08/output/host/bin/moc
-	/home/andre/buildroot-2019.08/output/host/bin/moc $(DEFINES) --include /home/andre/git/ERGE/erge/btTeste/build-btTeste-rpi-Debug/moc_predefs.h -I/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++ -I/home/andre/git/ERGE/erge/btTeste/btTeste -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore -I. -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/arm-buildroot-linux-uclibcgnueabihf -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/backward -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include-fixed -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include ../btTeste/bluetooth_server.h -o moc_bluetooth_server.cpp
+		../../../../buildroot-2019.08/output/host/bin/moc
+	/home/andre/buildroot-2019.08/output/host/bin/moc $(DEFINES) --include /home/andre/git/ERGE/btTeste/build-btTeste-Rpi-Debug/moc_predefs.h -I/home/andre/buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++ -I/home/andre/git/ERGE/btTeste/btTeste -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore -I. -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0 -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/arm-buildroot-linux-uclibcgnueabihf -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/8.3.0/backward -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include -I/home/andre/buildroot-2019.08/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/8.3.0/include-fixed -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/include -I/home/andre/buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include ../btTeste/bluetooth_server.h -o moc_bluetooth_server.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -554,14 +758,356 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 bluetooth_module.o: ../btTeste/bluetooth_module.cpp ../btTeste/bluetooth_module.h \
-		../btTeste/bluetooth_server.h
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothhostinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetoothglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig-bootstrapped.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtcore-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsystemdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qprocessordetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcompilerdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtypeinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsysinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlogging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbasicatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qgenericatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_msvc.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobalstatic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmutex.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnumeric.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qversiontagging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetooth-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothAddress \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothaddress.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrefcount.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnamespace.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qarraydata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QString \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstring.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringliteral.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringview.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringbuilder.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QMetaType \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgetsglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtguiglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtgui-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgets-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qwidget.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiterator.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhashfunctions.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpair.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearraylist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qregexp.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringmatcher.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qscopedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmargins.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpaintdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrect.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsize.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpalette.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcolor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgb.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgba64.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qbrush.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qmatrix.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpolygon.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qregion.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdatastream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtransform.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpainterpath.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qimage.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixelformat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfont.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontmetrics.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcursor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qkeysequence.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfile.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfiledevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qvector2d.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtouchdevice.h \
+		../btTeste/bluetooth_server.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothserviceinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothuuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QtGlobal \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/quuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QDebug \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QList \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QSharedPointer \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QVariant \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothlocaldevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QObject \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothHostInfo
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bluetooth_module.o ../btTeste/bluetooth_module.cpp
 
-bluetooth_server.o: ../btTeste/bluetooth_server.cpp ../btTeste/bluetooth_server.h
+bluetooth_server.o: ../btTeste/bluetooth_server.cpp ../btTeste/bluetooth_server.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnamespace.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig-bootstrapped.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtcore-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsystemdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qprocessordetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcompilerdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtypeinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsysinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlogging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbasicatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qgenericatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_msvc.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobalstatic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmutex.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnumeric.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qversiontagging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstring.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrefcount.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qarraydata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringliteral.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringview.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringbuilder.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiterator.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhashfunctions.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpair.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearraylist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qregexp.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringmatcher.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qscopedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothaddress.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetoothglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetooth-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QString \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QMetaType \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothserviceinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothuuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QtGlobal \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/quuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QDebug \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothAddress \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QList \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QSharedPointer \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QVariant \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothserver.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QObject \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetooth.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothSocket \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothsocket.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtNetwork/qabstractsocket.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtNetwork/qtnetworkglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtNetwork/qtnetwork-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothServiceInfo
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bluetooth_server.o ../btTeste/bluetooth_server.cpp
 
-main.o: ../btTeste/main.cpp ../btTeste/bluetooth_module.h \
-		../btTeste/bluetooth_server.h
+main.o: ../btTeste/main.cpp ../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QCoreApplication \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreapplication.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig-bootstrapped.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtcore-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsystemdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qprocessordetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcompilerdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtypeinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsysinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlogging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbasicatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qgenericatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_msvc.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobalstatic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmutex.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnumeric.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qversiontagging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstring.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrefcount.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnamespace.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qarraydata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringliteral.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringview.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringbuilder.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiterator.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhashfunctions.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpair.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearraylist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qregexp.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringmatcher.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qscopedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qeventloop.h \
+		../btTeste/bluetooth_module.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothhostinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetoothglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetooth-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothAddress \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothaddress.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QString \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QMetaType \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgetsglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtguiglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtgui-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgets-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qwidget.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmargins.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpaintdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrect.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsize.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpalette.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcolor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgb.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgba64.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qbrush.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qmatrix.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpolygon.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qregion.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdatastream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtransform.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpainterpath.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qimage.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixelformat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfont.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontmetrics.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcursor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qkeysequence.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfile.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfiledevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qvector2d.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtouchdevice.h \
+		../btTeste/bluetooth_server.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothserviceinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothuuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QtGlobal \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/quuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QDebug \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QList \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QSharedPointer \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QVariant \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qapplication.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdesktopwidget.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qguiapplication.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qinputmethod.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../btTeste/main.cpp
 
 moc_bluetooth_module.o: moc_bluetooth_module.cpp 

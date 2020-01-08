@@ -81,11 +81,6 @@
 #define char_instructions                     (char)  'Y'
 #define int_instructions                      (int) 24
 	
-#define char_presensce_check                  (char)  'H'
-#define int_presence_check                     (int) 25
-	
-
-	
 
 
 
@@ -352,13 +347,6 @@ void prepare_receive_info(int *c )
 			*c=int_update;
 			UART4Tx_index++;
 		break;
-		
-		case char_presensce_check:
-			*c=int_presence_check;
-			UART4Tx_index++;		
-			break;
-		
-		
 		case char_trama_error:
 		{
 			*c=int_error;
@@ -478,10 +466,6 @@ void end_receiving_trama (int *c)
 					printUpdate(create_user_finger(),char_instructions);
 					HAL_TIM_Base_Start_IT(&htim2);
 				
-					break;
-				
-				case int_presence_check:
-					printUpdate(getPresenceStatus(user_pars.nickName),char_presensce_check);
 					break;
 				
 

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Login extends AppCompatActivity {
 
@@ -46,7 +45,7 @@ public class Login extends AppCompatActivity {
     public static final int CONNECTED_SUCCESS = 6;
     private MenuItem playMenu;
     private MenuItem DeviceType;
-    private ArrayList<String> users;
+    private List<String> users;
 
 
     @SuppressLint("HandlerLeak")
@@ -100,8 +99,7 @@ public class Login extends AppCompatActivity {
         actionBar.setTitle("Login");
 
         ApplicationClass.mBluetoothConnectionService.updateHandlerContex(mHandler);
-        users = new ArrayList<>();
-        loadData();
+
         etNick =  findViewById(R.id.etNick);
         etPinCode= findViewById(R.id.etPinCode);
         btnCancel = findViewById(R.id.btnCancel);
@@ -114,15 +112,13 @@ public class Login extends AppCompatActivity {
             ivType.setImageResource(R.drawable.rasp);
         else ivType.setImageResource(R.drawable.not_knowned);
 
-       // String[] stringArray = users.toArray().copyOf(objectArray, objectArray.length, String[].class);
-        String[] strArr = asStrings(users.toArray());
-       // String[] strArr = {"Pau","Paulo","Andre","coisa"};
-        ArrayAdapter<String> adapter
-                = new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, strArr);
+        loadData();
 
-        etNick.setThreshold(1);
-        etNick.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, strArr));
-        etNick.setDropDownAnchor(R.id.ivType);
+        ArrayAdapter<String> adapter
+                = new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, users);
+
+        etNick.setThreshold(1);  //Numero de caraters que o utilizador percisa de por para começar a aparecer a funcao de autocomplete
+        etNick.setAdapter(adapter);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +129,7 @@ public class Login extends AppCompatActivity {
                 {
                     Toast.makeText(Login.this, "Please make sure you enter all fields", Toast.LENGTH_SHORT).show();
                 } else {
-
+                    saveUser(etNick.getText().toString());
                     ApplicationClass.sendMessage("<S" + etNick.getText().toString().trim() + ">", Login.this);
                 }
 
@@ -156,12 +152,6 @@ public class Login extends AppCompatActivity {
 
         startActivity(new Intent(Login.this, Enter.class));
         Login.this.finish();
-    }
-    public static String[] asStrings(Object... objArray) {
-        String[] strArray = new String[objArray.length];
-        for (int i = 0; i < objArray.length; i++)
-            strArray[i] = String.valueOf(objArray[i]);
-        return strArray;
     }
 @Override
     public boolean onCreateOptionsMenu( Menu menu ) {
@@ -351,11 +341,7 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            if (!users.contains(etNick.getText().toString()))
-                                saveUser(etNick.getText().toString());
-
                             ApplicationClass.userNickname = etNick.getText().toString().trim();
-                            ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
                             startActivity(new Intent(Login.this, MainActivity.class));
                             Login.this.finish();
 
@@ -374,9 +360,9 @@ public class Login extends AppCompatActivity {
         try {
             FileOutputStream file = openFileOutput("users.txt", MODE_PRIVATE);  //cria o ficheiro caso nao exitsa, e define a permisao do ficheiro para so o nossa aplicaçao
             OutputStreamWriter outputFile = new OutputStreamWriter(file);  //cria a connecao com o ficheiro que vamos escrever
-            outputFile.append(nickname).append("\r\n");
+            outputFile.append(nickname);
             outputFile.close();
-            Toast.makeText(this, "Sucessfully saveded!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sucessfully savedes eyeyeyyeyeyeyeyeyeye!", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -390,9 +376,10 @@ public class Login extends AppCompatActivity {
         if (file.exists()) {
             try {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("users.txt")));  //abre p ficheiro Data.txt para leitura!
+                BufferedReader reader = new BufferedReader(new InputStreamReader(openFileInput("bluetooth.txt")));  //abre p ficheiro Data.txt para leitura!
                 while ((linefromFile = reader.readLine()) != null) {
                     users.add(linefromFile);
+
                 }
 
             } catch (IOException e) {
