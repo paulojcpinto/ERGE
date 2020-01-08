@@ -83,7 +83,7 @@ void send_sms_ ()
 	uint8_t c ;
 	c =26;
 //	sprintf(c, "%c", 26);
-	HAL_UART_Transmit(&huart6, message, size_SMS-2, 10000);
+	HAL_UART_Transmit(&huart6, message, size_SMS, 10000);
 	HAL_UART_Transmit(&huart6, &c, 1, 10000);
 //	printf("%c",26);
 	local ++;
