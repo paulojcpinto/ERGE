@@ -308,7 +308,11 @@ public class Register extends AppCompatActivity {
                     message.setMessage("Enter the platform that you want to release here!!");
 
                     if(ApplicationClass.deviceType.contains("STM"))
+                    {
                         rbTwitter.setVisibility(View.VISIBLE);
+                        rbEmail.setVisibility(View.GONE);
+                    }
+
                     else rbTwitter.setVisibility(View.GONE);
 
                     rbTwitter.setOnClickListener(new OnClickListener() {
@@ -372,7 +376,10 @@ public class Register extends AppCompatActivity {
                                  Toast.makeText(Register.this, "Please put an twitter KEY number!", Toast.LENGTH_SHORT).show();
                                  dialog.cancel();
                              }
-                             else etPlatform.setText("TWITTER "+etKey.getText().toString().trim());
+                             else if(etKey.getText().toString().length() == 16)
+                             {
+                                 etPlatform.setText("TWITTER "+etKey.getText().toString().trim());
+                             }else Toast.makeText(Register.this, "Please make sure you put the 16 characters", Toast.LENGTH_SHORT).show();
 
                             }
                             else {
@@ -926,6 +933,7 @@ public class Register extends AppCompatActivity {
                 //   final EditText etReleaseMessage = dialogView.findViewById(R.id.etReleaseMessage);
                // progressDialog.dismiss();
 
+                ApplicationClass.userNickname= etNickName.getText().toString();
                 message.setView(dialogView);
                 message.setTitle("Register Completed");
                 message.setMessage("You successfully register an new user!!");

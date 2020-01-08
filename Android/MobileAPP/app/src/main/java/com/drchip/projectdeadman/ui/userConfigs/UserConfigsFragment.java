@@ -242,12 +242,12 @@ public class UserConfigsFragment extends Fragment {
                 }
 
 
-
-
             }
             @Override
             public void onAnimationRepeat(Animation animation) { }
         });
+
+
         fade_out2.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

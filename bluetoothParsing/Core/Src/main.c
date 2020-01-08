@@ -23,6 +23,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "bluetooth_module.h"
+#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -100,6 +101,9 @@ int main(void)
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
 	init_UARTs();
+	uint8_t pa[2][256];
+	strcpy(pa[0], "paulo");
+	HAL_UART_Transmit(&huart3, pa[0], 5, 1000);
 	//HAL_UART_Transmit_IT(&huart3, (uint8_t *)sizeof(char), 1);
 
 	//user pp;

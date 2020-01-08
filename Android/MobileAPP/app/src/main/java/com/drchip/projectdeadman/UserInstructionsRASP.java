@@ -45,9 +45,10 @@ public class UserInstructionsRASP extends AppCompatActivity {
     int aux = 0;
     long starttime = 0;
     Animation rotate;
-    Animation fade_in;
+
     Animation to_start;
-    Animation fade_out;
+    Animation fade_in;
+    Animation fade_out,fade_out2;
     Timer timer = new Timer();
     final Handler h = new Handler(new Callback() {
 
@@ -183,10 +184,30 @@ public class UserInstructionsRASP extends AppCompatActivity {
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotate.setStartTime(10);
+
+        to_start = AnimationUtils.loadAnimation(this, R.anim.rotate_to_start);
         fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fade_in.setStartOffset(1);
-        to_start = AnimationUtils.loadAnimation(this, R.anim.rotate_to_start);
         fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fade_out2 = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+
+        fade_in.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         ApplicationClass.sendMessage("<Y>",this);
 

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -354,6 +355,7 @@ public class Login extends AppCompatActivity {
                                 saveUser(etNick.getText().toString());
 
                             ApplicationClass.userNickname = etNick.getText().toString().trim();
+                            ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
                             startActivity(new Intent(Login.this, MainActivity.class));
                             Login.this.finish();
 
@@ -372,7 +374,7 @@ public class Login extends AppCompatActivity {
         try {
             FileOutputStream file = openFileOutput("users.txt", MODE_PRIVATE);  //cria o ficheiro caso nao exitsa, e define a permisao do ficheiro para so o nossa aplicaçao
             OutputStreamWriter outputFile = new OutputStreamWriter(file);  //cria a connecao com o ficheiro que vamos escrever
-            outputFile.append(nickname);
+            outputFile.append(nickname).append("\r\n");
             outputFile.close();
             Toast.makeText(this, "Sucessfully saveded!", Toast.LENGTH_LONG).show();
 

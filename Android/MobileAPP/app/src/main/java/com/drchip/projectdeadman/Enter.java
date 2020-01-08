@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -81,6 +83,7 @@ public class Enter extends AppCompatActivity {
                         ivStatus.clearAnimation();
                         ivStatus.setImageResource(R.drawable.done);
                         ivStatus.startAnimation(fade_in);
+                        ApplicationClass.conectedTime = SystemClock.elapsedRealtime();
 
                         Toast.makeText(Enter.this, "Connected with success", Toast.LENGTH_SHORT).show();
                         boolean canSave = true;
@@ -104,6 +107,8 @@ public class Enter extends AppCompatActivity {
                         ivStatus.startAnimation(fade_in);
 
                         Toast.makeText(Enter.this, "Connected with success", Toast.LENGTH_SHORT).show();
+
+                        ApplicationClass.conectedTime = SystemClock.elapsedRealtime();
 
                         boolean canSave = true;
 
@@ -511,8 +516,8 @@ public class Enter extends AppCompatActivity {
 //
 //
 //            }
-            outputFile.write(mac+","+type+"\r\n");
-            outputFile.flush();
+            outputFile.append(mac+","+type+"\r\n");
+           // outputFile.flush();
             outputFile.close();
             Toast.makeText(this, "Sucessfully saveded!", Toast.LENGTH_LONG).show();
 
