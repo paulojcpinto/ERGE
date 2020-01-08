@@ -129,6 +129,8 @@ void initUser(void)
 		 }
 		 return 2;	 
 	 }
+	 
+	 
 	  return 3;
 	 
  }
@@ -162,6 +164,8 @@ void initUser(void)
  
  
  
+ 
+ 
  int updateUser(user_parsing updateInfo)
  {
 	  user * toUpdate = getUser(updateInfo.nickName);
@@ -179,13 +183,20 @@ void initUser(void)
 			
 		}else return USER_NOT_FOUND;
  }
-
+ 
+ 
+ 
+ 
  int updatePinCode(char *mpinCode, user * mUser)
  {
 	 memset(mUser->pinCode,0,strlen(mUser->pinCode));
 	 strcpy(mUser->pinCode,mpinCode);
 	 return 1;
  }
+ 
+ 
+ 
+ 
  
 
  int updatePhoneNumber(char * mphoneNumber, user *mUser)
@@ -195,6 +206,9 @@ void initUser(void)
 	 return 1;
  }
  
+ 
+ 
+ 
 
  int updateEmail(char* mEmail,user* mUser)
  {
@@ -202,6 +216,10 @@ void initUser(void)
 	 strcpy(mUser->email,mEmail);
 	 return 1;
  }
+ 
+ 
+ 
+ 
 
  int updateEmailPassword(char* mEmailPassword, user* mUser)
  {
@@ -209,6 +227,13 @@ void initUser(void)
 	 strcpy(mUser->emailPassword,mEmailPassword);
 	 return 1;
  }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  void update_time( uint8_t use )
  {
@@ -226,6 +251,18 @@ void initUser(void)
  }
 	 
  }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  void verify_release_time1 ( void )
@@ -275,6 +312,14 @@ void initUser(void)
 	 }
 	 				 xSemaphoreGive(finger_signal);
  }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
  void verify_release_time ( void )
  {
@@ -293,6 +338,12 @@ void initUser(void)
 	 stmtime.fingerp = 0;
  }
  
+ 
+ 
+ 
+ 
+ 
+ 
  uint8_t get_fingerID_avaiable ( void )
  {
 	 uint8_t fingerID = 1;
@@ -310,6 +361,14 @@ void initUser(void)
 	 return fingerID;
  }
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  void update_presenceCheck ( char ID )
  {
 	 uint8_t fingerIDp = ID - '0';
@@ -319,6 +378,12 @@ void initUser(void)
 			users[pos].presenceCheck = 1;
 		}
  }
+ 
+ 
+ 
+ 
+ 
+ 
  
 
  int create_user_finger ( void )
@@ -332,12 +397,21 @@ void initUser(void)
 				return 1;
 			}
 			else
-			{
 				return 2;
-			}
+			
 		}
 		else 
 		{
 			return 3;
 		}
+ }
+ int getPresenceStatus(char* nickname)
+ {
+	 user* userAux;
+	 userAux=getUser(nickName);
+	 if(!strcmp(userAux->nickName,nickName))
+	 {
+		 return userAux->presenceCheck;
+	 }
+	 else return USER_NOT_FOUND;
  }
