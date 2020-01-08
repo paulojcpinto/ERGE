@@ -152,7 +152,7 @@ Animation blink;
             //tvTime.setText(((SystemClock.elapsedRealtime()-ApplicationClass.conectedTime )/1000)/60+"min");
 
             //long millis = System.currentTimeMillis() - startTime;
-            long millis = SystemClock.elapsedRealtime()-ApplicationClass.conectedTime;
+            long millis = SystemClock.elapsedRealtime()-ApplicationClass.seccionTime;
 
             int seconds = (int) (millis / 1000);
             int minutes = seconds / 60;
@@ -202,7 +202,7 @@ Animation blink;
 
 
         blink = AnimationUtils.loadAnimation(getContext(), R.anim.blink);
-        tvTime.setText(((SystemClock.elapsedRealtime()-ApplicationClass.conectedTime )/1000)/60+"min");
+        tvTime.setText(((SystemClock.elapsedRealtime()-ApplicationClass.seccionTime )/1000)/60+"min");
 
         ivClock.setAnimation(blink);
         timerHandler.postDelayed(timerRunnable, 0);

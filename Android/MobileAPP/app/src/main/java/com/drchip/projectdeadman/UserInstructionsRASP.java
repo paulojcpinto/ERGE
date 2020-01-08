@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -334,6 +335,8 @@ public class UserInstructionsRASP extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
+
                 startActivity(new Intent(UserInstructionsRASP.this, MainActivity.class));
                 UserInstructionsRASP.this.finish();
 

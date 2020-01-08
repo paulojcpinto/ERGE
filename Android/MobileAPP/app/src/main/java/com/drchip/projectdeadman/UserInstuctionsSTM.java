@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -280,6 +281,7 @@ public class UserInstuctionsSTM extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
                 startActivity(new Intent(UserInstuctionsSTM.this, MainActivity.class));
                 UserInstuctionsSTM.this.finish();
 
