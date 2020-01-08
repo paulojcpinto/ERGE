@@ -152,9 +152,41 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
+          <LineNumber>370</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Core\Src\FingerPrint.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>330</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Core\Src\esp8266.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
           <LineNumber>249</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134249166</Address>
+          <Address>134249174</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -166,11 +198,11 @@
           <Expression>\\PPPPPPP\../Core/Src/user.c\249</Expression>
         </Bp>
         <Bp>
-          <Number>1</Number>
+          <Number>3</Number>
           <Type>0</Type>
           <LineNumber>237</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231670</Address>
+          <Address>134231678</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -182,11 +214,11 @@
           <Expression>\\PPPPPPP\../Core/Src/freertos.c\237</Expression>
         </Bp>
         <Bp>
-          <Number>2</Number>
+          <Number>4</Number>
           <Type>0</Type>
           <LineNumber>71</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134243258</Address>
+          <Address>134243266</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -198,11 +230,11 @@
           <Expression>\\PPPPPPP\../Core/Src/esp8266.c\71</Expression>
         </Bp>
         <Bp>
-          <Number>3</Number>
+          <Number>5</Number>
           <Type>0</Type>
           <LineNumber>413</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134239862</Address>
+          <Address>134239870</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -214,11 +246,11 @@
           <Expression>\\PPPPPPP\../Core/Src/esp8266.c\413</Expression>
         </Bp>
         <Bp>
-          <Number>4</Number>
+          <Number>6</Number>
           <Type>0</Type>
           <LineNumber>240</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134231738</Address>
+          <Address>134231746</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -230,11 +262,11 @@
           <Expression>\\PPPPPPP\../Core/Src/freertos.c\240</Expression>
         </Bp>
         <Bp>
-          <Number>5</Number>
+          <Number>7</Number>
           <Type>0</Type>
           <LineNumber>258</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134249298</Address>
+          <Address>134249306</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
