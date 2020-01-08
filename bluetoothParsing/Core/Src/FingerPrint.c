@@ -367,7 +367,8 @@ bool	Fingerprint_SaveNewFinger(uint16_t	Location,uint8_t	WaitForFingerInSecond)
 	HAL_UART_Transmit(&huart4, "<F>", 3,100);
 	HAL_UART_Transmit(&huart3, "\n\nFinger Saved\n\n", 16,100);
 	HAL_Delay(1000);
-	//while(HAL_GPIO_ReadPin(_FINGERPRINT_POWER_GPIO,_FINGERPRINT_POWER_PIN)==GPIO_PIN_RESET);
+	
+	while(HAL_GPIO_ReadPin(_FINGERPRINT_IRQ_GPIO,_FINGERPRINT_IRQ_PIN)==GPIO_PIN_RESET);
 	return true;
 	
 	Faild:
