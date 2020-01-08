@@ -66,6 +66,8 @@ extern int updateEmailPassword(char* mEmailPassword, user* mUser);
 
 extern int updateUser(user_parsing updateInfo);
 
+extern int getPresenceStatus(char* nickname);
+
 
 extern uint8_t get_fingerID_avaiable ( void );
 
