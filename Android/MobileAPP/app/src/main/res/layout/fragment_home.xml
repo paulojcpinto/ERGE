@@ -154,4 +154,26 @@
             app:srcCompat="@drawable/facescansuccess" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/ivStm"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:stateListAnimator="@anim/rotate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/stm" />
+
+    <ImageView
+        android:id="@+id/ivRasp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:stateListAnimator="@anim/rotate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/rasp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

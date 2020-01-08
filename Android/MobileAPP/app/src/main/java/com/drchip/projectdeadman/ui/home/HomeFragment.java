@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment {
     };
 
 
-    ImageView ivPresenseStatus,ivFingerStatus,ivFaceStatus,ivClock;
+    ImageView ivPresenseStatus,ivFingerStatus,ivFaceStatus,ivClock,ivStm, ivRasp;
     TextView tvPresenceStatus, tvFingerStatus, tvFaceStatus,tvTime;
     LinearLayout lFingerStatus,lFaceStatus;
     Animation blink;
@@ -175,6 +175,17 @@ public class HomeFragment extends Fragment {
             timerHandler.postDelayed(this, 500);
         }
     };
+    Handler timerHandler1 = new Handler();
+
+    Runnable timerRunnable1 = new Runnable() {
+
+        @Override
+        public void run() {
+            ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname+">",getContext());
+
+            timerHandler.postDelayed(this, 100000);
+        }
+    };
     Timer timer = new Timer();
     final Handler h = new Handler(new Handler.Callback() {
 
@@ -194,6 +205,8 @@ public class HomeFragment extends Fragment {
         }
     });
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -209,16 +222,24 @@ public class HomeFragment extends Fragment {
         lFaceStatus = root.findViewById(R.id.lFaceStatus);
         ivClock = root.findViewById(R.id.ivClock);
         tvTime = root.findViewById(R.id.tvTime);
+        ivStm = root.findViewById(R.id.ivStm);
+        ivRasp = root.findViewById(R.id.ivRasp);
         toUpdateImage = new ArrayList<ImageView>();
         toUpdateText=  new ArrayList<>();
         toUpdateLayout= new ArrayList<>();
 
+        rotate = AnimationUtils.loadAnimation(getContext(), R.anim.rotate);
+        rotate.setStartTime(10);
+        ivStm.setAnimation(rotate);
+        ivRasp.setAnimation(rotate);
 
         blink = AnimationUtils.loadAnimation(getContext(), R.anim.blink);
         tvTime.setText(((SystemClock.elapsedRealtime()-ApplicationClass.seccionTime )/1000)/60+"min");
 
         ivClock.setAnimation(blink);
         timerHandler.postDelayed(timerRunnable, 0);
+        timerHandler1.postDelayed(timerRunnable1, 0);
+
 
         ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname+">",getContext());
         // ApplicationClass.sendMessage("<H>",getContext());
@@ -319,6 +340,8 @@ public class HomeFragment extends Fragment {
         }
     }
 
+
+
     void receive_nick(String readMessage)
     {
         if(readMessage.contains("<S") && readMessage.contains((">")))
@@ -343,7 +366,6 @@ public class HomeFragment extends Fragment {
             }else
             {
                 ApplicationClass.sendMessage("<H>",getContext());
-
             }
 
         }
