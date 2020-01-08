@@ -170,7 +170,7 @@
           <Type>0</Type>
           <LineNumber>371</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134221772</Address>
+          <Address>134221764</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -184,25 +184,9 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>370</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134221756</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Core\Src\FingerPrint.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/FingerPrint.c\370</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
           <LineNumber>47</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134244948</Address>
+          <Address>134244956</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -214,11 +198,11 @@
           <Expression>\\PPPPPPP\../Core/Src/gsm.c\47</Expression>
         </Bp>
         <Bp>
-          <Number>4</Number>
+          <Number>3</Number>
           <Type>0</Type>
           <LineNumber>249</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134249522</Address>
+          <Address>134249530</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -230,11 +214,11 @@
           <Expression>\\PPPPPPP\../Core/Src/user.c\249</Expression>
         </Bp>
         <Bp>
-          <Number>5</Number>
+          <Number>4</Number>
           <Type>0</Type>
           <LineNumber>71</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134243618</Address>
+          <Address>134243626</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -246,11 +230,11 @@
           <Expression>\\PPPPPPP\../Core/Src/esp8266.c\71</Expression>
         </Bp>
         <Bp>
-          <Number>6</Number>
+          <Number>5</Number>
           <Type>0</Type>
           <LineNumber>413</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134240222</Address>
+          <Address>134240230</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -260,22 +244,6 @@
           <Filename>..\Core\Src\esp8266.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\PPPPPPP\../Core/Src/esp8266.c\413</Expression>
-        </Bp>
-        <Bp>
-          <Number>7</Number>
-          <Type>0</Type>
-          <LineNumber>142</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134222050</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/gpio.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\PPPPPPP\../Core/Src/gpio.c\142</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

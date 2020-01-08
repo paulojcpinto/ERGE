@@ -305,24 +305,24 @@ void StarPparsingBT(void const * argument)
 			while ( code_number < 4 )
 			{
 				line_output 	|=   NumPad_1Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 				line_output		&=  ~NumPad_1Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 			
 				line_output 	|=   NumPad_2Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 				line_output 	&=  ~NumPad_2Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 			
 				line_output 	|=   NumPad_3Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 				line_output 	&=  ~NumPad_3Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 			
 				line_output 	|=   NumPad_4Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 				line_output 	&=  ~NumPad_4Lin_Pin;
-				vTaskDelay(10);
+				vTaskDelay(70);
 			}
 		}
   }
