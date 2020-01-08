@@ -1,6 +1,7 @@
 #ifndef __bluetooth_module_H
 #define __bluetooth_module_H
 
+#include <tim.h>
 
 typedef struct User_parsing user_parsing;
 
@@ -14,7 +15,7 @@ struct User_parsing
 	char emailPassword[12];
 	char messageToRelease[255];
 	int repeatTime;
-	char dateToStart[10];
+	char dateToStart[16];
 	char platformToRelease[50];
 
 };

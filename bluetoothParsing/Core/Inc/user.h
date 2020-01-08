@@ -3,13 +3,16 @@
 
 #include "usart.h"
 #include "bluetooth_module.h"
-#include  "message.h"
-
+#include "message.h"
+#include "init.h"
+#include "localtime.h"
 
 #define LOGIN_SUCCESS 1
 #define USER_NOT_FOUND 2
 #define USER_BLOCKED  3
 #define BAD_CREDENTIALS  4
+
+#define MAX_USERS 8
 
 
 typedef struct UserFuncitons userfuncs;
@@ -32,9 +35,11 @@ struct User
 	message mmessage; 
 	userfuncs funcs;
 	int position;
+	uint8_t fingerID;
 	char nickName[25];
 	char pinCode[4];
 	char phoneNumber[13];
+	char twitterCardentials[16];
 	char email[50];
 	char emailPassword[12];
 	char unlocked;
@@ -59,8 +64,14 @@ extern int login(char* nickName, char* pinCode);
 
 extern int updateEmailPassword(char* mEmailPassword, user* mUser);
 
+extern int updateUser(user_parsing updateInfo);
 
 
+extern uint8_t get_fingerID_avaiable ( void );
+
+extern  int create_user_finger ( void );
+
+extern  void update_presenceCheck ( char ID );
 
 
 

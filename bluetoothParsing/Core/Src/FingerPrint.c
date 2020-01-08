@@ -4,6 +4,7 @@
 #include "usart.h"
 #include "task.h"
 #include <string.h>
+#include "localtime.h"
 
 
 
@@ -109,8 +110,8 @@ void FingerPrintTask(void const * argument)
 			FingerPrint.LastDetectedLocation = FingerPrint_Scan();
 			if(FingerPrint.LastDetectedLocation >= 0)
 				FingerPrint_Detect(FingerPrint.LastDetectedLocation);		
-			else
-				Fingerprint_SaveNewFinger(2,5);
+//			else
+//				Fingerprint_SaveNewFinger(2,5);
 			while(HAL_GPIO_ReadPin(_FINGERPRINT_IRQ_GPIO,_FINGERPRINT_IRQ_PIN)==GPIO_PIN_RESET)
 				osDelay(500);
 			osDelay(500);				
@@ -363,7 +364,9 @@ bool	Fingerprint_SaveNewFinger(uint16_t	Location,uint8_t	WaitForFingerInSecond)
 	HAL_GPIO_WritePin(_FINGERPRINT_POWER_GPIO,_FINGERPRINT_POWER_PIN,GPIO_PIN_RESET);
 	FingerPrint.Lock=0;
 	FingerPrint_ReadTemplateNumber();
+	HAL_UART_Transmit(&huart4, "<F>", 3,100);
 	HAL_UART_Transmit(&huart3, "\n\nFinger Saved\n\n", 16,100);
+	while(HAL_GPIO_ReadPin(_FINGERPRINT_POWER_GPIO,_FINGERPRINT_POWER_PIN)==GPIO_PIN_RESET);
 	return true;
 	
 	Faild:
@@ -467,8 +470,12 @@ int16_t	FingerPrint_Scan(void)
 			
 								ok = FingerPrint.AnswerBuffer[4];
 				
+
 				if (FingerPrint.AnswerBuffer[4] > 0)
-					xSemaphoreGive(finger_signal);
+				{
+					update_presenceCheck(FingerPrint.AnswerBuffer[4]);
+					//xSemaphoreGive(finger_signal);
+				stmtime.fingerp =1; }
 
 				if (FingerPrint.AnswerBuffer[4] == 7)
 				HAL_UART_Transmit_IT(&huart3,"7",1);

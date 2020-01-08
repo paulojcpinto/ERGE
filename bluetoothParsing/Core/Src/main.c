@@ -117,14 +117,13 @@ int main(void)
 	initUser();
 	vSemaphoreCreateBinary(finger_signal);
 	vSemaphoreCreateBinary(sim1);
-	char test[8];
-	int testi = 10;
+	vSemaphoreCreateBinary(release_signal);
+
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init(); 
-	FingerPrint_Init(osPriorityLow);
-
+FingerPrint_Init(osPriorityLow);
   /* Start scheduler */
   osKernelStart();
   
