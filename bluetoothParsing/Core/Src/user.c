@@ -151,9 +151,14 @@ void initUser(void)
 		 {
 			 if(userAux->unlocked)
 			 {
-				 return LOGIN_SUCCESS;    //login success
+				 return LOGIN_SUCCESS;
+				 //login success
 			 }
-			 else return USER_BLOCKED;   //user blocked
+			 else 
+			 {
+				 return USER_BLOCKED;   //user blocked
+				 xSemaphoreGive(numPad);
+			 }
 		 }
 		 else return BAD_CREDENTIALS;   //wrong pincode
 	 }
