@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,9 +46,10 @@ public class UserInstructionsRASP extends AppCompatActivity {
     int aux = 0;
     long starttime = 0;
     Animation rotate;
-    Animation fade_in;
+
     Animation to_start;
-    Animation fade_out;
+    Animation fade_in;
+    Animation fade_out,fade_out2;
     Timer timer = new Timer();
     final Handler h = new Handler(new Callback() {
 
@@ -74,6 +76,56 @@ public class UserInstructionsRASP extends AppCompatActivity {
                     if (readMessage.contains("STM") || readMessage.contains("RASP")) {
 
                         playMenu.setIcon(R.drawable.bluetooth_on);
+
+                    }
+                    if(readMessage.contains("<F>"))
+                    {
+                        ivFingerRasp.setImageResource(R.drawable.correct);
+                        ivFingerRasp.clearAnimation();
+                        ivFaceStart.startAnimation(rotate);
+                        linFaceDescription.setVisibility(View.VISIBLE);
+
+                        aux=0;
+                    }
+                    if(readMessage.contains("<I>"))
+                    {
+
+
+
+                        if(aux==0)
+                        {
+                            ivFaceStart.setImageResource(R.drawable.correct);
+                            ivFaceStart.clearAnimation();
+                            linImageCount.setVisibility(View.VISIBLE);
+                            Animation animation2 = AnimationUtils.loadAnimation(UserInstructionsRASP.this, R.anim.rotate);
+                            animation2.setStartTime(10);
+                            ivImageCount.startAnimation(animation2);
+                        }
+                        aux++;
+                        if ( aux < 15) {
+                            ivImageCount.clearAnimation();
+                            ivImageCount.startAnimation(fade_in);
+                            tvImageNumber.setText(aux  + "");
+                            pbImageCount.setProgress(aux );
+                            starttime = System.currentTimeMillis();
+                            ivImageCount.setImageResource(R.drawable.correct);
+
+                            // ivImageCount.setVisibility(View.INVISIBLE);
+
+
+                            //ivImageCount.startAnimation(fade_in);
+                            //  timer = new Timer();
+                            //timer.schedule(new firstTask(), 1000,9000);
+
+
+                        } else  {
+                            Animation fade_in1 = AnimationUtils.loadAnimation(UserInstructionsRASP.this, R.anim.fade_in);
+                            tvImageNumber.setText(aux  + "");
+                            pbImageCount.setProgress(aux );
+                            ivImageCount.setImageResource(R.drawable.correct);
+                            btnConfirm.startAnimation(fade_in1);
+                            btnConfirm.setVisibility(View.VISIBLE);
+                        }
 
                     }
 
@@ -133,11 +185,32 @@ public class UserInstructionsRASP extends AppCompatActivity {
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotate.setStartTime(10);
+
+        to_start = AnimationUtils.loadAnimation(this, R.anim.rotate_to_start);
         fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fade_in.setStartOffset(1);
-        to_start = AnimationUtils.loadAnimation(this, R.anim.rotate_to_start);
         fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fade_out2 = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
+        fade_in.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        ApplicationClass.sendMessage("<Y>",this);
 
         ivFingerRasp.startAnimation(rotate);
 
@@ -159,6 +232,8 @@ public class UserInstructionsRASP extends AppCompatActivity {
                 else tvFaceRecoDescription.setVisibility(View.GONE);
             }
         });
+
+
 
         btnTeste.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,6 +335,8 @@ public class UserInstructionsRASP extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
+
                 startActivity(new Intent(UserInstructionsRASP.this, MainActivity.class));
                 UserInstructionsRASP.this.finish();
 
@@ -321,6 +398,8 @@ public class UserInstructionsRASP extends AppCompatActivity {
             h.sendEmptyMessage(0);
         }
     }
+
+
 
 }
 
