@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -90,6 +92,8 @@ public class Login extends AppCompatActivity {
     EditText etPinCode;
     Button btnCancel, btnLogin;
     ImageView ivType;
+    Animation rotate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,9 +120,11 @@ public class Login extends AppCompatActivity {
 
        // String[] stringArray = users.toArray().copyOf(objectArray, objectArray.length, String[].class);
         String[] strArr = asStrings(users.toArray());
-       // String[] strArr = {"Pau","Paulo","Andre","coisa"};
         ArrayAdapter<String> adapter
                 = new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, strArr);
+        rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        rotate.setStartTime(10);
+
 
         etNick.setThreshold(1);
         etNick.setAdapter(new ArrayAdapter<String>(this, R.layout.custom_design_autocomlete, strArr));
@@ -322,13 +328,14 @@ public class Login extends AppCompatActivity {
                     messageUserNotFound.show();
                 }
                 break;
-                case ApplicationClass.USER_BLOCKED: {
+                case ApplicationClass.BAD_PINCODE: {
                     final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
                     LayoutInflater inflaterUserNotFound = getLayoutInflater();
                     final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_blocked, null);
+
                     messageUserNotFound.setView(dialogViewUserNotFound);
                     messageUserNotFound.setTitle("Error!!");
-                    messageUserNotFound.setMessage("You need to unlock the application!!!");
+                    messageUserNotFound.setMessage("The pinCode entered is invalid!!!!");
                     messageUserNotFound.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -337,9 +344,37 @@ public class Login extends AppCompatActivity {
                         }
                     });
                     messageUserNotFound.show();
+
+                    messageUserNotFound.setCancelable(false);
                 }
 
                 break;
+
+                case ApplicationClass.USER_BLOCKED:
+                {
+                    ImageView ivWait;
+                    final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
+                    LayoutInflater inflaterUserNotFound = getLayoutInflater();
+                    final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_codewait, null);
+                    ivWait = dialogViewUserNotFound.findViewById(R.id.ivWait);
+
+                    messageUserNotFound.setView(dialogViewUserNotFound);
+                    messageUserNotFound.setTitle("Next Step!!");
+                    messageUserNotFound.setMessage("Now enter the pinCode on the system!!!!");
+                    messageUserNotFound.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+
+                        }
+                    });
+                    messageUserNotFound.show();
+
+                    ivWait.setAnimation(rotate);
+                    messageUserNotFound.setCancelable(false);
+
+
+                }  break;
                 case ApplicationClass.LOGIN_SUCCESS: {
                     final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
                     LayoutInflater inflaterUserNotFound = getLayoutInflater();

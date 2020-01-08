@@ -25,6 +25,8 @@ public class ApplicationClass extends Application {
     public static final int USER_NOT_FOUND =2;
     public static final int USER_BLOCKED =3;
     public static final int BAD_CREDENTIALS =4;
+    public static final int BAD_PINCODE =5;
+
     public static long conectedTime;
     public static long seccionTime;
 
