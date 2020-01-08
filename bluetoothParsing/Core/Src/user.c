@@ -346,3 +346,13 @@ void initUser(void)
 			return 3;
 		}
  }
+  int getPresenceStatus(char* nickname)
+ {
+	 user* userAux;
+	 userAux=getUser(nickname);
+	 if(!strcmp(userAux->nickName,nickname))
+	 {
+		 return userAux->presenceCheck;
+	 }
+	 else return USER_NOT_FOUND;
+ }

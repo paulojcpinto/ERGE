@@ -73,6 +73,7 @@ extern  int create_user_finger ( void );
 
 extern  void update_presenceCheck ( char ID );
 
+extern int getPresenceStatus(char* nickname);
 
 
 
