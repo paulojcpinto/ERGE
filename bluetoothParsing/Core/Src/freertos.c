@@ -295,11 +295,11 @@ void StarPparsingBT(void const * argument)
 {
   /* USER CODE BEGIN StarPparsingBT */
 	//    if (xSemaphoreTake(numPad, 99999));
-
+	if (xSemaphoreTake(numPad, 99999));
   /* Infinite loop */
   for(;;)
   {
-	if (xSemaphoreTake(numPad, 99999));
+
 		code_number = 0;
 		if (xSemaphoreTake(numPad, 99999))
 		{

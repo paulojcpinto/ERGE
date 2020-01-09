@@ -478,6 +478,8 @@ int16_t	FingerPrint_Scan(void)
 					update_presenceCheck(FingerPrint.AnswerBuffer[4]);
 					//xSemaphoreGive(finger_signal);
 				stmtime.fingerp =1; }
+				else 
+					HAL_UART_Transmit(&huart4, "<F2>", 4, 1000);
 
 				if (FingerPrint.AnswerBuffer[4] == 7)
 				HAL_UART_Transmit_IT(&huart3,"7",1);
@@ -502,6 +504,7 @@ int16_t	FingerPrint_Scan(void)
 	Faild:
 	if(IfModuleIsOff==1)
 		HAL_GPIO_WritePin(_FINGERPRINT_POWER_GPIO,_FINGERPRINT_POWER_PIN,GPIO_PIN_RESET);
+	HAL_UART_Transmit_IT(&huart3,"<F2>",4);
 	FingerPrint.Lock=0;
 	
 	return -1;

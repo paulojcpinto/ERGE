@@ -196,6 +196,9 @@ void update_date1 ()
 		
 		case 25:
 		{
+			stmtime.localtim->tm_wday = 0;
+			stmtime.localtim->tm_yday = 0;
+			stmtime.localtim->tm_isdst = 0;
 					sim2 = yapp;
 					isim2 = sizeof( yapp ) / sizeof( char ) -1;
 					local1 = 24;

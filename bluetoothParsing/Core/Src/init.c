@@ -20,6 +20,7 @@ char choose_pin[5];
 uint8_t interrupt_count = 0;
 uint8_t max_interrupt = 2;
 
+char connected_user [20];
 
 message_info to_release[MAX_USERS];
 uint8_t number_release;

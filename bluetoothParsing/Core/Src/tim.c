@@ -22,6 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 #include "init.h"
+#include "localtime.h"
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;
@@ -129,10 +130,18 @@ void HAL_TIM_OC_MspDeInit(TIM_HandleTypeDef* tim_ocHandle)
 /* USER CODE BEGIN 1 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim->Instance == TIM2){
-		if ( ++interrupt_count  >= max_interrupt)
+		if ( ++interrupt_count  >= 2)
 		{
-			interrupt_count=0;
+
+			if(stmtime.updated)
+			{
+				printf("AT+CIPCLOSE\r\n");
+				HAL_Delay(10);
+				stmtime.updated = 0;
+			}
+		else
 			xSemaphoreGiveFromISR(sim1,NULL);
+			interrupt_count=0;
 		}
 		//GPIOB->ODR ^= 0x0080;
 		//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);

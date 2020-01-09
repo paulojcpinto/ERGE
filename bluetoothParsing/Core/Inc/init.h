@@ -34,6 +34,7 @@ extern uint8_t max_interrupt;
 extern uint8_t code_number;
 extern char pin_code[5];
 extern char choose_pin[5];
+extern char connected_user [20];
 
 extern message_info to_release[8];
 extern uint8_t number_release;

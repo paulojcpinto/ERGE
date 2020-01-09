@@ -5,6 +5,7 @@
 
 #include "stdlib.h"
 #include "user.h"
+#include "init.h"
 
 
 #define discard_char					UART4Tx_index++
@@ -81,7 +82,7 @@
 #define char_instructions                     (char)  'Y'
 #define int_instructions                      (int) 24
 	
-#define char_presensce_check                  (char)  'H'
+#define char_presensce_check                  (char)  'B'
 #define int_presence_check                     (int) 25
 
 
@@ -469,22 +470,26 @@ void end_receiving_trama (int *c)
 					break;
 				case int_instructions:
 					    //TODO
-					HAL_TIM_Base_Stop_IT(&htim2);
+				//	HAL_TIM_Base_Stop_IT(&htim2);
 				
 				if (	create_user_finger()==2)
 				{
 					printUpdate(2,char_instructions);
-					HAL_TIM_Base_Start_IT(&htim2);
-					break;
+				//	HAL_TIM_Base_Start_IT(&htim2);
+					
 				}
+				else
+				{
 				UART4Tx_index++;
 				
-				HAL_TIM_Base_Start_IT(&htim2);
+				//HAL_TIM_Base_Start_IT(&htim2);
+				}
 				
 					break;
 				
 					case int_presence_check:
 					printUpdate(getPresenceStatus(user_pars.nickName),char_presensce_check);
+					strcpy(connected_user, user_pars.nickName);
 					break;
 				
 
