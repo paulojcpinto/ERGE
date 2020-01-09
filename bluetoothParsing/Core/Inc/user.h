@@ -32,6 +32,7 @@ struct UserFuncitons
 
 struct User
 {
+	double release_memory;
 	message mmessage; 
 	userfuncs funcs;
 	int position;

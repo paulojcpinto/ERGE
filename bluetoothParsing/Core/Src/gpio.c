@@ -138,23 +138,24 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//2
-					code_number++;
+					//2
+					choose_pin[code_number++] = '2';
+					
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//5
+					choose_pin[code_number++] = '5';//5
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//8
+					choose_pin[code_number++] = '8';//8
 				}; break;
 				
 				case NumPad_4Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//0
+					choose_pin[code_number++] = '0';//0
 				}; break;
 			}			
 			
@@ -168,17 +169,17 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//1
+					choose_pin[code_number++] = '1';//1
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//4
+					choose_pin[code_number++] = '4';//4
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//7
+					choose_pin[code_number++] = '7';//7
 				}; break;
 
 			}
@@ -192,17 +193,17 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//3
+					choose_pin[code_number++] = '3';//3
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//6
+					choose_pin[code_number++] = '6';//6
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);//9
+					choose_pin[code_number++] = '9';//9
 				}; break;
 			}
 		} break;

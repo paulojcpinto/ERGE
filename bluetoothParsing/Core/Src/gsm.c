@@ -269,7 +269,7 @@ its_updating=0;
 					HAL_UART_Transmit(&huart3, "\r\nIT'S OK\r\n",11, 1000);
 					local = discard_char ;
 				busy = 0;
-				stmtime.updated=1;
+				//stmtime.updated=1;
 				//stmtime.need_update=0;
 				}
 				else

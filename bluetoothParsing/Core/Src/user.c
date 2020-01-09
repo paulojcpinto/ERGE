@@ -1,5 +1,6 @@
 #include "user.h"
 #include <string.h>
+#include "bluetooth_module.h"
 
 
 int  nextUser;
@@ -65,13 +66,15 @@ void initUser(void)
 			 strcpy(users[nextUser].mmessage.dateToStart,newUser.dateToStart);
 			 strcpy(users[nextUser].mmessage.messageToRelease,newUser.messageToRelease);
 			 strcpy(users[nextUser].mmessage.platformToRelease,newUser.platformToRelease);
+			 strcpy(pin_code, newUser.pinCode);
 			 users[nextUser].mmessage.repeatTime= newUser.repeatTime;
-			 users[nextUser].unlocked=1;
+			 users[nextUser].unlocked=0;
 			 users[nextUser].mmessage.dateToRelease1.tm_year = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_mon = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_mday = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_min = 0;
 			 users[nextUser].mmessage.dateToRelease1.tm_hour = 0;
+			 users[nextUser].release_memory = 0;
 			 for(int position = 0; position < strlen(users[nextUser].mmessage.dateToStart); position++)
 			 {
 					if ( users[nextUser].mmessage.dateToStart[ position ] == '/' )
@@ -156,8 +159,10 @@ void initUser(void)
 			 }
 			 else 
 			 {
-				 return USER_BLOCKED;   //user blocked
+  			 strcpy(pin_code, pinCode);
 				 xSemaphoreGive(numPad);
+				 return USER_BLOCKED;   //user blocked
+
 			 }
 		 }
 		 else return BAD_CREDENTIALS;   //wrong pincode
@@ -249,6 +254,19 @@ void initUser(void)
 		 user_time += users[ count ].mmessage.dateToRelease1.tm_mday * day;
 		 user_time += users[ count ].mmessage.dateToRelease1.tm_mon * month;
 		 user_time += users[ count ].mmessage.dateToRelease1.tm_year * year;
+		 
+		 	time_t t1, t2;
+			t1 = mktime( stmtime.localtim);
+			t2 = mktime(&users[count].mmessage.dateToRelease1);
+		 if ( difftime(t1,t2) > users[count].release_memory && !(users[count].presenceCheck) )
+		 {
+			 users[count].release_memory = 0;
+			 strcpy(to_release[ count ].phone_number, users[count].phoneNumber);
+			 to_release[count].where = 1;
+			 strcpy(to_release[count].message, "Time is running out. Do your Presence Check");
+			 to_release[ count ].to_publish = 1;
+		 }
+		 
 		 if ( user_time <= current_time && !(users[count].presenceCheck) )
 		 {
 			 if ( users[count].mmessage.platformToRelease[0] == 'T' )
@@ -267,7 +285,7 @@ void initUser(void)
 			 users[ count-- ] = users[ --nextUser ];
 
 		 }
-		 else if ( user_time == current_time && users[count].presenceCheck )
+		 else if ( user_time >= current_time && users[count].presenceCheck )
 		 {
 			 update_time(count);
 			 users[count].presenceCheck =0;
@@ -278,6 +296,7 @@ void initUser(void)
 			 to_release[ count ].to_publish = 0;
 		 }
 	 }
+	 stmtime.updated = 0;
 	 				 xSemaphoreGive(finger_signal);
  }
 
@@ -317,11 +336,22 @@ void initUser(void)
  
  void update_presenceCheck ( char ID )
  {
+	
 	 uint8_t fingerIDp = ID - '0';
-	 for (uint8_t pos = 0; pos < MAX_USERS; pos++)
+	 for (uint8_t pos = 0; pos < nextUser; pos++)
 		if ( users[pos].fingerID == ID )
 		{
+			 time_t t1, t2;
+			t1 = mktime( stmtime.localtim);
+			t2 = mktime(&users[pos].mmessage.dateToRelease1);
+			users[pos].release_memory = difftime(t1,t2);
 			users[pos].presenceCheck = 1;
+			if (!strcmp(connected_user,users[pos].nickName))
+			{
+				HAL_UART_Transmit(&huart4, "<F1>", 4, 1000);
+			}
+			else
+				HAL_UART_Transmit(&huart4, "<F2>", 4, 1000);
 		}
  }
  
@@ -334,6 +364,7 @@ void initUser(void)
 			if ( Fingerprint_SaveNewFinger(fingerID,40) )
 			{				
 				users[ nextUser++ ].fingerID = fingerID;
+				xSemaphoreGive(numPad);
 				return 1;
 			}
 			else
