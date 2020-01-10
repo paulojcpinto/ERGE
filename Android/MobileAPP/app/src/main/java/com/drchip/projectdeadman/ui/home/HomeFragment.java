@@ -56,40 +56,49 @@ public class HomeFragment extends Fragment {
 
                     }
                     receive_nick(readMessage);
-                    if(readMessage.contains("<H1>"))
+                    if(readMessage.contains("<B1>"))
                     {
-                        tvPresenceStatus.setText("Already Done");
-                        toUpdateText.add(tvPresenceStatus);
-                        toUpdateImage.add(ivPresenseStatus);
-                        ivPresenseStatus.setImageResource(R.drawable.correct);
-                        ivPresenseStatus.setAnimation(fade_out2);
-                        tvPresenceStatus.setAnimation(fade_out);
+                        if(!tvPresenceStatus.getText().toString().equals("Done with success")) {
+                            tvPresenceStatus.setText("Done with success");
+                            toUpdateText.add(tvPresenceStatus);
+                            toUpdateImage.add(ivPresenseStatus);
+                            ivPresenseStatus.clearAnimation();
+                            ivPresenseStatus.setImageResource(R.drawable.correct);
+                            ivPresenseStatus.clearAnimation();
+                            ivPresenseStatus.startAnimation(fade_out2);
+                            tvPresenceStatus.startAnimation(fade_out);
+                        }
 
                     }
-                    if(readMessage.contains("<H2>"))
+                    if(readMessage.contains("<B2>"))
                     {
-                        tvPresenceStatus.setText("User not unknown");
-                        toUpdateText.add(tvPresenceStatus);
-                        toUpdateImage.add(ivPresenseStatus);
-                        ivPresenseStatus.setImageResource(R.drawable.not_knowned);
-                        ivPresenseStatus.setAnimation(fade_out);
-                        tvPresenceStatus.setAnimation(fade_out);
+                        if(!tvPresenceStatus.getText().toString().equals("User unknown")) {
+                            tvPresenceStatus.setText("User unknown");
+                            toUpdateText.add(tvPresenceStatus);
+                            toUpdateImage.add(ivPresenseStatus);
+                            ivPresenseStatus.setImageResource(R.drawable.not_knowned);
+                            ivPresenseStatus.startAnimation(fade_out2);
+                            tvPresenceStatus.startAnimation(fade_out);
+                        }
                     }
-                    if(readMessage.contains("<H0>"))
+                    if(readMessage.contains("<B0>"))
                     {
-                        tvPresenceStatus.setText("Lacking");
-                        toUpdateText.add(tvPresenceStatus);
-                        toUpdateImage.add(ivPresenseStatus);
-                        ivPresenseStatus.setImageResource(R.drawable.correct);
-                        ivPresenseStatus.setAnimation(fade_out);
-                        tvPresenceStatus.setAnimation(fade_out);
+                        if(!tvPresenceStatus.getText().toString().equals("Lacking")) {
+                            tvPresenceStatus.setText("Lacking");
+                            toUpdateText.add(tvPresenceStatus);
+                            toUpdateImage.add(ivPresenseStatus);
+                            ivPresenseStatus.setImageResource(R.drawable.error);
+                            ivPresenseStatus.startAnimation(fade_out2);
+                            tvPresenceStatus.startAnimation(fade_out);
+                        }
                     }
                     if(readMessage.contains("<F1>"))
                     {
                         tvFingerStatus.setText("Finger Read with success");
                         ivFingerStatus.setImageResource(R.drawable.dedinho_green);
                         toUpdateLayout.add(lFingerStatus);
-                        lFingerStatus.setAnimation(fade_in2);
+                        lFingerStatus.setVisibility(View.VISIBLE);
+                        lFingerStatus.startAnimation(fade_in2);
 
                     }
                     if(readMessage.contains("<F2>"))
@@ -97,21 +106,26 @@ public class HomeFragment extends Fragment {
                         tvFingerStatus.setText("Error reading finger!");
                         ivFingerStatus.setImageResource(R.drawable.dedinho_red);
                         toUpdateLayout.add(lFingerStatus);
-                        lFingerStatus.setAnimation(fade_in2);
+                        lFingerStatus.setVisibility(View.VISIBLE);
+                        lFingerStatus.startAnimation(fade_in2);
                     }
                     if(readMessage.contains("<I1>"))
                     {
                         tvFaceStatus.setText("Successful Facial Recognition");
                         ivFaceStatus.setImageResource(R.drawable.facescansuccess);
                         toUpdateLayout.add(lFaceStatus);
-                        lFaceStatus.setAnimation(fade_in2);
+                        lFaceStatus.startAnimation(fade_in2);
+                        lFaceStatus.setVisibility(View.VISIBLE);
+
                     }
                     if(readMessage.contains("<I2>"))
                     {
                         tvFaceStatus.setText("Facial Recognition timed out");
                         ivFaceStatus.setImageResource(R.drawable.facescanerror);
                         toUpdateLayout.add(lFaceStatus);
-                        lFaceStatus.setAnimation(fade_in2);
+                        lFaceStatus.startAnimation(fade_in2);
+                        lFaceStatus.setVisibility(View.VISIBLE);
+
                     }
 
 
@@ -183,7 +197,8 @@ public class HomeFragment extends Fragment {
         public void run() {
             ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname+">",getContext());
 
-            timerHandler.postDelayed(this, 100000);
+            SystemClock.sleep(10);
+            timerHandler.postDelayed(this, 10000);
         }
     };
     Timer timer = new Timer();
@@ -216,7 +231,7 @@ public class HomeFragment extends Fragment {
         ivFingerStatus = root.findViewById(R.id.ivFingerStatus);
         ivFaceStatus = root.findViewById(R.id.ivFaceStatus);
         tvPresenceStatus = root.findViewById(R.id.tvPresenceStatus);
-        tvFingerStatus = root.findViewById(R.id.tvFingerStm);
+        tvFingerStatus = root.findViewById(R.id.tvFingerStatus);
         tvFaceStatus = root.findViewById(R.id.tvFaceStatus);
         lFingerStatus = root.findViewById(R.id.lFingerStatus);
         lFaceStatus = root.findViewById(R.id.lFaceStatus);
@@ -238,10 +253,9 @@ public class HomeFragment extends Fragment {
 
         ivClock.setAnimation(blink);
         timerHandler.postDelayed(timerRunnable, 0);
-        timerHandler1.postDelayed(timerRunnable1, 0);
+        timerHandler1.postDelayed(timerRunnable1, 500);
 
 
-        ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname+">",getContext());
         // ApplicationClass.sendMessage("<H>",getContext());
 
 
@@ -262,16 +276,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
 
-                for(int i=0; i<toUpdateImage.size();i++)
-                {
-                    toUpdateImage.get(i).clearAnimation();
-                    toUpdateImage.get(i).setImageResource(R.drawable.error);
-                    toUpdateImage.get(i).startAnimation(fade_in);
-
-                }
-                toUpdateImage= new ArrayList<>();
-                toUpdateImage.clear();
-
                 for(int i=0; i<toUpdateText.size();i++)
                 {
                     toUpdateText.get(i).clearAnimation();
@@ -280,6 +284,14 @@ public class HomeFragment extends Fragment {
                 }
                 toUpdateText= new ArrayList<>();
                 toUpdateText.clear();
+                for(int i=0; i<toUpdateLayout.size();i++)
+                {
+                    toUpdateLayout.get(i).clearAnimation();
+                    toUpdateLayout.get(i).setVisibility(View.GONE);
+
+                }
+                toUpdateLayout= new ArrayList<>();
+                toUpdateLayout.clear();
 
             }
 
@@ -299,6 +311,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onAnimationEnd(Animation animation) {
 
+                for(int i=0; i<toUpdateImage.size();i++)
+                {
+                    toUpdateImage.get(i).clearAnimation();
+                  //  toUpdateImage.get(i).setImageResource(R.drawable.correct);
+                    toUpdateImage.get(i).startAnimation(fade_in);
+
+                }
+                toUpdateImage= new ArrayList<>();
+                toUpdateImage.clear();
             }
 
             @Override
@@ -365,7 +386,7 @@ public class HomeFragment extends Fragment {
 
             }else
             {
-                ApplicationClass.sendMessage("<H>",getContext());
+                ApplicationClass.sendMessage("<B>",getContext());
             }
 
         }

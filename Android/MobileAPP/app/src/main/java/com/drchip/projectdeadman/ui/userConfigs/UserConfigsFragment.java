@@ -262,12 +262,12 @@ public class UserConfigsFragment extends Fragment {
                     toUpdate.get(i).startAnimation(fade_in);
 
                 }
-                for(int i=0; i<toUpdate.size();i++)
-                {
-                    toUpdate.get(i).clearAnimation();
-                }
-                toUpdate= new ArrayList<>();
-                toUpdate.clear();
+//                for(int i=0; i<toUpdate.size();i++)
+//                {
+//                    toUpdate.get(i).clearAnimation();
+//                }
+//                toUpdate= new ArrayList<>();
+//                toUpdate.clear();
             }
 
             @Override

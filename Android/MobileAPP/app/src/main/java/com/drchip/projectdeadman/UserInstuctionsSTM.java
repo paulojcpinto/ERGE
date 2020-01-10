@@ -59,18 +59,18 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                       //  ivFingerSTM.setImageResource(R.drawable.correct);
                        // ivFingerSTM.clearAnimation();
                         toUpdate.add(ivFingerSTM);
-                        ivFingerSTM.setAnimation(fade_out2);
+                        ivFingerSTM.startAnimation(fade_out2);
                         ivPinCode.startAnimation(rotate);
-                        linPincode.setAnimation(fade_in2);
+                        linPincode.startAnimation(fade_in2);
                         linPincode.setVisibility(View.VISIBLE);
                     }
 
                     if(readMessage.contains("<Q1>"))
                     {
                         toUpdate.add(ivPinCode);
-                        ivPinCode.setAnimation(fade_out2);
+                        ivPinCode.startAnimation(fade_out2);
                         linSuccess.setVisibility(View.VISIBLE);
-                        linSuccess.setAnimation(fade_in2);
+                        linSuccess.startAnimation(fade_in2);
                         Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
                         btnConfirm.setVisibility(View.VISIBLE);
                         btnConfirm.startAnimation(fade_in1);
@@ -80,17 +80,17 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                     if(readMessage.contains("<Q5"))
                     {
                         toUpdate.add(ivPinCode);
-                        ivPinCode.setAnimation(fade_out);
+                        ivPinCode.startAnimation(fade_out);
                         ivSuccess.setImageResource(R.drawable.error);
                         tvSuccess.setText("Error: pincode invalid!!!");
                         linSuccess.setVisibility(View.VISIBLE);
-                        linSuccess.setAnimation(fade_in2);
+                        linSuccess.startAnimation(fade_in2);
                         ivSuccess.startAnimation(fade_in);
                     }
                     if(readMessage.contains("<Y1>"))
                     {
                         linSuccess.setVisibility(View.VISIBLE);
-                        linSuccess.setAnimation(fade_in);
+                        linSuccess.startAnimation(fade_in);
                         Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
                         btnConfirm.setVisibility(View.VISIBLE);
                         btnConfirm.startAnimation(fade_in1);
@@ -102,7 +102,7 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         ivSuccess.setImageResource(R.drawable.error);
                         tvSuccess.setText("Error registering your fingerprint, timeout");
                         linSuccess.setVisibility(View.VISIBLE);
-                        linSuccess.setAnimation(fade_in2);
+                        linSuccess.startAnimation(fade_in2);
                         ivSuccess.startAnimation(fade_in);
 
                     }
