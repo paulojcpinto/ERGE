@@ -261,7 +261,7 @@ void StarPparsingBT(void const * argument)
   for(;;)
   {
 		parsingBT(&cp);
-			vTaskDelay(100);
+		vTaskDelay(100);
   }
   /* USER CODE END StarPparsingBT */
 }
@@ -323,6 +323,7 @@ void StarPparsingBT(void const * argument)
 			else
 				HAL_UART_Transmit(&huart4, "<Q5>",4, 1000);
 		}
+		vTaskDelay(100);
   }
 }
 /* USER CODE END Application */
