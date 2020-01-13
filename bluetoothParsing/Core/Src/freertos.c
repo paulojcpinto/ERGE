@@ -273,7 +273,7 @@ void StarPparsingBT(void const * argument)
   for(;;)
   {
 		parsing_gsm();
-			vTaskDelay(100);
+		vTaskDelay(100);
   }
   /* USER CODE END StarPparsingBT */
 }
