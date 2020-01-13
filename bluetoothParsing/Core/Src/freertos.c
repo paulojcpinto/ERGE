@@ -147,7 +147,7 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-    parsing_gsm11();
+    parsing_esp();
 		vTaskDelay(100);
 		}
   /* USER CODE END StartDefaultTask */
