@@ -4,7 +4,7 @@
 
 
 
-xSemaphoreHandle finger_signal;
+xSemaphoreHandle release_signal;
 xSemaphoreHandle sim1;
 xSemaphoreHandle release_signal;
 xSemaphoreHandle numPad;

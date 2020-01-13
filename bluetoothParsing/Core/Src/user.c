@@ -316,7 +316,7 @@ void initUser(void)
 		 }
 	 }
 	 stmtime.updated = 0;
-	 				 xSemaphoreGive(finger_signal);
+	 				 xSemaphoreGive(release_signal);
  }
 
  void verify_release_time ( void )
@@ -327,7 +327,7 @@ void initUser(void)
 		 if(  (stmtime.localtim->tm_min <= 60) && stmtime.fingerp == 0 )
 		 {
 			 HAL_UART_Transmit(&huart3, "\r\ndedo\r\n", 8, 1000);
-				xSemaphoreGive(finger_signal);
+				xSemaphoreGive(release_signal);
 		 }
 		 else			 
 			HAL_UART_Transmit(&huart3, "\r\nnotd\r\n", 8, 1000);

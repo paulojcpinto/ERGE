@@ -20,7 +20,7 @@ typedef struct message_info
 	uint8_t to_publish;
 }message_info;
 
-extern xSemaphoreHandle finger_signal;
+extern xSemaphoreHandle release_signal;
 extern xSemaphoreHandle sim1;
 extern xSemaphoreHandle release_signal;
 extern xSemaphoreHandle numPad;

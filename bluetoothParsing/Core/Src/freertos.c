@@ -202,7 +202,7 @@ void StartTaskpublish(void const *argument)
 {
     /*USER CODE BEGIN StartTaskpublish */
     uint8_t i = 0;
-    if (xSemaphoreTake(finger_signal, 99999))
+    if (xSemaphoreTake(release_signal, 99999))
     {
         ini();
         HAL_UART_Transmit(&huart5, "AT+CIPCLOSE\r\n", 13, 1000);
@@ -214,7 +214,7 @@ void StartTaskpublish(void const *argument)
     /*Infinite loop */
     for (;;)
     {
-        if (xSemaphoreTake(finger_signal, 99999))
+        if (xSemaphoreTake(release_signal, 99999))
         {
             while (stmtime.need_update)
             {
@@ -233,7 +233,7 @@ void StartTaskpublish(void const *argument)
                 to_release[pos].to_publish = 0;
             }
 
-            publ();
+            finish_twitter();
         }
 
         vTaskDelay(1000);

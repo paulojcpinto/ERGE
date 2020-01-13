@@ -118,7 +118,7 @@ int main(void)
 	int c = 0;
 	HAL_Delay(50);
 	initUser();
-	vSemaphoreCreateBinary(finger_signal);
+	vSemaphoreCreateBinary(release_signal);
 	vSemaphoreCreateBinary(sim1);
 	vSemaphoreCreateBinary(release_signal);
 	vSemaphoreCreateBinary(numPad);

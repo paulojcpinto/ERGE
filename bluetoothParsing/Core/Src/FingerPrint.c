@@ -476,7 +476,7 @@ int16_t	FingerPrint_Scan(void)
 				if (FingerPrint.AnswerBuffer[4] > 0)
 				{
 					update_presenceCheck(FingerPrint.AnswerBuffer[4]);
-					//xSemaphoreGive(finger_signal);
+					//xSemaphoreGive(release_signal);
 				stmtime.fingerp =1; }
 				else 
 					HAL_UART_Transmit(&huart4, "<F2>", 4, 1000);

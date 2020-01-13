@@ -58,7 +58,7 @@ void publish_twitter ( uint8_t message_release[], uint8_t who_publish[] )
 	Rx_publish &= ~MAX_USERS;
 
 }
-void publ()
+void finish_twitter()
 {
 	if (Rx_publish !=Tx_publish)
 	{
