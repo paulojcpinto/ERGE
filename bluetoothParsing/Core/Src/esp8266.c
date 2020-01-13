@@ -44,6 +44,8 @@ uint8_t Tx_publish = 0;
 uint8_t Rx_publish = 0;
 
 void atribute_month ( void );
+
+
 void ini ()
 {
 	local1 = 0x14;

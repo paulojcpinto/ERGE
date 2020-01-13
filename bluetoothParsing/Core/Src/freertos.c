@@ -218,7 +218,7 @@ void StartTaskUpdateTime(void const * argument)
 void StartTaskpublish(void const * argument)
 {
   /* USER CODE BEGIN StartTaskpublish */
-	uint8_t i = 0;
+
 	if(xSemaphoreTake(finger_signal, 99999))
 	{
 		ini();
@@ -332,6 +332,8 @@ void StarPparsingBT(void const * argument)
 			else
 				HAL_UART_Transmit(&huart4, "<Q5>",4, 1000);
 		}
+		vTaskDelay(100);
+		
   }
 }
 /* USER CODE END Application */

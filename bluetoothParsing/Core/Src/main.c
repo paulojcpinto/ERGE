@@ -82,6 +82,9 @@ int main(void)
   /* USER CODE END 1 */
   
 
+  /* Enable I-Cache---------------------------------------------------------*/
+  SCB_EnableICache();
+
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
@@ -124,7 +127,7 @@ int main(void)
 
   /* Call init function for freertos objects (in freertos.c) */
   MX_FREERTOS_Init(); 
-FingerPrint_Init(osPriorityLow);
+	FingerPrint_Init(osPriorityLow);
   /* Start scheduler */
   osKernelStart();
   

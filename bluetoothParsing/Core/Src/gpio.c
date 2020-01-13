@@ -19,9 +19,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
-#include "init.h"
 /* USER CODE BEGIN 0 */
 
+#include "init.h"
 #define 		line_mask 			GPIOE->ODR & 0x03C
 
 uint8_t NumPad [4][4]  =		{'1',			'2',		 '3',			'A',

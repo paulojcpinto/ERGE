@@ -360,9 +360,29 @@ void initUser(void)
 	 for (uint8_t pos = 0; pos < nextUser; pos++)
 		if ( users[pos].fingerID == ID )
 		{
-			 time_t t1, t2;
-			t1 = mktime( stmtime.localtim);
-			t2 = mktime(&users[pos].mmessage.dateToRelease1);
+			stmtime.localtim->tm_isdst = 0;
+		 stmtime.localtim->tm_wday = 0;
+		 stmtime.localtim->tm_yday = 0;
+		 
+		 aux.localtim->tm_hour =  stmtime.localtim->tm_hour;
+		 aux.localtim->tm_mday =  stmtime.localtim->tm_mday;
+		 aux.localtim->tm_min =  stmtime.localtim->tm_min;
+		 aux.localtim->tm_year =  stmtime.localtim->tm_year;
+		 aux.localtim->tm_sec =  stmtime.localtim->tm_sec;
+		 aux.localtim->tm_isdst =  stmtime.localtim->tm_isdst;
+		 aux.localtim->tm_wday =  stmtime.localtim->tm_wday;
+		 aux.localtim->tm_yday =  stmtime.localtim->tm_yday;
+		 aux1.localtim->tm_hour =  users[pos].mmessage.dateToRelease1.tm_hour;
+		 aux1.localtim->tm_mday =  users[pos].mmessage.dateToRelease1.tm_mday;
+		 aux1.localtim->tm_min =  users[pos].mmessage.dateToRelease1.tm_min;
+		 aux1.localtim->tm_year =  users[pos].mmessage.dateToRelease1.tm_year;
+		 aux1.localtim->tm_sec =  users[pos].mmessage.dateToRelease1.tm_sec;
+		 aux1.localtim->tm_isdst =  users[pos].mmessage.dateToRelease1.tm_isdst;
+		 aux1.localtim->tm_wday =  users[pos].mmessage.dateToRelease1.tm_wday;
+		 aux1.localtim->tm_yday =  users[pos].mmessage.dateToRelease1.tm_yday;
+		 	time_t t1, t2;
+			t1 = mktime( aux.localtim);
+			t2 = mktime(aux1.localtim);
 			users[pos].release_memory = difftime(t1,t2);
 			users[pos].presenceCheck = 1;
 			if (!strcmp(connected_user,users[pos].nickName))
