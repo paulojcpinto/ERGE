@@ -160,8 +160,7 @@ void StartDefaultTask(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_StartTaskUpdateTime */
-void StartTaskUpdateTime(void
-    const *argument)
+void StartTaskUpdateTime(void const *argument)
 {
     /*USER CODE BEGIN StartTaskUpdateTime */
     if (xSemaphoreTake(sim1, 99999))
@@ -174,13 +173,10 @@ void StartTaskUpdateTime(void
         if (xSemaphoreTake(sim1, 99999))
         {
             stmtime.updated = 1;
-           	//printf("AT+CIPCLOSE\r\n");
-           	//publish_twitter(i++);
             while (stmtime.need_update)
             {
                 vTaskDelay(10);
             }
-
             wait1();
             HAL_GPIO_TogglePin(GPIOB, EmbLED_Blue_Pin);
             while (stmtime.updated)

@@ -215,12 +215,6 @@ void update_date1 ()
 
 void  wait1 ()
 { 
-//	while (busy)
-//	{
-//		vTaskDelay(10);
-//		HAL_UART_Transmit(&huart3, "w", 1, 100);
-//		
-//	}
 	stmtime.need_update = 1;
 	busy = 1;
 	printf("AT+CIPSTART=\"TCP\",\"%s\",80\r\n","facebook.com");
@@ -249,84 +243,115 @@ int vHardware_verify1 ( void  )
 		return -1;
 	}
 }
-
-void atribute_month ( void )
+void atribute_month(void)
 {
-	switch ( month1[0] )
-	{
-		case 'J':
-		{
-			switch ( month1[1] )
-			{
-				case 'a':
-				{
-					stmtime.localtim->tm_mon = January;
-				}break;
-				case 'u':
-				{
-					switch ( month1[2] )
-					{
-						case 'n':
-						{
-							stmtime.localtim->tm_mon = June;
-						}break;
-						case 'l':
-						{
-							stmtime.localtim->tm_mon = July;
-						}break;
-					}
-				}break;
-			}
-		}break;
-		case 'F':
-		{
-			stmtime.localtim->tm_mon = February;
-		}break;
-		case 'M':
-		{
-			switch ( month1[2] )
-			{
-				case 'r':
-				{
-					stmtime.localtim->tm_mon = March;
-				}break;
-				case 'y':
-				{
-					stmtime.localtim->tm_mon = May;
-				}break;
-			}
-		}break;
-		case 'A':
-		{
-			switch ( month1[1] )
-			{
-				case 'p':
-				{
-					stmtime.localtim->tm_mon = April;
-				}break;
-				case 'u':
-				{
-					stmtime.localtim->tm_mon = August;
-				}break;
-			}
-		}break;
-		case 'S':
-		{
-			stmtime.localtim->tm_mon = September;
-		}break;
-		case 'O':
-		{
-			stmtime.localtim->tm_mon = October;
-		}break;
-		case 'N':
-		{
-			stmtime.localtim->tm_mon = November;
-		}break;
-		case 'D':
-		{
-			stmtime.localtim->tm_mon = December;
-		}break;
-	}
+    switch (month1[0])
+    {
+        case 'J':
+            {
+                switch (month1[1])
+                {
+                    case 'a':
+                        {
+                            stmtime.localtim->tm_mon = January;
+                        }
+
+                        break;
+                    case 'u':
+                        {
+                            switch (month1[2])
+                            {
+                                case 'n':
+                                    {
+                                        stmtime.localtim->tm_mon = June;
+                                    }
+
+                                    break;
+                                case 'l':
+                                    {
+                                        stmtime.localtim->tm_mon = July;
+                                    }
+
+                                    break;
+                            }
+                        }
+
+                        break;
+                }
+            }
+
+            break;
+        case 'F':
+            {
+                stmtime.localtim->tm_mon = February;
+            }
+
+            break;
+        case 'M':
+            {
+                switch (month1[2])
+                {
+                    case 'r':
+                        {
+                            stmtime.localtim->tm_mon = March;
+                        }
+
+                        break;
+                    case 'y':
+                        {
+                            stmtime.localtim->tm_mon = May;
+                        }
+
+                        break;
+                }
+            }
+
+            break;
+        case 'A':
+            {
+                switch (month1[1])
+                {
+                    case 'p':
+                        {
+                            stmtime.localtim->tm_mon = April;
+                        }
+
+                        break;
+                    case 'u':
+                        {
+                            stmtime.localtim->tm_mon = August;
+                        }
+
+                        break;
+                }
+            }
+
+            break;
+        case 'S':
+            {
+                stmtime.localtim->tm_mon = September;
+            }
+
+            break;
+        case 'O':
+            {
+                stmtime.localtim->tm_mon = October;
+            }
+
+            break;
+        case 'N':
+            {
+                stmtime.localtim->tm_mon = November;
+            }
+
+            break;
+        case 'D':
+            {
+                stmtime.localtim->tm_mon = December;
+            }
+
+            break;
+    }
 }
 
 void parsing_esp ( void )
