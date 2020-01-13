@@ -89,18 +89,23 @@
 
 static int out_index = 0;
 int error_number = 0;
+int counterUserInfo;
+
 char echo[255];
+char userInfo[50];
+char repeatTime[20];
+
 user_parsing user_pars;
 user* userBluetooh;
-char userInfo[50];
-int counterUserInfo;
-char repeatTime[20];
+
+
+
+
+
 
 void UlToStr(char *s, unsigned int bin, unsigned char n)
 {
     s += n;
-    //*s = '\0';
-
     while (n--)
     {
         *--s = (bin % 10) + '0';
@@ -108,102 +113,92 @@ void UlToStr(char *s, unsigned int bin, unsigned char n)
     }
 }
 
-
 void print_response(char c)
 {
-	char* s;
-					if(out_index<=9)
-					{
-						
-				  	UlToStr(s,out_index,1);
-						char aux[4];
-						 memset(aux,0,4);
-					   aux[0]='<';
-					   aux[1]=c;
-					   aux[2]=s[0];
-					   aux[3]='>';
-					   HAL_UART_Transmit_IT(&huart4, aux ,4 );
-					}
-					
-					else if(out_index>9 && out_index<100)
-					{
-						UlToStr(s,out_index,2);
-						char aux[5];
-   				 memset(aux,0,5);
-					  aux[0]='<';
-					  aux[1]=c;
-					  aux[2]=s[0];
-					  aux[3]=s[1];
-					  aux[4]='>';
-					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
-						
-					}
-					else 
-					{
-						UlToStr(s,out_index,2);
-						char aux[6];
-					  memset(aux,0,6);
-					  aux[0]='<';
-					  aux[1]=c;
-					  aux[2]=s[0];
-					  aux[3]=s[1];
-						aux[4]= s[2];
-					  aux[5]='>';
-					  HAL_UART_Transmit_IT(&huart4, aux ,5 );
-					}
-					
-	       
+    char *s;
+    if (out_index <= 9)
+    {
+        UlToStr(s, out_index, 1);
+        char aux[4];
+        memset(aux, 0, 4);
+        aux[0] = '<';
+        aux[1] = c;
+        aux[2] = s[0];
+        aux[3] = '>';
+        HAL_UART_Transmit_IT(&huart4, aux, 4);
+    }
+    else if (out_index > 9 && out_index < 100)
+    {
+        UlToStr(s, out_index, 2);
+        char aux[5];
+        memset(aux, 0, 5);
+        aux[0] = '<';
+        aux[1] = c;
+        aux[2] = s[0];
+        aux[3] = s[1];
+        aux[4] = '>';
+        HAL_UART_Transmit_IT(&huart4, aux, 5);
 
-					UART4Tx_index++;
-					
-	
+    }
+    else
+    {
+        UlToStr(s, out_index, 2);
+        char aux[6];
+        memset(aux, 0, 6);
+        aux[0] = '<';
+        aux[1] = c;
+        aux[2] = s[0];
+        aux[3] = s[1];
+        aux[4] = s[2];
+        aux[5] = '>';
+        HAL_UART_Transmit_IT(&huart4, aux, 5);
+    }
+
+    UART4Tx_index++;
+
 }
-
-
-
 
 
 void print_responseLogin(int log)
 {
-	char* s;
-	
-	if(log<=9)
-					{						
-				  	UlToStr(s,log,1);
-						uint8_t  pp[4];
-						memset(pp,0,4);
-					   pp[0]='<';
-					   pp[1]=char_app_login;
-					   pp[2]=s[0];
-					   pp[3]='>';
-					   HAL_UART_Transmit_IT(&huart4,  pp,4 );
-					}				      
-					UART4Tx_index++;
-	
+    char *s;
+
+    if (log <= 9)
+    {
+        UlToStr(s, log, 1);
+        uint8_t pp[4];
+        memset(pp, 0, 4);
+        pp[0] = '<';
+        pp[1] = char_app_login;
+        pp[2] = s[0];
+        pp[3] = '>';
+        HAL_UART_Transmit_IT(&huart4, pp, 4);
+    }
+
+    UART4Tx_index++;
+
 }
 
 
-
-void printParameter(char* parameter, char category)
+void printParameter(char *parameter, char category)
 {
-	int i;
-	char message[300];
-	memset(message,0,300);
-	message[0]='<';
-	message[1]=category;
-	for(i=2; i<strlen(parameter)+2;i++)
-	{
-		message[i] = parameter[i-2];
-	}
-	int aux;
-	aux=strlen(message);
-	message[aux]= '>';
-  HAL_UART_Transmit_IT(&huart4,  message,aux+1 );
-	UART4Tx_index++;
+    int i;
+    char message[300];
+    memset(message, 0, 300);
+    message[0] = '<';
+    message[1] = category;
+    for (i = 2; i < strlen(parameter) + 2; i++)
+    {
+        message[i] = parameter[i - 2];
+    }
 
-	
+    int aux;
+    aux = strlen(message);
+    message[aux] = '>';
+    HAL_UART_Transmit_IT(&huart4, message, aux + 1);
+    UART4Tx_index++;
+
 }
-
 void printNumber(int number,char c)
 {
 	char numberChar[30];
@@ -231,139 +226,139 @@ void receive_echo ( int *c )
 	echo[out_index++] = UART4Rx_Buffer[UART4Tx_index++];
 }
 
-
-
-void prepare_receive_info(int *c )
+void prepare_receive_info(int *c)
 {
-	switch ( UART4Rx_Buffer[UART4Tx_index] )
-	{
-		case char_trama_echo:
-		{
-			*c= 3;
-			receive_echo (c);
-		}; break;
-		
-		case char_trama_start:
-		{
-			*c = 2;
-			receive_start (c);
-		}; break;
-		
-		case char_trama_nick:
-			*c= int_nick;
-			UART4Tx_index++;
-		  memset(&user_pars,0,sizeof(user_parsing));
-		  memset(&user_pars.nickName,'\0',strlen(user_pars.nickName));
-			break;
-		
-		case char_trama_pincode:
-			*c= int_pincode;
-			UART4Tx_index++;
-			memset(&user_pars.pinCode,'\0',strlen(user_pars.pinCode));
-			break;
-		
-		case char_trama_email:
-			*c= int_email;
-			UART4Tx_index++;
-			memset(&user_pars.email,'\0',strlen(user_pars.email));
-			break;
-		
-		case char_trama_email_password:
-			*c= int_email_password;
-			UART4Tx_index++;
-			memset(&user_pars.emailPassword,'\0',strlen(user_pars.emailPassword));
-			break;
-		case char_trama_phone_number:
-			*c= int_phone_number;
-			UART4Tx_index++;
-		  memset(&user_pars.phoneNumber,'\0',strlen(user_pars.phoneNumber));
-			break;
-	
-		case char_trama_message:
-			*c= int_message;
-			UART4Tx_index++;
-		  memset(&user_pars.messageToRelease,'\0',strlen(user_pars.messageToRelease));
-			break;
-		
-		case char_trama_repeat:
-			*c= int_repeat;
-			UART4Tx_index++;
-	  	memset(repeatTime,0,20);
-			break;
-		
-		case char_trama_date:
-			*c= int_date;
-			UART4Tx_index++;
-		  memset(&user_pars.dateToStart,'\0',strlen(user_pars.dateToStart));
-			break;
-		
-		case char_trama_platform:
-			*c= int_platform;
-			UART4Tx_index++;		
-		  memset(&user_pars.platformToRelease,'\0',strlen(user_pars.platformToRelease));
-		break;
-		
-		case char_create_user:
-			*c=int_create_user;
-		  UART4Tx_index++;	
-			break;
-		case char_instructions:
-			*c=int_instructions;
-			UART4Tx_index++;	
-			break;
-		case char_app_login:
-			*c=int_app_login;
-			 UART4Tx_index++;	
-			break;
-		
-		case char_get_phone:
-			*c=int_get_phone;
-			UART4Tx_index++;	
-			break;
-		case char_get_user:
-			*c=int_get_user;
-		  counterUserInfo=0;
-			UART4Tx_index++;	
-			break;
-		
-		case char_get_repeat:
-			*c=int_get_repeat;
-			 UART4Tx_index++;	
-			break;
-		case char_get_email:
-			*c=int_get_email;
-		  UART4Tx_index++;	
-			break;
-		case char_get_emailpassword:
-			*c= int_get_emailpassword;
-			UART4Tx_index++;	
-			break;
-		case char_get_message:
-			*c=int_get_message;
-  		UART4Tx_index++;	
-			break;
-		case char_get_platform:
-			*c=int_get_platform;
-		  UART4Tx_index++;	
-			break;
-		case char_update:
-			*c=int_update;
-			UART4Tx_index++;
-		break;
-		case char_presensce_check:
-			*c=int_presence_check;
-			UART4Tx_index++;		
-			break;
-		
-		case char_trama_error:
-		{
-			*c=int_error;
-			UART4Tx_index++;
-			error_number=0;
-		};break;
-	}
-}
+    switch (UART4Rx_Buffer[UART4Tx_index])
+    {
+        case char_trama_echo:
+            {
+                *c = 3;
+                receive_echo(c);
+            };
+            break;
 
+        case char_trama_start:
+            {
+                *c = 2;
+                receive_start(c);
+            };
+            break;
+
+        case char_trama_nick:
+            *c = int_nick;
+            UART4Tx_index++;
+            memset(&user_pars, 0, sizeof(user_parsing));
+            memset(&user_pars.nickName, '\0', strlen(user_pars.nickName));
+            break;
+
+        case char_trama_pincode:
+            *c = int_pincode;
+            UART4Tx_index++;
+            memset(&user_pars.pinCode, '\0', strlen(user_pars.pinCode));
+            break;
+
+        case char_trama_email:
+            *c = int_email;
+            UART4Tx_index++;
+            memset(&user_pars.email, '\0', strlen(user_pars.email));
+            break;
+
+        case char_trama_email_password:
+            *c = int_email_password;
+            UART4Tx_index++;
+            memset(&user_pars.emailPassword, '\0', strlen(user_pars.emailPassword));
+            break;
+        case char_trama_phone_number:
+            *c = int_phone_number;
+            UART4Tx_index++;
+            memset(&user_pars.phoneNumber, '\0', strlen(user_pars.phoneNumber));
+            break;
+
+        case char_trama_message:
+            *c = int_message;
+            UART4Tx_index++;
+            memset(&user_pars.messageToRelease, '\0', strlen(user_pars.messageToRelease));
+            break;
+
+        case char_trama_repeat:
+            *c = int_repeat;
+            UART4Tx_index++;
+            memset(repeatTime, 0, 20);
+            break;
+
+        case char_trama_date:
+            *c = int_date;
+            UART4Tx_index++;
+            memset(&user_pars.dateToStart, '\0', strlen(user_pars.dateToStart));
+            break;
+
+        case char_trama_platform:
+            *c = int_platform;
+            UART4Tx_index++;
+            memset(&user_pars.platformToRelease, '\0', strlen(user_pars.platformToRelease));
+            break;
+
+        case char_create_user:
+            *c = int_create_user;
+            UART4Tx_index++;
+            break;
+        case char_instructions:
+            *c = int_instructions;
+            UART4Tx_index++;
+            break;
+        case char_app_login:
+            *c = int_app_login;
+            UART4Tx_index++;
+            break;
+
+        case char_get_phone:
+            *c = int_get_phone;
+            UART4Tx_index++;
+            break;
+        case char_get_user:
+            *c = int_get_user;
+            counterUserInfo = 0;
+            UART4Tx_index++;
+            break;
+
+        case char_get_repeat:
+            *c = int_get_repeat;
+            UART4Tx_index++;
+            break;
+        case char_get_email:
+            *c = int_get_email;
+            UART4Tx_index++;
+            break;
+        case char_get_emailpassword:
+            *c = int_get_emailpassword;
+            UART4Tx_index++;
+            break;
+        case char_get_message:
+            *c = int_get_message;
+            UART4Tx_index++;
+            break;
+        case char_get_platform:
+            *c = int_get_platform;
+            UART4Tx_index++;
+            break;
+        case char_update:
+            *c = int_update;
+            UART4Tx_index++;
+            break;
+        case char_presensce_check:
+            *c = int_presence_check;
+            UART4Tx_index++;
+            break;
+
+        case char_trama_error:
+            {
+                *c = int_error;
+                UART4Tx_index++;
+                error_number = 0;
+            };
+            break;
+    }
+}
 
 void printUpdate(int error,char c)
 {
