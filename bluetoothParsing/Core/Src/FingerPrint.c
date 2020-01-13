@@ -504,7 +504,7 @@ int16_t	FingerPrint_Scan(void)
 	Faild:
 	if(IfModuleIsOff==1)
 		HAL_GPIO_WritePin(_FINGERPRINT_POWER_GPIO,_FINGERPRINT_POWER_PIN,GPIO_PIN_RESET);
-	HAL_UART_Transmit_IT(&huart3,"<F2>",4);
+	HAL_UART_Transmit_IT(&huart4,"<F2>",4);
 	FingerPrint.Lock=0;
 	
 	return -1;
