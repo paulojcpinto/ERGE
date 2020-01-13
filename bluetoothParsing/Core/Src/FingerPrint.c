@@ -481,18 +481,6 @@ int16_t	FingerPrint_Scan(void)
 				else 
 					HAL_UART_Transmit(&huart4, "<F2>", 4, 1000);
 
-				if (FingerPrint.AnswerBuffer[4] == 7)
-				HAL_UART_Transmit_IT(&huart3,"7",1);
-				else if (FingerPrint.AnswerBuffer[4] == 1)
-					HAL_UART_Transmit_IT(&huart3,"1",1);
-				else if (FingerPrint.AnswerBuffer[4] == 5)
-					HAL_UART_Transmit_IT(&huart3,"5",1);
-				else if (FingerPrint.AnswerBuffer[4] == 3)
-					HAL_UART_Transmit_IT(&huart3,"3",1);
-				else if (FingerPrint.AnswerBuffer[4] == 2)
-					HAL_UART_Transmit_IT(&huart3,"2",1);
-				else
-					HAL_UART_Transmit_IT(&huart3,"a",1);
 				return FingerPrint.AnswerBuffer[3]*256+FingerPrint.AnswerBuffer[4];
 			}
 			if(Timeout>19)
