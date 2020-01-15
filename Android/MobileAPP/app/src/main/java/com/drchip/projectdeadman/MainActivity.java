@@ -1,6 +1,7 @@
 package com.drchip.projectdeadman;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -88,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(this, "You are connected to an " + ApplicationClass.deviceType + " by the name " + ApplicationClass.target.getName(), Toast.LENGTH_SHORT).show();
 
+                break;
+            case R.id.action_logout:
+                startActivity(new Intent(MainActivity.this, Enter.class));
+                MainActivity.this.finish();
                 break;
 
         }

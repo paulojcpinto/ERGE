@@ -123,6 +123,7 @@ public class UserInstructionsRASP extends AppCompatActivity {
                             tvImageNumber.setText(aux  + "");
                             pbImageCount.setProgress(aux );
                             ivImageCount.setImageResource(R.drawable.correct);
+                            starttime = System.currentTimeMillis();
                             btnConfirm.startAnimation(fade_in1);
                             btnConfirm.setVisibility(View.VISIBLE);
                         }
@@ -162,7 +163,7 @@ public class UserInstructionsRASP extends AppCompatActivity {
         tvFingerRaspDescription = findViewById(R.id.tvFingeRaspDescription);
         tvFaceReco = findViewById(R.id.tvFacereco);
         tvFaceRecoDescription = findViewById(R.id.tvFacerecDescription);
-        tvImageNumber = findViewById(R.id.tvImageNumber);
+        tvImageNumber = findViewById(R.id.tvNumber);
         ivFingerRasp = findViewById(R.id.ivFingerRasp);
         ivFaceStart = findViewById(R.id.ivFaceStart);
         ivImageCount = findViewById(R.id.ivImageCount);
