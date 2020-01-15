@@ -21,6 +21,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ public class Login extends AppCompatActivity {
     private MenuItem playMenu;
     private MenuItem DeviceType;
     private ArrayList<String> users;
-
+int numbers=0;
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
@@ -66,6 +67,15 @@ public class Login extends AppCompatActivity {
                     receive_nick(readMessage);
                     receive_pincode(readMessage);
                     receive_login(readMessage);
+                    if(readMessage.contains("<K>"))
+                    {
+                        numbers++;
+                        ivWait.clearAnimation();
+                        ivWait.startAnimation(fade_in3);
+                        tvNumberCounter.setText(numbers  + "");
+                        ivWait.setImageResource(R.drawable.correct);
+
+                    }
                     Toast.makeText(Login.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
@@ -93,6 +103,11 @@ public class Login extends AppCompatActivity {
     Button btnCancel, btnLogin;
     ImageView ivType;
     Animation rotate;
+    ImageView ivWait;
+    TextView tvNumberCounter;
+    Animation fade_in3;
+    Animation fade_out3;
+
 
 
     @Override
@@ -111,6 +126,48 @@ public class Login extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnLogin = findViewById(R.id.btnLogin);
         ivType = findViewById(R.id.ivType);
+        fade_in3 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fade_out3 = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+
+
+        fade_in3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ivWait.clearAnimation();
+                ivWait.startAnimation(fade_out3);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fade_out3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                ivWait.clearAnimation();
+                ivWait.setImageResource(R.drawable.loading2);
+                ivWait.clearAnimation();
+                ivWait.startAnimation(rotate);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         if(ApplicationClass.deviceType.contains("STM"))
             ivType.setImageResource(R.drawable.stm);
@@ -333,6 +390,7 @@ public class Login extends AppCompatActivity {
                     LayoutInflater inflaterUserNotFound = getLayoutInflater();
                     final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_blocked, null);
 
+                    numbers=0;
                     messageUserNotFound.setView(dialogViewUserNotFound);
                     messageUserNotFound.setTitle("Error!!");
                     messageUserNotFound.setMessage("The pinCode entered is invalid!!!!");
@@ -352,11 +410,11 @@ public class Login extends AppCompatActivity {
 
                 case ApplicationClass.USER_BLOCKED:
                 {
-                    ImageView ivWait;
                     final AlertDialog.Builder messageUserNotFound = new AlertDialog.Builder(Login.this);
                     LayoutInflater inflaterUserNotFound = getLayoutInflater();
                     final View dialogViewUserNotFound = inflaterUserNotFound.inflate(R.layout.login_codewait, null);
                     ivWait = dialogViewUserNotFound.findViewById(R.id.ivWait);
+                    tvNumberCounter = dialogViewUserNotFound.findViewById(R.id.tvNumber);
 
                     messageUserNotFound.setView(dialogViewUserNotFound);
                     messageUserNotFound.setTitle("Next Step!!");
@@ -371,6 +429,7 @@ public class Login extends AppCompatActivity {
                     messageUserNotFound.show();
 
                     ivWait.setAnimation(rotate);
+
                     messageUserNotFound.setCancelable(false);
 
 
@@ -389,8 +448,12 @@ public class Login extends AppCompatActivity {
                             if (!users.contains(etNick.getText().toString()))
                                 saveUser(etNick.getText().toString());
 
+
                             ApplicationClass.userNickname = etNick.getText().toString().trim();
                             ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
+                            ivWait.clearAnimation();
+                            ivWait.setImageResource(R.drawable.correct);
+
                             startActivity(new Intent(Login.this, MainActivity.class));
                             Login.this.finish();
 

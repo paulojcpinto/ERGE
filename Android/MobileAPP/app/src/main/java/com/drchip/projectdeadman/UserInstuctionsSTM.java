@@ -34,11 +34,12 @@ public class UserInstuctionsSTM extends AppCompatActivity {
     public static final int MESSAGE_TOAST = 5;
     public static final int CONNECTED_SUCCESS = 6;
     public static final String TOAST = "toast";
-    TextView tvFingerSTM, tvPinCode, tvFingerSTMDescription, tvPinCodeDescription, tvSuccess;
-    ImageView ivFingerSTM, ivPinCode, ivSuccess;
+    TextView tvFingerSTM, tvPinCode, tvFingerSTMDescription, tvPinCodeDescription, tvSuccess,tvNumberCounter;
+    ImageView ivFingerSTM, ivPinCode, ivSuccess,ivNumberCount;
     Button btnCancel, btnConfirm, btnTeste;
     LinearLayout linSuccess, linPincode;
     MenuItem playMenu;
+    int numbers =0;
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
@@ -62,6 +63,9 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         ivFingerSTM.startAnimation(fade_out2);
                         ivPinCode.startAnimation(rotate);
                         linPincode.startAnimation(fade_in2);
+                        Animation animation2 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.rotate);
+                        animation2.setStartTime(10);
+                        ivNumberCount.startAnimation(animation2);
                         linPincode.setVisibility(View.VISIBLE);
                     }
 
@@ -77,7 +81,7 @@ public class UserInstuctionsSTM extends AppCompatActivity {
 
 
                     }
-                    if(readMessage.contains("<Q5"))
+                    if(readMessage.contains("<Q5>"))
                     {
                         toUpdate.add(ivPinCode);
                         ivPinCode.startAnimation(fade_out);
@@ -94,7 +98,8 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
                         btnConfirm.setVisibility(View.VISIBLE);
                         btnConfirm.startAnimation(fade_in1);
-
+                        ivNumberCount.clearAnimation();
+                        ivNumberCount.setImageResource(R.drawable.correct);
 
                     }
                     if(readMessage.contains("<Y2>"))
@@ -104,6 +109,19 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         linSuccess.setVisibility(View.VISIBLE);
                         linSuccess.startAnimation(fade_in2);
                         ivSuccess.startAnimation(fade_in);
+                        ivNumberCount.clearAnimation();
+                        ivNumberCount.setImageResource(R.drawable.correct);
+
+                    }
+                    if(readMessage.contains("<K>"))
+                    {
+                        numbers++;
+
+                            ivNumberCount.clearAnimation();
+                            ivNumberCount.startAnimation(fade_in3);
+                            tvNumberCounter.setText(numbers + "");
+                            ivNumberCount.setImageResource(R.drawable.correct);
+
 
                     }
 
@@ -133,10 +151,16 @@ public class UserInstuctionsSTM extends AppCompatActivity {
     };
     MenuItem DeviceType;
     Animation rotate;
+    Animation rotate2;
+
     Animation fade_in;
+    Animation fade_in3;
+
     Animation fade_in2;
     Animation fade_out;
     Animation fade_out2;
+    Animation fade_out3;
+
     ArrayList<ImageView> toUpdate;
 
     int aux = 0;
@@ -166,17 +190,63 @@ public class UserInstuctionsSTM extends AppCompatActivity {
         tvPinCodeDescription.setVisibility(View.GONE);
         tvFingerSTMDescription.setVisibility(View.GONE);
         btnConfirm.setVisibility(View.GONE);
+        ivNumberCount = findViewById(R.id.ivNumberCount);
+        tvNumberCounter = findViewById(R.id.tvNumber);
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotate.setStartTime(10);
+        rotate2 = AnimationUtils.loadAnimation(this, R.anim.rotate);
         fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fade_in.setStartOffset(1);
+        fade_in3 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fade_in2 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fade_in2.setStartOffset(1);
         fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
         fade_out2 = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fade_out3 = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
         ivFingerSTM.startAnimation(rotate);
+
+        fade_in3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ivNumberCount.clearAnimation();
+                linPincode.clearAnimation();
+                ivNumberCount.startAnimation(fade_out3);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fade_out3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                ivNumberCount.clearAnimation();
+                ivNumberCount.setImageResource(R.drawable.loading2);
+                ivNumberCount.clearAnimation();
+                ivNumberCount.startAnimation(rotate2);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
 
         fade_out.setAnimationListener(new Animation.AnimationListener() {
             @Override

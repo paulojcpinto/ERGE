@@ -212,8 +212,6 @@ public class HomeFragment extends Fragment {
                 toUpdateLayout.get(i).startAnimation(fade_out);
 
             }
-            toUpdateLayout= new ArrayList<>();
-            toUpdateLayout.clear();
             timer.cancel();
             timer.purge();
             return false;
