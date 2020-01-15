@@ -130,6 +130,7 @@ void HAL_TIM_OC_MspDeInit(TIM_HandleTypeDef* tim_ocHandle)
 /* USER CODE BEGIN 1 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim->Instance == TIM2){
+
 		if ( ++interrupt_count  >= 2)
 		{
 
@@ -139,10 +140,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 				HAL_Delay(10);
 				stmtime.updated = 0;
 			}
-		else
-			xSemaphoreGiveFromISR(sim1,NULL);
-			interrupt_count=0;
+			else
+				xSemaphoreGiveFromISR(sim1,NULL);
+				interrupt_count=0;
 		}
+		HAL_GPIO_WritePin(LedRed_GPIO_Port, LedRed_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(LedGreen_GPIO_Port, LedGreen_Pin, GPIO_PIN_RESET);
 		//GPIOB->ODR ^= 0x0080;
 		//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_13);
 	}

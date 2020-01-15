@@ -201,7 +201,8 @@ void StartTaskUpdateTime(void const *argument)
 void StartTaskpublish(void const *argument)
 {
     /*USER CODE BEGIN StartTaskpublish */
-    uint8_t i = 0;
+
+
     if (xSemaphoreTake(release_signal, 99999))
     {
         ini();

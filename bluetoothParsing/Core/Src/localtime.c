@@ -2,5 +2,5 @@
 
 
 localtime1 stmtime;
-localtime1 aux;
-localtime1 aux1;
+struct tm aux;
+struct tm aux1;

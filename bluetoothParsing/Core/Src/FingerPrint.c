@@ -478,8 +478,11 @@ int16_t	FingerPrint_Scan(void)
 					stmtime.fingerp =1; 
 				}
 				else 
+				{
+					HAL_GPIO_WritePin(LedRed_GPIO_Port, LedRed_Pin, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(LedGreen_GPIO_Port, LedGreen_Pin, GPIO_PIN_SET);
 					HAL_UART_Transmit(&huart4, "<F2>", 4, 1000);
-
+				}
 				return FingerPrint.AnswerBuffer[3]*256+FingerPrint.AnswerBuffer[4];
 			}
 			if(Timeout>19)
@@ -492,6 +495,8 @@ int16_t	FingerPrint_Scan(void)
 	if(IfModuleIsOff==1)
 		HAL_GPIO_WritePin(_FINGERPRINT_POWER_GPIO,_FINGERPRINT_POWER_PIN,GPIO_PIN_RESET);
 	HAL_UART_Transmit_IT(&huart4,"<F2>",4);
+	HAL_GPIO_WritePin(LedRed_GPIO_Port, LedRed_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LedGreen_GPIO_Port, LedGreen_Pin, GPIO_PIN_RESET);
 	FingerPrint.Lock=0;
 	
 	return -1;

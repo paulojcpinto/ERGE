@@ -21,7 +21,7 @@ typedef struct localtime
 } localtime1;
 
 extern localtime1 stmtime;
-extern localtime1 aux;
-extern localtime1 aux1;
+extern struct tm aux;
+extern struct tm aux1;
 
 #endif

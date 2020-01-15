@@ -76,6 +76,8 @@ extern  void update_presenceCheck ( char ID );
 
 extern int getPresenceStatus(char* nickname);
 
+extern void verify_release_time1 ( void );
+
 
 
 

@@ -22,6 +22,7 @@
 /* USER CODE BEGIN 0 */
 
 #include "init.h"
+#include "usart.h"
 #define 		line_mask 			GPIOE->ODR & 0x03C
 
 uint8_t NumPad [4][4]  =		{'1',			'2',		 '3',			'A',
@@ -140,22 +141,29 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 				{
 					//2
 					choose_pin[code_number++] = '2';
+						HAL_UART_Transmit(&huart4, "<K>",3, 1000);
 					
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					choose_pin[code_number++] = '5';//5
+					choose_pin[code_number++] = '5';//5	
+					HAL_UART_Transmit(&huart4, "<K>",3, 1000);
+
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					choose_pin[code_number++] = '8';//8
+					choose_pin[code_number++] = '8';//8	
+HAL_UART_Transmit(&huart4, "<K>",3, 1000);
+
 				}; break;
 				
 				case NumPad_4Lin_Pin:
 				{
-					choose_pin[code_number++] = '0';//0
+					choose_pin[code_number++] = '0';//0	
+HAL_UART_Transmit(&huart4, "<K>",3, 1000);
+
 				}; break;
 			}			
 			
@@ -169,17 +177,23 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					choose_pin[code_number++] = '1';//1
+					choose_pin[code_number++] = '1';//1	
+HAL_UART_Transmit(&huart4, "<K>",3, 1000);
+
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
-					choose_pin[code_number++] = '4';//4
+					choose_pin[code_number++] = '4';//4	
+HAL_UART_Transmit(&huart4, "<K>",3, 1000);
+
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
-					choose_pin[code_number++] = '7';//7
+					choose_pin[code_number++] = '7';//7	
+HAL_UART_Transmit(&huart4, "<K>",3, 1000);
+
 				}; break;
 
 			}
@@ -193,21 +207,26 @@ void HAL_GPIO_EXTI_Callback ( uint16_t GPIO_PIN )
 			{
 				case NumPad_1Lin_Pin:
 				{
-					choose_pin[code_number++] = '3';//3
+					choose_pin[code_number++] = '3';//3	
+HAL_UART_Transmit(&huart4, "<K>",3, 1000);
+
 				}; break;
 				
 				case NumPad_2Lin_Pin:
 				{
 					choose_pin[code_number++] = '6';//6
+						HAL_UART_Transmit(&huart4, "<K>",3, 1000);
 				}; break;
 				
 				case NumPad_3Lin_Pin:
 				{
 					choose_pin[code_number++] = '9';//9
+						HAL_UART_Transmit(&huart4, "<K>",3, 1000);
 				}; break;
 			}
 		} break;
 	}
+
 }
 /* USER CODE END 2 */
 

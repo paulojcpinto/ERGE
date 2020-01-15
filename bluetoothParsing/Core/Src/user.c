@@ -113,10 +113,20 @@ void initUser(void)
 			 users[nextUser].mmessage.phone_to_release[1] = '3';
 			 users[nextUser].mmessage.phone_to_release[2] = '5';
 			 users[nextUser].mmessage.phone_to_release[3] = '1';
+			 users[nextUser].mmessage.phone_to_lastwarning[0] = '+';
+			 users[nextUser].mmessage.phone_to_lastwarning[1] = '3';
+			 users[nextUser].mmessage.phone_to_lastwarning[2] = '5';
+			 users[nextUser].mmessage.phone_to_lastwarning[3] = '1';
+			 				 for ( uint8_t position = 4; position < 13; position++)
+				 {
+					 users[nextUser].mmessage.phone_to_lastwarning[position] = users[nextUser].phoneNumber[position-4];
+
+				 }
 			 if ( users[nextUser].mmessage.platformToRelease[0] == 'S' ) 
 			 {
 				 for ( uint8_t position = 4; position < 13; position++)
 				 {
+					 users[nextUser].mmessage.phone_to_lastwarning[position] = users[nextUser].phoneNumber[position-4];
 					 users[nextUser].mmessage.phone_to_release[position] = users[nextUser].mmessage.platformToRelease[position];
 				 }
 			 }
@@ -228,11 +238,14 @@ void initUser(void)
 	 if (aux > 59)
 	 {
 	  users[use].mmessage.dateToRelease1.tm_hour += 1;
-	 
+	 	 	aux -= 60;	
 	 }
 	 else 
+	 {
 		 users[use].mmessage.dateToRelease1.tm_min  =aux;
-	 	aux -= 60;	
+		 aux -= aux;
+	 }
+
  }
 	 
  }
@@ -247,7 +260,7 @@ void initUser(void)
 	 current_time += stmtime.localtim->tm_mday * day;
 	 current_time += stmtime.localtim->tm_mon * month;
 	 current_time += stmtime.localtim->tm_year * year;
-	 for ( int count = 0; count < nextUser; count ++)
+	 for ( int count2 = 0,  count = 0; count < nextUser;count2 ++, count ++)
 	 {
 		 user_time  = users[ count ].mmessage.dateToRelease1.tm_min;
 		 user_time += users[ count ].mmessage.dateToRelease1.tm_hour * hour;
@@ -258,61 +271,62 @@ void initUser(void)
 		 stmtime.localtim->tm_wday = 0;
 		 stmtime.localtim->tm_yday = 0;
 		 
-		 aux.localtim->tm_hour =  stmtime.localtim->tm_hour;
-		 aux.localtim->tm_mday =  stmtime.localtim->tm_mday;
-		 aux.localtim->tm_min =  stmtime.localtim->tm_min;
-		 aux.localtim->tm_year =  stmtime.localtim->tm_year;
-		 aux.localtim->tm_sec =  stmtime.localtim->tm_sec;
-		 aux.localtim->tm_isdst =  stmtime.localtim->tm_isdst;
-		 aux.localtim->tm_wday =  stmtime.localtim->tm_wday;
-		 aux.localtim->tm_yday =  stmtime.localtim->tm_yday;
-		 aux1.localtim->tm_hour =  users[count].mmessage.dateToRelease1.tm_hour;
-		 aux1.localtim->tm_mday =  users[count].mmessage.dateToRelease1.tm_mday;
-		 aux1.localtim->tm_min =  users[count].mmessage.dateToRelease1.tm_min;
-		 aux1.localtim->tm_year =  users[count].mmessage.dateToRelease1.tm_year;
-		 aux1.localtim->tm_sec =  users[count].mmessage.dateToRelease1.tm_sec;
-		 aux1.localtim->tm_isdst =  users[count].mmessage.dateToRelease1.tm_isdst;
-		 aux1.localtim->tm_wday =  users[count].mmessage.dateToRelease1.tm_wday;
-		 aux1.localtim->tm_yday =  users[count].mmessage.dateToRelease1.tm_yday;
+		 aux.tm_hour =  stmtime.localtim->tm_hour;
+		 aux.tm_mday =  stmtime.localtim->tm_mday;
+		 aux.tm_min =  stmtime.localtim->tm_min;
+		 aux.tm_year =  stmtime.localtim->tm_year;
+		 aux.tm_sec =  stmtime.localtim->tm_sec;
+		 aux.tm_isdst =  stmtime.localtim->tm_isdst;
+		 aux.tm_wday =  stmtime.localtim->tm_wday;
+		 aux.tm_yday =  stmtime.localtim->tm_yday;
+		 aux1.tm_hour =  users[count].mmessage.dateToRelease1.tm_hour;
+		 aux1.tm_mday =  users[count].mmessage.dateToRelease1.tm_mday;
+		 aux1.tm_min =  users[count].mmessage.dateToRelease1.tm_min;
+		 aux1.tm_year =  users[count].mmessage.dateToRelease1.tm_year;
+		 aux1.tm_sec =  users[count].mmessage.dateToRelease1.tm_sec;
+		 aux1.tm_isdst =  users[count].mmessage.dateToRelease1.tm_isdst;
+		 aux1.tm_wday =  users[count].mmessage.dateToRelease1.tm_wday;
+		 aux1.tm_yday =  users[count].mmessage.dateToRelease1.tm_yday;
 		 	time_t t1, t2;
-			t1 = mktime( aux.localtim);
-			t2 = mktime(aux1.localtim);
-		 if ( difftime(t1,t2) > users[count].release_memory && !(users[count].presenceCheck) )
-		 {
-			 users[count].release_memory = 0;
-			 strcpy(to_release[ count ].phone_number, users[count].phoneNumber);
-			 to_release[count].where = 1;
-			 strcpy(to_release[count].message, "Time is running out. Do your Presence Check");
-			 to_release[ count ].to_publish = 1;
-		 }
+			t1 = mktime( &aux);
+			t2 = mktime(&aux1);
+
 		 
 		 if ( user_time <= current_time && !(users[count].presenceCheck) )
 		 {
 			 if ( users[count].mmessage.platformToRelease[0] == 'T' )
 			 {
-				 strcpy(to_release[ count ].cardentials_twitter, users[count].mmessage.twitter_cardentials);
-				 to_release[ count ].to_publish = 1;
-				 to_release[count].where = 0;
+				 strcpy(to_release[ count2 ].cardentials_twitter, users[count].mmessage.twitter_cardentials);
+				 to_release[ count2 ].to_publish = 1;
+				 to_release[count2].where = 0;
 			 }
 			 else 
 			 {
-				 strcpy(to_release[ count ].phone_number, users[count].mmessage.phone_to_release);
-				 to_release[count].where = 1;
+				 strcpy(to_release[ count2 ].phone_number, users[count].mmessage.phone_to_release);
+				 to_release[count2].where = 1;
 			 }
-			 strcpy(to_release[count].message, users[count].mmessage.messageToRelease);
-			 to_release[ count ].to_publish = 1;
+			 strcpy(to_release[count2].message, users[count].mmessage.messageToRelease);
+			 to_release[ count2 ].to_publish = 1;
 			 users[ count-- ] = users[ --nextUser ];
 
 		 }
-		 else if ( user_time >= current_time && users[count].presenceCheck )
+		 else if ( user_time <= current_time && users[count].presenceCheck )
 		 {
 			 update_time(count);
 			 users[count].presenceCheck =0;
-			 to_release[ count ].to_publish = 0;
+			 to_release[ count2 ].to_publish = 0;
+		 }
+		 else 		 if ( difftime(t1,t2) > users[count].release_memory && !(users[count].presenceCheck) )
+		 {
+			 users[count].release_memory = 0;
+			 strcpy(to_release[ count2 ].phone_number, users[count].mmessage.phone_to_lastwarning);
+			 to_release[count2].where = 1;
+			 strcpy(to_release[count2].message, "Time is running out. Do your Presence Check");
+			 to_release[ count2 ].to_publish = 1;
 		 }
 		 else 
 		 {
-			 to_release[ count ].to_publish = 0;
+			 to_release[ count2 ].to_publish = 0;
 		 }
 	 }
 	 stmtime.updated = 0;
@@ -357,6 +371,8 @@ void initUser(void)
  {
 	
 	 uint8_t fingerIDp = ID - '0';
+	 					HAL_GPIO_WritePin(LedRed_GPIO_Port, LedRed_Pin, GPIO_PIN_SET);
+					HAL_GPIO_WritePin(LedGreen_GPIO_Port, LedGreen_Pin, GPIO_PIN_RESET);
 	 for (uint8_t pos = 0; pos < nextUser; pos++)
 		if ( users[pos].fingerID == ID )
 		{
@@ -364,33 +380,45 @@ void initUser(void)
 		 stmtime.localtim->tm_wday = 0;
 		 stmtime.localtim->tm_yday = 0;
 		 
-		 aux.localtim->tm_hour =  stmtime.localtim->tm_hour;
-		 aux.localtim->tm_mday =  stmtime.localtim->tm_mday;
-		 aux.localtim->tm_min =  stmtime.localtim->tm_min;
-		 aux.localtim->tm_year =  stmtime.localtim->tm_year;
-		 aux.localtim->tm_sec =  stmtime.localtim->tm_sec;
-		 aux.localtim->tm_isdst =  stmtime.localtim->tm_isdst;
-		 aux.localtim->tm_wday =  stmtime.localtim->tm_wday;
-		 aux.localtim->tm_yday =  stmtime.localtim->tm_yday;
-		 aux1.localtim->tm_hour =  users[pos].mmessage.dateToRelease1.tm_hour;
-		 aux1.localtim->tm_mday =  users[pos].mmessage.dateToRelease1.tm_mday;
-		 aux1.localtim->tm_min =  users[pos].mmessage.dateToRelease1.tm_min;
-		 aux1.localtim->tm_year =  users[pos].mmessage.dateToRelease1.tm_year;
-		 aux1.localtim->tm_sec =  users[pos].mmessage.dateToRelease1.tm_sec;
-		 aux1.localtim->tm_isdst =  users[pos].mmessage.dateToRelease1.tm_isdst;
-		 aux1.localtim->tm_wday =  users[pos].mmessage.dateToRelease1.tm_wday;
-		 aux1.localtim->tm_yday =  users[pos].mmessage.dateToRelease1.tm_yday;
+		 aux.tm_hour =  stmtime.localtim->tm_hour;
+		 aux.tm_mday =  stmtime.localtim->tm_mday;
+		 aux.tm_min =  stmtime.localtim->tm_min;
+		 aux.tm_year =  stmtime.localtim->tm_year;
+		 aux.tm_sec =  stmtime.localtim->tm_sec;
+		 aux.tm_isdst =  stmtime.localtim->tm_isdst;
+		 aux.tm_wday =  stmtime.localtim->tm_wday;
+		 aux.tm_yday =  stmtime.localtim->tm_yday;
+		 aux1.tm_hour =  users[pos].mmessage.dateToRelease1.tm_hour;
+		 aux1.tm_mday =  users[pos].mmessage.dateToRelease1.tm_mday;
+		 aux1.tm_min =  users[pos].mmessage.dateToRelease1.tm_min;
+		 aux1.tm_year =  users[pos].mmessage.dateToRelease1.tm_year;
+		 aux1.tm_sec =  users[pos].mmessage.dateToRelease1.tm_sec;
+		 aux1.tm_isdst =  users[pos].mmessage.dateToRelease1.tm_isdst;
+		 aux1.tm_wday =  users[pos].mmessage.dateToRelease1.tm_wday;
+		 aux1.tm_yday =  users[pos].mmessage.dateToRelease1.tm_yday;
 		 	time_t t1, t2;
-			t1 = mktime( aux.localtim);
-			t2 = mktime(aux1.localtim);
-			users[pos].release_memory = difftime(t1,t2);
+			t1 = mktime( &aux);
+			t2 = mktime(&aux1);
+			if (	!(users[pos].release_memory) )
+			{
+				users[pos].release_memory = difftime(t1,t2);
+			}
+			else
+			  users[pos].release_memory = (users[pos].release_memory + difftime(t1,t2)) / 2;
 			users[pos].presenceCheck = 1;
 			if (!strcmp(connected_user,users[pos].nickName))
 			{
+					HAL_GPIO_WritePin(LedRed_GPIO_Port, LedRed_Pin, GPIO_PIN_RESET);
+					HAL_GPIO_WritePin(LedGreen_GPIO_Port, LedGreen_Pin, GPIO_PIN_SET);
 				HAL_UART_Transmit(&huart4, "<F1>", 4, 1000);
 			}
 			else
+			{
+				
+					HAL_GPIO_WritePin(LedRed_GPIO_Port, LedRed_Pin, GPIO_PIN_SET);
+					HAL_GPIO_WritePin(LedGreen_GPIO_Port, LedGreen_Pin, GPIO_PIN_RESET);
 				HAL_UART_Transmit(&huart4, "<F2>", 4, 1000);
+			}
 		}
  }
  
