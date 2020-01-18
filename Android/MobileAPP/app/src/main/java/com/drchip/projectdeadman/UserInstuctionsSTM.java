@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class UserInstuctionsSTM extends AppCompatActivity {
 
     public static final int MESSAGE_STATE_CHANGE = 1;
@@ -31,11 +34,12 @@ public class UserInstuctionsSTM extends AppCompatActivity {
     public static final int MESSAGE_TOAST = 5;
     public static final int CONNECTED_SUCCESS = 6;
     public static final String TOAST = "toast";
-    TextView tvFingerSTM, tvPinCode, tvFingerSTMDescription, tvPinCodeDescription;
-    ImageView ivFingerSTM, ivPinCode, ivSuccess;
+    TextView tvFingerSTM, tvPinCode, tvFingerSTMDescription, tvPinCodeDescription, tvSuccess,tvNumberCounter;
+    ImageView ivFingerSTM, ivPinCode, ivSuccess,ivNumberCount;
     Button btnCancel, btnConfirm, btnTeste;
     LinearLayout linSuccess, linPincode;
     MenuItem playMenu;
+    int numbers =0;
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
@@ -50,6 +54,78 @@ public class UserInstuctionsSTM extends AppCompatActivity {
                         playMenu.setIcon(R.drawable.bluetooth_on);
 
                     }
+                    if(readMessage.contains("<F>"))
+                    {
+
+                      //  ivFingerSTM.setImageResource(R.drawable.correct);
+                       // ivFingerSTM.clearAnimation();
+                        toUpdate.add(ivFingerSTM);
+                        ivFingerSTM.startAnimation(fade_out2);
+                        ivPinCode.startAnimation(rotate);
+                        linPincode.startAnimation(fade_in2);
+                        Animation animation2 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.rotate);
+                        animation2.setStartTime(10);
+                        ivNumberCount.startAnimation(animation2);
+                        linPincode.setVisibility(View.VISIBLE);
+                    }
+
+                    if(readMessage.contains("<Q1>"))
+                    {
+                        toUpdate.add(ivPinCode);
+                        ivPinCode.startAnimation(fade_out2);
+                        linSuccess.setVisibility(View.VISIBLE);
+                        linSuccess.startAnimation(fade_in2);
+                        Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
+                        btnConfirm.setVisibility(View.VISIBLE);
+                        btnConfirm.startAnimation(fade_in1);
+
+
+                    }
+                    if(readMessage.contains("<Q5>"))
+                    {
+                        toUpdate.add(ivPinCode);
+                        ivPinCode.startAnimation(fade_out);
+                        ivSuccess.setImageResource(R.drawable.error);
+                        tvSuccess.setText("Error: pincode invalid!!!");
+                        linSuccess.setVisibility(View.VISIBLE);
+                        linSuccess.startAnimation(fade_in2);
+                        ivSuccess.startAnimation(fade_in);
+                    }
+                    if(readMessage.contains("<Y1>"))
+                    {
+                        linSuccess.setVisibility(View.VISIBLE);
+                        linSuccess.startAnimation(fade_in);
+                        Animation fade_in1 = AnimationUtils.loadAnimation(UserInstuctionsSTM.this, R.anim.fade_in);
+                        btnConfirm.setVisibility(View.VISIBLE);
+                        btnConfirm.startAnimation(fade_in1);
+                        ivNumberCount.clearAnimation();
+                        ivNumberCount.setImageResource(R.drawable.correct);
+
+                    }
+                    if(readMessage.contains("<Y2>"))
+                    {
+                        ivSuccess.setImageResource(R.drawable.error);
+                        tvSuccess.setText("Error registering your fingerprint, timeout");
+                        linSuccess.setVisibility(View.VISIBLE);
+                        linSuccess.startAnimation(fade_in2);
+                        ivSuccess.startAnimation(fade_in);
+                        ivNumberCount.clearAnimation();
+                        ivNumberCount.setImageResource(R.drawable.correct);
+
+                    }
+                    if(readMessage.contains("<K>"))
+                    {
+                        numbers++;
+
+                            ivNumberCount.clearAnimation();
+                            ivNumberCount.startAnimation(fade_in3);
+                            tvNumberCounter.setText(numbers + "");
+                            ivNumberCount.setImageResource(R.drawable.correct);
+
+
+                    }
+
+
 
                     Toast.makeText(UserInstuctionsSTM.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
@@ -60,6 +136,7 @@ public class UserInstuctionsSTM extends AppCompatActivity {
 
                         Toast.makeText(UserInstuctionsSTM.this, "Device was lost", Toast.LENGTH_SHORT).show();
                     }
+
                     Toast.makeText(getApplicationContext(), msg.getData().getString(TOAST),
                             Toast.LENGTH_SHORT).show();
                     break;
@@ -74,7 +151,18 @@ public class UserInstuctionsSTM extends AppCompatActivity {
     };
     MenuItem DeviceType;
     Animation rotate;
+    Animation rotate2;
+
     Animation fade_in;
+    Animation fade_in3;
+
+    Animation fade_in2;
+    Animation fade_out;
+    Animation fade_out2;
+    Animation fade_out3;
+
+    ArrayList<ImageView> toUpdate;
+
     int aux = 0;
 
     @Override
@@ -95,22 +183,127 @@ public class UserInstuctionsSTM extends AppCompatActivity {
         linSuccess = findViewById(R.id.linSuccess);
         linPincode = findViewById(R.id.linPinCode);
         btnTeste = findViewById(R.id.btnTeste);
-
+        toUpdate = new ArrayList<ImageView>();
+        tvSuccess= findViewById(R.id.tvSuccess);
         linPincode.setVisibility(View.GONE);
         linSuccess.setVisibility(View.GONE);
         tvPinCodeDescription.setVisibility(View.GONE);
         tvFingerSTMDescription.setVisibility(View.GONE);
         btnConfirm.setVisibility(View.GONE);
+        ivNumberCount = findViewById(R.id.ivNumberCount);
+        tvNumberCounter = findViewById(R.id.tvNumber);
 
         rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotate.setStartTime(10);
+        rotate2 = AnimationUtils.loadAnimation(this, R.anim.rotate);
         fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         fade_in.setStartOffset(1);
+        fade_in3 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fade_in2 = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        fade_in2.setStartOffset(1);
+        fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fade_out2 = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+        fade_out3 = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 
         ivFingerSTM.startAnimation(rotate);
 
+        fade_in3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ivNumberCount.clearAnimation();
+                linPincode.clearAnimation();
+                ivNumberCount.startAnimation(fade_out3);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fade_out3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                ivNumberCount.clearAnimation();
+                ivNumberCount.setImageResource(R.drawable.loading2);
+                ivNumberCount.clearAnimation();
+                ivNumberCount.startAnimation(rotate2);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+        fade_out.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                for(int i=0; i<toUpdate.size();i++)
+                {
+                    toUpdate.get(i).clearAnimation();
+                    toUpdate.get(i).setImageResource(R.drawable.error);
+                    toUpdate.get(i).startAnimation(fade_in);
+
+                }
+                toUpdate= new ArrayList<>();
+                toUpdate.clear();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        fade_out2.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+                for(int i=0; i<toUpdate.size();i++)
+                {
+                    toUpdate.get(i).clearAnimation();
+                    toUpdate.get(i).setImageResource(R.drawable.correct);
+                    toUpdate.get(i).startAnimation(fade_in);
+
+                }
+                toUpdate= new ArrayList<>();
+                toUpdate.clear();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Instructions");
+        ApplicationClass.sendMessage("<Y>",this);
+
 
         tvFingerSTM.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +363,7 @@ public class UserInstuctionsSTM extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
                 startActivity(new Intent(UserInstuctionsSTM.this, MainActivity.class));
                 UserInstuctionsSTM.this.finish();
 

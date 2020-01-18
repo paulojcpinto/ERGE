@@ -228,7 +228,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvImageNumber"
+                android:id="@+id/tvNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -272,6 +272,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
         app:layout_constraintEnd_toEndOf="parent" />
 
