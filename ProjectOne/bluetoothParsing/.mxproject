@@ -1,21 +1,21 @@
 [PreviousGenFiles]
 AdvancedFolderStructure=true
 HeaderFileListSize=5
-HeaderFiles#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Inc/gpio.h
-HeaderFiles#1=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Inc/usart.h
-HeaderFiles#2=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Inc/stm32f7xx_it.h
-HeaderFiles#3=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Inc/stm32f7xx_hal_conf.h
-HeaderFiles#4=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Inc/main.h
+HeaderFiles#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Inc/gpio.h
+HeaderFiles#1=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Inc/usart.h
+HeaderFiles#2=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Inc/stm32f7xx_it.h
+HeaderFiles#3=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Inc/stm32f7xx_hal_conf.h
+HeaderFiles#4=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Inc/main.h
 HeaderFolderListSize=1
-HeaderPath#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Inc
+HeaderPath#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Inc
 SourceFileListSize=5
-SourceFiles#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Src/gpio.c
-SourceFiles#1=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Src/usart.c
-SourceFiles#2=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Src/stm32f7xx_it.c
-SourceFiles#3=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Src/stm32f7xx_hal_msp.c
-SourceFiles#4=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Src/main.c
+SourceFiles#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Src/gpio.c
+SourceFiles#1=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Src/usart.c
+SourceFiles#2=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Src/stm32f7xx_it.c
+SourceFiles#3=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Src/stm32f7xx_hal_msp.c
+SourceFiles#4=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Src/main.c
 SourceFolderListSize=1
-SourcePath#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Documentos/GitHub/TSI/Project1/PPPPPPP/Core/Src
+SourcePath#0=C:/Users/Paulo/OneDrive - Universidade do Minho/Ambiente de Trabalho/Anything/University/ERGE/ERGE/ProjectOne/bluetoothParsing/Core/Src
 HeaderFiles=;
 SourceFiles=;
 
