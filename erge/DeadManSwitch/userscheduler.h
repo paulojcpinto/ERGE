@@ -5,6 +5,7 @@
 #include "user.h"
 #include <string>
 
+
 using namespace std;
 
 
@@ -19,13 +20,16 @@ private:
 
 public:
   UserScheduler();
-  UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease );
+  UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease );
   UserScheduler(tm nextScheduler);
+  UserScheduler(tm jumpScheduler, tm nextScheduler,MCamera* cameraPointer,fullUser userData);
   struct tm getNextScheduler ( void );
   bool compareTimeRelease( tm timeNow );
   void updateNextSchedulerTime ( void );
   bool compareUserFinger ( unsigned int id );
   bool compareUserNickName ( string nickName );
+  bool createDataset(int *imagesTaked,bool *ended);
+  bool login(string pincode);
   void operator=(UserScheduler userSchedule);
   ~UserScheduler(){}
 };

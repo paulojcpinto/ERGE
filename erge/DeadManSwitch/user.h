@@ -3,8 +3,10 @@
 
 #include <string>
 #include "finger.h"
+#include "face.h"
 #include "datainfo.h"
-
+#include "SqlModule/sqlquery.h"
+#include "loghandler.h"
 using namespace std;
 
 
@@ -19,19 +21,23 @@ class User
        string email;
        string password;
        Finger finger;
-       DataInfo dataInfo;     
+       Face face;
+       DataInfo dataInfo;
+       LogHandler log;
+
 
 
     public:
-
-        User();
-        User( string nickName, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease = true  );
+        User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease = true  );
+        User(MCamera* cameraPointer,fullUser Data);
         void updatePhoneNumeber ( string phoneNumber );
         void updateEMail ( string email );
         void updatePassword ( string password );
         bool releaseInformation ( void );
         bool compareNickName ( string nickName );
         bool compareFinger ( unsigned int id );
+        bool createDataset(int *imagesTaked,bool *ended);
+        bool login(string pincode);
         ~User(){}
 
 };
