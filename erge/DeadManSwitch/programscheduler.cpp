@@ -205,3 +205,11 @@ void ProgramScheduler::updateNextScheduler ( void )
         }
     }
 }
+
+
+
+user_parsing ProgramScheduler::getUserForUpdate(String Nickname)
+{
+    user_parsing userToUpdate;
+    UserScheduler *aux =  finduser(Nickname);
+}
