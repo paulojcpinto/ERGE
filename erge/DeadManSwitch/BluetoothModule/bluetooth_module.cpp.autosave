@@ -301,6 +301,9 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                 sendMessage(platform);
             }
             break;
+        case 'U':
+            
+        break;
         default:
             ss<<"1 character:"<<c<<"\n";
 

@@ -100,6 +100,7 @@ void bluetooth_server::sendMessage(const QString &message)
 {
     QByteArray text = message.toUtf8() ;
 
+
     for (QBluetoothSocket *socket : qAsConst(clientSockets))
         socket->write(text);
 }

@@ -10,6 +10,7 @@ UserScheduler::UserScheduler(tm jumpScheduler, tm nextScheduler, string nickName
 {
     this->jumpScheduler = jumpScheduler;
     this->nextScheduler = nextScheduler;
+
     this->preseceCheck = false;
 }
 
@@ -17,6 +18,7 @@ UserScheduler::UserScheduler(tm jumpScheduler,tm nextScheduler,MCamera* cameraPo
 {
     this->jumpScheduler = jumpScheduler;
     this->nextScheduler = nextScheduler;
+    this->repeatTime = userData.messageInfo.JumpTime;
     this->preseceCheck = false;
 }
 
@@ -119,5 +121,12 @@ void UserScheduler::operator=(UserScheduler userSchedule)
   this->nextScheduler = userSchedule.nextScheduler;
   this->preseceCheck = userSchedule.preseceCheck;
   this->user = userSchedule.user;
+}
+
+user_parsing UserScheduler::getInfoToUpdate()
+{
+    user_parsing infoUpdate = user.getInfoToUpdate();
+    infoUpdate.repeatTime = repeatTime;
+    return infoUpdate;
 }
 

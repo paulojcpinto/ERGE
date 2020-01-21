@@ -451,8 +451,12 @@ int numbers=0;
 
                             ApplicationClass.userNickname = etNick.getText().toString().trim();
                             ApplicationClass.seccionTime = SystemClock.elapsedRealtime();
-                            ivWait.clearAnimation();
-                            ivWait.setImageResource(R.drawable.correct);
+                            if(ApplicationClass.deviceType.equals("STM"))
+                            {
+                                ivWait.clearAnimation();
+                                ivWait.setImageResource(R.drawable.correct);
+                            }
+
 
                             startActivity(new Intent(Login.this, MainActivity.class));
                             Login.this.finish();

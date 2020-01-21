@@ -75,6 +75,7 @@ public class UserConfigsFragment extends Fragment {
                     receive_password(readMessage);
                     receive_email(readMessage);
 
+                    Toast.makeText(getContext(), "Message Reciebed:"+readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:

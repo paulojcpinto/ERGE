@@ -53,6 +53,7 @@ private:
     void writeToLog(string Message);
     ProgramScheduler *data;
     void sendResult(int result,char c);
+    void clear();
 
 
 

@@ -64,7 +64,7 @@ public class TerminalFragment extends Fragment {
                     } else {
                         //tvDisplay.append(readMessage);
 
-                        message += readMessage;
+                        message = readMessage;
 
                         if (message.contains(">") && message.contains("<")) {
 
@@ -94,10 +94,10 @@ public class TerminalFragment extends Fragment {
                                     ivLoading.clearAnimation();
                                     ivLoading.setImageResource(R.drawable.error);
                                     ivLoading.startAnimation(fade_in);
-                                    message = "";
+                                    //message = "";
                                     waitTimer.cancel();
                                     waitTimer = null;
-                                    ApplicationClass.sendMessage("<E"+4+">".trim().toString(), getContext());
+                                   // ApplicationClass.sendMessage("<E"+4+">".trim().toString(), getContext());
                                 }
                             }.start();
                         }

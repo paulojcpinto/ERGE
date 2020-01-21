@@ -16,6 +16,7 @@ private:
   tm jumpScheduler;
   tm nextScheduler;
   bool preseceCheck;
+  int repeatTime;
   User user;
 
 public:
@@ -30,6 +31,7 @@ public:
   bool compareUserNickName ( string nickName );
   bool createDataset(int *imagesTaked,bool *ended);
   bool login(string pincode);
+  user_parsing getInfoToUpdate();
   void operator=(UserScheduler userSchedule);
   ~UserScheduler(){}
 };

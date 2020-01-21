@@ -126,3 +126,15 @@ bool User::createDataset(int *imagesTaked, bool *ended)
 {
     return face.createDataset(imagesTaked,ended);
 }
+
+user_parsing User::getInfoToUpdate()
+{
+    user_parsing info;
+    info.email= email;
+    info.phoneNumber=phoneNumber;
+    info.emailPassword = password;
+    releaseInfo aux = dataInfo.getReleaseInfo();
+    info.platformToRelease = aux.platform;
+    info.messageToRelease = aux.message;
+    return info;
+}

@@ -104,7 +104,7 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     userParsingToFulluser(newUserInfo,&NewUser);
 
     log.writeToLog("Deu ate aqui!");
-    NewUser.fingerInfo.FingerprintID=9;     //TODO getFingerprint here
+    NewUser.fingerInfo.FingerprintID=10;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
     *endedFingerPrint=true;
     log.writeToLog("Deu ate aqui!2");
@@ -208,8 +208,16 @@ void ProgramScheduler::updateNextScheduler ( void )
 
 
 
-user_parsing ProgramScheduler::getUserForUpdate(String Nickname)
+bool ProgramScheduler::getUserForUpdate(String Nickname, user_parsing *output)
 {
     user_parsing userToUpdate;
     UserScheduler *aux =  finduser(Nickname);
+    if(aux != nullptr)
+    {
+    userToUpdate = aux->getInfoToUpdate();
+    *output = userToUpdate;
+    log.writeToLog("User information getted.");
+    return true;
+    }return false;
+
 }

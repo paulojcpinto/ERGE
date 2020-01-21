@@ -10,6 +10,22 @@
 using namespace std;
 
 
+
+struct user_parsing
+{
+    string nickName;
+    string pinCode;
+    string phoneNumber;
+    string email;
+    string emailPassword;
+    string messageToRelease;
+    int repeatTime;
+    string dateToStart;
+    string platformToRelease;
+
+};
+
+
 class User
 {
 
@@ -38,6 +54,7 @@ class User
         bool compareFinger ( unsigned int id );
         bool createDataset(int *imagesTaked,bool *ended);
         bool login(string pincode);
+        user_parsing getInfoToUpdate();
         ~User(){}
 
 };

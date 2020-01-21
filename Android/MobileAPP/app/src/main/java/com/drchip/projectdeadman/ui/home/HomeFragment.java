@@ -195,7 +195,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void run() {
-            ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname+">",getContext());
+            ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname.trim()+">",getContext());
 
             SystemClock.sleep(10);
             timerHandler.postDelayed(this, 10000);
