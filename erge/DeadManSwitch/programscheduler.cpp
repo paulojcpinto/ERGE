@@ -54,7 +54,7 @@ bool ProgramScheduler::userParsingToFulluser(user_parsing input, fullUser *outpu
     output->messageInfo.JumpTime=input.repeatTime;
     output->messageInfo.UserMessage=input.messageToRelease;
     output->messageInfo.dateToStart=input.dateToStart;
-    output->messageInfo.TargetPlatform=input.dateToStart;
+    output->messageInfo.TargetPlatform=input.platformToRelease;
     return true;
 }
 
@@ -104,7 +104,7 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     userParsingToFulluser(newUserInfo,&NewUser);
 
     log.writeToLog("Deu ate aqui!");
-    NewUser.fingerInfo.FingerprintID=10;     //TODO getFingerprint here
+    NewUser.fingerInfo.FingerprintID=2;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
     *endedFingerPrint=true;
     log.writeToLog("Deu ate aqui!2");
@@ -134,6 +134,7 @@ void ProgramScheduler::deleteUser( string nickName )
         {
 
           usersScheduler.erase(usersScheduler.begin()+count);
+          mQuery.deleteUser(nickName);
           stringstream message;
           message<<"Deleted User: "<<nickName;
           log.writeToLog(message.str());
@@ -158,8 +159,12 @@ UserScheduler* ProgramScheduler::finduser(string Nickname)
             return &usersScheduler.at(i);
 
         }
+
     }
 
+    stringstream ss;
+    ss<<"User "<<Nickname<<" Not founded";
+    log.writeToLog(ss.str());
     return  nullptr;
 }
 
@@ -219,5 +224,23 @@ bool ProgramScheduler::getUserForUpdate(String Nickname, user_parsing *output)
     log.writeToLog("User information getted.");
     return true;
     }return false;
+
+}
+bool ProgramScheduler::updateFullUser(user_parsing updDateinfo, string Nickname)
+
+{
+    UserScheduler *aux = finduser(Nickname);
+    if(aux != nullptr)
+    {
+        aux->updateUser(updDateinfo);
+        mQuery.updateEmail(Nickname,updDateinfo.email);
+        mQuery.updateJumpTime(Nickname,updDateinfo.repeatTime);
+        mQuery.updatePhoneNumber(Nickname,updDateinfo.phoneNumber);
+        mQuery.updateUserMessage(Nickname,updDateinfo.messageToRelease);
+        mQuery.updateEmailPassword(Nickname,updDateinfo.emailPassword);
+        mQuery.updatePlatformToRelease(Nickname,updDateinfo.platformToRelease);
+        return true;
+    }
+    return false;
 
 }

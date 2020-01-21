@@ -106,7 +106,7 @@ public class UserConfigsFragment extends Fragment {
     };
 
     Animation animTop, animBot;
-    Button btnUpdate;
+    Button btnUpdate,btnAddImages;
     Animation rotate,fade_in,fade_out,fade_out2;
     ArrayList<ImageView> toUpdate;
 
@@ -137,6 +137,7 @@ public class UserConfigsFragment extends Fragment {
         ivMessage = root.findViewById(R.id.ivMessage);
         ivPlatform = root.findViewById(R.id.ivPlatform);
         btnUpdate = root.findViewById(R.id.btnUpdate);
+        btnAddImages=root.findViewById(R.id.btnAddImages);
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Communicating");
@@ -273,6 +274,13 @@ public class UserConfigsFragment extends Fragment {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        btnAddImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });

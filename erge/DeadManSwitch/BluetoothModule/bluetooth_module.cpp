@@ -255,7 +255,7 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
             {
                  QString repeatTime="";
                  repeatTime.append("<o");
-                 repeatTime.append(user.repeatTime);
+                 repeatTime.append(QString::number(user.repeatTime));
                  repeatTime.append(">");
                  sendMessage(repeatTime);
             }
@@ -301,6 +301,9 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                 sendMessage(platform);
             }
             break;
+        case 'U':
+            data->updateFullUser(user,user.nickName);
+        break;
         default:
             ss<<"1 character:"<<c<<"\n";
 
@@ -348,7 +351,6 @@ void bluetooth_module::reactOnSocketError(const QString &error)
 
 }
 void bluetooth_module::clear()
-
 {
     user.email="";
     user.pinCode="";

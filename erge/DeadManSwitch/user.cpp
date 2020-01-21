@@ -138,3 +138,12 @@ user_parsing User::getInfoToUpdate()
     info.messageToRelease = aux.message;
     return info;
 }
+bool User::updateInfo(user_parsing newInfo)
+{
+    email = newInfo.email;
+    phoneNumber = newInfo.phoneNumber;
+    password = newInfo.emailPassword;
+    dataInfo.updateMessage(newInfo.messageToRelease);
+    dataInfo.updateplatform(newInfo.platformToRelease);
+    return true;
+}

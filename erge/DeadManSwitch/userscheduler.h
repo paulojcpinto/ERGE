@@ -31,6 +31,7 @@ public:
   bool compareUserNickName ( string nickName );
   bool createDataset(int *imagesTaked,bool *ended);
   bool login(string pincode);
+  bool updateUser(user_parsing newInfo);
   user_parsing getInfoToUpdate();
   void operator=(UserScheduler userSchedule);
   ~UserScheduler(){}

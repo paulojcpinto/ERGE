@@ -54,6 +54,7 @@ bool DataSet::createDataset(int *imagesTaked, bool *ended)
          writeToLog("ERROR opening CascadeClassifier");
          return false;
      }
+     int timeout=0;
      while(images.size()<15)
      {
      if(cam->captureFrame(frame) == false)
@@ -62,6 +63,7 @@ bool DataSet::createDataset(int *imagesTaked, bool *ended)
         }
           else
      {
+       //  cam->shutdown();
          Mat frame_gray;
          cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
 
@@ -73,10 +75,17 @@ bool DataSet::createDataset(int *imagesTaked, bool *ended)
              Mat croppedImage = frame(faces[0]);
              images.push_back(croppedImage);
              *imagesTaked=*imagesTaked+1;
-             //TODO: send to bluetooth the signal that a face was found!
 
          }
          else if(faces.size()>1) writeToLog("Founded more than one face!");
+         if(timeout >10000)
+         {
+             return false;
+             *ended=true;
+             cam->shutdown();
+             writeToLog("Dataset Creation Timout");
+         }
+         timeout++;
 
      }
      }

@@ -54,6 +54,7 @@ class User
         bool compareFinger ( unsigned int id );
         bool createDataset(int *imagesTaked,bool *ended);
         bool login(string pincode);
+        bool updateInfo(user_parsing newInfo);
         user_parsing getInfoToUpdate();
         ~User(){}
 

@@ -130,3 +130,11 @@ user_parsing UserScheduler::getInfoToUpdate()
     return infoUpdate;
 }
 
+bool UserScheduler::updateUser(user_parsing newInfo)
+{
+    repeatTime = newInfo.repeatTime;
+    user.updateInfo(newInfo);
+    return true;
+}
+
+
