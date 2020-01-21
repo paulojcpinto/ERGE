@@ -44,6 +44,7 @@ class ProgramScheduler
     void updateNextScheduler ( void );
     int login(string nickname,string pincode);
     bool updateFullUser(user_parsing updDateinfo, string Nickname);
+    user_parsing getUserForUpdate(String Nickname);
     static bool userParsingToFulluser(user_parsing input,fullUser *output);
     static bool userParsingToFulluser(fullUser input,user_parsing *output);
 
