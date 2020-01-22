@@ -29,6 +29,7 @@ bool MCamera::captureFrame(cv::Mat& image)
 
     if( m_cap.isOpened())
     {
+
         m_cap.read(frame);
         image = frame.clone();
         return true;

@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -281,6 +282,44 @@ public class UserConfigsFragment extends Fragment {
         btnAddImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final AlertDialog.Builder message = new AlertDialog.Builder(getContext());
+                LayoutInflater inflater = getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.images_amount, null);
+                final EditText etNumber = dialogView.findViewById(R.id.etNumber);
+                final SeekBar sbNumber = dialogView.findViewById(R.id.sbNumber);
+
+                message.setView(dialogView);
+                message.setTitle("Images to Database");
+                message.setMessage("Enter the amount of images that you want to add to your dataset here!!");
+                sbNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        etNumber.setText(seekBar.getProgress()+"");
+
+                    }
+                });
+                message.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                message.setPositiveButton("Start!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        
+                    }
+                });
 
             }
         });

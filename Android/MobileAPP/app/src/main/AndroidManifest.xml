@@ -14,19 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserInstructionsRASP"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".UserInstuctionsSTM"
+        <activity android:name=".AddImages"></activity>
+        <activity
+            android:name=".UserInstructionsRASP"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".UserInstuctionsSTM"
             android:screenOrientation="portrait" />
-        <activity android:name=".Register"
+        <activity
+            android:name=".Register"
             android:screenOrientation="portrait" />
-        <activity android:name=".Login"
+        <activity
+            android:name=".Login"
             android:screenOrientation="portrait" />
-        <activity android:name=".Enter"
+        <activity
+            android:name=".Enter"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,9 +41,7 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

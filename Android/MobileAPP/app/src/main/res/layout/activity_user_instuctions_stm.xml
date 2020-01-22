@@ -175,7 +175,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvNumber"
+                    android:id="@+id/tvNumberIMages"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
