@@ -1,5 +1,7 @@
 QT -= gui
 QT += core bluetooth widgets
+QT += serialport
+
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -22,10 +24,15 @@ SOURCES += \
         FaceModule/dataset.cpp \
         FaceModule/facerecognizer.cpp \
         FaceModule/mcamera.cpp \
+        FingerPrintModule/Adafruit_Fingerprint.cpp \
+        FingerPrintModule/FingerprintReader.cpp \
+        FingerPrintModule/fingerprintthread.cpp \
+        FingerPrintModule/uart.cpp \
         SqlModule/sqlquery.cpp \
         datainfo.cpp \
         face.cpp \
         finger.cpp \
+        init.cpp \
         loghandler.cpp \
         main.cpp \
         programscheduler.cpp \
@@ -47,10 +54,17 @@ HEADERS += \
     FaceModule/dataset.h \
     FaceModule/facerecognizer.h \
     FaceModule/mcamera.h \
+    FingerPrintModule/Adafruit_Fingerprint.h \
+    FingerPrintModule/FingerprintReader.h \
+    FingerPrintModule/MFRC522.h \
+    FingerPrintModule/dDrivers.h \
+    FingerPrintModule/fingerprintthread.h \
+    FingerPrintModule/uart.h \
     SqlModule/sqlquery.h \
     datainfo.h \
     face.h \
     finger.h \
+    init.h \
     loghandler.h \
     programscheduler.h \
     timef.h \

@@ -31,7 +31,9 @@ public:
   bool compareUserNickName ( string nickName );
   bool createDataset(int *imagesTaked,bool *ended);
   bool login(string pincode);
+<<<<<<< Updated upstream
   bool updateUser(user_parsing newInfo);
+  void setPresenceCheck( bool );
   bool appendImages(int *imagesTaked,bool *ended,int Amount);
   int getNumberofImages(){return user.getNumberofImages();};
   user_parsing getInfoToUpdate();

@@ -1,4 +1,7 @@
 #include "../HeaderFiles/FingerprintReader.h"
+#include "fingerprintthread.h"
+#include <fcntl.h>
+#include <stdio.h>
 
 Fingerprint::Fingerprint() {
     uart = (HardwareSerial*)malloc(sizeof(HardwareSerial));
@@ -33,8 +36,10 @@ int8_t Fingerprint::Enroll(int ID){
 	if ((FingerprintRead(1) != FINGERPRINT_OK) || (searchFingerprint() != 0)) return -1;
 
 	printf("Remove finger\n");
+    qDebug()<<"Remove finger\n";
 	noFinger();		
 	printf("Place same finger again\n");
+    qDebug()<<"lace same finger again\n";
     if ((FingerprintRead(2) | FingerprintEnroll(ID)) != FINGERPRINT_OK) return -1;
 	printf("Stored!");
     return 0;

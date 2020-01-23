@@ -226,6 +226,7 @@ bool ProgramScheduler::getUserForUpdate(String Nickname, user_parsing *output)
     }return false;
 
 }
+<<<<<<< Updated upstream
 bool ProgramScheduler::updateFullUser(user_parsing updDateinfo, string Nickname)
 
 {
@@ -243,6 +244,38 @@ bool ProgramScheduler::updateFullUser(user_parsing updDateinfo, string Nickname)
         return true;
     }
     return false;
+=======
+
+
+unsigned int ProgramScheduler::getNewFingerID( void )
+{
+    bool FreeID = false;
+    for (int count = 1; count < 100; count ++)
+    {
+        for ( UserScheduler ok : usersScheduler )
+        {
+            if ( ok.compareUserFinger ( count ))
+                FreeID = true;
+        }
+        if (FreeID)
+        {
+            return count;
+        }
+    }
+    return 0;
+}
+
+void ProgramScheduler::doPresenceCheck(unsigned int fingerID)
+{
+     for ( UserScheduler ok : usersScheduler )
+     {
+         if (ok.compareUserFinger (fingerID))
+         {
+             ok.setPresenceCheck (true);
+             return ;
+         }
+     }
+>>>>>>> Stashed changes
 
 }
 

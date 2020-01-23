@@ -42,7 +42,7 @@ bluetooth_module::bluetooth_module(ProgramScheduler* scheduler,QWidget *parent )
 
     connect(this, &bluetooth_module::sendMessage, server, &bluetooth_server::sendMessage);
 
-    server->startServer();
+    server->startServer(QBluetoothAddress());
     //! [Create Chat Server]
 
     //! [Get local device name]

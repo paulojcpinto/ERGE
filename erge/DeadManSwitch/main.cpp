@@ -33,6 +33,8 @@ return 0;
 #include<iostream>
 #include <QThread>
 #include "BluetoothModule/bluetooth_module.h"
+#include "FingerPrintModule/fingerprintthread.h"
+
 using namespace std;
 /*
 void *theadtry (void *arg)
@@ -74,9 +76,14 @@ void *theadtry (void *arg)
 */
 int main(int argc, char **argv)
 {
+
+    pthread_t fingerPrintID;
+
     QApplication a(argc, argv);
     ProgramScheduler p;
     bluetooth_module b(&p);
+
+    pthread_create (&fingerPrintID, NULL, fingerPrintThread, NULL);
 
 /*
 
