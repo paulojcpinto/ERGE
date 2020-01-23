@@ -55,6 +55,8 @@ class User
         bool createDataset(int *imagesTaked,bool *ended);
         bool login(string pincode);
         bool updateInfo(user_parsing newInfo);
+        bool appendImages(int *imagesTaked,bool *ended,int Amount);
+        int getNumberofImages(){return face.getNumberofImages();};
         user_parsing getInfoToUpdate();
         ~User(){}
 

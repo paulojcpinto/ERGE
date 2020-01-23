@@ -13,10 +13,11 @@
 
 #define  PROGRAM_NAME "BluetoothModule: "
 
-int imagesTaked;
+int imagesTaked, imagesToAppend;
 bool endedFace,endedFInger;
 ProgramScheduler *data2;
 bluetooth_module* test;
+String currentUser;
 
 static const QLatin1String serviceUuid("e8e10f95-1a70-4b27-9ccf-02010264e9c8");
 using namespace  std;
@@ -117,6 +118,51 @@ void* createDatasetFunc(void *threadid)
 
 }
 
+void* appendImages(void *threadid)
+{
+    LogHandler log("AppendImages: ");
+    log.writeToLog("thread created");
+    //data2->appendImageDataset(imagesTaked,&endedFace,&endedFInger,imagesToAppend);
+    data2->appendImageDataset(currentUser,imagesToAppend,&imagesTaked,&endedFace);
+    log.writeToLog("Thread ended");
+    pthread_exit(NULL);
+
+
+}
+
+void* appendHandler(void *threadid)
+{
+    imagesTaked=0;
+    endedFace=false;
+    pthread_t doAppend;
+    LogHandler log("ThreadAppendHandler: ");
+    log.writeToLog("Inicialized successfully");
+    int rTask= pthread_create(&doAppend,NULL,createDatasetFunc,NULL);
+    if(rTask)
+    {
+        stringstream ss;
+        ss<<"ERROR: return code from pthread_create() is: "<<rTask;
+        log.writeToLog(ss.str());
+        pthread_exit(NULL);
+    }
+    int imagesAux=0;
+    while(!endedFace)
+    {
+        while (imagesAux < imagesTaked)
+        {
+           test->sendMessage("<I>");
+           imagesAux++;
+        }
+    }
+    pthread_join(doAppend,NULL);
+    stringstream ss;
+    ss<<"Created user successfully!!";
+    log.writeToLog(ss.str());
+    pthread_exit(NULL);
+
+}
+
+
 void* datasetHandler(void *threadid)
 {
     imagesTaked=0;
@@ -131,8 +177,8 @@ void* datasetHandler(void *threadid)
         stringstream ss;
         ss<<"ERROR: return code from pthread_create() is: "<<rTask;
         log.writeToLog(ss.str());
+        pthread_exit(NULL);
     }
-   int i ;
     while(!endedFInger){
 
         usleep(100);
@@ -177,6 +223,7 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
         case 'S':
             clear();
              parsing(message,user.nickName,'S');
+             currentUser = user.nickName;
              ss<<"User Nickname:"<<user.nickName<<"\n\n";
             break;
         case 'P':
@@ -237,6 +284,8 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
            for(int i = 2; i<message.length()-1;i++)
               user.nickName += message.at(i).toLatin1();
             //parsing(message,user.nickName,'G');
+           currentUser = user.nickName;
+
             ss<<"Request to send info about user: "<<user.nickName<<"\n";
             if(data->getUserForUpdate(user.nickName,&user))
             {
@@ -258,6 +307,8 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                  repeatTime.append(QString::number(user.repeatTime));
                  repeatTime.append(">");
                  sendMessage(repeatTime);
+                 ss<<"Sending email: "<<user.email<<", to mobile app";
+
             }
 
         break;
@@ -279,6 +330,8 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                 emailPass.append(user.emailPassword.c_str());
                 emailPass.append(">");
                 sendMessage(emailPass);
+                ss<<"Sending email password: "<<user.emailPassword<<", to mobile app";
+
             }
             break;
           case 'r':
@@ -289,6 +342,7 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                 message.append(user.messageToRelease.c_str());
                 message.append(">");
                 sendMessage(message);
+                ss<<"Sending message to release: "<<user.messageToRelease<<", to mobile app";
             }
             break;
         case 'a':
@@ -299,11 +353,24 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                 platform.append(user.platformToRelease.c_str());
                 platform.append(">");
                 sendMessage(platform);
+                ss<<"Sending platform to release: "<<user.platformToRelease<<" to mobile app";
             }
             break;
         case 'U':
+            ss<<"Updatring user:"<< user.nickName;
             data->updateFullUser(user,user.nickName);
         break;
+        case 'F':
+            pthread_t append;
+            int rAppend;
+            rAppend=pthread_create(&append, NULL, appendHandler, NULL);
+            if(rAppend)
+            {
+                stringstream ss;
+                ss<<"ERROR: return code from pthread_create() is: "<<rThread;
+                writeToLog(ss.str());
+            }
+            break;
         default:
             ss<<"1 character:"<<c<<"\n";
 

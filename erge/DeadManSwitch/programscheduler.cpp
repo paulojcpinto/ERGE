@@ -239,8 +239,26 @@ bool ProgramScheduler::updateFullUser(user_parsing updDateinfo, string Nickname)
         mQuery.updateUserMessage(Nickname,updDateinfo.messageToRelease);
         mQuery.updateEmailPassword(Nickname,updDateinfo.emailPassword);
         mQuery.updatePlatformToRelease(Nickname,updDateinfo.platformToRelease);
+        log.writeToLog("Update done With success");
         return true;
     }
     return false;
 
+}
+
+bool ProgramScheduler::appendImageDataset(String nickname,int Amount,int *imagesTaked,bool *ended)
+{
+   bool  aux= finduser(nickname)->appendImages(imagesTaked,ended,Amount);
+   if(aux)
+   {
+       mQuery.updateNumberOfImage(nickname,*imagesTaked);
+       log.writeToLog("Added Images to dataSet with success");
+       return true;
+   }
+   return false;
+
+}
+int ProgramScheduler::getNumberofImages(String nickname)
+{
+    return finduser(nickname)->getNumberofImages();
 }

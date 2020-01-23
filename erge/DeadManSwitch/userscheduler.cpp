@@ -138,3 +138,9 @@ bool UserScheduler::updateUser(user_parsing newInfo)
 }
 
 
+bool UserScheduler::appendImages(int *imagesTaked, bool *ended, int Amount)
+{
+    return user.appendImages(imagesTaked,ended,Amount);
+}
+
+

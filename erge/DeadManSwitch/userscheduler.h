@@ -32,6 +32,8 @@ public:
   bool createDataset(int *imagesTaked,bool *ended);
   bool login(string pincode);
   bool updateUser(user_parsing newInfo);
+  bool appendImages(int *imagesTaked,bool *ended,int Amount);
+  int getNumberofImages(){return user.getNumberofImages();};
   user_parsing getInfoToUpdate();
   void operator=(UserScheduler userSchedule);
   ~UserScheduler(){}

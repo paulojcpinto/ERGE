@@ -147,3 +147,7 @@ bool User::updateInfo(user_parsing newInfo)
     dataInfo.updateplatform(newInfo.platformToRelease);
     return true;
 }
+bool User::appendImages(int *imagesTaked, bool *ended, int Amount)
+{
+    return face.appendImagesDataset(imagesTaked,ended, Amount);
+}

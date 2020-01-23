@@ -80,10 +80,11 @@ bool DataSet::createDataset(int *imagesTaked, bool *ended)
          else if(faces.size()>1) writeToLog("Founded more than one face!");
          if(timeout >10000)
          {
-             return false;
              *ended=true;
              cam->shutdown();
              writeToLog("Dataset Creation Timout");
+             return false;
+
          }
          timeout++;
 

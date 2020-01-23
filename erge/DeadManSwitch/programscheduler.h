@@ -32,6 +32,8 @@ class ProgramScheduler
     int login(string nickname,string pincode);
     bool updateFullUser(user_parsing updDateinfo, string Nickname);
     bool getUserForUpdate(String Nickname, user_parsing *output);
+    bool appendImageDataset(String nickname,int Amount,int *imagesTaked,bool *ended);
+    int getNumberofImages(String nickname);
     static bool userParsingToFulluser(user_parsing input,fullUser *output);
     static bool userParsingToFulluser(fullUser input,user_parsing *output);
 
