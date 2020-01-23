@@ -130,7 +130,6 @@ user_parsing UserScheduler::getInfoToUpdate()
     return infoUpdate;
 }
 
-<<<<<<< Updated upstream
 bool UserScheduler::updateUser(user_parsing newInfo)
 {
     repeatTime = newInfo.repeatTime;
@@ -140,12 +139,13 @@ bool UserScheduler::updateUser(user_parsing newInfo)
 
 
 void UserScheduler::setPresenceCheck( bool success )
-    this->preseceCheck = success;
 {
+    this->preseceCheck = success;
+
 }
 bool UserScheduler::appendImages(int *imagesTaked, bool *ended, int Amount)
-    return user.appendImages(imagesTaked,ended,Amount);
 {
+    return user.appendImages(imagesTaked,ended,Amount);
 }
 
 

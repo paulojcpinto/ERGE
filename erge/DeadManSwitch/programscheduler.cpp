@@ -226,7 +226,7 @@ bool ProgramScheduler::getUserForUpdate(String Nickname, user_parsing *output)
     }return false;
 
 }
-<<<<<<< Updated upstream
+
 bool ProgramScheduler::updateFullUser(user_parsing updDateinfo, string Nickname)
 
 {
@@ -244,7 +244,7 @@ bool ProgramScheduler::updateFullUser(user_parsing updDateinfo, string Nickname)
         return true;
     }
     return false;
-=======
+}
 
 
 unsigned int ProgramScheduler::getNewFingerID( void )
@@ -275,7 +275,7 @@ void ProgramScheduler::doPresenceCheck(unsigned int fingerID)
              return ;
          }
      }
->>>>>>> Stashed changes
+
 
 }
 
