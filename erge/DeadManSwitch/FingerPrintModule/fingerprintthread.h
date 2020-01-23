@@ -9,3 +9,4 @@
 
 
 extern void* fingerPrintThread(void * para);
+extern unsigned int createFingerPrint();

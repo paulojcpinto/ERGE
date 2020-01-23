@@ -1,6 +1,7 @@
 #include "fingerprintthread.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include "programscheduler.h"
 
 #define BUTTONS "/dev/buttons"
 
@@ -8,6 +9,7 @@ typedef struct fingerprintStatus
 {
     bool needCreateFingerPrint;
     bool createSuccess;
+    unsigned int fingerID;
 } fingerprintStatus;
 
 static volatile fingerprintStatus fingerPrintStatus;
@@ -15,6 +17,8 @@ static volatile fingerprintStatus fingerPrintStatus;
 
 void* fingerPrintThread(void * para)
 {
+
+    ProgramScheduler * scheduler = (ProgramScheduler *) para;
 
 QThread::sleep(1);
 Fingerprint f;
@@ -79,6 +83,7 @@ while (1)
           qDebug ()<<"Finger Print ID =" << fingerID <<"\n\n";
         printf("\n%d -> Finger Print ID =  %d\n",aux++, fingerID);
        pthread_cond_signal (&condition_cond);
+       scheduler->doPresenceCheck ( fingerID );
          //sleep (10);
        }
      else
@@ -183,15 +188,24 @@ while (1)
                qDebug()<<("\nCommunication error");
 
              }
-             p = f.finger->storeModel(1);
+             fingerPrintStatus.fingerID = scheduler->getNewFingerID ();
+             fingerPrintStatus.createSuccess = false;
+             p = f.finger->storeModel(fingerPrintStatus.fingerID);
              if (p == FINGERPRINT_OK) {
                  qDebug()<<("\nStored!");
                  fingerPrintStatus.createSuccess = true;
                  fingerPrintStatus.needCreateFingerPrint = false;
                } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
+                 fingerPrintStatus.createSuccess = false;
+                 fingerPrintStatus.needCreateFingerPrint = false;
                  qDebug()<<("\nCommunication error");
                  qDebug() <<"end";
+             }else
+             {
+                 fingerPrintStatus.createSuccess = false;
+                 fingerPrintStatus.needCreateFingerPrint = false;
              }
+
 
          }
   }
@@ -201,9 +215,16 @@ while (1)
 }
 
 
-bool createFingerPrint ( void )
+unsigned int createFingerPrint ( void )
 {
     fingerPrintStatus.createSuccess = false;
     fingerPrintStatus.needCreateFingerPrint = true;
+    while (fingerPrintStatus.needCreateFingerPrint) {
+        ;
+
+    }
+    if (fingerPrintStatus.createSuccess)
+        return fingerPrintStatus.fingerID;
+    return  0;
 
 }

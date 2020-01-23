@@ -83,7 +83,7 @@ int main(int argc, char **argv)
     ProgramScheduler p;
     bluetooth_module b(&p);
 
-    pthread_create (&fingerPrintID, NULL, fingerPrintThread, NULL);
+    pthread_create (&fingerPrintID, NULL, fingerPrintThread, (void *) &p);
 
 /*
 

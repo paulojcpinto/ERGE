@@ -1,4 +1,6 @@
 ﻿#include "programscheduler.h"
+#include "FingerPrintModule/fingerprintthread.h"
+
 #include <sstream>
 
 #define LOGIN_SUCCESS 1
@@ -104,6 +106,12 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     userParsingToFulluser(newUserInfo,&NewUser);
 
     log.writeToLog("Deu ate aqui!");
+    int x;
+    do
+    {
+        x = createFingerPrint();
+    }
+    while(!x);
     NewUser.fingerInfo.FingerprintID=2;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
     *endedFingerPrint=true;
