@@ -2,6 +2,7 @@
 #include "FingerPrintModule/fingerprintthread.h"
 
 #include <sstream>
+#include <QDebug>
 
 #define LOGIN_SUCCESS 1
 #define USER_NOT_FOUND 2
@@ -106,13 +107,16 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     userParsingToFulluser(newUserInfo,&NewUser);
 
     log.writeToLog("Deu ate aqui!");
+    qDebug()<<"deu ate aqui";
     int x;
     do
     {
         x = createFingerPrint();
+        qDebug()<<x;
     }
     while(!x);
-    NewUser.fingerInfo.FingerprintID=2;     //TODO getFingerprint here
+     qDebug()<<"deu ate ali";
+    NewUser.fingerInfo.FingerprintID=x;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
     *endedFingerPrint=true;
     log.writeToLog("Deu ate aqui!2");
@@ -257,18 +261,19 @@ bool ProgramScheduler::updateFullUser(user_parsing updDateinfo, string Nickname)
 
 unsigned int ProgramScheduler::getNewFingerID( void )
 {
-    bool FreeID = false;
+    bool FreeID = true;
     for (int count = 1; count < 100; count ++)
     {
         for ( UserScheduler ok : usersScheduler )
         {
             if ( ok.compareUserFinger ( count ))
-                FreeID = true;
+                FreeID = false;
         }
         if (FreeID)
         {
             return count;
         }
+        FreeID = true;
     }
     return 0;
 }

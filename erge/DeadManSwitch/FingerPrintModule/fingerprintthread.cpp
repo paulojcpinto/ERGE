@@ -194,6 +194,7 @@ while (1)
              if (p == FINGERPRINT_OK) {
                  qDebug()<<("\nStored!");
                  fingerPrintStatus.createSuccess = true;
+                 qDebug()<<("\n!")<<fingerPrintStatus.fingerID;
                  fingerPrintStatus.needCreateFingerPrint = false;
                } else if (p == FINGERPRINT_PACKETRECIEVEERR) {
                  fingerPrintStatus.createSuccess = false;
@@ -206,6 +207,20 @@ while (1)
                  fingerPrintStatus.needCreateFingerPrint = false;
              }
 
+             do {
+                 fd = fopen (BUTTONS, "r" );
+                     if(fd == NULL){
+                         printf ("Device doesn't exist\n");
+                         return 0;
+                     }
+                     //read (fd,buffer,3,NULL);
+                     fread(buffer,sizeof(int),3,fd);
+                    // qDebug ()<<"Values on buffer: "<<buffer[0]<<" \n";
+
+                     //printf ("Read it");
+                     fclose (fd);
+
+             }while(buffer[0] == '0');
 
          }
   }
