@@ -1,4 +1,4 @@
-#include "../HeaderFiles/FingerprintReader.h"
+#include "FingerprintReader.h"
 #include "fingerprintthread.h"
 #include <fcntl.h>
 #include <stdio.h>

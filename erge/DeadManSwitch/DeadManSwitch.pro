@@ -3,6 +3,7 @@ QT += core bluetooth widgets
 QT += serialport
 
 
+
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
@@ -28,6 +29,7 @@ SOURCES += \
         FingerPrintModule/FingerprintReader.cpp \
         FingerPrintModule/fingerprintthread.cpp \
         FingerPrintModule/uart.cpp \
+        GSM/cgms1.cpp \
         SqlModule/sqlquery.cpp \
         datainfo.cpp \
         face.cpp \
@@ -60,6 +62,7 @@ HEADERS += \
     FingerPrintModule/dDrivers.h \
     FingerPrintModule/fingerprintthread.h \
     FingerPrintModule/uart.h \
+    GSM/cgms1.h \
     SqlModule/sqlquery.h \
     datainfo.h \
     face.h \

@@ -34,6 +34,8 @@ return 0;
 #include <QThread>
 #include "BluetoothModule/bluetooth_module.h"
 #include "FingerPrintModule/fingerprintthread.h"
+#include <time.h>
+#include "GSM/cgms1.h"
 
 using namespace std;
 /*
@@ -74,6 +76,36 @@ void *theadtry (void *arg)
 
 }
 */
+CGSM1 *w;
+static void sendPeriodicUpdate(int signo)
+{
+
+
+    if(signo==SIGALRM)
+    {
+        time_t rawtime;
+        struct tm * timeinfo;
+
+        time ( &rawtime );
+        timeinfo = localtime ( &rawtime );
+        qDebug() <<"\n\n"<<asctime (timeinfo)<<"\n\n";
+         w->releaseSMS ("916201643", "pilinha minha" );
+    }
+
+}
+
+
+
+  QSerialPort *serialptr;
+void* cc(void * para)
+{
+
+QThread::sleep(1);
+
+w->initGSM();
+
+}
+
 int main(int argc, char **argv)
 {
 
@@ -82,8 +114,32 @@ int main(int argc, char **argv)
     QApplication a(argc, argv);
     ProgramScheduler p;
     bluetooth_module b(&p);
+    CGSM1 ola;
+    pthread_t sumID;
 
-    pthread_create (&fingerPrintID, NULL, fingerPrintThread, (void *) &p);
+      w=  &ola;//l=&w;
+      w->releaseSMS ("916201643", "aaaa1" );
+      w->releaseSMS ("916201643", "aaaa2" );
+
+    struct itimerval itv;
+
+            signal(SIGALRM,sendPeriodicUpdate);
+
+            //ualarm(300,300);
+            itv.it_interval.tv_sec = 60;
+            itv.it_interval.tv_usec = 0;//4*10000;
+            itv.it_value.tv_sec = 1;
+            itv.it_value.tv_usec = 0;//4*10000;
+            setitimer (ITIMER_REAL, &itv, NULL);
+
+   // pthread_create (&fingerPrintID, NULL, fingerPrintThread, (void *) &p);
+    pthread_create(&sumID, NULL, cc, NULL);
+    vector<int> d;
+    d.push_back (3);
+    d.push_back (5);
+    qDebug()<<"\n\n\n" << d.at (1);//<<d.at (1)<<"\n\n\n";
+
+    int x =d.at (0);
 
 /*
 

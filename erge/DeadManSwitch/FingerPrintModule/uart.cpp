@@ -1,4 +1,4 @@
-#include "../HeaderFiles/uart.h"
+#include "uart.h"
 
 #include <poll.h>
 #include <string.h>

@@ -18,7 +18,7 @@
 
 #ifdef LINUX
   #include <stdint.h>
-  #include "../HeaderFiles/uart.h"// workaround implementation of HardwareSerial 
+  #include "uart.h"// workaround implementation of HardwareSerial
 
 void delay(int n);
 
