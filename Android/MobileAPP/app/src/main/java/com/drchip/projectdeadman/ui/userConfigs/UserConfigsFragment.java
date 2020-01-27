@@ -33,7 +33,9 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.drchip.projectdeadman.AddImages;
 import com.drchip.projectdeadman.ApplicationClass;
+import com.drchip.projectdeadman.MainActivity;
 import com.drchip.projectdeadman.R;
 import com.drchip.projectdeadman.Register;
 import com.drchip.projectdeadman.UserInstructionsRASP;
@@ -317,10 +319,14 @@ public class UserConfigsFragment extends Fragment {
                 message.setPositiveButton("Start!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ApplicationClass.imageNumber = Integer.parseInt(etNumber.getText().toString());
                         ApplicationClass.sendMessage("<J"+etNumber.getText().toString()+">",getContext());
+                        startActivity(new Intent(getContext(), AddImages.class));
+
                     }
                 });
 
+                message.show();
             }
         });
 

@@ -20,8 +20,9 @@ DataSet::DataSet()
 }
 
 
-DataSet::DataSet(string Nickname,MCamera* cameraPointer)
+DataSet::DataSet(string Nickname,MCamera* cameraPointer, int lastIndex)
 {
+    lastLengh = lastIndex;
     cam = cameraPointer;
     stringstream ss;
     ss <<"mkdir /datasets/"<<Nickname<<"/";
@@ -132,14 +133,15 @@ bool DataSet::addFace(vector<cv::Mat> images, unsigned int lengh)
 
 
 
-bool DataSet::appendFrame(vector<cv::Mat> images)
+bool DataSet::appendFrame(vector<cv::Mat> images, int newLengh)
 {
+    lastLengh = newLengh;
  if(images.empty())
  {
      writeToLog(" AppendFrames: Images vector was empty");
      return false;
  }
- for(int i= lastLengh; i<images.size()+lastLengh; i++ )
+ for(int i= lastLengh; i<=images.size()+lastLengh; i++ )
  {
      string path = m_dataset_path + "user0"+ "_" + to_string(i) + ".jpg";
      cv::imwrite(path,images.back());

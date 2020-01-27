@@ -111,7 +111,6 @@ void* createDatasetFunc(void *threadid)
 {
      LogHandler log("CreateDatasetThread: ");
      log.writeToLog("thread created");
-     endedFInger=true;
      data2->createUser(&imagesTaked,&endedFace,&endedFInger);
      log.writeToLog("Thread ended");
      pthread_exit(NULL);
@@ -137,7 +136,7 @@ void* appendHandler(void *threadid)
     pthread_t doAppend;
     LogHandler log("ThreadAppendHandler: ");
     log.writeToLog("Inicialized successfully");
-    int rTask= pthread_create(&doAppend,NULL,createDatasetFunc,NULL);
+    int rTask= pthread_create(&doAppend,NULL,appendImages,NULL);
     if(rTask)
     {
         stringstream ss;
@@ -218,7 +217,7 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
         char c;
         c=message.at(message.indexOf('<')+1).toLatin1();
         string parser;
-
+        QString auxMessage;
         switch (c) {
         case 'S':
             clear();
@@ -370,7 +369,11 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                 stringstream ss;
                 ss<<"ERROR: return code from pthread_create() is: "<<rThread;
                 writeToLog(ss.str());
+
             }
+            auxMessage = "<F"+QString::number(data->getNumberofImages(currentUser))+">";
+            sendMessage(auxMessage);
+
             break;
         case 'J':
             parsing(message,parser,'J');

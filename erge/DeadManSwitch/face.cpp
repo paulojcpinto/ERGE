@@ -1,14 +1,15 @@
 #include "face.h"
 
-Face::Face(string nickname,MCamera* cameraPointer):UserDataset(nickname,cameraPointer),userRecognizer(&UserDataset),log("Face_module: ")
+Face::Face(string nickname,MCamera* cameraPointer):UserDataset(nickname,cameraPointer,15),userRecognizer(&UserDataset),log("Face_module: ")
 {
-
+cam = cameraPointer;
 
 
 }
-Face::Face(MCamera* cameraPointer,faceQuery faceInfo):UserDataset(faceInfo.PathDataset,cameraPointer),userRecognizer(&UserDataset),log("Face_module: ")
+Face::Face(MCamera* cameraPointer,faceQuery faceInfo):UserDataset(faceInfo.PathDataset,cameraPointer,faceInfo.NumberOfImages),userRecognizer(&UserDataset),log("Face_module: ")
 {
     numberOfImages=faceInfo.NumberOfImages;
+    cam = cameraPointer;
 }
 
 DataSet* Face::getDataset()
@@ -26,7 +27,6 @@ bool Face::createDataset(int *imagesTaked, bool *ended)
 
 bool Face::appendImagesDataset(int *imagesTaked, bool *ended, int Amount)
 {
-    MCamera cam;
     CascadeClassifier face_cascade;
      vector<Mat> images;
      String face_cascade_name = "/opt/haarcascade_frontalface_alt.xml";
@@ -39,7 +39,7 @@ bool Face::appendImagesDataset(int *imagesTaked, bool *ended, int Amount)
      int timeout=0;
      while(images.size()<Amount)
      {
-     if(cam.captureFrame(frame) == false)
+     if(cam->captureFrame(frame) == false)
         {
             log.writeToLog("Error getting frame!");
         }
@@ -63,7 +63,7 @@ bool Face::appendImagesDataset(int *imagesTaked, bool *ended, int Amount)
                   {
 
                       *ended=true;
-                      cam.shutdown();
+                      cam->shutdown();
                       log.writeToLog("Dataset Creation Timout");
                        return false;
                   }
@@ -72,9 +72,9 @@ bool Face::appendImagesDataset(int *imagesTaked, bool *ended, int Amount)
               }
 
      }
-     if(UserDataset.appendFrame(images))
+     if(UserDataset.appendFrame(images,numberOfImages+Amount))
      {
-         cam.shutdown();
+         cam->shutdown();
          numberOfImages+= Amount;
          *ended=true;
          *imagesTaked= this->numberOfImages;

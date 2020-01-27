@@ -84,6 +84,7 @@ public class UserInstructionsRASP extends AppCompatActivity {
                         ivFingerRasp.clearAnimation();
                         ivFaceStart.startAnimation(rotate);
                         linFaceDescription.setVisibility(View.VISIBLE);
+                        //inImageCount.setVisibility(View.VISIBLE);
 
                         aux=0;
                     }
@@ -163,7 +164,7 @@ public class UserInstructionsRASP extends AppCompatActivity {
         tvFingerRaspDescription = findViewById(R.id.tvFingeRaspDescription);
         tvFaceReco = findViewById(R.id.tvFacereco);
         tvFaceRecoDescription = findViewById(R.id.tvFacerecDescription);
-        tvImageNumber = findViewById(R.id.tvNumber);
+        tvImageNumber = findViewById(R.id.tvNumberIMages);
         ivFingerRasp = findViewById(R.id.ivFingerRasp);
         ivFaceStart = findViewById(R.id.ivFaceStart);
         ivImageCount = findViewById(R.id.ivImageCount);

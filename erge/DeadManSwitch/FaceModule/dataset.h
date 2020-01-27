@@ -16,11 +16,11 @@ class DataSet
 {
 public:
     DataSet();
-    DataSet(string NickName, MCamera* cameraPointer);
+    DataSet(string NickName, MCamera* cameraPointer,int lastIndex);
     ~DataSet();
     bool createDataset(int *imagesTaked,bool *ended);
     bool addFace(vector<cv::Mat>images, unsigned int lengh = 15);
-    bool appendFrame(vector<cv::Mat>images);
+    bool appendFrame(vector<cv::Mat>images,int newLengh);
     vector<cv::Mat> readFace(int lengh=15);
     void removeFace();
     string getDatasetPath();

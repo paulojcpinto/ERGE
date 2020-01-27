@@ -11,6 +11,7 @@ class Face
     FRecognizer userRecognizer;
     int numberOfImages;
     LogHandler log;
+    MCamera * cam;
 
   public:    
     Face(string nickname,MCamera* cameraPointer);

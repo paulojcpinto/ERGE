@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,6 +30,7 @@ public class AddImages extends AppCompatActivity {
 
     Animation fade_in;
     Animation fade_out,fade_out2;
+    int images;
 
     Timer timer = new Timer();
     final Handler h = new Handler(new Handler.Callback() {
@@ -66,7 +68,7 @@ public class AddImages extends AppCompatActivity {
                     //receive_platform(readMessage);
                     //receive_password(readMessage);
                     //receive_email(readMessage);
-
+                    receive_recieveImages(readMessage);
                     if(readMessage.contains("<I>")) {
 
 
@@ -76,10 +78,11 @@ public class AddImages extends AppCompatActivity {
                             ivImageCount.startAnimation(animation2);
                         }
                         imagesCount++;
-                        if (imagesCount < 15) {
+                        if (imagesCount < ApplicationClass.imageNumber) {
                             ivImageCount.clearAnimation();
                             ivImageCount.startAnimation(fade_in);
-                            tvNumberImages.setText(imagesCount + "");
+                            tvNumberImages.setText(images + imagesCount +"");
+                            tvNumber.setText(imagesCount + "");
                             ivImageCount.setImageResource(R.drawable.correct);
 
                             // ivImageCount.setVisibility(View.INVISIBLE);
@@ -92,7 +95,8 @@ public class AddImages extends AppCompatActivity {
 
                         } else {
                             Animation fade_in1 = AnimationUtils.loadAnimation(AddImages.this, R.anim.fade_in);
-                            tvNumberImages.setText(imagesCount + "");
+                            tvNumberImages.setText(images +imagesCount+ "");
+                            tvNumber.setText(imagesCount + "");
                             ivImageCount.setImageResource(R.drawable.correct);
                             btnConfirm.startAnimation(fade_in1);
                             btnConfirm.setVisibility(View.VISIBLE);
@@ -145,8 +149,15 @@ public class AddImages extends AppCompatActivity {
         ApplicationClass.sendMessage("<F>",AddImages.this);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        btnConfirm.setVisibility(View.GONE);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  startActivity(new Intent(AddImages.this, MainActivity.class));
+                AddImages.this.finish();
 
-
+            }
+        });
         rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
         rotate.setStartTime(10);
         fade_in = AnimationUtils.loadAnimation(this, R.anim.fade_in);
@@ -202,7 +213,7 @@ public class AddImages extends AppCompatActivity {
         if (message.contains("<F") && message.contains((">"))) {
 
             tvNumberImages.setText(parsing(message).substring(message.indexOf("<F") + 2, message.lastIndexOf(">")));
-
+            images = Integer.parseInt(tvNumberImages.getText().toString());
 
         }
     }

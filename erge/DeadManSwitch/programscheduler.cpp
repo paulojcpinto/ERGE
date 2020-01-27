@@ -107,16 +107,15 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     userParsingToFulluser(newUserInfo,&NewUser);
 
     log.writeToLog("Deu ate aqui!");
-    qDebug()<<"deu ate aqui";
+    /*
     int x;
     do
     {
         x = createFingerPrint();
-        qDebug()<<x;
     }
     while(!x);
-     qDebug()<<"deu ate ali";
-    NewUser.fingerInfo.FingerprintID=x;     //TODO getFingerprint here
+    */
+    NewUser.fingerInfo.FingerprintID=5;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
     *endedFingerPrint=true;
     log.writeToLog("Deu ate aqui!2");

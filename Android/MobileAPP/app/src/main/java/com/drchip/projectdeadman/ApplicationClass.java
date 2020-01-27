@@ -29,7 +29,7 @@ public class ApplicationClass extends Application {
 
     public static long conectedTime;
     public static long seccionTime;
-
+    public static int imageNumber;
 
 
     private final Handler mHandler = new Handler();
