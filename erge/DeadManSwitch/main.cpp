@@ -35,6 +35,7 @@ return 0;
 #include "BluetoothModule/bluetooth_module.h"
 #include "FingerPrintModule/fingerprintthread.h"
 #include <time.h>
+#include <init.h>
 #include "GSM/cgms1.h"
 
 using namespace std;
@@ -76,7 +77,7 @@ void *theadtry (void *arg)
 
 }
 */
-CGSM1 *w;
+//CGSM1 *w;
 static void sendPeriodicUpdate(int signo)
 {
 
@@ -89,7 +90,8 @@ static void sendPeriodicUpdate(int signo)
         time ( &rawtime );
         timeinfo = localtime ( &rawtime );
         qDebug() <<"\n\n"<<asctime (timeinfo)<<"\n\n";
-         w->releaseSMS ("916201643", "pilinha minha" );
+        p.verifyReleaseTime ();
+        // w->releaseSMS ("916201643", "pilinha minha" );
     }
 
 }
@@ -112,7 +114,7 @@ int main(int argc, char **argv)
     pthread_t fingerPrintID;
 
     QApplication a(argc, argv);
-    ProgramScheduler p;
+
     bluetooth_module b(&p);
     CGSM1 ola;
     pthread_t sumID;

@@ -1,5 +1,5 @@
 #include "user.h"
-
+#include "init.h"
 
 /****************************************************************************
  *
@@ -150,4 +150,22 @@ bool User::updateInfo(user_parsing newInfo)
 bool User::appendImages(int *imagesTaked, bool *ended, int Amount)
 {
     return face.appendImagesDataset(imagesTaked,ended, Amount);
+}
+
+void User::doRelease()
+{
+    struct dataInfo p =  dataInfo.getReleaseInfo();
+    char number[9];
+    char message[256];
+    int count;
+    for ( int aux = 4; aux < 13; aux ++)
+    {
+        number[aux-4] = p.platform[aux];
+    }
+    for ( count = 0; count < p.message.length () && count < 255; count++)
+    {
+        message[count] = p.message[count];
+    }
+    message[count] = 0;
+    w->releaseSMS (number, message);
 }

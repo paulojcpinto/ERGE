@@ -68,13 +68,15 @@ void ProgramScheduler::verifyReleaseTime( void )
 
   time ( &raw_time );
   ptr_ts = gmtime ( &raw_time );
-  bool aux = false;
-while(!aux)
+
   for ( uint8_t cont = 0; cont < usersScheduler.size(); cont ++)
     if(usersScheduler.at(cont).compareTimeRelease (*ptr_ts))
       { /*send signal */
-        printf("okooko");
-        aux = true;
+
+        if (usersScheduler.at(cont).doRelease ())
+        {
+            deleteUser(usersScheduler.at(cont).getInfoToUpdate ().nickName);
+        }
       }
     else
     {
@@ -104,12 +106,47 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     ptr_ts = gmtime ( &raw_time );
     ptr_ts->tm_min++;
     fullUser NewUser;
+    int pos=0;
     userParsingToFulluser(newUserInfo,&NewUser);
+    for (int aux = 0; aux < NewUser.messageInfo.dateToStart.length (); aux++)
+    {
+        if (NewUser.messageInfo.dateToStart[aux]==  '/')
+            pos ++;
+        else
+         switch (pos)
+         {
+          case 0:
+         {
+               nextScheduler.tm_mday*=10;
+               nextScheduler.tm_mday+=NewUser.messageInfo.dateToStart[aux] - 48;
+         }
+         case 1:
+         {
+             nextScheduler.tm_mon*=10;
+             nextScheduler.tm_mon+=NewUser.messageInfo.dateToStart[aux] - 48;
+         }
+         case 2:
+         {
+             nextScheduler.tm_year*=10;
+             nextScheduler.tm_year+=NewUser.messageInfo.dateToStart[aux] - 48;
+         }
+         case 3:
+         {
+             nextScheduler.tm_hour*=10;
+             nextScheduler.tm_hour+=NewUser.messageInfo.dateToStart[aux] - 48;
+         }
+         case 4:
+         {
+             nextScheduler.tm_min*=10;
+             nextScheduler.tm_min+=NewUser.messageInfo.dateToStart[aux] - 48;
+         }
+         }
+    }
 
     log.writeToLog("Deu ate aqui!");
     /*
     int x;
-    do
+   /* do
     {
         x = createFingerPrint();
     }
