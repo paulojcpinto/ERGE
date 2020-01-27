@@ -360,6 +360,7 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
             ss<<"Updatring user:"<< user.nickName;
             data->updateFullUser(user,user.nickName);
         break;
+
         case 'F':
             pthread_t append;
             int rAppend;
@@ -370,6 +371,11 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
                 ss<<"ERROR: return code from pthread_create() is: "<<rThread;
                 writeToLog(ss.str());
             }
+            break;
+        case 'J':
+            parsing(message,parser,'J');
+            imagesToAppend = parsingNumber(parser);
+            ss<<"Images to Append: "<<imagesToAppend<<"\n\n";
             break;
         default:
             ss<<"1 character:"<<c<<"\n";

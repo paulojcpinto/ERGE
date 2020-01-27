@@ -317,7 +317,7 @@ public class UserConfigsFragment extends Fragment {
                 message.setPositiveButton("Start!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        
+                        ApplicationClass.sendMessage("<J"+etNumber.getText().toString()+">",getContext());
                     }
                 });
 
