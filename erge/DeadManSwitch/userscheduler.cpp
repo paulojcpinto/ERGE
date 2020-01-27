@@ -46,10 +46,30 @@ bool UserScheduler::login(string pincode)
 bool UserScheduler::compareTimeRelease( tm timeNow )
 {
  // printf ("\n %2d:%02d\n", timeNow.tm_min, this->nextScheduler.tm_min);8
-  return ( ( this->nextScheduler.tm_year == timeNow.tm_year ) &&
-           ( this->nextScheduler.tm_yday == timeNow.tm_yday ) &&
-           ( this->nextScheduler.tm_hour == timeNow.tm_hour ) &&
-           ( this->nextScheduler.tm_min  <= timeNow.tm_min  ) );
+    if (this->nextScheduler.tm_year < timeNow.tm_year)
+        return true;
+    else if (this->nextScheduler.tm_year == timeNow.tm_year)
+    {
+        if ( this->nextScheduler.tm_yday < timeNow.tm_yday )
+        {
+            return true;
+        }
+        else if ( this->nextScheduler.tm_yday == timeNow.tm_yday )
+        {
+            if  ( this->nextScheduler.tm_hour < timeNow.tm_hour )
+          {
+              return true;
+          }
+          else  if  ( this->nextScheduler.tm_hour == timeNow.tm_hour )
+          {
+              if( this->nextScheduler.tm_min  <= timeNow.tm_min  )
+              {
+                  return true;
+              }
+          }
+        }
+    }
+    return false;
 }
 
 
@@ -63,19 +83,28 @@ bool UserScheduler::compareTimeRelease( tm timeNow )
 
 void UserScheduler::updateNextSchedulerTime( void )
 {
-    this->nextScheduler.tm_year += this->jumpScheduler.tm_year;
-
-    this->nextScheduler.tm_yday += this->jumpScheduler.tm_yday;
-    if ( this->nextScheduler.tm_yday > numberDaysYear - 1 )
-        this->nextScheduler.tm_yday -= numberDaysYear;
-
-    this->nextScheduler.tm_hour += this->jumpScheduler.tm_hour;
-    if ( this->nextScheduler.tm_hour > numberHourDay - 1 )
-        this->nextScheduler.tm_hour -= numberHourDay;
-
-    this->nextScheduler.tm_min += this->jumpScheduler.tm_min;
-    if ( this->nextScheduler.tm_min > numberMinutesHour - 1 )
-        this->nextScheduler.tm_min -= numberMinutesHour;
+    int minutesIncrement = nextScheduler.tm_min + repeatTime;
+    while(minutesIncrement)
+    {
+        if (minutesIncrement >= 60)
+        {
+            if (minutesIncrement + nextScheduler.tm_hour*60 >= 60*24)
+            {
+                nextScheduler.tm_mday ++;
+                minutesIncrement -= 6*24;
+            }
+            else
+            {
+                nextScheduler.tm_hour ++;
+                minutesIncrement -= 60;
+            }
+        }
+        else
+        {
+            nextScheduler.tm_min = minutesIncrement;
+            minutesIncrement -=60;
+        }
+    }
 }
 
 
@@ -146,6 +175,20 @@ void UserScheduler::setPresenceCheck( bool success )
 bool UserScheduler::appendImages(int *imagesTaked, bool *ended, int Amount)
 {
     return user.appendImages(imagesTaked,ended,Amount);
+}
+
+bool UserScheduler::doRelease()
+{
+    if (!preseceCheck)
+    {
+        doRelease();
+        return true;
+    }
+    else
+    {
+       updateNextSchedulerTime ();
+       return false;
+    }
 }
 
 

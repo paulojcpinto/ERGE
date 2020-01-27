@@ -36,6 +36,7 @@ public:
   bool appendImages(int *imagesTaked,bool *ended,int Amount);
   int getNumberofImages(){return user.getNumberofImages();};
   user_parsing getInfoToUpdate();
+  bool doRelease();
   void operator=(UserScheduler userSchedule);
   ~UserScheduler(){}
 };
