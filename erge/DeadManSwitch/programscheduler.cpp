@@ -344,3 +344,17 @@ int ProgramScheduler::getNumberofImages(String nickname)
 {
     return finduser(nickname)->getNumberofImages();
 }
+bool ProgramScheduler::getUserRecognizer(string Nickname, FRecognizer **output)
+{
+    UserScheduler* aux = finduser(Nickname);
+    if(aux!= nullptr)
+    {
+        *output = aux->getUserRecognizer();
+        log.writeToLog("Getted recognizer with success");
+        return true;
+    }else
+    {
+        log.writeToLog("User wasnt found");
+        return false;
+    }
+}

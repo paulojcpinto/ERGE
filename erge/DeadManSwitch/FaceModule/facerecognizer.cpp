@@ -4,7 +4,7 @@
 #include <mqueue.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include "loghandler.h"
 #define PROGRAM_NAME "FACERECOGNIZER: "
 
 FRecognizer::FRecognizer():face_cascade_name("/opt/haarcascade_frontalface_alt.xml")
@@ -67,19 +67,28 @@ bool FRecognizer::findFace(Mat *frameP)
     Mat frame,frame_gray;
     frame = *frameP;
     cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
+    LogHandler mLog("FRECOGINZER_STATIC: ");
+    CascadeClassifier face_cascade;
+    if( !face_cascade.load( "/opt/haarcascade_frontalface_alt.xml" ) )
+    {
+        mLog.writeToLog("Error loading cascade");
+        return false;
+    }
+    mLog.writeToLog("Loaded cascade successfuly");
     vector<Rect> faces;
+
     face_cascade.detectMultiScale( frame_gray, faces, 1.1, 3, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50));
     if(faces.size()>1)
     {
-        writeToLog("Founded more than one face!");
+        mLog.writeToLog("Founded more than one face!");
         return false;
     }
     if(faces.size()<=0)
     {
-        writeToLog("No faces founded");
+        mLog.writeToLog("No faces founded");
         return false;
     }
-    writeToLog("One face was found!");
+    mLog.writeToLog("One face was found!");
     *frameP = frame_gray(faces[0]);
     return true;
 

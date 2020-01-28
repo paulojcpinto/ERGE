@@ -63,6 +63,7 @@ SOURCES       = ../DeadManSwitch/BluetoothModule/bluetooth_module.cpp \
 		../DeadManSwitch/FingerPrintModule/uart.cpp \
 		../DeadManSwitch/GSM/cgms1.cpp \
 		../DeadManSwitch/SqlModule/sqlquery.cpp \
+		../DeadManSwitch/camerathreads.cpp \
 		../DeadManSwitch/datainfo.cpp \
 		../DeadManSwitch/face.cpp \
 		../DeadManSwitch/finger.cpp \
@@ -85,6 +86,7 @@ OBJECTS       = bluetooth_module.o \
 		uart.o \
 		cgms1.o \
 		sqlquery.o \
+		camerathreads.o \
 		datainfo.o \
 		face.o \
 		finger.o \
@@ -210,7 +212,6 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		../DeadManSwitch/.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -244,6 +245,7 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../DeadManSwitch/FingerPrintModule/uart.h \
 		../DeadManSwitch/GSM/cgms1.h \
 		../DeadManSwitch/SqlModule/sqlquery.h \
+		../DeadManSwitch/camerathreads.h \
 		../DeadManSwitch/datainfo.h \
 		../DeadManSwitch/face.h \
 		../DeadManSwitch/finger.h \
@@ -263,6 +265,7 @@ DIST          = ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_
 		../DeadManSwitch/FingerPrintModule/uart.cpp \
 		../DeadManSwitch/GSM/cgms1.cpp \
 		../DeadManSwitch/SqlModule/sqlquery.cpp \
+		../DeadManSwitch/camerathreads.cpp \
 		../DeadManSwitch/datainfo.cpp \
 		../DeadManSwitch/face.cpp \
 		../DeadManSwitch/finger.cpp \
@@ -396,7 +399,6 @@ Makefile: ../DeadManSwitch/DeadManSwitch.pro ../../../../buildroot-2019.08/outpu
 		../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf \
 		../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf \
@@ -532,7 +534,6 @@ Makefile: ../DeadManSwitch/DeadManSwitch.pro ../../../../buildroot-2019.08/outpu
 ../../../../buildroot-2019.08/output/host/mkspecs/features/qt_config.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/spec_post.prf:
-.qmake.stash:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/exclusive_builds.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/toolchain.prf:
 ../../../../buildroot-2019.08/output/host/mkspecs/features/default_pre.prf:
@@ -569,8 +570,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../buildroot-2019.08/output/host/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.h ../DeadManSwitch/BluetoothModule/bluetooth_server.h ../DeadManSwitch/FaceModule/dataset.h ../DeadManSwitch/FaceModule/facerecognizer.h ../DeadManSwitch/FaceModule/mcamera.h ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h ../DeadManSwitch/FingerPrintModule/FingerprintReader.h ../DeadManSwitch/FingerPrintModule/MFRC522.h ../DeadManSwitch/FingerPrintModule/dDrivers.h ../DeadManSwitch/FingerPrintModule/fingerprintthread.h ../DeadManSwitch/FingerPrintModule/uart.h ../DeadManSwitch/GSM/cgms1.h ../DeadManSwitch/SqlModule/sqlquery.h ../DeadManSwitch/datainfo.h ../DeadManSwitch/face.h ../DeadManSwitch/finger.h ../DeadManSwitch/init.h ../DeadManSwitch/loghandler.h ../DeadManSwitch/programscheduler.h ../DeadManSwitch/timef.h ../DeadManSwitch/user.h ../DeadManSwitch/userscheduler.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.cpp ../DeadManSwitch/BluetoothModule/bluetooth_server.cpp ../DeadManSwitch/FaceModule/dataset.cpp ../DeadManSwitch/FaceModule/facerecognizer.cpp ../DeadManSwitch/FaceModule/mcamera.cpp ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.cpp ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ../DeadManSwitch/FingerPrintModule/uart.cpp ../DeadManSwitch/GSM/cgms1.cpp ../DeadManSwitch/SqlModule/sqlquery.cpp ../DeadManSwitch/datainfo.cpp ../DeadManSwitch/face.cpp ../DeadManSwitch/finger.cpp ../DeadManSwitch/init.cpp ../DeadManSwitch/loghandler.cpp ../DeadManSwitch/main.cpp ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/user.cpp ../DeadManSwitch/userscheduler.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.h ../DeadManSwitch/BluetoothModule/bluetooth_server.h ../DeadManSwitch/FaceModule/dataset.h ../DeadManSwitch/FaceModule/facerecognizer.h ../DeadManSwitch/FaceModule/mcamera.h ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h ../DeadManSwitch/FingerPrintModule/FingerprintReader.h ../DeadManSwitch/FingerPrintModule/MFRC522.h ../DeadManSwitch/FingerPrintModule/dDrivers.h ../DeadManSwitch/FingerPrintModule/fingerprintthread.h ../DeadManSwitch/FingerPrintModule/uart.h ../DeadManSwitch/GSM/cgms1.h ../DeadManSwitch/SqlModule/sqlquery.h ../DeadManSwitch/camerathreads.h ../DeadManSwitch/datainfo.h ../DeadManSwitch/face.h ../DeadManSwitch/finger.h ../DeadManSwitch/init.h ../DeadManSwitch/loghandler.h ../DeadManSwitch/programscheduler.h ../DeadManSwitch/timef.h ../DeadManSwitch/user.h ../DeadManSwitch/userscheduler.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.cpp ../DeadManSwitch/BluetoothModule/bluetooth_server.cpp ../DeadManSwitch/FaceModule/dataset.cpp ../DeadManSwitch/FaceModule/facerecognizer.cpp ../DeadManSwitch/FaceModule/mcamera.cpp ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.cpp ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ../DeadManSwitch/FingerPrintModule/uart.cpp ../DeadManSwitch/GSM/cgms1.cpp ../DeadManSwitch/SqlModule/sqlquery.cpp ../DeadManSwitch/camerathreads.cpp ../DeadManSwitch/datainfo.cpp ../DeadManSwitch/face.cpp ../DeadManSwitch/finger.cpp ../DeadManSwitch/init.cpp ../DeadManSwitch/loghandler.cpp ../DeadManSwitch/main.cpp ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/user.cpp ../DeadManSwitch/userscheduler.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1714,7 +1715,8 @@ facerecognizer.o: ../DeadManSwitch/FaceModule/facerecognizer.cpp ../DeadManSwitc
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix_opt.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_posix_opt.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/environments.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h \
+		../DeadManSwitch/loghandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o facerecognizer.o ../DeadManSwitch/FaceModule/facerecognizer.cpp
 
 mcamera.o: ../DeadManSwitch/FaceModule/mcamera.cpp ../DeadManSwitch/FaceModule/mcamera.h \
@@ -2038,7 +2040,61 @@ FingerprintReader.o: ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp ..
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportglobal.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/QSerialPortInfo \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportinfo.h \
-		../DeadManSwitch/init.h
+		../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/QDialog \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h \
+		../DeadManSwitch/user.h \
+		../DeadManSwitch/finger.h \
+		../DeadManSwitch/SqlModule/sqlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/syslog.h \
+		../DeadManSwitch/face.h \
+		../DeadManSwitch/FaceModule/facerecognizer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv_modules.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/types_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/math.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_val.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_valf.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_vall.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/inf.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/nan.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathdef.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathcalls.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathinline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/version.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/operations.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/mat.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/miniflann.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/defines.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/types_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/video.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/tracking.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/background_segm.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/features2d/features2d.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/objdetect/objdetect.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/calib3d/calib3d.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/affine.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/ml/ml.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/contrib.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/retina.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/openfabmap.hpp \
+		../DeadManSwitch/FaceModule/dataset.h \
+		../DeadManSwitch/FaceModule/mcamera.h \
+		../DeadManSwitch/loghandler.h \
+		../DeadManSwitch/datainfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FingerprintReader.o ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp
 
 fingerprintthread.o: ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ../DeadManSwitch/FingerPrintModule/fingerprintthread.h \
@@ -2238,6 +2294,10 @@ fingerprintthread.o: ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ..
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/QSerialPortInfo \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportinfo.h \
 		../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/QDialog \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
 		../DeadManSwitch/programscheduler.h \
 		../DeadManSwitch/userscheduler.h \
 		../DeadManSwitch/user.h \
@@ -2581,6 +2641,248 @@ sqlquery.o: ../DeadManSwitch/SqlModule/sqlquery.cpp ../DeadManSwitch/SqlModule/s
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/alloca.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sqlquery.o ../DeadManSwitch/SqlModule/sqlquery.cpp
 
+camerathreads.o: ../DeadManSwitch/camerathreads.cpp ../DeadManSwitch/camerathreads.h \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h \
+		../DeadManSwitch/user.h \
+		../DeadManSwitch/finger.h \
+		../DeadManSwitch/SqlModule/sqlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/mqueue.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/features.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/cdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/types.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/types.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/wordsize.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/typesizes.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/time.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/time.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_clk_tck.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/endian.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/endian.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/byteswap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-common.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/byteswap-16.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/select.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/select.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/sysmacros.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/pthreadtypes.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/fcntl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/fcntl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uio.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/stat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/stat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/siginfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mqueue.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/string.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/syslog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/signal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/signum.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigaction.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigcontext.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/asm/sigcontext.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigstack.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/ucontext.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/procfs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/time.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/user.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigthread.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/unistd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix_opt.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_posix_opt.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/environments.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/getopt.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdlib.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/waitflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/waitstatus.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/alloca.h \
+		../DeadManSwitch/face.h \
+		../DeadManSwitch/FaceModule/facerecognizer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv_modules.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/types_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/assert.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/wchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/math.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_val.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_valf.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_vall.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/inf.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/nan.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathdef.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathcalls.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathinline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/version.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/limits.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix1_lim.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/local_lim.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/linux/limits.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_local_lim.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix2_lim.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/xopen_lim.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/stdio_lim.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/operations.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/mat.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/miniflann.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/defines.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/types_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/video.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/tracking.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/background_segm.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/features2d/features2d.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/objdetect/objdetect.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/calib3d/calib3d.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/affine.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/ml/ml.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/contrib.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/retina.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/openfabmap.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdio.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_stdio.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wctype.h \
+		../DeadManSwitch/FaceModule/dataset.h \
+		../DeadManSwitch/FaceModule/mcamera.h \
+		../DeadManSwitch/loghandler.h \
+		../DeadManSwitch/datainfo.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_module.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothhostinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetoothglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig-bootstrapped.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtcore-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsystemdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qprocessordetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcompilerdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtypeinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsysinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlogging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbasicatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qgenericatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_msvc.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobalstatic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmutex.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnumeric.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qversiontagging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qtbluetooth-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothAddress \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothaddress.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrefcount.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnamespace.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qarraydata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QString \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstring.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringliteral.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringview.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringbuilder.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QMetaType \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgetsglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtguiglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtgui-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgets-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qwidget.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiterator.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhashfunctions.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpair.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearraylist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qregexp.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringmatcher.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qscopedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmargins.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpaintdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrect.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsize.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpalette.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcolor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgb.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgba64.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qbrush.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qmatrix.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpolygon.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qregion.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdatastream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtransform.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpainterpath.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qimage.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixelformat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfont.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontmetrics.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcursor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qkeysequence.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfile.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfiledevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qvector2d.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtouchdevice.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_server.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothserviceinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/QBluetoothUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtBluetooth/qbluetoothuuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QtGlobal \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QUuid \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/quuid.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QDebug \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QList \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QSharedPointer \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QVariant
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camerathreads.o ../DeadManSwitch/camerathreads.cpp
+
 datainfo.o: ../DeadManSwitch/datainfo.cpp ../DeadManSwitch/datainfo.h \
 		../DeadManSwitch/SqlModule/sqlquery.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/mqueue.h \
@@ -2892,7 +3194,148 @@ init.o: ../DeadManSwitch/init.cpp ../DeadManSwitch/init.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/QDialog \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgetsglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtguiglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtgui-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgets-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qwidget.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmargins.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpaintdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrect.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsize.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpalette.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcolor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgb.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgba64.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qbrush.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qmatrix.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpolygon.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qregion.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdatastream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtransform.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpainterpath.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qimage.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixelformat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfont.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontmetrics.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcursor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qkeysequence.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdio.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_stdio.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/wchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/wctype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/getopt.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfile.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfiledevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qvector2d.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtouchdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/QSerialPort \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialport.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h \
+		../DeadManSwitch/user.h \
+		../DeadManSwitch/finger.h \
+		../DeadManSwitch/SqlModule/sqlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/mqueue.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/fcntl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/fcntl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uio.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/stat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/stat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/siginfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mqueue.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/syslog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/signal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/signum.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigaction.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigcontext.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/asm/sigcontext.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigstack.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/ucontext.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/procfs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/time.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/sys/user.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/sigthread.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/unistd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/posix_opt.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/uClibc_posix_opt.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/environments.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/confname.h \
+		../DeadManSwitch/face.h \
+		../DeadManSwitch/FaceModule/facerecognizer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/opencv_modules.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/types_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/stdint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/math.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_val.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_valf.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/huge_vall.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/inf.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/nan.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathdef.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathcalls.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/bits/mathinline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/core.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/version.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/operations.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/mat.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/miniflann.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/defines.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/flann/config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/types_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/imgproc/imgproc.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/photo/photo_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/video.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/tracking.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/video/background_segm.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/features2d/features2d.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/objdetect/objdetect.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/calib3d/calib3d.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/core/affine.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/ml/ml.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui_c.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/highgui/highgui.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/contrib.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/retina.hpp \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/opencv2/contrib/openfabmap.hpp \
+		../DeadManSwitch/FaceModule/dataset.h \
+		../DeadManSwitch/FaceModule/mcamera.h \
+		../DeadManSwitch/loghandler.h \
+		../DeadManSwitch/datainfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o init.o ../DeadManSwitch/init.cpp
 
 loghandler.o: ../DeadManSwitch/loghandler.cpp ../DeadManSwitch/loghandler.h \
@@ -3218,7 +3661,8 @@ main.o: ../DeadManSwitch/main.cpp ../../../../buildroot-2019.08/output/host/arm-
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportinfo.h \
 		../DeadManSwitch/init.h \
 		../DeadManSwitch/GSM/cgms1.h \
-		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/QDialog
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/QDialog \
+		../DeadManSwitch/camerathreads.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../DeadManSwitch/main.cpp
 
 programscheduler.o: ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/programscheduler.h \
@@ -3467,7 +3911,11 @@ programscheduler.o: ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/progr
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportglobal.h \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/QSerialPortInfo \
 		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportinfo.h \
-		../DeadManSwitch/init.h
+		../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/QDialog \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o programscheduler.o ../DeadManSwitch/programscheduler.cpp
 
 user.o: ../DeadManSwitch/user.cpp ../DeadManSwitch/user.h \
@@ -3583,7 +4031,121 @@ user.o: ../DeadManSwitch/user.cpp ../DeadManSwitch/user.h \
 		../DeadManSwitch/FaceModule/dataset.h \
 		../DeadManSwitch/FaceModule/mcamera.h \
 		../DeadManSwitch/loghandler.h \
-		../DeadManSwitch/datainfo.h
+		../DeadManSwitch/datainfo.h \
+		../DeadManSwitch/init.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QThread \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qthread.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnamespace.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig-bootstrapped.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qconfig.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtcore-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsystemdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qprocessordetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcompilerdetection.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtypeinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsysinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlogging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qflags.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbasicatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qgenericatomic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qatomic_msvc.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qglobalstatic.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmutex.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qnumeric.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qversiontagging.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstring.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qchar.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrefcount.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qarraydata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringliteral.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringview.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringbuilder.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qalgorithms.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiterator.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhashfunctions.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpair.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qbytearraylist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringlist.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qregexp.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qstringmatcher.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcoreevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qscopedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmetatype.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvarlengtharray.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontainerfwd.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qobject_impl.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/QDialog \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qdialog.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgetsglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtguiglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtgui-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qtwidgets-config.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qwidget.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmargins.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpaintdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qrect.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsize.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qpoint.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpalette.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcolor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgb.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qrgba64.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qbrush.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvector.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qmatrix.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpolygon.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qregion.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdatastream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qiodevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qline.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtransform.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpainterpath.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qimage.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixelformat.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qpixmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qshareddata.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qhash.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfont.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontmetrics.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qfontinfo.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qcursor.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qkeysequence.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qevent.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qvariant.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qmap.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qdebug.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qtextstream.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qlocale.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qset.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qcontiguouscache.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurl.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qurlquery.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfile.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/qfiledevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qvector2d.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtGui/qtouchdevice.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/QSerialPort \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialport.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtSerialPort/qserialportglobal.h \
+		../../../../buildroot-2019.08/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include/qt5/QtCore/QByteArray \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o user.o ../DeadManSwitch/user.cpp
 
 userscheduler.o: ../DeadManSwitch/userscheduler.cpp ../DeadManSwitch/userscheduler.h \

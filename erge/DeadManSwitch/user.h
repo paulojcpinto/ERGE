@@ -56,6 +56,7 @@ class User
         bool login(string pincode);
         bool updateInfo(user_parsing newInfo);
         bool appendImages(int *imagesTaked,bool *ended,int Amount);
+        FRecognizer* getUserRecognizer(){return face.getRecognizer();};
         void doRelease ( void );
         int getNumberofImages(){return face.getNumberofImages();};
         user_parsing getInfoToUpdate();

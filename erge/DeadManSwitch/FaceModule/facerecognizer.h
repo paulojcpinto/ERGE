@@ -19,7 +19,7 @@ public:
     FRecognizer();
     FRecognizer(DataSet* dataset);
     void changeDataSet(String Nickname);
-    bool findFace(Mat *frameP);
+    static bool findFace(Mat *frameP);
     int recognizeFace(Mat frame);
     int loadRecognizer(int numberOfImages=15);
 

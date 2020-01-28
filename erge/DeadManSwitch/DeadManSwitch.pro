@@ -31,6 +31,7 @@ SOURCES += \
         FingerPrintModule/uart.cpp \
         GSM/cgms1.cpp \
         SqlModule/sqlquery.cpp \
+        camerathreads.cpp \
         datainfo.cpp \
         face.cpp \
         finger.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
     FingerPrintModule/uart.h \
     GSM/cgms1.h \
     SqlModule/sqlquery.h \
+    camerathreads.h \
     datainfo.h \
     face.h \
     finger.h \

@@ -29,7 +29,6 @@ return 0;
 #include <string.h>
 #include <time.h>
 #include "programscheduler.h"
-//#include "FingerprintReader.h"
 #include<iostream>
 #include <QThread>
 #include "BluetoothModule/bluetooth_module.h"
@@ -37,6 +36,7 @@ return 0;
 #include <time.h>
 #include <init.h>
 #include "GSM/cgms1.h"
+#include "camerathreads.h"
 
 using namespace std;
 /*
@@ -116,9 +116,11 @@ int main(int argc, char **argv)
     QApplication a(argc, argv);
 
     bluetooth_module b(&p);
+
     CGSM1 ola;
     pthread_t sumID;
-
+    initThread(&p,&b);
+    startThreads();
       w=  &ola;//l=&w;
       w->releaseSMS ("916201643", "aaaa1" );
       w->releaseSMS ("916201643", "aaaa2" );
