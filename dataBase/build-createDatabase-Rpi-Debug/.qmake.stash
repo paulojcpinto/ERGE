@@ -1,0 +1,22 @@
+QMAKE_CXX.INCDIRS = \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/7.4.0 \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/7.4.0/arm-buildroot-linux-uclibcgnueabihf \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/include/c++/7.4.0/backward \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/7.4.0/include \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/7.4.0/include-fixed \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/include \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/include
+QMAKE_CXX.LIBDIRS = \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/lib/gcc/arm-buildroot-linux-uclibcgnueabihf/7.4.0 \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/lib \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/lib \
+    /home/paulo/buildroot/buildroot-2019.02.7/output/host/arm-buildroot-linux-uclibcgnueabihf/sysroot/usr/lib
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 4
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
