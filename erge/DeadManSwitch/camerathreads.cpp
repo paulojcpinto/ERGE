@@ -4,6 +4,7 @@ ProgramScheduler* mainClass= nullptr;
 bluetooth_module* mBluetooth;
 string CurrentUser="";
 pthread_mutex_t mutexImage = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutexImage1 = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t hasNewImage = PTHREAD_COND_INITIALIZER;
 pthread_cond_t startReco = PTHREAD_COND_INITIALIZER;
 pthread_cond_t startFrame = PTHREAD_COND_INITIALIZER;
@@ -61,7 +62,7 @@ void *getFrames(void* threadid)
 
     for(;;)
     {
-        pthread_cond_wait(&startReco,&mutexImage);
+        pthread_cond_wait(&startFrame,&mutexImage);
         long int counter;
         Mat frame;
         while(!finish)
@@ -101,7 +102,7 @@ void *recognition(void* threadid)
     int prediction;
     for(;;)
     {
-        pthread_cond_wait(&startFrame,&mutexImage);
+        pthread_cond_wait(&startReco,&mutexImage1);
 
         if(CurrentUser!="")
         {

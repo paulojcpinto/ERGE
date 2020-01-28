@@ -122,8 +122,8 @@ int main(int argc, char **argv)
     initThread(&p,&b);
     startThreads();
       w=  &ola;//l=&w;
-      w->releaseSMS ("916201643", "aaaa1" );
-      w->releaseSMS ("916201643", "aaaa2" );
+    //  w->releaseSMS ("916201643", "aaaa1" );
+     // w->releaseSMS ("916201643", "aaaa2" );
 
     struct itimerval itv;
 

@@ -39,6 +39,7 @@ public:
   user_parsing getInfoToUpdate();
   bool doRelease();
   void operator=(UserScheduler userSchedule);
+  string getNick();
   ~UserScheduler(){}
 };
 

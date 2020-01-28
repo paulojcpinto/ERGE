@@ -38,7 +38,7 @@ class ProgramScheduler
     bool appendImageDataset(String nickname,int Amount,int *imagesTaked,bool *ended);
     static bool userParsingToFulluser(user_parsing input,fullUser *output);
     static bool userParsingToFulluser(fullUser input,user_parsing *output);
-    void doPresenceCheck ( unsigned int );
+    string getNicknameByFinger ( unsigned int );
     MCamera* getCameraInstance(){return &mCamera;}
     ~ProgramScheduler ( void ) {}
 

@@ -61,6 +61,7 @@ SOURCES       = ../DeadManSwitch/BluetoothModule/bluetooth_module.cpp \
 		../DeadManSwitch/FingerPrintModule/uart.cpp \
 		../DeadManSwitch/GSM/cgms1.cpp \
 		../DeadManSwitch/SqlModule/sqlquery.cpp \
+		../DeadManSwitch/camerathreads.cpp \
 		../DeadManSwitch/datainfo.cpp \
 		../DeadManSwitch/face.cpp \
 		../DeadManSwitch/finger.cpp \
@@ -83,6 +84,7 @@ OBJECTS       = bluetooth_module.o \
 		uart.o \
 		cgms1.o \
 		sqlquery.o \
+		camerathreads.o \
 		datainfo.o \
 		face.o \
 		finger.o \
@@ -239,6 +241,7 @@ DIST          = /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/fe
 		../DeadManSwitch/FingerPrintModule/uart.h \
 		../DeadManSwitch/GSM/cgms1.h \
 		../DeadManSwitch/SqlModule/sqlquery.h \
+		../DeadManSwitch/camerathreads.h \
 		../DeadManSwitch/datainfo.h \
 		../DeadManSwitch/face.h \
 		../DeadManSwitch/finger.h \
@@ -258,6 +261,7 @@ DIST          = /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/fe
 		../DeadManSwitch/FingerPrintModule/uart.cpp \
 		../DeadManSwitch/GSM/cgms1.cpp \
 		../DeadManSwitch/SqlModule/sqlquery.cpp \
+		../DeadManSwitch/camerathreads.cpp \
 		../DeadManSwitch/datainfo.cpp \
 		../DeadManSwitch/face.cpp \
 		../DeadManSwitch/finger.cpp \
@@ -568,8 +572,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.h ../DeadManSwitch/BluetoothModule/bluetooth_server.h ../DeadManSwitch/FaceModule/dataset.h ../DeadManSwitch/FaceModule/facerecognizer.h ../DeadManSwitch/FaceModule/mcamera.h ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h ../DeadManSwitch/FingerPrintModule/FingerprintReader.h ../DeadManSwitch/FingerPrintModule/MFRC522.h ../DeadManSwitch/FingerPrintModule/dDrivers.h ../DeadManSwitch/FingerPrintModule/fingerprintthread.h ../DeadManSwitch/FingerPrintModule/uart.h ../DeadManSwitch/GSM/cgms1.h ../DeadManSwitch/SqlModule/sqlquery.h ../DeadManSwitch/datainfo.h ../DeadManSwitch/face.h ../DeadManSwitch/finger.h ../DeadManSwitch/init.h ../DeadManSwitch/loghandler.h ../DeadManSwitch/programscheduler.h ../DeadManSwitch/timef.h ../DeadManSwitch/user.h ../DeadManSwitch/userscheduler.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.cpp ../DeadManSwitch/BluetoothModule/bluetooth_server.cpp ../DeadManSwitch/FaceModule/dataset.cpp ../DeadManSwitch/FaceModule/facerecognizer.cpp ../DeadManSwitch/FaceModule/mcamera.cpp ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.cpp ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ../DeadManSwitch/FingerPrintModule/uart.cpp ../DeadManSwitch/GSM/cgms1.cpp ../DeadManSwitch/SqlModule/sqlquery.cpp ../DeadManSwitch/datainfo.cpp ../DeadManSwitch/face.cpp ../DeadManSwitch/finger.cpp ../DeadManSwitch/init.cpp ../DeadManSwitch/loghandler.cpp ../DeadManSwitch/main.cpp ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/user.cpp ../DeadManSwitch/userscheduler.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.h ../DeadManSwitch/BluetoothModule/bluetooth_server.h ../DeadManSwitch/FaceModule/dataset.h ../DeadManSwitch/FaceModule/facerecognizer.h ../DeadManSwitch/FaceModule/mcamera.h ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h ../DeadManSwitch/FingerPrintModule/FingerprintReader.h ../DeadManSwitch/FingerPrintModule/MFRC522.h ../DeadManSwitch/FingerPrintModule/dDrivers.h ../DeadManSwitch/FingerPrintModule/fingerprintthread.h ../DeadManSwitch/FingerPrintModule/uart.h ../DeadManSwitch/GSM/cgms1.h ../DeadManSwitch/SqlModule/sqlquery.h ../DeadManSwitch/camerathreads.h ../DeadManSwitch/datainfo.h ../DeadManSwitch/face.h ../DeadManSwitch/finger.h ../DeadManSwitch/init.h ../DeadManSwitch/loghandler.h ../DeadManSwitch/programscheduler.h ../DeadManSwitch/timef.h ../DeadManSwitch/user.h ../DeadManSwitch/userscheduler.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../DeadManSwitch/BluetoothModule/bluetooth_module.cpp ../DeadManSwitch/BluetoothModule/bluetooth_server.cpp ../DeadManSwitch/FaceModule/dataset.cpp ../DeadManSwitch/FaceModule/facerecognizer.cpp ../DeadManSwitch/FaceModule/mcamera.cpp ../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.cpp ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ../DeadManSwitch/FingerPrintModule/uart.cpp ../DeadManSwitch/GSM/cgms1.cpp ../DeadManSwitch/SqlModule/sqlquery.cpp ../DeadManSwitch/camerathreads.cpp ../DeadManSwitch/datainfo.cpp ../DeadManSwitch/face.cpp ../DeadManSwitch/finger.cpp ../DeadManSwitch/init.cpp ../DeadManSwitch/loghandler.cpp ../DeadManSwitch/main.cpp ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/user.cpp ../DeadManSwitch/userscheduler.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -671,7 +675,8 @@ dataset.o: ../DeadManSwitch/FaceModule/dataset.cpp ../DeadManSwitch/FaceModule/d
 
 facerecognizer.o: ../DeadManSwitch/FaceModule/facerecognizer.cpp ../DeadManSwitch/FaceModule/facerecognizer.h \
 		../DeadManSwitch/FaceModule/dataset.h \
-		../DeadManSwitch/FaceModule/mcamera.h
+		../DeadManSwitch/FaceModule/mcamera.h \
+		../DeadManSwitch/loghandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o facerecognizer.o ../DeadManSwitch/FaceModule/facerecognizer.cpp
 
 mcamera.o: ../DeadManSwitch/FaceModule/mcamera.cpp ../DeadManSwitch/FaceModule/mcamera.h
@@ -685,7 +690,19 @@ FingerprintReader.o: ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp ..
 		../DeadManSwitch/FingerPrintModule/uart.h \
 		../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h \
 		../DeadManSwitch/FingerPrintModule/fingerprintthread.h \
-		../DeadManSwitch/init.h
+		../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h \
+		../DeadManSwitch/user.h \
+		../DeadManSwitch/finger.h \
+		../DeadManSwitch/SqlModule/sqlquery.h \
+		../DeadManSwitch/face.h \
+		../DeadManSwitch/FaceModule/facerecognizer.h \
+		../DeadManSwitch/FaceModule/dataset.h \
+		../DeadManSwitch/FaceModule/mcamera.h \
+		../DeadManSwitch/loghandler.h \
+		../DeadManSwitch/datainfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FingerprintReader.o ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp
 
 fingerprintthread.o: ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ../DeadManSwitch/FingerPrintModule/fingerprintthread.h \
@@ -693,6 +710,7 @@ fingerprintthread.o: ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ..
 		../DeadManSwitch/FingerPrintModule/uart.h \
 		../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h \
 		../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h \
 		../DeadManSwitch/programscheduler.h \
 		../DeadManSwitch/userscheduler.h \
 		../DeadManSwitch/user.h \
@@ -715,6 +733,22 @@ cgms1.o: ../DeadManSwitch/GSM/cgms1.cpp ../DeadManSwitch/GSM/cgms1.h
 sqlquery.o: ../DeadManSwitch/SqlModule/sqlquery.cpp ../DeadManSwitch/SqlModule/sqlquery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sqlquery.o ../DeadManSwitch/SqlModule/sqlquery.cpp
 
+camerathreads.o: ../DeadManSwitch/camerathreads.cpp ../DeadManSwitch/camerathreads.h \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h \
+		../DeadManSwitch/user.h \
+		../DeadManSwitch/finger.h \
+		../DeadManSwitch/SqlModule/sqlquery.h \
+		../DeadManSwitch/face.h \
+		../DeadManSwitch/FaceModule/facerecognizer.h \
+		../DeadManSwitch/FaceModule/dataset.h \
+		../DeadManSwitch/FaceModule/mcamera.h \
+		../DeadManSwitch/loghandler.h \
+		../DeadManSwitch/datainfo.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_module.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_server.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o camerathreads.o ../DeadManSwitch/camerathreads.cpp
+
 datainfo.o: ../DeadManSwitch/datainfo.cpp ../DeadManSwitch/datainfo.h \
 		../DeadManSwitch/SqlModule/sqlquery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o datainfo.o ../DeadManSwitch/datainfo.cpp
@@ -731,7 +765,19 @@ finger.o: ../DeadManSwitch/finger.cpp ../DeadManSwitch/finger.h \
 		../DeadManSwitch/SqlModule/sqlquery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o finger.o ../DeadManSwitch/finger.cpp
 
-init.o: ../DeadManSwitch/init.cpp ../DeadManSwitch/init.h
+init.o: ../DeadManSwitch/init.cpp ../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h \
+		../DeadManSwitch/user.h \
+		../DeadManSwitch/finger.h \
+		../DeadManSwitch/SqlModule/sqlquery.h \
+		../DeadManSwitch/face.h \
+		../DeadManSwitch/FaceModule/facerecognizer.h \
+		../DeadManSwitch/FaceModule/dataset.h \
+		../DeadManSwitch/FaceModule/mcamera.h \
+		../DeadManSwitch/loghandler.h \
+		../DeadManSwitch/datainfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o init.o ../DeadManSwitch/init.cpp
 
 loghandler.o: ../DeadManSwitch/loghandler.cpp ../DeadManSwitch/loghandler.h
@@ -755,7 +801,8 @@ main.o: ../DeadManSwitch/main.cpp ../DeadManSwitch/programscheduler.h \
 		../DeadManSwitch/FingerPrintModule/uart.h \
 		../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h \
 		../DeadManSwitch/init.h \
-		../DeadManSwitch/GSM/cgms1.h
+		../DeadManSwitch/GSM/cgms1.h \
+		../DeadManSwitch/camerathreads.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../DeadManSwitch/main.cpp
 
 programscheduler.o: ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/programscheduler.h \
@@ -773,7 +820,8 @@ programscheduler.o: ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/progr
 		../DeadManSwitch/FingerPrintModule/FingerprintReader.h \
 		../DeadManSwitch/FingerPrintModule/uart.h \
 		../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h \
-		../DeadManSwitch/init.h
+		../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o programscheduler.o ../DeadManSwitch/programscheduler.cpp
 
 user.o: ../DeadManSwitch/user.cpp ../DeadManSwitch/user.h \
@@ -784,7 +832,11 @@ user.o: ../DeadManSwitch/user.cpp ../DeadManSwitch/user.h \
 		../DeadManSwitch/FaceModule/dataset.h \
 		../DeadManSwitch/FaceModule/mcamera.h \
 		../DeadManSwitch/loghandler.h \
-		../DeadManSwitch/datainfo.h
+		../DeadManSwitch/datainfo.h \
+		../DeadManSwitch/init.h \
+		../DeadManSwitch/GSM/cgms1.h \
+		../DeadManSwitch/programscheduler.h \
+		../DeadManSwitch/userscheduler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o user.o ../DeadManSwitch/user.cpp
 
 userscheduler.o: ../DeadManSwitch/userscheduler.cpp ../DeadManSwitch/userscheduler.h \

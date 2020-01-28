@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include "programscheduler.h"
+#include "camerathreads.h"
 
 #define BUTTONS "/dev/buttons"
 
@@ -74,6 +75,8 @@ while (1)
      {
          if (!fingerPrintStatus.needCreateFingerPrint)
          {
+
+             pthread_cond_signal (&startFrame);
         uint8_t fingerID=0;
      f.finger->getImage();
      f.finger->image2Tz(1);
@@ -81,10 +84,16 @@ while (1)
      fingerID = f.searchFingerprint ();
      if (fingerID)
        {
-          qDebug ()<<"Finger Print ID =" << fingerID <<"\n\n";
+         qDebug ()<<"Finger Print ID =" << fingerID <<"\n\n";
         printf("\n%d -> Finger Print ID =  %d\n",aux++, fingerID);
-       pthread_cond_signal (&condition_cond);
-       scheduler->doPresenceCheck ( fingerID );
+        string aux = scheduler->getNicknameByFinger(fingerID);
+
+           initRecognizer (aux);
+           pthread_cond_signal (&startReco);
+
+
+
+      // scheduler->doPresenceCheck ( fingerID );
          //sleep (10);
        }
      else

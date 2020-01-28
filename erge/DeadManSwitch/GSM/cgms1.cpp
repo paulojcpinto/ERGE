@@ -7,6 +7,7 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <QThread>
+#include "loghandler.h"
 
 using namespace std;
 
@@ -170,6 +171,7 @@ void CGSM1::readSerial()
 
 void CGSM1::prepareGSM ()
 {
+      LogHandler log("GSM: ");
   switch (stateConfiguration) {
     case 0:
       {
@@ -217,6 +219,7 @@ void CGSM1::prepareGSM ()
      //       aux.message = "as";
        //     vRelease.push_back (aux);
             serial->write("AT+CMGS=\"+351");
+            log.writeToLog (vRelease[0].number);
             serial->write (vRelease[0].number);
             serial->write ("\"\r\n");
           }
@@ -292,11 +295,16 @@ void CGSM1::initGSM()
 void CGSM1::releaseSMS(char* number, char* message)
 {
 
+    LogHandler log("GSM: ");
+
     release aux;
     qDebug()<<"\n\n\n" <<  "release ok?"<<"\n\n\n";
-    aux.number = "933288042";
+   // aux.number = "933288042";
+    aux.number = number;
+    aux.number[9] = 0;
     aux.message = message;
     vRelease.push_back (aux);
+   log.writeToLog (vRelease[0].number);
     if (sending == false)
     {
         serialData.clear();

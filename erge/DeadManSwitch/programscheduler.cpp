@@ -324,16 +324,17 @@ unsigned int ProgramScheduler::getNewFingerID( void )
     return 0;
 }
 
-void ProgramScheduler::doPresenceCheck(unsigned int fingerID)
+string ProgramScheduler::getNicknameByFinger(unsigned int fingerID)
 {
      for ( UserScheduler ok : usersScheduler )
      {
          if (ok.compareUserFinger (fingerID))
          {
-             ok.setPresenceCheck (true);
-             return ;
+            // ok.setPresenceCheck (true);
+             return ok.getNick ();
          }
      }
+     return nullptr;
 
 
 }

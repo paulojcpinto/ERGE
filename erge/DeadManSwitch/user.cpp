@@ -158,14 +158,23 @@ void User::doRelease()
     char number[9];
     char message[256];
     int count;
+
     for ( int aux = 4; aux < 13; aux ++)
     {
+
         number[aux-4] = p.platform[aux];
     }
+
     for ( count = 0; count < p.message.length () && count < 255; count++)
     {
         message[count] = p.message[count];
     }
     message[count] = 0;
     w->releaseSMS (number, message);
+}
+
+
+string User::getNick()
+{
+    return nickName;
 }

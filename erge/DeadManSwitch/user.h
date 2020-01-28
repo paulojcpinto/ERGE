@@ -60,6 +60,7 @@ class User
         void doRelease ( void );
         int getNumberofImages(){return face.getNumberofImages();};
         user_parsing getInfoToUpdate();
+        string getNick();
         ~User(){}
 
 };

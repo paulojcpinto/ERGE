@@ -74,7 +74,7 @@ bool FRecognizer::findFace(Mat *frameP)
         mLog.writeToLog("Error loading cascade");
         return false;
     }
-    mLog.writeToLog("Loaded cascade successfuly");
+    //mLog.writeToLog("Loaded cascade successfuly");
     vector<Rect> faces;
 
     face_cascade.detectMultiScale( frame_gray, faces, 1.1, 3, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50));
@@ -85,7 +85,7 @@ bool FRecognizer::findFace(Mat *frameP)
     }
     if(faces.size()<=0)
     {
-        mLog.writeToLog("No faces founded");
+        //mLog.writeToLog("No faces founded");
         return false;
     }
     mLog.writeToLog("One face was found!");

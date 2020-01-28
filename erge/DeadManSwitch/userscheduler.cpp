@@ -195,4 +195,9 @@ bool UserScheduler::doRelease()
     }
 }
 
+string UserScheduler::getNick()
+{
+    return user.getNick ();
+}
+
 
