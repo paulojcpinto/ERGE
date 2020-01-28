@@ -20,7 +20,7 @@ void* fingerPrintThread(void * para)
 
     ProgramScheduler * scheduler = (ProgramScheduler *) para;
 
-QThread::sleep(1);
+
 Fingerprint f;
 
 uint8_t Image = 0;
@@ -31,7 +31,7 @@ FILE* fd ;
 fingerPrintStatus.createSuccess = false;
 fingerPrintStatus.needCreateFingerPrint = false;
 
-strcpy(device,"/dev/ttyUSB0");
+strcpy(device,"/dev/ttyUSB1");
 int x= f.uart->open(device);
 if (x != 0)
   {
@@ -54,6 +54,7 @@ else{
                     qDebug ()<<"DID NOT Found fingerprint sensor! \n";
                     return 0;
 }
+
 int aux = 0;
 
 while (1)

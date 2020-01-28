@@ -68,13 +68,13 @@ void ProgramScheduler::verifyReleaseTime( void )
 
   time ( &raw_time );
   ptr_ts = gmtime ( &raw_time );
-
+    qDebug()<<"\n\n\n" <<  usersScheduler.size()<<"\n\n\n";
   for ( uint8_t cont = 0; cont < usersScheduler.size(); cont ++)
     if(usersScheduler.at(cont).compareTimeRelease (*ptr_ts))
       { /*send signal */
-
+//qDebug()<<"\n\n\n" <<  "release ok?"<<"\n\n\n";
         if (usersScheduler.at(cont).doRelease ())
-        {
+        {//qDebug()<<"\n\n\n" <<  "deleted ok?"<<"\n\n\n";
             deleteUser(usersScheduler.at(cont).getInfoToUpdate ().nickName);
         }
       }
@@ -107,7 +107,13 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     ptr_ts->tm_min++;
     fullUser NewUser;
     int pos=0;
+     nextScheduler.tm_mday=0;
+      nextScheduler.tm_min=0;
+       nextScheduler.tm_mon=0;
+        nextScheduler.tm_hour=0;
+         nextScheduler.tm_year=0;
     userParsingToFulluser(newUserInfo,&NewUser);
+
     for (int aux = 0; aux < NewUser.messageInfo.dateToStart.length (); aux++)
     {
         if (NewUser.messageInfo.dateToStart[aux]==  '/')
@@ -118,41 +124,45 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
           case 0:
          {
                nextScheduler.tm_mday*=10;
-               nextScheduler.tm_mday+=NewUser.messageInfo.dateToStart[aux] - 48;
-         }
+               nextScheduler.tm_mday+=NewUser.messageInfo.dateToStart[aux] - '0';
+               qDebug() <<"\n\nmsdf sd"<<(nextScheduler.tm_mday)<<"\n\n,o";
+         }break;
          case 1:
          {
              nextScheduler.tm_mon*=10;
-             nextScheduler.tm_mon+=NewUser.messageInfo.dateToStart[aux] - 48;
-         }
+             nextScheduler.tm_mon+=NewUser.messageInfo.dateToStart[aux] - '0';
+         }break;
          case 2:
          {
              nextScheduler.tm_year*=10;
-             nextScheduler.tm_year+=NewUser.messageInfo.dateToStart[aux] - 48;
-         }
+             nextScheduler.tm_year+=NewUser.messageInfo.dateToStart[aux] - '0';
+         }break;
          case 3:
          {
              nextScheduler.tm_hour*=10;
-             nextScheduler.tm_hour+=NewUser.messageInfo.dateToStart[aux] - 48;
-         }
+             nextScheduler.tm_hour+=NewUser.messageInfo.dateToStart[aux] - '0';
+
+         }break;
          case 4:
          {
              nextScheduler.tm_min*=10;
-             nextScheduler.tm_min+=NewUser.messageInfo.dateToStart[aux] - 48;
+             nextScheduler.tm_min+=NewUser.messageInfo.dateToStart[aux] - '0';
          }
          }
+
     }
+
 
     log.writeToLog("Deu ate aqui!");
     /*
     int x;
-   /* do
+    do
     {
         x = createFingerPrint();
     }
     while(!x);
-    */
-    NewUser.fingerInfo.FingerprintID=5;     //TODO getFingerprint here
+     qDebug()<<"deu ate ali";
+    NewUser.fingerInfo.FingerprintID=x;     //TODO getFingerprint here
     NewUser.fingerInfo.FingerprintName="FingerOne";
     *endedFingerPrint=true;
     log.writeToLog("Deu ate aqui!2");

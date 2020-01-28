@@ -1,4 +1,6 @@
 #include "userscheduler.h"
+#include <QDebug>
+#include <time.h>
 
 #define numberDaysYear      366
 #define numberHourDay       24
@@ -46,15 +48,16 @@ bool UserScheduler::login(string pincode)
 bool UserScheduler::compareTimeRelease( tm timeNow )
 {
  // printf ("\n %2d:%02d\n", timeNow.tm_min, this->nextScheduler.tm_min);8
+        qDebug() <<"\n\nday "<<(nextScheduler.tm_mday)<<","<<timeNow.tm_mday<<"\n\nm "<<(nextScheduler.tm_min)<<","<<timeNow.tm_min<<"\n\n,o"<<(nextScheduler.tm_mon)<<","<<timeNow.tm_mon<<"\n\ny"<<(nextScheduler.tm_year)<<","<<timeNow.tm_year<<"\n\nh"<<(nextScheduler.tm_hour)<<","<<timeNow.tm_hour<<"\n\n";
     if (this->nextScheduler.tm_year < timeNow.tm_year)
         return true;
-    else if (this->nextScheduler.tm_year == timeNow.tm_year)
+    else if (this->nextScheduler.tm_year == timeNow.tm_year+1900)
     {
-        if ( this->nextScheduler.tm_yday < timeNow.tm_yday )
+        if ( this->nextScheduler.tm_mday < timeNow.tm_mday )
         {
             return true;
         }
-        else if ( this->nextScheduler.tm_yday == timeNow.tm_yday )
+        else if ( this->nextScheduler.tm_mday == timeNow.tm_mday )
         {
             if  ( this->nextScheduler.tm_hour < timeNow.tm_hour )
           {
@@ -181,7 +184,8 @@ bool UserScheduler::doRelease()
 {
     if (!preseceCheck)
     {
-        doRelease();
+        qDebug()<<"\n\n\n" <<  "release ok?"<<"\n\n\n";
+       user.doRelease ();
         return true;
     }
     else

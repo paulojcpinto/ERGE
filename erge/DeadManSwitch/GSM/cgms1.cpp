@@ -81,6 +81,7 @@ CGSM1::CGSM1(QWidget *parent) :
       *  Open and configure the arduino port if available
       */
      if(arduino_is_available){
+          qDebug() <<arduino_uno_port_name;
          qDebug() << "Found the arduino port...\n";
          serial->setPortName(arduino_uno_port_name);
          serial->open(QSerialPort::ReadWrite);
@@ -292,6 +293,7 @@ void CGSM1::releaseSMS(char* number, char* message)
 {
 
     release aux;
+    qDebug()<<"\n\n\n" <<  "release ok?"<<"\n\n\n";
     aux.number = "933288042";
     aux.message = message;
     vRelease.push_back (aux);
