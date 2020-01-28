@@ -135,19 +135,19 @@ bool DataSet::addFace(vector<cv::Mat> images, unsigned int lengh)
 
 bool DataSet::appendFrame(vector<cv::Mat> images, int newLengh)
 {
-    lastLengh = newLengh;
+
  if(images.empty())
  {
      writeToLog(" AppendFrames: Images vector was empty");
      return false;
  }
- for(int i= lastLengh; i<=images.size()+lastLengh; i++ )
+ for(int i= lastLengh+1; i<=images.size()+lastLengh+1; i++ )
  {
      string path = m_dataset_path + "user0"+ "_" + to_string(i) + ".jpg";
      cv::imwrite(path,images.back());
      images.pop_back();
  }
- lastLengh += images.size();
+ lastLengh = newLengh;
  writeToLog("Appended to Dataset successfuly");
  return true;
 

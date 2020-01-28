@@ -154,7 +154,7 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
 
 
     log.writeToLog("Deu ate aqui!");
-    /*
+
     int x;
     do
     {

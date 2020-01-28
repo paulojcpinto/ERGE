@@ -235,6 +235,7 @@ unsigned int createFingerPrint ( void )
 {
     fingerPrintStatus.createSuccess = false;
     fingerPrintStatus.needCreateFingerPrint = true;
+    qDebug()<<"deu ate ali";
     while (fingerPrintStatus.needCreateFingerPrint) {
         ;
 
