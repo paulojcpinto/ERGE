@@ -1,4 +1,5 @@
 #include "camerathreads.h"
+#include "semaphore.h"
 
 ProgramScheduler* mainClass= nullptr;
 bluetooth_module* mBluetooth;
@@ -8,6 +9,9 @@ pthread_mutex_t mutexImage1 = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t hasNewImage = PTHREAD_COND_INITIALIZER;
 pthread_cond_t startReco = PTHREAD_COND_INITIALIZER;
 pthread_cond_t startFrame = PTHREAD_COND_INITIALIZER;
+sem_t sImage;
+
+
 
 
 LogHandler mLog("ThreadCameraModule: ");
@@ -30,6 +34,7 @@ void initRecognizer(string nickname)
 
 void startThreads()
 {
+
     if(mainClass!= nullptr)
     {
         pthread_t threadGetframes, threadRecognition;
@@ -49,6 +54,7 @@ void startThreads()
             exit(-1);
         }
         mLog.writeToLog("ThreadRecognition created with success");
+        sem_init (&sImage,0,0);
     }
     else mLog.writeToLog("Thread was not inittialized");
 
@@ -76,9 +82,12 @@ void *getFrames(void* threadid)
                 if(FRecognizer::findFace(&frame))
                 {
                     frameLog.writeToLog("face retrived with success");
-                    pthread_mutex_lock(&mutexImage);
+                  //  pthread_mutex_lock(&mutexImage);
                     imagesToProcess.push_back(frame);
-                    pthread_mutex_unlock(&mutexImage);
+                     frameLog.writeToLog("face retrived with successo+");
+
+                    //pthread_mutex_unlock(&mutexImage);
+  sem_post (&sImage);
 
                 }
             }
@@ -106,23 +115,27 @@ void *recognition(void* threadid)
 
         if(CurrentUser!="")
         {
-            recoLog.writeToLog("Starting Recognizing: " +CurrentUser);
-            if(mainClass->getUserRecognizer(CurrentUser,&recog))
+            recoLog.writeToLog("Starting Recognizing: " +CurrentUser+"\n\n");
+            if(mainClass->getUserRecognizer(CurrentUser,&recog) == 1)
             {
+                recoLog.writeToLog( to_string (1)+"\n\n");
+
                 prediction= 200;
                 recog->loadRecognizer(mainClass->getNumberofImages(CurrentUser));
                 while (prediction>60) {
-
+                     recoLog.writeToLog("Image To Process:"+ to_string(imagesToProcess.size ()));
+                    sem_wait (&sImage);
+                    recoLog.writeToLog("sem pos:");
                     if(imagesToProcess.size()>=1)
                     {
-                    pthread_mutex_lock(&mutexImage);
-                    Mat frame = imagesToProcess.back();
-                    imagesToProcess.pop_back();
-                    pthread_mutex_unlock(&mutexImage);
+                    //pthread_mutex_lock(&mutexImage1);
+                    Mat frame = imagesToProcess.front ();
+                    imagesToProcess.erase (imagesToProcess.begin ());
+                    //pthread_mutex_unlock(&mutexImage1);
                     prediction =recog->recognizeFace(frame);
                     recoLog.writeToLog("Recongized result:"+ to_string(prediction));
                     }
-                    usleep(200);
+
 
 
                 }

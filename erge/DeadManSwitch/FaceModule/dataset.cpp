@@ -160,7 +160,7 @@ vector<cv::Mat> DataSet::readFace(int lengh)
     vector<cv::Mat> images;
        for(int i = 1; i <= lengh; i++)
           {
-                string path = m_dataset_path +"user0" + "_" +to_string(i) + ".jpg";
+                string path = m_dataset_path +"user0_" +to_string(i) + ".jpg";
                 images.push_back(cv::imread(path,CV_LOAD_IMAGE_GRAYSCALE ));
           }
     writeToLog("Readed images successfully");

@@ -47,17 +47,21 @@ bool FRecognizer::loadCascade()
 
 int FRecognizer::loadRecognizer(int numberOfImages)
 {
-    if(!loadCascade())
-        return ERROR_CASCADE;
      vector<Mat> images;
-     images = dataset->readFace(numberOfImages);
+    images.clear ();
      vector<int> labels;
-     model = createLBPHFaceRecognizer();
-     if(model ==nullptr) return ERROR_MODEL;
+     images = dataset->readFace(15);
+     //if(model ==nullptr) return ERROR_MODEL;
      labels.clear();
-     for(int i=0; i<numberOfImages;i++)labels.push_back(i);
-     model->train(images,labels);
+     //labels.push_back (0);
+     writeToLog ("module initialized"+ to_string (numberOfImages));
+     for(int i=1; i<16;i++)labels.push_back(i);
+        //  writeToLog ("size image : "+ to_string (images.size ()));
+    // model = createLBPHFaceRecognizer();
+     Ptr<FaceRecognizer> model1 = createLBPHFaceRecognizer ();
+     model1->train(images ,labels);
 
+writeToLog ("train done with success");
      return 1;
 
 
@@ -98,7 +102,9 @@ int FRecognizer::recognizeFace(Mat frame) //return the confidence level
 {
     int predicted_label = -1;
     double predicted_confidence = 0.0;
+    writeToLog("two face was found!");
     model->predict(frame, predicted_label, predicted_confidence);
+    writeToLog("Onthreee face was found!");
     return (int)predicted_confidence;
 }
 

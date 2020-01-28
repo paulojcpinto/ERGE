@@ -2,7 +2,7 @@
 
 CDataSet::CDataSet()
 {
-    m_dataset_path = "/datasets/teste1/";
+    m_dataset_path = "/datasets/paulo/";
 }
 
 CDataSet::~CDataSet()
