@@ -19,7 +19,7 @@ using namespace std;
 class FRecognizer
 {
 public:
-    FRecognizer();
+   // FRecognizer();
     FRecognizer(DataSet* dataset);
     void changeDataSet(String Nickname);
     static bool findFace(Mat *frameP);

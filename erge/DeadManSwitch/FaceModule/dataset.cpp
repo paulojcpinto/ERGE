@@ -10,15 +10,15 @@
 #include <QDebug>
 
 
-DataSet::DataSet()
-{
- m_dataset_path = DEFAULT_PATH;
+//DataSet::DataSet()
+//{
+// m_dataset_path = DEFAULT_PATH;
 
- if ((fd = open("/var/log/deadman.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
-             perror("open");
-             exit(EXIT_FAILURE);
-         }
-}
+// if ((fd = open("/var/log/deadman.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
+//             perror("open");
+//             exit(EXIT_FAILURE);
+//         }
+//}
 
 
 DataSet::DataSet(string Nickname,MCamera* cameraPointer, int lastIndex)

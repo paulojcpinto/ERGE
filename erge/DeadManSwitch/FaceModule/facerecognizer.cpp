@@ -7,12 +7,12 @@
 #include "loghandler.h"
 #define PROGRAM_NAME "FACERECOGNIZER: "
 
-FRecognizer::FRecognizer():face_cascade_name("/opt/haarcascade_frontalface_alt.xml")
-{
- dataset = new DataSet();
- loadLog();
+//FRecognizer::FRecognizer():face_cascade_name("/opt/haarcascade_frontalface_alt.xml")
+//{
+// //dataset = new DataSet();
+// loadLog();
 
-}
+//}
 
 FRecognizer::FRecognizer(DataSet* dataset)
 {

@@ -15,7 +15,7 @@ using namespace std;
 class DataSet
 {
 public:
-    DataSet();
+   // DataSet();
     DataSet(string NickName, MCamera* cameraPointer,int lastIndex);
     ~DataSet();
     bool createDataset(int *imagesTaked,bool *ended);
