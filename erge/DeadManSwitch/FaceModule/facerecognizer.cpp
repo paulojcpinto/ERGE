@@ -50,14 +50,10 @@ int FRecognizer::loadRecognizer(int numberOfImages)
      vector<Mat> images;
      images.clear ();
      vector<int> labels;
-     for(int i = 1; i <= numberOfImages; i++)
-        {
-              string path = "/datasets/paulo/user0_" +to_string(i) + ".jpg";
-              images.push_back(cv::imread(path,CV_LOAD_IMAGE_GRAYSCALE ));
-        }
+      dataset->readFace(&images,numberOfImages);
       labels.clear();
       writeToLog ("module initialized"+ to_string (numberOfImages));
-      for(int i=1; i<16;i++)labels.push_back(i);
+      for(int i=1; i<numberOfImages;i++)labels.push_back(i);
       model = createLBPHFaceRecognizer();
       model->train(images ,labels);
       writeToLog ("train done with success");

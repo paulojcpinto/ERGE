@@ -156,16 +156,15 @@ bool DataSet::appendFrame(vector<cv::Mat> images, int newLengh)
 
 
 
-vector<cv::Mat> DataSet::readFace(int lengh)
+bool DataSet::readFace(vector<cv::Mat>* output,int lengh)
 {
-    vector<cv::Mat> images;
        for(int i = 1; i <= lengh; i++)
           {
                 string path = m_dataset_path +"user0_" +to_string(i) + ".jpg";
-                images.push_back(cv::imread(path,CV_LOAD_IMAGE_GRAYSCALE ));
+                output->push_back(cv::imread(path,CV_LOAD_IMAGE_GRAYSCALE ));
           }
     writeToLog("Readed images successfully");
-    return images;
+    return true;
 }
 
 

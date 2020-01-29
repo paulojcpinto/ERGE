@@ -296,7 +296,7 @@ public class UserConfigsFragment extends Fragment {
                 sbNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                        etNumber.setText(seekBar.getProgress()+"");
                     }
 
                     @Override
@@ -306,7 +306,7 @@ public class UserConfigsFragment extends Fragment {
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
-                        etNumber.setText(seekBar.getProgress()+"");
+
 
                     }
                 });
