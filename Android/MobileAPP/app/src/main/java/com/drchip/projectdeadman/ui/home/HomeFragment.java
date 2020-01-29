@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment {
 
 
 
-                    Toast.makeText(getContext(), "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:
@@ -197,7 +197,8 @@ public class HomeFragment extends Fragment {
         public void run() {
             ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname.trim()+">",getContext());
 
-            SystemClock.sleep(10);
+            SystemClock.sleep(100);
+            if(!hidden1)
             timerHandler.postDelayed(this, 10000);
         }
     };
@@ -225,9 +226,11 @@ public class HomeFragment extends Fragment {
         if(hidden)
         {
 
+            hidden1 = true;
 
         }
     }
+    boolean hidden1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -265,6 +268,7 @@ public class HomeFragment extends Fragment {
 
         // ApplicationClass.sendMessage("<H>",getContext());
 
+        hidden1= false;
 
         fade_in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
         fade_in.setStartOffset(1);

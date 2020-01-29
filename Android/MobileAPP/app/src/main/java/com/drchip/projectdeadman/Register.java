@@ -76,7 +76,7 @@ public class Register extends AppCompatActivity {
                     receive_dateStart(readMessage);
                     receive_platform(readMessage);
                     recieve_create(readMessage);
-                    Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Register.this, "Receibed " + readMessage, Toast.LENGTH_SHORT).show();
                     break;
 
                 case MESSAGE_TOAST:

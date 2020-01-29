@@ -1,10 +1,12 @@
 package com.drchip.projectdeadman;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +41,6 @@ public class AddImages extends AppCompatActivity {
         @Override
         public boolean handleMessage(Message msg) {
             ivImageCount.clearAnimation();
-            // ivImageCount.setImageResource(R.drawable.loading2);
             ivImageCount.startAnimation(fade_out);
             timer.cancel();
             timer.purge();
@@ -49,6 +51,7 @@ public class AddImages extends AppCompatActivity {
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -83,6 +86,8 @@ public class AddImages extends AppCompatActivity {
                             ivImageCount.startAnimation(fade_in);
                             tvNumberImages.setText(images + imagesCount +"");
                             tvNumber.setText(imagesCount + "");
+                            progressBar.setProgress(imagesCount,true);
+
                             ivImageCount.setImageResource(R.drawable.correct);
 
                             // ivImageCount.setVisibility(View.INVISIBLE);
@@ -130,6 +135,8 @@ public class AddImages extends AppCompatActivity {
     Button btnConfirm;
     int imagesCount = 0;
     Animation rotate;
+    ProgressBar progressBar;
+
 
 
     @Override
@@ -142,6 +149,9 @@ public class AddImages extends AppCompatActivity {
         tvNumberImages = findViewById(R.id.tvNumberIMages);
         ivImageCount = findViewById(R.id.ivImageCount);
         btnConfirm = findViewById(R.id.btnConfirm);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setMax(ApplicationClass.imageNumber);
+        progressBar.setProgress(0);
 
         Animation animation2 = AnimationUtils.loadAnimation(AddImages.this, R.anim.rotate);
         animation2.setStartTime(10);
