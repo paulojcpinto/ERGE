@@ -7,6 +7,7 @@
 #define PROGRAM_NAME "DATASET_MODULE: "
 #define DEFAULT_PATH "/datasets/teste1/"
 
+#include <QDebug>
 
 
 DataSet::DataSet()
