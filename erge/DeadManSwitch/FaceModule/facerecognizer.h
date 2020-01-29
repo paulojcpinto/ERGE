@@ -24,7 +24,7 @@ public:
     void changeDataSet(String Nickname);
     static bool findFace(Mat *frameP);
     int recognizeFace(Mat frame);
-    int loadRecognizer(int numberOfImages=15);
+    int loadRecognizer(string nickName, int numberOfImages=15);
 
      string face_cascade_name = "/opt/haarcascade_frontalface_alt.xml";
 

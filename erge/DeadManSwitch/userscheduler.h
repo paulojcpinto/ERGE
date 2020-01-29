@@ -38,9 +38,11 @@ public:
   FRecognizer* getUserRecognizer(){return user.getUserRecognizer();};
   int getNumberofImages(){return user.getNumberofImages();};
   user_parsing getInfoToUpdate();
+  bool compareTimewARNIG( tm timeNow );
   bool doRelease();
   void operator=(UserScheduler userSchedule);
   string getNick();
+  bool doWarning();
   ~UserScheduler(){}
 };
 

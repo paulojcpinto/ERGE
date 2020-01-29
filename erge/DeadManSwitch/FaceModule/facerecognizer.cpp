@@ -45,16 +45,20 @@ bool FRecognizer::loadCascade()
 
 }
 
-int FRecognizer::loadRecognizer(int numberOfImages)
+int FRecognizer::loadRecognizer(string nickName, int numberOfImages)
 {
      vector<Mat> images;
      images.clear ();
      vector<int> labels;
       //dataset->readFace(&images,numberOfImages);
      string*  m_dataset_path = dataset->getPath();
+     writeToLog (*dataset->getPath());
+   // writeToLog(dataset->nickName);
+     writeToLog(*m_dataset_path);
       for(int i = 1; i <= numberOfImages; i++)
          {
-               string path =*m_dataset_path +"user0_" +to_string(i) + ".jpg";
+               string path ="/datasets/"+nickName +"/user0_" +to_string(i) + ".jpg";
+               writeToLog(path);
                images.push_back(cv::imread(path,CV_LOAD_IMAGE_GRAYSCALE ));
          }
       labels.clear();

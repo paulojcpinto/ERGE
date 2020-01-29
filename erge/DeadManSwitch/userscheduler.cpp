@@ -76,6 +76,39 @@ bool UserScheduler::compareTimeRelease( tm timeNow )
 }
 
 
+
+bool UserScheduler::compareTimewARNIG(tm timeNow)
+{
+ // printf ("\n %2d:%02d\n", timeNow.tm_min, this->nextScheduler.tm_min);8
+    int aux = 0;
+    int aux1=0;
+    aux = timeNow.tm_min + 10;
+    if (aux >= 60)
+    {
+         aux -= 60;
+        if (++timeNow.tm_hour )
+        {
+
+            if (timeNow.tm_hour >= 24)
+            {
+                timeNow.tm_hour -= 24;
+                timeNow.tm_mday++;
+            }
+        }
+    }
+
+    if(timeNow.tm_mday == nextScheduler.tm_mday && timeNow.tm_hour == nextScheduler.tm_hour &&timeNow.tm_min == nextScheduler.tm_min && timeNow.tm_mon == nextScheduler.tm_mon+1 )
+       {
+        user.doWarning ();
+    return true;
+    }
+    else
+        return false;
+
+
+}
+
+
 /*******************************************************************************************************
  *
  *
@@ -192,6 +225,21 @@ bool UserScheduler::doRelease()
     {
        preseceCheck = false;
        updateNextSchedulerTime ();
+       return false;
+    }
+}
+
+bool UserScheduler::doWarning()
+{
+    if (!preseceCheck)
+    {
+        qDebug()<<"\n\n\n" <<  "release ok?"<<"\n\n\n";
+       user.doRelease ();
+        return true;
+    }
+    else
+    {
+
        return false;
     }
 }

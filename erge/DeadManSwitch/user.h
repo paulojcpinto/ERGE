@@ -59,6 +59,7 @@ class User
         FRecognizer* getUserRecognizer(){return face.getRecognizer();};
         void doRelease ( void );
         int getNumberofImages(){return face.getNumberofImages();};
+        void doWarning();
         user_parsing getInfoToUpdate();
         string getNick();
         ~User(){}

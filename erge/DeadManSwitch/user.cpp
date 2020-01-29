@@ -172,6 +172,16 @@ void User::doRelease()
     message[count] = 0;
     w->releaseSMS (number, message);
 }
+void User::doWarning()
+{
+    char number[9];
+    for ( int aux = 0; aux < 9; aux ++)
+    {
+
+        number[aux] = phoneNumber[aux];
+    }
+    w->releaseSMS (number, "Do your presence Check");
+}
 
 
 string User::getNick()

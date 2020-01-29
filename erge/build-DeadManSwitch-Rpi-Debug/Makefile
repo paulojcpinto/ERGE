@@ -207,7 +207,6 @@ DIST          = /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/fe
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/qt_config.prf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/spec_post.prf \
-		../DeadManSwitch/.qmake.stash \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/exclusive_builds.prf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/toolchain.prf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/default_pre.prf \
@@ -392,7 +391,6 @@ Makefile: ../DeadManSwitch/DeadManSwitch.pro /home/paulo/buildroot/buildroot-201
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/qt_config.prf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/exclusive_builds.prf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/toolchain.prf \
 		/home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/default_pre.prf \
@@ -530,7 +528,6 @@ Makefile: ../DeadManSwitch/DeadManSwitch.pro /home/paulo/buildroot/buildroot-201
 /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/qt_config.prf:
 /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/devices/linux-buildroot-g++/qmake.conf:
 /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/exclusive_builds.prf:
 /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/toolchain.prf:
 /home/paulo/buildroot/buildroot-2019.02.7/output/host/mkspecs/features/default_pre.prf:
@@ -702,7 +699,9 @@ FingerprintReader.o: ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp ..
 		../DeadManSwitch/FaceModule/dataset.h \
 		../DeadManSwitch/FaceModule/mcamera.h \
 		../DeadManSwitch/loghandler.h \
-		../DeadManSwitch/datainfo.h
+		../DeadManSwitch/datainfo.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_module.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_server.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FingerprintReader.o ../DeadManSwitch/FingerPrintModule/FingerprintReader.cpp
 
 fingerprintthread.o: ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ../DeadManSwitch/FingerPrintModule/fingerprintthread.h \
@@ -721,13 +720,17 @@ fingerprintthread.o: ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp ..
 		../DeadManSwitch/FaceModule/dataset.h \
 		../DeadManSwitch/FaceModule/mcamera.h \
 		../DeadManSwitch/loghandler.h \
-		../DeadManSwitch/datainfo.h
+		../DeadManSwitch/datainfo.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_module.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_server.h \
+		../DeadManSwitch/camerathreads.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fingerprintthread.o ../DeadManSwitch/FingerPrintModule/fingerprintthread.cpp
 
 uart.o: ../DeadManSwitch/FingerPrintModule/uart.cpp ../DeadManSwitch/FingerPrintModule/uart.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o uart.o ../DeadManSwitch/FingerPrintModule/uart.cpp
 
-cgms1.o: ../DeadManSwitch/GSM/cgms1.cpp ../DeadManSwitch/GSM/cgms1.h
+cgms1.o: ../DeadManSwitch/GSM/cgms1.cpp ../DeadManSwitch/GSM/cgms1.h \
+		../DeadManSwitch/loghandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cgms1.o ../DeadManSwitch/GSM/cgms1.cpp
 
 sqlquery.o: ../DeadManSwitch/SqlModule/sqlquery.cpp ../DeadManSwitch/SqlModule/sqlquery.h
@@ -821,7 +824,9 @@ programscheduler.o: ../DeadManSwitch/programscheduler.cpp ../DeadManSwitch/progr
 		../DeadManSwitch/FingerPrintModule/uart.h \
 		../DeadManSwitch/FingerPrintModule/Adafruit_Fingerprint.h \
 		../DeadManSwitch/init.h \
-		../DeadManSwitch/GSM/cgms1.h
+		../DeadManSwitch/GSM/cgms1.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_module.h \
+		../DeadManSwitch/BluetoothModule/bluetooth_server.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o programscheduler.o ../DeadManSwitch/programscheduler.cpp
 
 user.o: ../DeadManSwitch/user.cpp ../DeadManSwitch/user.h \

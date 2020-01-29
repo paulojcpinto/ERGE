@@ -7,7 +7,7 @@
 #define PROGRAM_NAME "DATASET_MODULE: "
 #define DEFAULT_PATH "/datasets/teste1/"
 
-#include <QDebug>
+//#include <QDebug>
 
 
 //DataSet::DataSet()
@@ -27,6 +27,7 @@ DataSet::DataSet(string Nickname,MCamera* cameraPointer, int lastIndex)
     cam = cameraPointer;
     stringstream ss;
     ss <<"mkdir /datasets/"<<Nickname<<"/";
+    this->nickName = Nickname;
 
     system(ss.str().c_str());
     stringstream path;
@@ -183,4 +184,10 @@ void DataSet::removeFace()
 string DataSet::getDatasetPath()
 {
     return m_dataset_path;
+}
+
+string* DataSet::getPath()
+{
+    writeToLog("\n\n\andre : " +m_dataset_path+"\n\n\n");
+       return &nickName;
 }

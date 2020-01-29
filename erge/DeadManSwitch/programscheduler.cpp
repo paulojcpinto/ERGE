@@ -114,6 +114,7 @@ void ProgramScheduler::verifyReleaseTime( void )
   ptr_ts = gmtime ( &raw_time );
     qDebug()<<"\n\n\n" <<  usersScheduler.size()<<"\n\n\n";
   for ( uint8_t cont = 0; cont < usersScheduler.size(); cont ++)
+  {
     if(usersScheduler.at(cont).compareTimeRelease (*ptr_ts))
       { /*send signal */
 //qDebug()<<"\n\n\n" <<  "release ok?"<<"\n\n\n";
@@ -122,11 +123,13 @@ void ProgramScheduler::verifyReleaseTime( void )
             deleteUser(usersScheduler.at(cont).getNick ());
         }
       }
-    else
-    {
+    else    if(usersScheduler.at(cont).compareTimewARNIG (*ptr_ts))
+        ;
        time ( &raw_time );
        ptr_ts = gmtime ( &raw_time );
-    }
+
+
+}
 }
 
 int ProgramScheduler::addUser(user_parsing newUser)
