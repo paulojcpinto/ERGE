@@ -51,10 +51,10 @@ int FRecognizer::loadRecognizer(string nickName, int numberOfImages)
      images.clear ();
      vector<int> labels;
       //dataset->readFace(&images,numberOfImages);
-     string*  m_dataset_path = dataset->getPath();
-     writeToLog (*dataset->getPath());
+     //string*  m_dataset_path = dataset->getPath();
+     //writeToLog (*dataset->getPath());
    // writeToLog(dataset->nickName);
-     writeToLog(*m_dataset_path);
+    // writeToLog(*m_dataset_path);
       for(int i = 1; i <= numberOfImages; i++)
          {
                string path ="/datasets/"+nickName +"/user0_" +to_string(i) + ".jpg";

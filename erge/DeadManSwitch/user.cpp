@@ -158,19 +158,27 @@ void User::doRelease()
     char number[9];
     char message[256];
     int count;
-
+    if(p.platform.c_str()[0]=='S')
+    {
     for ( int aux = 4; aux < 13; aux ++)
     {
 
         number[aux-4] = p.platform[aux];
     }
-
     for ( count = 0; count < p.message.length () && count < 255; count++)
     {
         message[count] = p.message[count];
     }
     message[count] = 0;
+    log.writeToLog("Releasing message: "+p.message+" through SMS");
     w->releaseSMS (number, message);
+    }
+    else if(p.platform.c_str()[0]=='E')
+    {
+        string emailTarget = p.platform.substr(6);
+        string emailMessage ="printf \"To: @gmail.com\nFrom: @gmail.com\nSubject: Release message from DeadMan switch system\n\n"+p.message+"\"| msmtp "+emailTarget;
+        system(emailMessage.c_str());
+    }
 }
 void User::doWarning()
 {
