@@ -21,7 +21,7 @@ public:
     bool createDataset(int *imagesTaked,bool *ended);
     bool addFace(vector<cv::Mat>images, unsigned int lengh = 15);
     bool appendFrame(vector<cv::Mat>images,int newLengh);
-    string getPath(){return m_dataset_path;};
+    string* getPath(){return &m_dataset_path;};
     bool readFace(vector<cv::Mat>* output,int lengh=15);
     void removeFace();
     string getDatasetPath();
