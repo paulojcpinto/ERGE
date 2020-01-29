@@ -38,7 +38,7 @@ public class ApplicationClass extends Application {
 
         // Check that we're actually connected before trying anything
         if (mBluetoothConnectionService.getState() != BluetoothConnectionService.STATE_CONNECTED) {
-            Toast.makeText(context, "not connected", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(context, "not connected", Toast.LENGTH_SHORT).show();
             return;
         }
         // Check that there's actually something to send

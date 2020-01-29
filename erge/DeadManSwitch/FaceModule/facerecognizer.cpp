@@ -50,7 +50,13 @@ int FRecognizer::loadRecognizer(int numberOfImages)
      vector<Mat> images;
      images.clear ();
      vector<int> labels;
-      dataset->readFace(&images,numberOfImages);
+      //dataset->readFace(&images,numberOfImages);
+     string  m_dataset_path = dataset->getPath();
+      for(int i = 1; i <= numberOfImages; i++)
+         {
+               string path = m_dataset_path +"user0_" +to_string(i) + ".jpg";
+               images.push_back(cv::imread(path,CV_LOAD_IMAGE_GRAYSCALE ));
+         }
       labels.clear();
       writeToLog ("module initialized"+ to_string (numberOfImages));
       for(int i=1; i<=numberOfImages;i++)labels.push_back(i);

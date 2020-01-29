@@ -290,6 +290,7 @@ public class UserConfigsFragment extends Fragment {
                 final EditText etNumber = dialogView.findViewById(R.id.etNumber);
                 final SeekBar sbNumber = dialogView.findViewById(R.id.sbNumber);
 
+                etNumber.setText(0+"");
                 message.setView(dialogView);
                 message.setTitle("Images to Database");
                 message.setMessage("Enter the amount of images that you want to add to your dataset here!!");
