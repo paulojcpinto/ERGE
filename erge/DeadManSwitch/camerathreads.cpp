@@ -98,6 +98,7 @@ void *getFrames(void* threadid)
             }
 
         }
+        mainClass->getCameraInstance()->shutdown();
         frameLog.writeToLog("Stopping thread...");
 
     }
@@ -155,4 +156,9 @@ void *recognition(void* threadid)
 
 }
 
+
+bool* getfinishSatet()
+{
+    return &finish;
+}
 

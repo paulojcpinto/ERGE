@@ -8,6 +8,7 @@ extern pthread_cond_t startFrame;
 void  initThread(ProgramScheduler* programData,bluetooth_module* bluetooth);
 void initRecognizer(string nickname);
 void startThreads();
+bool* getfinishSatet();
 
 
 
