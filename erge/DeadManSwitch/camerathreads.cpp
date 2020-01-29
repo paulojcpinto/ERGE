@@ -122,6 +122,7 @@ void *recognition(void* threadid)
             {
                 prediction= 200;
                 recog->loadRecognizer(mainClass->getNumberofImages(CurrentUser));
+
                 while (prediction>60 && !finish) {
                      recoLog.writeToLog("Image To Process:"+ to_string(imagesToProcess.size ()));
                     sem_wait (&sImage);

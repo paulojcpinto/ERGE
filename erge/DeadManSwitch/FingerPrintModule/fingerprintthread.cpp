@@ -4,7 +4,12 @@
 #include "programscheduler.h"
 #include "camerathreads.h"
 
+
+
 #define BUTTONS "/dev/buttons"
+
+
+bluetooth_module *bluetooth;
 
 typedef struct fingerprintStatus
 {
@@ -15,6 +20,10 @@ typedef struct fingerprintStatus
 
 static volatile fingerprintStatus fingerPrintStatus;
 
+void initBluet(bluetooth_module* blue )
+{
+    bluetooth = blue;
+}
 
 void* fingerPrintThread(void * para)
 {
@@ -32,7 +41,7 @@ FILE* fd ;
 fingerPrintStatus.createSuccess = false;
 fingerPrintStatus.needCreateFingerPrint = false;
 
-strcpy(device,"/dev/ttyUSB1");
+strcpy(device,"/dev/ttyUSB2");
 int x= f.uart->open(device);
 if (x != 0)
   {
@@ -87,17 +96,19 @@ while (1)
          qDebug ()<<"Finger Print ID =" << fingerID <<"\n\n";
         printf("\n%d -> Finger Print ID =  %d\n",aux++, fingerID);
         string aux = scheduler->getNicknameByFinger(fingerID);
-
+qDebug ()<<"Finger Print ID =" << fingerID <<"\n\n";
            initRecognizer (aux);
            pthread_cond_signal (&startReco);
-
-
+           bluetooth->sendFingerSucces (aux);
+            if (aux == "")
+               *getfinishSatet ()=true;
 
       // scheduler->doPresenceCheck ( fingerID );
          //sleep (10);
        }
      else
      {
+
        printf("\n%d -> That Finger Print is not stored\n",aux++);
       qDebug ()<<" That Finger Print is not stored \n";
      }

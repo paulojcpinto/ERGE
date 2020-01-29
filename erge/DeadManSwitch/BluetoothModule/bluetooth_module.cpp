@@ -442,3 +442,13 @@ void bluetooth_module::clear()
     user.messageToRelease="";
     user.platformToRelease="";
 }
+
+void bluetooth_module::sendFingerSucces(string nick)
+{
+    if (currentUser == nick)
+    {
+        sendMessage ("<F1>");
+    }
+    else
+        sendMessage ("<F2>");
+}

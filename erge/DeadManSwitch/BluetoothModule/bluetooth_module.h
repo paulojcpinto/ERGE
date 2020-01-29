@@ -21,6 +21,7 @@ class bluetooth_module : public QDialog
 
 public:
     bluetooth_module(ProgramScheduler* scheduler, QWidget *parent = nullptr);
+        void sendFingerSucces (string );
 
 signals:
      void sendMessage(const QString &message);
@@ -53,6 +54,7 @@ private:
     void writeToLog(string Message);
     ProgramScheduler *data;
     void sendResult(int result,char c);
+
     void clear();
 
 

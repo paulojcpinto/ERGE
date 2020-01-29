@@ -57,9 +57,6 @@ CGSM1::CGSM1(QWidget *parent) :
      */
 
 
-     /*
-      *   Identify the port the arduino uno is on.
-      */
      bool arduino_is_available = false;
      QString arduino_uno_port_name;
      //
@@ -179,7 +176,7 @@ void CGSM1::prepareGSM ()
           {
             stateConfiguration ++ ;
             serialData.clear();
-            serial->write("AT+CPIN=7484\r\n");
+            serial->write("AT+CPIN=7484\n");
           }
          else if (serialData.contains("ERROR\r\n"))
           {

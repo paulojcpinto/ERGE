@@ -26,10 +26,54 @@ void ProgramScheduler::loadData(vector<fullUser> users)
         time ( &raw_time );
         ptr_ts = gmtime ( &raw_time );
         ptr_ts->tm_min++;
-        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,nUser));
+
+        int pos=0;
+         nextScheduler.tm_mday=0;
+          nextScheduler.tm_min=0;
+           nextScheduler.tm_mon=0;
+            nextScheduler.tm_hour=0;
+             nextScheduler.tm_year=0;
+
         //usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,newUser.nickName,newUser.pinCode,newUser.phoneNumber,newUser.email,newUser.emailPassword,idfinger,newUser.messageToRelease,newUser.platformToRelease,true));
+        for (int aux = 0; aux < nUser.messageInfo.dateToStart.length (); aux++)
+        {
+            if (nUser.messageInfo.dateToStart[aux]==  '/')
+                pos ++;
+            else
+             switch (pos)
+             {
+              case 0:
+             {
+                   nextScheduler.tm_mday*=10;
+                   nextScheduler.tm_mday+=nUser.messageInfo.dateToStart[aux] - '0';
+                   qDebug() <<"\n\nmsdf sd"<<(nextScheduler.tm_mday)<<"\n\n,o";
+             }break;
+             case 1:
+             {
+                 nextScheduler.tm_mon*=10;
+                 nextScheduler.tm_mon+=nUser.messageInfo.dateToStart[aux] - '0';
+             }break;
+             case 2:
+             {
+                 nextScheduler.tm_year*=10;
+                 nextScheduler.tm_year+=nUser.messageInfo.dateToStart[aux] - '0';
+             }break;
+             case 3:
+             {
+                 nextScheduler.tm_hour*=10;
+                 nextScheduler.tm_hour+=nUser.messageInfo.dateToStart[aux] - '0';
 
+             }break;
+             case 4:
+             {
+                 nextScheduler.tm_min*=10;
+                 nextScheduler.tm_min+=nUser.messageInfo.dateToStart[aux] - '0';
+             }
+             }
 
+        }
+
+        usersScheduler.push_back(UserScheduler(*ptr_ts,nextScheduler,&mCamera,nUser));
 
     }
 }
@@ -75,7 +119,7 @@ void ProgramScheduler::verifyReleaseTime( void )
 //qDebug()<<"\n\n\n" <<  "release ok?"<<"\n\n\n";
         if (usersScheduler.at(cont).doRelease ())
         {//qDebug()<<"\n\n\n" <<  "deleted ok?"<<"\n\n\n";
-            deleteUser(usersScheduler.at(cont).getInfoToUpdate ().nickName);
+            deleteUser(usersScheduler.at(cont).getNick ());
         }
       }
     else
@@ -186,12 +230,12 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
 
 void ProgramScheduler::deleteUser( string nickName )
 {
-  for ( uint8_t count = 0; count < usersScheduler.size(); count++ )
+  for (auto i = usersScheduler.begin (); i < usersScheduler.end(); i++ )
     {
-      if ( usersScheduler[count].compareUserNickName ( nickName ))
+      if ( i->compareUserNickName ( nickName ))
         {
 
-          usersScheduler.erase(usersScheduler.begin()+count);
+          usersScheduler.erase(i);
           mQuery.deleteUser(nickName);
           stringstream message;
           message<<"Deleted User: "<<nickName;
@@ -334,7 +378,8 @@ string ProgramScheduler::getNicknameByFinger(unsigned int fingerID)
              return ok.getNick ();
          }
      }
-     return nullptr;
+     qDebug ()<<"Finger Print ID =" << fingerID <<"\n\n";
+     return "";
 
 
 }

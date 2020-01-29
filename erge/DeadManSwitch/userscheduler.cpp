@@ -87,7 +87,7 @@ bool UserScheduler::compareTimeRelease( tm timeNow )
 void UserScheduler::updateNextSchedulerTime( void )
 {
     int minutesIncrement = nextScheduler.tm_min + repeatTime;
-    while(minutesIncrement)
+    while(minutesIncrement > 0)
     {
         if (minutesIncrement >= 60)
         {
@@ -190,6 +190,7 @@ bool UserScheduler::doRelease()
     }
     else
     {
+       preseceCheck = false;
        updateNextSchedulerTime ();
        return false;
     }

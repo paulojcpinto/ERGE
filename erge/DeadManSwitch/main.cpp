@@ -91,6 +91,7 @@ static void sendPeriodicUpdate(int signo)
         timeinfo = localtime ( &rawtime );
         qDebug() <<"\n\n"<<asctime (timeinfo)<<"\n\n";
         p.verifyReleaseTime ();
+
         // w->releaseSMS ("916201643", "pilinha minha" );
     }
 
@@ -120,6 +121,7 @@ int main(int argc, char **argv)
     CGSM1 ola;
     pthread_t sumID;
     initThread(&p,&b);
+    initBluet(&b);
     startThreads();
       w=  &ola;//l=&w;
     //  w->releaseSMS ("916201643", "aaaa1" );

@@ -53,7 +53,7 @@ int FRecognizer::loadRecognizer(int numberOfImages)
       dataset->readFace(&images,numberOfImages);
       labels.clear();
       writeToLog ("module initialized"+ to_string (numberOfImages));
-      for(int i=1; i<numberOfImages;i++)labels.push_back(i);
+      for(int i=1; i<=numberOfImages;i++)labels.push_back(i);
       model = createLBPHFaceRecognizer();
       model->train(images ,labels);
       writeToLog ("train done with success");
