@@ -34,6 +34,7 @@ class ProgramScheduler
     bool updateFullUser(user_parsing updDateinfo, string Nickname);
     bool getUserForUpdate(String Nickname, user_parsing *output);
     bool getUserRecognizer(string Nickname,FRecognizer** output);
+    bool doPresenceCheck(string Nickname);
     unsigned int getNewFingerID ( void );
     bool appendImageDataset(String nickname,int Amount,int *imagesTaked,bool *ended);
     static bool userParsingToFulluser(user_parsing input,fullUser *output);

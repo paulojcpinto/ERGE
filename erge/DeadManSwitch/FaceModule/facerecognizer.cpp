@@ -48,25 +48,19 @@ bool FRecognizer::loadCascade()
 int FRecognizer::loadRecognizer(int numberOfImages)
 {
      vector<Mat> images;
-    images.clear ();
+     images.clear ();
      vector<int> labels;
-     for(int i = 1; i <= 15; i++)
+     for(int i = 1; i <= numberOfImages; i++)
         {
               string path = "/datasets/paulo/user0_" +to_string(i) + ".jpg";
               images.push_back(cv::imread(path,CV_LOAD_IMAGE_GRAYSCALE ));
         }
-     //images = dataset->readFace(15);
-     //if(model ==nullptr) return ERROR_MODEL;
-     labels.clear();
-     //labels.push_back (0);
-     writeToLog ("module initialized"+ to_string (numberOfImages));
-     for(int i=1; i<16;i++)labels.push_back(i);
-        //  writeToLog ("size image : "+ to_string (images.size ()));
-     model = createLBPHFaceRecognizer();
-    // Ptr<FaceRecognizer> model1 = createLBPHFaceRecognizer ();
-     model->train(images ,labels);
-
-writeToLog ("train done with success");
+      labels.clear();
+      writeToLog ("module initialized"+ to_string (numberOfImages));
+      for(int i=1; i<16;i++)labels.push_back(i);
+      model = createLBPHFaceRecognizer();
+      model->train(images ,labels);
+      writeToLog ("train done with success");
      return 1;
 
 

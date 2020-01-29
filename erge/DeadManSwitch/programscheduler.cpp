@@ -355,6 +355,8 @@ int ProgramScheduler::getNumberofImages(String nickname)
 {
     return finduser(nickname)->getNumberofImages();
 }
+
+
 bool ProgramScheduler::getUserRecognizer(string Nickname, FRecognizer **output)
 {
     UserScheduler* aux = finduser(Nickname);
@@ -369,3 +371,16 @@ bool ProgramScheduler::getUserRecognizer(string Nickname, FRecognizer **output)
         return false;
     }
 }
+
+bool ProgramScheduler::doPresenceCheck(string Nickname)
+{
+    UserScheduler* aux = finduser(Nickname);
+    if(aux!= nullptr)
+    {
+       aux->setPresenceCheck(true);
+       log.writeToLog("Precence check done with success");
+       return true;
+    }
+    return false;
+}
+
