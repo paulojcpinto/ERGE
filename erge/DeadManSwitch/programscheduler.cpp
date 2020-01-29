@@ -383,4 +383,13 @@ bool ProgramScheduler::doPresenceCheck(string Nickname)
     }
     return false;
 }
-
+int ProgramScheduler::getPrensenceCheckStatus(String nickname)
+{
+    UserScheduler* aux= finduser(nickname);
+    if(aux != nullptr)
+    {
+        if(aux->getpresenceCheck())
+            return 1;
+        else return 0;
+    }return 2;
+}

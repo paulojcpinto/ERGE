@@ -200,4 +200,7 @@ string UserScheduler::getNick()
     return user.getNick ();
 }
 
-
+bool UserScheduler::getpresenceCheck()
+{
+    return preseceCheck;
+}

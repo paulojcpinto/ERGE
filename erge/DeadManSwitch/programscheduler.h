@@ -31,6 +31,7 @@ class ProgramScheduler
     int login(string nickname,string pincode);
     int addUser (user_parsing newUser);
     int getNumberofImages(String nickname);
+    int getPrensenceCheckStatus(String nickname);
     bool updateFullUser(user_parsing updDateinfo, string Nickname);
     bool getUserForUpdate(String Nickname, user_parsing *output);
     bool getUserRecognizer(string Nickname,FRecognizer** output);

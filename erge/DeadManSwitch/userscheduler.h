@@ -34,6 +34,7 @@ public:
   bool updateUser(user_parsing newInfo);
   void setPresenceCheck( bool );
   bool appendImages(int *imagesTaked,bool *ended,int Amount);
+  bool getpresenceCheck();
   FRecognizer* getUserRecognizer(){return user.getUserRecognizer();};
   int getNumberofImages(){return user.getNumberofImages();};
   user_parsing getInfoToUpdate();

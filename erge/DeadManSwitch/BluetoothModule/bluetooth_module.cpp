@@ -380,6 +380,10 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
             imagesToAppend = parsingNumber(parser);
             ss<<"Images to Append: "<<imagesToAppend<<"\n\n";
             break;
+        case 'B':
+            sendMessage("<B"+QString::number(data->getPrensenceCheckStatus(currentUser))+">");
+            ss<<"Sending presence check status of user "<<currentUser;
+            break;
         default:
             ss<<"1 character:"<<c<<"\n";
 
