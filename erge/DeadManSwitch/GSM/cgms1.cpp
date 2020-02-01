@@ -127,7 +127,7 @@ CGSM1::~CGSM1()
     if(serial->isOpen()){
         serial->close(); //    Close the serial port if it's open.
     }
-    delete ui;
+   // delete ui;
 }
 
 void CGSM1::readSerial()

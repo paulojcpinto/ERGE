@@ -21,7 +21,7 @@ void Fingerprint::noFinger(void){
 
 int8_t Fingerprint::FingerprintEnroll(int ID){
     if ((finger->createModel() | (finger->storeModel(ID))) != FINGERPRINT_OK) return -1;
-	printf("%d",ID);
+    //printf("%d",ID);
     return 0;
 }
 
@@ -31,15 +31,17 @@ uint8_t Fingerprint::searchFingerprint(void) {
 }
 
 int8_t Fingerprint::Enroll(int ID){
-	printf("Waiting...");
-
+    //printf("Waiting...");
+    LogHandler log("FINGERPRINT_READER: ");
 	if ((FingerprintRead(1) != FINGERPRINT_OK) || (searchFingerprint() != 0)) return -1;
 
-	printf("Remove finger\n");
-    qDebug()<<"Remove finger\n";
+    //printf("Remove finger\n");
+    log.writeToLog("Remove finger");
+    //qDebug()<<"Remove finger\n";
 	noFinger();		
-	printf("Place same finger again\n");
-    qDebug()<<"lace same finger again\n";
+    //printf("Place same finger again\n");
+    //qDebug()<<"lace same finger again\n";
+    log.writeToLog("Place same finger again");
     if ((FingerprintRead(2) | FingerprintEnroll(ID)) != FINGERPRINT_OK) return -1;
 	printf("Stored!");
     return 0;

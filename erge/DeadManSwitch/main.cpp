@@ -39,48 +39,13 @@ return 0;
 #include "camerathreads.h"
 
 using namespace std;
-/*
-void *theadtry (void *arg)
-{
-  Fingerprint f;
 
-  uint8_t Image = 0;
-  char device[13];
-  int ID=1;
-  strcpy(device,"/dev/ttyUSB0");
-  f.uart->open(device);
-  f.finger->setHardwareSerial(f.uart);
-  f.finger->begin(57600);
+QSerialPort *serialptr;
 
-
-  if(f.finger->verifyPassword())
-          printf("Found fingerprint sensor! \n");
-  else{
-          printf("Did not Find fingerprint sensor!\n");
-  }
-  int aux = 0;
-  while (1)
-    {
-       uint8_t fingerID=0;
-       f.finger->getImage();
-       f.finger->image2Tz(1);
-
-       fingerID = f.searchFingerprint ();
-       if (fingerID)
-          printf("\n%d -> Finger Print ID =  %d\n",aux++, fingerID);
-       else
-         printf("\n%d -> That Finger Print is not stored\n",aux++);
-       sleep (3);
-    }
-
- // printf("\n\n\paulo\nfingerprint ID = %d", fingerID);
-
-}
-*/
-//CGSM1 *w;
 static void sendPeriodicUpdate(int signo)
 {
 
+    LogHandler log("PERIODIC_UPDATE: ");
 
     if(signo==SIGALRM)
     {
@@ -89,23 +54,23 @@ static void sendPeriodicUpdate(int signo)
 
         time ( &rawtime );
         timeinfo = localtime ( &rawtime );
-        qDebug() <<"\n\n"<<asctime (timeinfo)<<"\n\n";
+        stringstream ss;
+        ss <<"Time info Aquired"<<asctime (timeinfo)<<"\n\n";
+        log.writeToLog(ss.str());
         p.verifyReleaseTime ();
 
-        // w->releaseSMS ("916201643", "pilinha minha" );
     }
 
 }
 
 
 
-  QSerialPort *serialptr;
 void* cc(void * para)
 {
 
-QThread::sleep(1);
+QThread::sleep(10);
 
-w->initGSM();
+//w->initGSM();
 
 }
 
@@ -133,41 +98,19 @@ int main(int argc, char **argv)
 
     signal(SIGALRM,sendPeriodicUpdate);
 
-            //ualarm(300,300);
-            itv.it_interval.tv_sec = 60;
-            itv.it_interval.tv_usec = 0;//4*10000;
-            itv.it_value.tv_sec = 1;
-            itv.it_value.tv_usec = 0;//4*10000;
-            setitimer (ITIMER_REAL, &itv, NULL);
+    //ualarm(300,300);
+    itv.it_interval.tv_sec = 60;
+    itv.it_interval.tv_usec = 0;//4*10000;
+    itv.it_value.tv_sec = 1;
+    itv.it_value.tv_usec = 0;//4*10000;
+    setitimer (ITIMER_REAL, &itv, NULL);
 
     pthread_create (&fingerPrintID, NULL, fingerPrintThread, (void *) &p);
     //CGSM1 ola;
-    pthread_create(&sumID, NULL, cc, NULL);
+    //pthread_create(&sumID, NULL, cc, NULL);
 
 
-/*
 
-  time_t raw_time;
-  struct tm *ptr_ts;
-  pthread_t pps;
-  int p;
-  pthread_attr_t attr;
-  time ( &raw_time );
-  ptr_ts = gmtime ( &raw_time );
-  ProgramScheduler pp;
-  cin >> p;
-pthread_create(&pps, NULL,theadtry, NULL);
-pthread_join(pps, NULL);
-  pp.addUser ();
-
-  pp.verifyReleaseTime ();
-
-  printf ("\n\n\n\n\nTime Los Angeles: %2d:%02d\n",
-       ptr_ts->tm_hour, ptr_ts->tm_min);
-  printf ("Time Amsterdam: %2d:%02d\n",
-       ptr_ts->tm_year+1900, ptr_ts->tm_mday);
-  return 0;
-  */
     return  a.exec();
 
 }

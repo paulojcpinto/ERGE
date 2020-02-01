@@ -102,6 +102,7 @@ public class AddImages extends AppCompatActivity {
                             Animation fade_in1 = AnimationUtils.loadAnimation(AddImages.this, R.anim.fade_in);
                             tvNumberImages.setText(images +imagesCount+ "");
                             tvNumber.setText(imagesCount + "");
+                            progressBar.setProgress(imagesCount,true);
                             ivImageCount.setImageResource(R.drawable.correct);
                             btnConfirm.startAnimation(fade_in1);
                             btnConfirm.setVisibility(View.VISIBLE);
