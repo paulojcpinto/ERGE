@@ -117,6 +117,7 @@ void* fingerPrintThread(void * para)
 
                     //printf("\n%d -> That Finger Print is not stored\n",aux++);
                     *getfinishSatet ()=true;
+                    system("echo R > /dev/TIAM_led ");
                     mlog.writeToLog("That Finger Print is not stored \n");
                 }
 

@@ -32,7 +32,6 @@ bluetooth_module::bluetooth_module(ProgramScheduler* scheduler,QWidget *parent )
     QBluetoothLocalDevice adapter(localAdapters.at(0).address());
     adapter.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
     server = new bluetooth_server(this);
-    cout<<"Started\n";
     connect(server, QOverload<const QString &>::of(&bluetooth_server::clientConnected),
             this, &bluetooth_module::clientConnected);
     connect(server, QOverload<const QString &>::of(&bluetooth_server::clientDisconnected),

@@ -105,6 +105,8 @@ void *getFrames(void* threadid)
                 finish=true;
                 frameLog.writeToLog("Face ulnock timed out");
                 mBluetooth->sendMessage("<I2>");
+                system("echo R > /dev/TIAM_led ");
+
             }
 
         }
@@ -154,6 +156,7 @@ void *recognition(void* threadid)
                 mainReco->doPresenceCheck(CurrentUser);
                 mBluetooth->sendMessage("<I1>");
                 }
+
 
             }else recoLog.writeToLog("Error getting recognizer from User: "+CurrentUser);
 
