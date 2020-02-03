@@ -70,7 +70,7 @@ private slots:
     void initGSM1()
     {
       //qDebug() << "ok";
-   // serial->write("AT+CMEE=2\r\n");
+    serial->write("AT+CMEE=2\r\n");
     }
 private:
     Ui::CGSM1 *ui;

@@ -100,7 +100,7 @@ void *getFrames(void* threadid)
                      sem_post (&sImage);
                 }
             }
-            if(counter>10000)
+            if(counter>100)
             {
                 finish=true;
                 frameLog.writeToLog("Face ulnock timed out");
@@ -150,6 +150,7 @@ void *recognition(void* threadid)
                 {
                 finish= true;
                 recoLog.writeToLog("Recognition done with success");
+                system("echo G > /dev/TIAM_led ");
                 mainReco->doPresenceCheck(CurrentUser);
                 mBluetooth->sendMessage("<I1>");
                 }

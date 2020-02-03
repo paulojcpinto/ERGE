@@ -59,6 +59,7 @@ void* fingerPrintThread(void * para)
     if(f.finger->verifyPassword())
     {
         mlog.writeToLog("Found the fingerprint sensor");
+        system("echo O > /dev/TIAM_led ");
     }
     else{
 
@@ -106,6 +107,8 @@ void* fingerPrintThread(void * para)
                     if (aux == "")
                         *getfinishSatet ()=true;
 
+                    while(*getfinishSatet () == false);
+
                     // scheduler->doPresenceCheck ( fingerID );
                     //sleep (10);
                 }
@@ -113,6 +116,7 @@ void* fingerPrintThread(void * para)
                 {
 
                     //printf("\n%d -> That Finger Print is not stored\n",aux++);
+                    *getfinishSatet ()=true;
                     mlog.writeToLog("That Finger Print is not stored \n");
                 }
 

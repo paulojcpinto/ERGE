@@ -68,9 +68,9 @@ static void sendPeriodicUpdate(int signo)
 void* cc(void * para)
 {
 
-QThread::sleep(10);
+//QThread::sleep(10);
 
-//w->initGSM();
+w->initGSM();
 
 }
 
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
     initBluet(&b);
     startThreads();
       w=  &ola;//l=&w;
-    //  w->releaseSMS ("916201643", "aaaa1" );
+     w->releaseSMS ("913753546", "aaaa1" );
      // w->releaseSMS ("916201643", "aaaa2" );
 
     struct itimerval itv;
@@ -106,8 +106,8 @@ int main(int argc, char **argv)
     setitimer (ITIMER_REAL, &itv, NULL);
 
     pthread_create (&fingerPrintID, NULL, fingerPrintThread, (void *) &p);
-    //CGSM1 ola;
-    //pthread_create(&sumID, NULL, cc, NULL);
+
+   // pthread_create(&sumID, NULL, cc, NULL);
 
 
 
