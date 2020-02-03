@@ -18,14 +18,9 @@ typedef struct dataInfo
 
 class DataInfo
 {
-
-
     private:
-
         releaseInfo dataInfo;
-
     public:
-
         DataInfo();
         DataInfo( string message, string platform, bool deleteAfterRelease = true );
         DataInfo(messageInfoQuery messageInfo);
@@ -34,7 +29,6 @@ class DataInfo
         void updateAfterRelease( bool deleteAfterRelease );
         releaseInfo getReleaseInfo ( void );
         ~DataInfo( void ){}
-
 };
 
 #endif // DATAINFO_H

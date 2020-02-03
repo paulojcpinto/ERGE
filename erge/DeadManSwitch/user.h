@@ -40,9 +40,6 @@ class User
        Face face;
        DataInfo dataInfo;
        LogHandler log;
-
-
-
     public:
         User( string nickName,string pinCode, string phoneNumber, string email, string password, unsigned int IDFinger, string message, string platform, bool deleteAfterRelease = true  );
         User(MCamera* cameraPointer,fullUser Data);
@@ -63,7 +60,6 @@ class User
         user_parsing getInfoToUpdate();
         string getNick();
         ~User(){}
-
 };
 
 

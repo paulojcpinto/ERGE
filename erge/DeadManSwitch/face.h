@@ -16,11 +16,12 @@ class Face
   public:    
     Face(string nickname,MCamera* cameraPointer);
     Face(MCamera* cameraPointer,faceQuery faceInfo);
-    DataSet* getDataset();
+   
     bool createDataset(int *imagesTaked,bool *ended);
     bool appendImagesDataset(int *imagesTaked,bool *ended,int Amount);
     int getNumberofImages(){return numberOfImages;};
-    FRecognizer* getRecognizer();
+    FRecognizer* getRecognizer(); 
+    DataSet* getDataset();
     void operator=(Face finger);
 
 

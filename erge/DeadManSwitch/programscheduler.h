@@ -7,10 +7,7 @@
 
 class ProgramScheduler
 {
-
   private:
-
-
     LogHandler log;
     vector<UserScheduler> usersScheduler;
     UserScheduler* finduser(string Nickname);
@@ -19,9 +16,7 @@ class ProgramScheduler
     void loadData(vector<fullUser> users);
     tm nextScheduler;
     MCamera mCamera;
-
   public:
-
     ProgramScheduler ( void );
     void verifyReleaseTime( void );
     void verifyLasWarningTime( void );
@@ -36,8 +31,8 @@ class ProgramScheduler
     bool getUserForUpdate(String Nickname, user_parsing *output);
     bool getUserRecognizer(string Nickname,FRecognizer** output);
     bool doPresenceCheck(string Nickname);
-    unsigned int getNewFingerID ( void );
     bool appendImageDataset(String nickname,int Amount,int *imagesTaked,bool *ended);
+    unsigned int getNewFingerID ( void );
     static bool userParsingToFulluser(user_parsing input,fullUser *output);
     static bool userParsingToFulluser(fullUser input,user_parsing *output);
     string getNicknameByFinger ( unsigned int );
