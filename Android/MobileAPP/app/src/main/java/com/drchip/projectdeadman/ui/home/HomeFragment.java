@@ -393,7 +393,7 @@ public class HomeFragment extends Fragment {
             if(lengh !=ApplicationClass.userNickname.length())
             {
                 Toast.makeText(getContext(), "Error Sending Nickname:"+ lengh + "Suposto:" + ApplicationClass.userNickname.length() + "With message: "+ readMessage, Toast.LENGTH_SHORT).show();
-                ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname.length()+">", getContext());
+              //  ApplicationClass.sendMessage("<S"+ApplicationClass.userNickname.length()+">", getContext());
 
             }else
             {
