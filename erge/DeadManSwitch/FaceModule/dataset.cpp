@@ -143,11 +143,13 @@ bool DataSet::appendFrame(vector<cv::Mat> images, int newLengh)
      writeToLog(" AppendFrames: Images vector was empty");
      return false;
  }
- for(int i= lastLengh+1; i<=images.size()+lastLengh+1; i++ )
+ int size = images.size();
+ for(int i= lastLengh+1; i<= size +lastLengh; i++ )
  {
      string path = m_dataset_path + "user0"+ "_" + to_string(i) + ".jpg";
      cv::imwrite(path,images.back());
      images.pop_back();
+     writeToLog("Added image:"+path);
  }
  lastLengh = newLengh;
  writeToLog("Appended to Dataset successfuly");
