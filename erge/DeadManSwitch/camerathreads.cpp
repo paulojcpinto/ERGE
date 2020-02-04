@@ -79,7 +79,7 @@ void *getFrames(void* threadid)
     {
         pthread_cond_wait(&startFrame,&mutexImage);
         sem_init (&sImage,0,0);
-        long int counter;
+        int counter=0;
         finish = false;
         imagesToProcess.clear ();
         Mat frame;
@@ -100,6 +100,7 @@ void *getFrames(void* threadid)
                      sem_post (&sImage);
                 }
             }
+            counter++;
             if(counter>100)
             {
                 finish=true;
