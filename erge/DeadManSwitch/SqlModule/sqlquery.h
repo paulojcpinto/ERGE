@@ -107,7 +107,6 @@ private:
     int  parsingNumber(string aux);
 
     void writeToLog(string Message);
-
     string getLastQueryResult();
     string selectQueryGetResponse(const char*, const char*, const char*, const char*);
     string selectQueryGetResponse(const char*, const char*, const char*, int);

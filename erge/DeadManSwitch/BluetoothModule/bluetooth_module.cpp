@@ -47,9 +47,9 @@ bluetooth_module::bluetooth_module(ProgramScheduler* scheduler,QWidget *parent )
     //! [Get local device name]
     localName = QBluetoothLocalDevice().name();
     if ((fd =  ::open("/var/log/deadman.log",	O_CREAT | O_WRONLY | O_APPEND, 0600)) < 0) {
-                perror("open");
-                exit(EXIT_FAILURE);
-            }
+        perror("open");
+        exit(EXIT_FAILURE);
+    }
 
 
 
@@ -98,21 +98,21 @@ void bluetooth_module::clientDisconnected(const QString &name)
 
 int parsingNumber(string aux)
 {
-  int auxInt;
-  stringstream toint(aux);
-  toint >> auxInt;
-  return auxInt;
+    int auxInt;
+    stringstream toint(aux);
+    toint >> auxInt;
+    return auxInt;
 
 }
 
 
 void* createDatasetFunc(void *threadid)
 {
-     LogHandler log("CreateDatasetThread: ");
-     log.writeToLog("thread created");
-     data2->createUser(&imagesTaked,&endedFace,&endedFInger);
-     log.writeToLog("Thread ended");
-     pthread_exit(NULL);
+    LogHandler log("CreateDatasetThread: ");
+    log.writeToLog("thread created");
+    data2->createUser(&imagesTaked,&endedFace,&endedFInger);
+    log.writeToLog("Thread ended");
+    pthread_exit(NULL);
 
 }
 
@@ -148,8 +148,8 @@ void* appendHandler(void *threadid)
     {
         while (imagesAux < imagesTaked)
         {
-           test->sendMessage("<I>");
-           imagesAux++;
+            test->sendMessage("<I>");
+            imagesAux++;
         }
     }
     pthread_join(doAppend,NULL);
@@ -181,7 +181,7 @@ void* datasetHandler(void *threadid)
 
         usleep(100);
 
-           };
+    };
     log.writeToLog("Fingerprint created successfuly");
     test->sendMessage("<F>");
     int imagesAux=0;
@@ -189,8 +189,8 @@ void* datasetHandler(void *threadid)
     {
         while (imagesAux < imagesTaked)
         {
-           test->sendMessage("<I>");
-           imagesAux++;
+            test->sendMessage("<I>");
+            imagesAux++;
         }
     }
     pthread_join(doDataSet,NULL);
@@ -210,186 +210,186 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
     {
         sendMessage("RASP");
     }else
-    if(message.contains("<")&& message.contains(">"))
-    {
+        if(message.contains("<")&& message.contains(">"))
+        {
 
-        char c;
-        c=message.at(message.indexOf('<')+1).toLatin1();
-        string parser;
-        QString auxMessage;
-        switch (c) {
-        case 'S':
-            clear();
-             parsing(message,user.nickName,'S');
-             currentUser = user.nickName;
-             ss<<"User Nickname:"<<user.nickName<<"\n\n";
-            break;
-        case 'P':
-            parsing(message,user.pinCode,'P');
-            ss<<"User Pincode: "<<user.pinCode<<"\n\n";
-            break;
-         case 'M':
-            parsing(message,user.email,'M');
-            ss<<"User Email: "<<user.email<<"\n\n";
-            break;
-         case 'X':
-            parsing(message,user.emailPassword,'X');
-            ss<<"User Email Password: "<< user.emailPassword<<"\n\n";
-            break;
-         case 'T':
-            parsing(message,user.phoneNumber,'T');
-            ss<<"User Phone Number: "<<user.phoneNumber<<"\n\n";
-            break;
-         case 'R':
-            parsing(message,user.messageToRelease,'R');
-            ss<<"User Message to Release: "<<user.messageToRelease<<"\n\n";
-            break;
-        case 'O':
-            parsing(message,parser,'O');
-            user.repeatTime = parsingNumber(parser);
-            ss<<"User Repeat Time: "<<user.repeatTime<<"\n\n";
-            break;
-        case 'D':
-            parsing(message,user.dateToStart,'D');
-            ss<<"User Date to Start: "<<user.dateToStart<<"\n\n";
-            break;
-        case 'A':
-            parsing(message,user.platformToRelease,'A');
-            ss<<"User Platform to Release: "<<user.platformToRelease<<"\n\n";
-            break;
-         case 'C':
-            sendResult(data->addUser(user),'C');
-            ss<<"added User?";
-            break;
-         case 'Q':
-           sendResult(data->login(user.nickName,user.pinCode),'Q');
-           ss<<"Login from user: "<<user.nickName<<" with pincode: "<<user.pinCode;
-            break;
-         case 'Y':
-            pthread_t create;
-            int rThread;
-            rThread=pthread_create(&create, NULL, datasetHandler, NULL);
-            if(rThread)
-            {
-                stringstream ss;
-                ss<<"ERROR: return code from pthread_create() is: "<<rThread;
-                writeToLog(ss.str());
+            char c;
+            c=message.at(message.indexOf('<')+1).toLatin1();
+            string parser;
+            QString auxMessage;
+            switch (c) {
+            case 'S':
+                clear();
+                parsing(message,user.nickName,'S');
+                currentUser = user.nickName;
+                ss<<"User Nickname:"<<user.nickName<<"\n\n";
+                break;
+            case 'P':
+                parsing(message,user.pinCode,'P');
+                ss<<"User Pincode: "<<user.pinCode<<"\n\n";
+                break;
+            case 'M':
+                parsing(message,user.email,'M');
+                ss<<"User Email: "<<user.email<<"\n\n";
+                break;
+            case 'X':
+                parsing(message,user.emailPassword,'X');
+                ss<<"User Email Password: "<< user.emailPassword<<"\n\n";
+                break;
+            case 'T':
+                parsing(message,user.phoneNumber,'T');
+                ss<<"User Phone Number: "<<user.phoneNumber<<"\n\n";
+                break;
+            case 'R':
+                parsing(message,user.messageToRelease,'R');
+                ss<<"User Message to Release: "<<user.messageToRelease<<"\n\n";
+                break;
+            case 'O':
+                parsing(message,parser,'O');
+                user.repeatTime = parsingNumber(parser);
+                ss<<"User Repeat Time: "<<user.repeatTime<<"\n\n";
+                break;
+            case 'D':
+                parsing(message,user.dateToStart,'D');
+                ss<<"User Date to Start: "<<user.dateToStart<<"\n\n";
+                break;
+            case 'A':
+                parsing(message,user.platformToRelease,'A');
+                ss<<"User Platform to Release: "<<user.platformToRelease<<"\n\n";
+                break;
+            case 'C':
+                sendResult(data->addUser(user),'C');
+                ss<<"added User?";
+                break;
+            case 'Q':
+                sendResult(data->login(user.nickName,user.pinCode),'Q');
+                ss<<"Login from user: "<<user.nickName<<" with pincode: "<<user.pinCode;
+                break;
+            case 'Y':
+                pthread_t create;
+                int rThread;
+                rThread=pthread_create(&create, NULL, datasetHandler, NULL);
+                if(rThread)
+                {
+                    stringstream ss;
+                    ss<<"ERROR: return code from pthread_create() is: "<<rThread;
+                    writeToLog(ss.str());
+                }
+
+                break;
+            case 'G':
+                clear();
+                for(int i = 2; i<message.length()-1;i++)
+                    user.nickName += message.at(i).toLatin1();
+                //parsing(message,user.nickName,'G');
+                currentUser = user.nickName;
+
+                ss<<"Request to send info about user: "<<user.nickName<<"\n";
+                if(data->getUserForUpdate(user.nickName,&user))
+                {
+                    QString phoneNumber ="";
+                    phoneNumber.append("<t");
+                    phoneNumber.append(user.phoneNumber.c_str()) ;
+                    phoneNumber.append(">");
+                    sendMessage(phoneNumber);
+                    writeToLog("sended phone number to update:"+phoneNumber.toStdString());
+                }
+                else sendMessage("<G-1>");
+
+                break;
+            case'o':
+                if(user.repeatTime!=0)
+                {
+                    QString repeatTime="";
+                    repeatTime.append("<o");
+                    repeatTime.append(QString::number(user.repeatTime));
+                    repeatTime.append(">");
+                    sendMessage(repeatTime);
+                    ss<<"Sending email: "<<user.email<<", to mobile app";
+
+                }
+
+                break;
+            case'm':
+                if(!user.email.empty())
+                {
+                    QString email="";
+                    email.append("<m");
+                    email.append(user.email.c_str());
+                    email.append(">");
+                    sendMessage(email);
+                }
+                break;
+            case 'x':
+                if(!user.emailPassword.empty())
+                {
+                    QString emailPass="";
+                    emailPass.append("<x");
+                    emailPass.append(user.emailPassword.c_str());
+                    emailPass.append(">");
+                    sendMessage(emailPass);
+                    ss<<"Sending email password: "<<user.emailPassword<<", to mobile app";
+
+                }
+                break;
+            case 'r':
+                if(!user.messageToRelease.empty())
+                {
+                    QString message="";
+                    message.append("<r");
+                    message.append(user.messageToRelease.c_str());
+                    message.append(">");
+                    sendMessage(message);
+                    ss<<"Sending message to release: "<<user.messageToRelease<<", to mobile app";
+                }
+                break;
+            case 'a':
+                if(!user.platformToRelease.empty())
+                {
+                    QString platform ="";
+                    platform.append("<a");
+                    platform.append(user.platformToRelease.c_str());
+                    platform.append(">");
+                    sendMessage(platform);
+                    ss<<"Sending platform to release: "<<user.platformToRelease<<" to mobile app";
+                }
+                break;
+            case 'U':
+                ss<<"Updatring user:"<< user.nickName;
+                data->updateFullUser(user,user.nickName);
+                break;
+
+            case 'F':
+                pthread_t append;
+                int rAppend;
+                rAppend=pthread_create(&append, NULL, appendHandler, NULL);
+                if(rAppend)
+                {
+                    stringstream ss;
+                    ss<<"ERROR: return code from pthread_create() is: "<<rThread;
+                    writeToLog(ss.str());
+
+                }
+                auxMessage = "<F"+QString::number(data->getNumberofImages(currentUser))+">";
+                sendMessage(auxMessage);
+
+                break;
+            case 'J':
+                parsing(message,parser,'J');
+                imagesToAppend = parsingNumber(parser);
+                ss<<"Images to Append: "<<imagesToAppend<<"\n\n";
+                break;
+            case 'B':
+                sendMessage("<B"+QString::number(data->getPrensenceCheckStatus(currentUser))+">");
+                ss<<"Sending presence check status of user "<<currentUser;
+                break;
+            default:
+                ss<<"1 character:"<<c<<"\n";
+
+                break;
             }
-
-            break;
-        case 'G':
-           clear();
-           for(int i = 2; i<message.length()-1;i++)
-              user.nickName += message.at(i).toLatin1();
-            //parsing(message,user.nickName,'G');
-           currentUser = user.nickName;
-
-            ss<<"Request to send info about user: "<<user.nickName<<"\n";
-            if(data->getUserForUpdate(user.nickName,&user))
-            {
-                QString phoneNumber ="";
-                phoneNumber.append("<t");
-                phoneNumber.append(user.phoneNumber.c_str()) ;
-                phoneNumber.append(">");
-                sendMessage(phoneNumber);
-                writeToLog("sended phone number to update:"+phoneNumber.toStdString());
-            }
-               else sendMessage("<G-1>");
-
-            break;
-        case'o':
-            if(user.repeatTime!=0)
-            {
-                 QString repeatTime="";
-                 repeatTime.append("<o");
-                 repeatTime.append(QString::number(user.repeatTime));
-                 repeatTime.append(">");
-                 sendMessage(repeatTime);
-                 ss<<"Sending email: "<<user.email<<", to mobile app";
-
-            }
-
-        break;
-        case'm':
-            if(!user.email.empty())
-            {
-                QString email="";
-                email.append("<m");
-                email.append(user.email.c_str());
-                email.append(">");
-                sendMessage(email);
-            }
-            break;
-        case 'x':
-            if(!user.emailPassword.empty())
-            {
-                QString emailPass="";
-                emailPass.append("<x");
-                emailPass.append(user.emailPassword.c_str());
-                emailPass.append(">");
-                sendMessage(emailPass);
-                ss<<"Sending email password: "<<user.emailPassword<<", to mobile app";
-
-            }
-            break;
-          case 'r':
-            if(!user.messageToRelease.empty())
-            {
-                QString message="";
-                message.append("<r");
-                message.append(user.messageToRelease.c_str());
-                message.append(">");
-                sendMessage(message);
-                ss<<"Sending message to release: "<<user.messageToRelease<<", to mobile app";
-            }
-            break;
-        case 'a':
-            if(!user.platformToRelease.empty())
-            {
-                QString platform ="";
-                platform.append("<a");
-                platform.append(user.platformToRelease.c_str());
-                platform.append(">");
-                sendMessage(platform);
-                ss<<"Sending platform to release: "<<user.platformToRelease<<" to mobile app";
-            }
-            break;
-        case 'U':
-            ss<<"Updatring user:"<< user.nickName;
-            data->updateFullUser(user,user.nickName);
-        break;
-
-        case 'F':
-            pthread_t append;
-            int rAppend;
-            rAppend=pthread_create(&append, NULL, appendHandler, NULL);
-            if(rAppend)
-            {
-                stringstream ss;
-                ss<<"ERROR: return code from pthread_create() is: "<<rThread;
-                writeToLog(ss.str());
-
-            }
-            auxMessage = "<F"+QString::number(data->getNumberofImages(currentUser))+">";
-            sendMessage(auxMessage);
-
-            break;
-        case 'J':
-            parsing(message,parser,'J');
-            imagesToAppend = parsingNumber(parser);
-            ss<<"Images to Append: "<<imagesToAppend<<"\n\n";
-            break;
-        case 'B':
-            sendMessage("<B"+QString::number(data->getPrensenceCheckStatus(currentUser))+">");
-            ss<<"Sending presence check status of user "<<currentUser;
-            break;
-        default:
-            ss<<"1 character:"<<c<<"\n";
-
-            break;
+            writeToLog(ss.str());
         }
-        writeToLog(ss.str());
-    }
 
 
 }
@@ -400,21 +400,21 @@ void bluetooth_module::receibedMessage(const QString &sender, const QString &mes
 
 void bluetooth_module::sendResult(int result,char c)
 {
-     QString answer = "<";
-     answer.append(c);
-     answer.append(QString::number(result));
-     answer.append('>');
-     stringstream ss;
-     ss<<"Message sended: "<<answer.toStdString() ;
-     writeToLog(ss.str());
-     sendMessage(answer);
+    QString answer = "<";
+    answer.append(c);
+    answer.append(QString::number(result));
+    answer.append('>');
+    stringstream ss;
+    ss<<"Message sended: "<<answer.toStdString() ;
+    writeToLog(ss.str());
+    sendMessage(answer);
 }
 
 void bluetooth_module::parsing(QString input, string &output, char answer)
 {
     output="";
     for(int i = 2; i<input.indexOf('>');i++)
-       output += input.at(i).toLatin1();
+        output += input.at(i).toLatin1();
     QString answer_back = "<";
     answer_back.append(answer);
     answer_back.append(QString::number(output.length()));

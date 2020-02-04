@@ -210,7 +210,7 @@ void ProgramScheduler::createUser(int *imagesTaked, bool *endedDataSet, bool *en
     while(!x);
      qDebug()<<"deu ate ali";
     NewUser.fingerInfo.FingerprintID=x;     //TODO getFingerprint here
-    NewUser.fingerInfo.FingerprintName="FingerOne";
+    NewUser.fingerInfo.FingerprintName="Finger"+to_string(x);
     *endedFingerPrint=true;
     log.writeToLog("Deu ate aqui!2");
     //TODO getfaces here!!

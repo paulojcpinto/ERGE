@@ -20,19 +20,14 @@ class bluetooth_module : public QDialog
     Q_OBJECT
 
 public:
-    bluetooth_module(ProgramScheduler* scheduler, QWidget *parent = nullptr);
+        bluetooth_module(ProgramScheduler* scheduler, QWidget *parent = nullptr);
         void sendFingerSucces (string );
 
 signals:
      void sendMessage(const QString &message);
 
 private slots:
-    //void connectClicked();
-    //void sendClicked();
-
     void receibedMessage(const QString &sender, const QString &message);
-
-    //void clientConnected(const QString &name);
     void clientDisconnected(const QString &name);
     void clientDisconnected();
     void connected(const QString &name);
@@ -46,20 +41,14 @@ private:
     int adapterFromUserSelection() const;
     int currentAdapterIndex = 0;
     int fd;
-
+    ProgramScheduler *data;
     bluetooth_server *server;
     QList<QBluetoothHostInfo> localAdapters;
     QString localName;
     void parsing(QString input,string &output,char answer);
     void writeToLog(string Message);
-    ProgramScheduler *data;
     void sendResult(int result,char c);
-
     void clear();
-
-
-
-
 
 };
 
